@@ -1,0 +1,258 @@
+Using pre-set license
+Built from '2022.1/staging' branch; Version is '2022.1.14f1 (ff7e140968b4) revision 16743956'; Using compiler version '192829333'; Build Type 'Release'
+OS: 'Windows 10  (10.0.19045) 64bit Core' Language: 'en' Physical Memory: 16381 MB
+BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1, IsPro: 1
+
+COMMAND LINE ARGUMENTS:
+C:\Program Files\Unity\Hub\Editor\2022.1.14f1\Editor\Unity.exe
+-adb2
+-batchMode
+-noUpm
+-name
+AssetImportWorker0
+-projectPath
+C:/Users/Ianh5/Desktop/Unity/NiGHTS Return to Dreamtopia
+-logFile
+Logs/AssetImportWorker0.log
+-srvPort
+53471
+Successfully changed project path to: C:/Users/Ianh5/Desktop/Unity/NiGHTS Return to Dreamtopia
+C:/Users/Ianh5/Desktop/Unity/NiGHTS Return to Dreamtopia
+[UnityMemory] Configuration Parameters - Can be set up in boot.config
+    "memorysetup-bucket-allocator-granularity=16"
+    "memorysetup-bucket-allocator-bucket-count=8"
+    "memorysetup-bucket-allocator-block-size=33554432"
+    "memorysetup-bucket-allocator-block-count=8"
+    "memorysetup-main-allocator-block-size=16777216"
+    "memorysetup-thread-allocator-block-size=16777216"
+    "memorysetup-gfx-main-allocator-block-size=16777216"
+    "memorysetup-gfx-thread-allocator-block-size=16777216"
+    "memorysetup-cache-allocator-block-size=4194304"
+    "memorysetup-typetree-allocator-block-size=2097152"
+    "memorysetup-profiler-bucket-allocator-granularity=16"
+    "memorysetup-profiler-bucket-allocator-bucket-count=8"
+    "memorysetup-profiler-bucket-allocator-block-size=33554432"
+    "memorysetup-profiler-bucket-allocator-block-count=8"
+    "memorysetup-profiler-allocator-block-size=16777216"
+    "memorysetup-profiler-editor-allocator-block-size=1048576"
+    "memorysetup-temp-allocator-size-main=16777216"
+    "memorysetup-job-temp-allocator-block-size=2097152"
+    "memorysetup-job-temp-allocator-block-size-background=1048576"
+    "memorysetup-job-temp-allocator-reduction-small-platforms=262144"
+    "memorysetup-temp-allocator-size-background-worker=32768"
+    "memorysetup-temp-allocator-size-job-worker=262144"
+    "memorysetup-temp-allocator-size-preload-manager=33554432"
+    "memorysetup-temp-allocator-size-nav-mesh-worker=65536"
+    "memorysetup-temp-allocator-size-audio-worker=65536"
+    "memorysetup-temp-allocator-size-cloud-worker=32768"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gfx=262144"
+Refreshing native plugins compatible for Editor in 469.44 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Initialize engine version: 2022.1.14f1 (ff7e140968b4)
+[Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/2022.1.14f1/Editor/Data/Resources/UnitySubsystems
+[Subsystems] Discovering subsystems at path C:/Users/Ianh5/Desktop/Unity/NiGHTS Return to Dreamtopia/Assets
+GfxDevice: creating device client; threaded=0; jobified=0
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.1]
+    Renderer: NVIDIA GeForce GTX 1050 Ti (ID=0x1c82)
+    Vendor:   NVIDIA
+    VRAM:     4018 MB
+    Driver:   31.0.15.1694
+Shader 'Digger/URP/Terrain/Lit': dependency 'BaseMapShader' shader 'Digger/URP/Terrain/Lit (Base Pass)' not found
+Initialize mono
+Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/2022.1.14f1/Editor/Data/Managed'
+Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/2022.1.14f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
+Mono config path = 'C:/Program Files/Unity/Hub/Editor/2022.1.14f1/Editor/Data/MonoBleedingEdge/etc'
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56368
+Begin MonoManager ReloadAssembly
+Registering precompiled unity dll's ...
+Register platform support module: C:/Program Files/Unity/Hub/Editor/2022.1.14f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
+Registered in 0.022430 seconds.
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 442.37 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  2.111 seconds
+Domain Reload Profiling:
+	ReloadAssembly (2112ms)
+		BeginReloadAssembly (222ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (0ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (4ms)
+		EndReloadAssembly (1555ms)
+			LoadAssemblies (212ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (345ms)
+				TypeCache.Initialize (344ms)
+					TypeCache.ScanAssembly (341ms)
+				ResolveRequiredComponents (1ms)
+			ReleaseScriptCaches (0ms)
+			RebuildScriptCaches (86ms)
+			SetupLoadedEditorAssemblies (974ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (27ms)
+				SetLoadedEditorAssemblies (15ms)
+				RefreshPlugins (443ms)
+				BeforeProcessingInitializeOnLoad (6ms)
+				ProcessInitializeOnLoadAttributes (371ms)
+				ProcessInitializeOnLoadMethodAttributes (113ms)
+				AfterProcessingInitializeOnLoad (0ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (0ms)
+Platform modules already initialized, skipping
+Registering precompiled user dll's ...
+Registered in 0.027623 seconds.
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory doesn't match image C:\Users\Ianh5\Desktop\Unity\NiGHTS Return to Dreamtopia\Library\PackageCache\com.unity.visualscripting@1.7.8\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Users\Ianh5\Desktop\Unity\NiGHTS Return to Dreamtopia\Library\PackageCache\com.unity.visualscripting@1.7.8\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+OnLevelWasLoaded was found on SceneFade
+This message has been deprecated and will be removed in a later version of Unity.
+Add a delegate to SceneManager.sceneLoaded instead to get notifications after scene loading has completed
+OnLevelWasLoaded was found on VideoFade
+This message has been deprecated and will be removed in a later version of Unity.
+Add a delegate to SceneManager.sceneLoaded instead to get notifications after scene loading has completed
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 429.33 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+NullReferenceException: Object reference not set to an instance of an object
+  at UnityEngine.JsonUtility.FromJson[T] (System.String json) [0x00011] in <3988ce76554c4635956c7bc1fc79ee4b>:0 
+  at UnityEditor.StateCache`1[T].GetState (UnityEngine.Hash128 key, T defaultValue) [0x00067] in <f90799373c314538a0c910377078306d>:0 
+  at UnityEditor.Tools.OnEnable () [0x0004b] in <f90799373c314538a0c910377078306d>:0 
+UnityEngine.ScriptableObject:CreateScriptableObjectInstanceFromType(Type, Boolean)
+UnityEngine.ScriptableObject:CreateInstance(Type)
+UnityEngine.ScriptableObject:CreateInstance()
+UnityEditor.Tools:get_get()
+UnityEditor.Tools:get_visibleLayers()
+UnityEditor.Animations.Rigging.BoneRendererUtils:.cctor() (at Library\PackageCache\com.unity.animation.rigging@1.1.1\Editor\Utils\BoneRendererUtils.cs:121)
+System.Runtime.CompilerServices.RuntimeHelpers:RunClassConstructor(IntPtr)
+System.Runtime.CompilerServices.RuntimeHelpers:RunClassConstructor(RuntimeTypeHandle)
+UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes(Type[])
+
+Mono: successfully reloaded assembly
+- Completed reload, in  4.652 seconds
+Domain Reload Profiling:
+	ReloadAssembly (4654ms)
+		BeginReloadAssembly (317ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (12ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (46ms)
+		EndReloadAssembly (4012ms)
+			LoadAssemblies (384ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (956ms)
+				TypeCache.Initialize (906ms)
+					TypeCache.ScanAssembly (895ms)
+				ResolveRequiredComponents (50ms)
+			ReleaseScriptCaches (2ms)
+			RebuildScriptCaches (256ms)
+			SetupLoadedEditorAssemblies (2279ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (11ms)
+				SetLoadedEditorAssemblies (15ms)
+				RefreshPlugins (429ms)
+				BeforeProcessingInitializeOnLoad (356ms)
+				ProcessInitializeOnLoadAttributes (1227ms)
+				ProcessInitializeOnLoadMethodAttributes (218ms)
+				AfterProcessingInitializeOnLoad (22ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (17ms)
+Platform modules already initialized, skipping
+========================================================================
+Worker process is ready to serve import requests
+Shader 'Digger/HDRP/Terrain/Lit': dependency 'BaseMapShader' shader 'Hidden/HDRP/TerrainLit_Basemap' not found
+Shader 'Digger/HDRP/Terrain/Lit': dependency 'BaseMapGenShader' shader 'Hidden/HDRP/TerrainLit_BasemapGen' not found
+Shader 'Digger/HDRP/Mesh/Lit': dependency 'BaseMapShader' shader 'Hidden/HDRP/TerrainLit_Basemap' not found
+Shader 'Digger/HDRP/Mesh/Lit': dependency 'BaseMapGenShader' shader 'Hidden/HDRP/TerrainLit_BasemapGen' not found
+Shader 'Digger/HDRP/Mesh/Lit': dependency 'BaseMapShader' shader 'Hidden/HDRP/TerrainLit_Basemap' not found
+Shader 'Digger/HDRP/Mesh/Lit': dependency 'BaseMapGenShader' shader 'Hidden/HDRP/TerrainLit_BasemapGen' not found
+Shader 'Digger/URP/Terrain/Lit': dependency 'BaseMapShader' shader 'Digger/URP/Terrain/Lit (Base Pass)' not found
+Shader 'Digger/HDRP/Terrain/Lit': dependency 'BaseMapShader' shader 'Hidden/HDRP/TerrainLit_Basemap' not found
+Shader 'Digger/HDRP/Terrain/Lit': dependency 'BaseMapGenShader' shader 'Hidden/HDRP/TerrainLit_BasemapGen' not found
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.42 seconds
+Refreshing native plugins compatible for Editor in 4.55 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 6569 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 52 unused Assets / (1.2 MB). Loaded Objects now: 7084.
+Memory consumption went from 1.17 GB to 1.17 GB.
+Total: 8.856500 ms (FindLiveObjects: 0.748600 ms CreateObjectMapping: 0.417800 ms MarkObjects: 6.116000 ms  DeleteObjects: 1.572400 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Import Request.
+  Time since last request: 18223.923946 seconds.
+  path: Assets/Materials/Outline.mat
+  artifactKey: Guid(6d0b1d1fd033d8641b149c8bbb96a0b1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/Outline.mat using Guid(6d0b1d1fd033d8641b149c8bbb96a0b1) Importer(815301076,1909f56bfc062723c751e8b465ee728b) Texture creation failed. 'None' is not supported for Render usage on this platform. Use 'SystemInfo.IsFormatSupported' C# API to check format support.
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object,UnityEngine.Object)
+UnityEngine.Debug:LogError (object,UnityEngine.Object)
+UnityEngine.Texture:ValidateFormat (UnityEngine.Experimental.Rendering.GraphicsFormat,UnityEngine.Experimental.Rendering.FormatUsage)
+UnityEngine.RenderTexture:.ctor (int,int,int,UnityEngine.Experimental.Rendering.GraphicsFormat,int)
+UnityEngine.RenderTexture:.ctor (int,int,int,UnityEngine.Experimental.Rendering.GraphicsFormat)
+UnityEngine.Rendering.RTHandleSystem:Alloc (int,int,int,UnityEngine.Rendering.DepthBits,UnityEngine.Experimental.Rendering.GraphicsFormat,UnityEngine.FilterMode,UnityEngine.TextureWrapMode,UnityEngine.Rendering.TextureDimension,bool,bool,bool,bool,int,single,UnityEngine.Rendering.MSAASamples,bool,bool,UnityEngine.RenderTextureMemoryless,UnityEngine.VRTextureUsage,string) (at Library/PackageCache/com.unity.render-pipelines.core@13.1.8/Runtime/Textures/RTHandleSystem.cs:490)
+UnityEngine.Rendering.RTHandles:Alloc (UnityEngine.RenderTextureDescriptor&,UnityEngine.FilterMode,UnityEngine.TextureWrapMode,bool,int,single,string) (at Library/PackageCache/com.unity.render-pipelines.core@13.1.8/Runtime/Textures/RTHandles.cs:117)
+UnityEngine.Rendering.Universal.RenderingUtils:ReAllocateIfNeeded (UnityEngine.Rendering.RTHandle&,UnityEngine.RenderTextureDescriptor&,UnityEngine.FilterMode,UnityEngine.TextureWrapMode,bool,int,single,string) (at Library/PackageCache/com.unity.render-pipelines.universal@13.1.8/Runtime/RenderingUtils.cs:570)
+UnityEngine.Rendering.Universal.Internal.RenderTargetBufferSystem:ReAllocate (UnityEngine.Rendering.CommandBuffer) (at Library/PackageCache/com.unity.render-pipelines.universal@13.1.8/Runtime/RenderTargetBufferSystem.cs:82)
+UnityEngine.Rendering.Universal.Internal.RenderTargetBufferSystem:GetFrontBuffer (UnityEngine.Rendering.CommandBuffer) (at Library/PackageCache/com.unity.render-pipelines.universal@13.1.8/Runtime/RenderTargetBufferSystem.cs:59)
+UnityEngine.Rendering.Universal.UniversalRenderer:GetCameraColorFrontBuffer (UnityEngine.Rendering.CommandBuffer) (at Library/PackageCache/com.unity.render-pipelines.universal@13.1.8/Runtime/UniversalRenderer.cs:1256)
+UnityEngine.Rendering.Universal.Internal.CopyColorPass:Execute (UnityEngine.Rendering.ScriptableRenderContext,UnityEngine.Rendering.Universal.RenderingData&) (at Library/PackageCache/com.unity.render-pipelines.universal@13.1.8/Runtime/Passes/CopyColorPass.cs:124)
+UnityEngine.Rendering.Universal.ScriptableRenderer:ExecuteRenderPass (UnityEngine.Rendering.ScriptableRenderContext,UnityEngine.Rendering.Universal.ScriptableRenderPass,UnityEngine.Rendering.Universal.RenderingData&) (at Library/PackageCache/com.unity.render-pipelines.universal@13.1.8/Runtime/ScriptableRenderer.cs:1099)
+UnityEngine.Rendering.Universal.ScriptableRenderer:ExecuteBlock (int,UnityEngine.Rendering.Universal.ScriptableRenderer/RenderBlocks&,UnityEngine.Rendering.ScriptableRenderContext,UnityEngine.Rendering.Universal.RenderingData&,bool) (at Library/PackageCache/com.unity.render-pipelines.universal@13.1.8/Runtime/ScriptableRenderer.cs:1058)
+UnityEngine.Rendering.Universal.ScriptableRenderer:Execute (UnityEngine.Rendering.ScriptableRenderContext,UnityEngine.Rendering.Universal.RenderingData&) (at Library/PackageCache/com.unity.render-pipelines.universal@13.1.8/Runtime/ScriptableRenderer.cs:843)
+UnityEngine.Rendering.Universal.UniversalRenderPipeline:RenderSingleCamera (UnityEngine.Rendering.ScriptableRenderContext,UnityEngine.Rendering.Universal.CameraData,bool) (at Library/PackageCache/com.unity.render-pipelines.universal@13.1.8/Runtime/UniversalRenderPipeline.cs:432)
+UnityEngine.Rendering.Universal.UniversalRenderPipeline:RenderSingleCamera (UnityEngine.Rendering.ScriptableRenderContext,UnityEngine.Camera) (at Library/PackageCache/com.unity.render-pipelines.universal@13.1.8/Runtime/UniversalRenderPipeline.cs:338)
+UnityEngine.Rendering.Universal.UniversalRenderPipeline:Render (UnityEngine.Rendering.ScriptableRenderContext,System.Collections.Generic.List`1<UnityEngine.Camera>) (at Library/PackageCache/com.unity.render-pipelines.universal@13.1.8/Runtime/UniversalRenderPipeline.cs:293)
+UnityEngine.Rendering.RenderPipeline:InternalRender (UnityEngine.Rendering.ScriptableRenderContext,System.Collections.Generic.List`1<UnityEngine.Camera>)
+UnityEngine.Rendering.RenderPipelineManager:DoRenderLoop_Internal (UnityEngine.Rendering.RenderPipelineAsset,intptr,System.Collections.Generic.List`1<UnityEngine.Camera/RenderRequest>,Unity.Collections.LowLevel.Unsafe.AtomicSafetyHandle)
+UnityEditor.PreviewRenderUtility:Render (bool,bool)
+UnityEditor.MaterialEditor:DoRenderPreview (UnityEditor.PreviewRenderUtility,bool)
+UnityEditor.MaterialEditor:RenderStaticPreview (string,UnityEngine.Object[],int,int)
+UnityEditor.AssetPreviewUpdater:CreatePreview (UnityEngine.Object,UnityEngine.Object[],string,int,int)
+UnityEditor.AssetPreviewUpdater:CreatePreviewForAsset (UnityEngine.Object,UnityEngine.Object[],string)
+
+(Filename: Library/PackageCache/com.unity.render-pipelines.core@13.1.8/Runtime/Textures/RTHandleSystem.cs Line: 490)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Object.set_hideFlags(UnityEngine.Object,UnityEngine.HideFlags)
+  at UnityEngine.Rendering.RTHandleSystem.Alloc (System.Int32 width, System.Int32 height, System.Int32 slices, UnityEngine.Rendering.DepthBits depthBufferBits, UnityEngine.Experimental.Rendering.GraphicsFormat colorFormat, UnityEngine.FilterMode filterMode, UnityEngine.TextureWrapMode wrapMode, UnityEngine.Rendering.TextureDimension dimension, System.Boolean enableRandomWrite, System.Boolean useMipMap, System.Boolean autoGenerateMips, System.Boolean isShadowMap, System.Int32 anisoLevel, System.Single mipMapBias, UnityEngine.Rendering.MSAASamples msaaSamples, System.Boolean bindTextureMS, System.Boolean useDynamicScale, UnityEngine.RenderTextureMemoryless memoryless, UnityEngine.VRTextureUsage vrUsage, System.String name) [0x000d6] in C:\Users\Ianh5\Desktop\Unity\NiGHTS Return to Dreamtopia\Library\PackageCache\com.unity.render-pipelines.core@13.1.8\Runtime\Textures\RTHandleSystem.cs:490 
+  at UnityEngine.Rendering.RTHandles.Alloc (UnityEngine.RenderTextureDescriptor& descriptor, UnityEngine.FilterMode filterMode, UnityEngine.TextureWrapMode wrapMode, System.Boolean isShadowMap, System.Int32 anisoLevel, System.Single mipMapBias, System.String name) [0x00000] in C:\Users\Ianh5\Desktop\Unity\NiGHTS Return to Dreamtopia\Library\PackageCache\com.unity.render-pipelines.core@13.1.8\Runtime\Textures\RTHandles.cs:117 
+  at UnityEngine.Rendering.Universal.RenderingUtils.ReAllocateIfNeeded (UnityEngine.Rendering.RTHandle& handle, UnityEngine.RenderTextureDescriptor& descriptor, UnityEngine.FilterMode filterMode, UnityEngine.TextureWrapMode wrapMode, System.Boolean isShadowMap, System.Int32 anisoLevel, System.Single mipMapBias, System.String name) [0x00022] in C:\Users\Ianh5\Desktop\Unity\NiGHTS Return to Dreamtopia\Library\PackageCache\com.unity.render-pipelines.universal@13.1.8\Runtime\RenderingUtils.cs:570 
+  at UnityEngine.Rendering.Universal.Internal.RenderTargetBufferSystem.ReAllocate (UnityEngine.Rendering.CommandBuffer cmd) [0x0009e] in C:\Users\Ianh5\Desktop\Unity\NiGHTS Return to Dreamtopia\Library\PackageCache\com.unity.render-pipelines.universal@13.1.8\Runtime\RenderTargetBufferSystem.cs:82 
+  at UnityEngine.Rendering.Universal.Internal.RenderTargetBufferSystem.GetFrontBuffer (UnityEngine.Rendering.CommandBuffer cmd) [0x00022] in C:\Users\Ianh5\Desktop\Unity\NiGHTS Return to Dreamtopia\Library\PackageCache\com.unity.render-pipelines.universal@13.1.8\Runtime\RenderTargetBufferSystem.cs:59 
+  at UnityEngine.Rendering.Universal.UniversalRenderer.GetCameraColorFrontBuffer (UnityEngine.Rendering.CommandBuffer cmd) [0x00000] in C:\Users\Ianh5\Desktop\Unity\NiGHTS Return to Dreamtopia\Library\PackageCache\com.unity.render-pipelines.universal@13.1.8\Runtime\UniversalRenderer.cs:1256 
+  at UnityEngine.Rendering.Universal.Internal.CopyColorPass.Execute (UnityEngine.Rendering.ScriptableRenderContext context, UnityEngine.Rendering.Universal.RenderingData& renderingData) [0x0003c] in C:\Users\Ianh5\Desktop\Unity\NiGHTS Return to Dreamtopia\Library\PackageCache\com.unity.render-pipelines.universal@13.1.8\Runtime\Passes\CopyColorPass.cs:124 
+  at UnityEngine.Rendering.Universal.ScriptableRenderer.ExecuteRenderPass (UnityEngine.Rendering.ScriptableRenderContext context, UnityEngine.Rendering.Universal.ScriptableRenderPass renderPass, UnityEngine.Rendering.Universal.RenderingData& renderingData) [0x0009e] in C:\Users\Ianh5\Desktop\Unity\NiGHTS Return to Dreamtopia\Library\PackageCache\com.unity.render-pipelines.universal@13.1.8\Runtime\ScriptableRenderer.cs:1099 
+  at UnityEngine.Rendering.Universal.ScriptableRenderer.ExecuteBlock (System.Int32 blockIndex, UnityEngine.Rendering.Universal.ScriptableRenderer+RenderBlocks& renderBlocks, UnityEngine.Rendering.ScriptableRenderContext context, UnityEngine.Rendering.Universal.RenderingData& renderingData, System.Boolean submit) [0x00030] in C:\Users\Ianh5\Desktop\Unity\NiGHTS Return to Dreamtopia\Library\PackageCache\com.unity.render-pipelines.universal@13.1.8\Runtime\ScriptableRenderer.cs:1058 
+  at UnityEngine.Rendering.Universal.ScriptableRenderer.Execute (UnityEngine.Rendering.ScriptableRenderContext context, UnityEngine.Rendering.Universal.RenderingData& renderingData) [0x0023c] in C:\Users\Ianh5\Desktop\Unity\NiGHTS Return to Dreamtopia\Library\PackageCache\com.unity.render-pipelines.universal@13.1.8\Runtime\ScriptableRenderer.cs:843 
+  at UnityEngine.Rendering.Universal.UniversalRenderPipeline.RenderSingleCamera (UnityEngine.Rendering.ScriptableRenderContext context, UnityEngine.Rendering.Universal.CameraData cameraData, System.Boolean anyPostProcessingEnabled) [0x0014d] in C:\Users\Ianh5\Desktop\Unity\NiGHTS Return to Dreamtopia\Library\PackageCache\com.unity.render-pipelines.universal@13.1.8\Runtime\UniversalRenderPipeline.cs:432 
+  at UnityEngine.Rendering.Universal.UniversalRenderPipeline.RenderSingleCamera (UnityEngine.Rendering.ScriptableRenderContext context, UnityEngine.Camera camera) [0x0003e] in C:\Users\Ianh5\Desktop\Unity\NiGHTS Return to Dreamtopia\Library\PackageCache\com.unity.render-pipelines.universal@13.1.8\Runtime\UniversalRenderPipeline.cs:338 
+  at UnityEngine.Rendering.Universal.UniversalRenderPipeline.Render (UnityEngine.Rendering.ScriptableRenderContext renderContext, System.Collections.Generic.List`1[T] cameras) [0x00101] in C:\Users\Ianh5\Desktop\Unity\NiGHTS Return to Dreamtopia\Library\PackageCache\com.unity.render-pipelines.universal@13.1.8\Runtime\UniversalRenderPipeline.cs:293 
+  at UnityEngine.Rendering.RenderPipeline.InternalRender (UnityEngine.Rendering.ScriptableRenderContext context, System.Collections.Generic.List`1[T] cameras) [0x0001c] in <790a43858b4b404fbe02a2b7b4a0d9d6>:0 
+  at UnityEngine.Rendering.RenderPipelineManager.DoRenderLoop_Internal (UnityEngine.Rendering.RenderPipelineAsset pipe, System.IntPtr loopPtr, System.Collections.Generic.List`1[T] renderRequests, Unity.Collections.LowLevel.Unsafe.AtomicSafetyHandle safety) [0x00044] in <790a43858b4b404fbe02a2b7b4a0d9d6>:0 
+UnityEngine.Camera:Render(Camera)
+UnityEditor.PreviewRenderUtility:Render(Boolean, Boolean)
+UnityEditor.MaterialEditor:DoRenderPreview(PreviewRenderUtility, Boolean)
+UnityEditor.MaterialEditor:RenderStaticPreview(String, Object[], Int32, Int32)
+UnityEditor.AssetPreviewUpdater:CreatePreview(Object, Object[], String, Int32, Int32)
+UnityEditor.AssetPreviewUpdater:CreatePreviewForAsset(Object, Object[], String)
+
+(Filename: Library/PackageCache/com.unity.render-pipelines.core@13.1.8/Runtime/Textures/RTHandleSystem.cs Line: 490)
+
+ -> (artifact id: 'f215c2e6fa2a1cb9780b32e2153c9bde') in 3.401930 seconds 
