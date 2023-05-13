@@ -1,0 +1,1050 @@
+////////////////////////////////////////////////////////////////////////////////////////////////
+//
+//  _dSASCommon.fxsub ver1.00 (ドゥドゥ)
+//  
+//  お借りしたプログラムの一覧と派生図の様なものです。ありがとうございます。
+//  ■SpotLight(そぼろP)
+//  ■異方向フィルタリング(Furia氏)
+//  ■full.fx v2.0(舞力介入P) ※MME v0.33以降が必要です
+//  ┗■AdultShader(データP)
+//    ■SeriousShader(データP) 
+//    ■ExcellentShadow(そぼろP)
+//    ■MechanicMirror(ビームマンP)
+//    ┗■_dSASCommon.fxsub(ドゥドゥ)
+//
+////////////////////////////////////////////////////////////////////////////////////////////////
+
+#ifdef INVERSE_X
+    #define IMAGE_DIRECTION_X -1
+#else
+    #define IMAGE_DIRECTION_X 1
+#endif
+#ifdef INVERSE_Y
+    #define IMAGE_DIRECTION_Y -1
+#else
+    #define IMAGE_DIRECTION_Y 1
+#endif
+
+
+#ifndef SpecularMapBoost
+    #define SpecularMapBoost 1.0
+#endif
+
+#define ShaderVer(x) x##_3_0
+
+//スクリーンシャドウマップ取得
+shared texture2D ScreenShadowMapProcessed : RENDERCOLORTARGET <
+    float2 ViewPortRatio = {1.0,1.0};
+    int MipLevels = 1;
+    string Format = "D3DFMT_R16F";
+>;
+sampler2D ScreenShadowMapProcessedSamp = sampler_state {
+    texture = <ScreenShadowMapProcessed>;
+    MinFilter = LINEAR; MagFilter = LINEAR; MipFilter = NONE;
+    AddressU  = CLAMP; AddressV = CLAMP;
+};
+
+//SSAOマップ取得
+shared texture2D ExShadowSSAOMapOut : RENDERCOLORTARGET <
+    float2 ViewPortRatio = {1.0,1.0};
+    int MipLevels = 1;
+    string Format = "R16F";
+>;
+
+sampler2D ExShadowSSAOMapSamp = sampler_state {
+    texture = <ExShadowSSAOMapOut>;
+    MinFilter = LINEAR; MagFilter = LINEAR; MipFilter = NONE;
+    AddressU  = CLAMP; AddressV = CLAMP;
+};
+
+// スクリーンサイズ
+float2 ES_ViewportSize : VIEWPORTPIXELSIZE;
+static float2 ES_ViewportOffset = (float2(0.5,0.5)/ES_ViewportSize);
+
+bool Exist_ExcellentShadow : CONTROLOBJECT < string name = "ExcellentShadow.x"; >;
+bool Exist_ExShadowSSAO : CONTROLOBJECT < string name = "ExShadowSSAO.x"; >;
+float ShadowRate : CONTROLOBJECT < string name = "ExcellentShadow.x"; string item = "Tr"; >;
+float3   ES_CameraPos1      : POSITION  < string Object = "Camera"; >;
+float es_size0 : CONTROLOBJECT < string name = "ExcellentShadow.x"; string item = "Si"; >;
+float4x4 es_mat1 : CONTROLOBJECT < string name = "ExcellentShadow.x"; >;
+
+static float3 es_move1 = float3(es_mat1._41, es_mat1._42, es_mat1._43 );
+static float CameraDistance1 = length(ES_CameraPos1 - es_move1); //カメラとシャドウ中心の距離
+
+// 座標変換行列
+float4x4 WorldViewProjMatrix      : WORLDVIEWPROJECTION;
+float4x4 WorldMatrix              : WORLD;
+float4x4 ViewMatrix               : VIEW;
+float4x4 ProjMatrix               : PROJECTION;
+float4x4 LightWorldViewProjMatrix : WORLDVIEWPROJECTION < string Object = "Light"; >;
+
+float3   LightDirection    : DIRECTION < string Object = "Light"; >;
+float3   CameraPosition    : POSITION  < string Object = "Camera"; >;
+
+// マテリアル色
+float4   MaterialDiffuse   : DIFFUSE  < string Object = "Geometry"; >;
+float3   MaterialAmbient   : AMBIENT  < string Object = "Geometry"; >;
+float3   MaterialEmmisive  : EMISSIVE < string Object = "Geometry"; >;
+float3   MaterialSpecular  : SPECULAR < string Object = "Geometry"; >;
+float    SpecularPower     : SPECULARPOWER < string Object = "Geometry"; >;
+float3   MaterialToon      : TOONCOLOR;
+float4   EdgeColor         : EDGECOLOR;
+float4   GroundShadowColor : GROUNDSHADOWCOLOR;
+// ライト色
+float3   LightDiffuse      : DIFFUSE   < string Object = "Light"; >;
+float3   LightAmbient      : AMBIENT   < string Object = "Light"; >;
+float3   LightSpecular     : SPECULAR  < string Object = "Light"; >;
+static float4 DiffuseColor  = MaterialDiffuse  * float4(LightDiffuse, 1.0f);
+static float3 AmbientColor  = MaterialAmbient * LightAmbient + MaterialEmmisive;
+static float3 DarkAmbient = (MaterialAmbient + MaterialEmmisive) * LightAmbient;
+static float3 SpecularColor = MaterialSpecular * LightSpecular;
+
+// テクスチャ材質モーフ値
+float4   TextureAddValue   : ADDINGTEXTURE;
+float4   TextureMulValue   : MULTIPLYINGTEXTURE;
+float4   SphereAddValue    : ADDINGSPHERETEXTURE;
+float4   SphereMulValue    : MULTIPLYINGSPHERETEXTURE;
+
+bool     use_texture;       // テクスチャ使用フラグ
+bool     use_spheremap;     // スフィアマップ使用フラグ
+bool     use_subtexture;    // サブテクスチャフラグ
+bool     use_toon;          // トゥーンレンダリング使用フラグ
+
+bool     parthf;   // パースペクティブフラグ
+bool     transp;   // 半透明フラグ
+bool     spadd;    // スフィアマップ加算合成フラグ
+#define SKII1    1500
+#define SKII2    8000
+#define Toon     3
+
+#if ANISOTROPY_TYPE == 1 // 旧MMDで異方向フィルタを使う場合 --------------------------------------
+
+    // オブジェクトのテクスチャ
+    texture ObjectTexture: MATERIALTEXTURE;
+    sampler OrgObjTexSampler = sampler_state {
+        texture = <ObjectTexture>;
+        MinFilter = LINEAR; MagFilter = LINEAR; MipFilter = NONE;
+        AddressU  = CLAMP; AddressV = CLAMP;
+    };
+
+    #define MIP_SETTING    int MipLevels = 0;
+    #define TEX_FILTER \
+        MinFilter = ANISOTROPIC; MagFilter = ANISOTROPIC; MipFilter = LINEAR; \
+        MaxAnisotropy = MAX_ANISOTROPY;
+
+    // テクスチャの質感向上用Mipmap
+    texture UseMipmapObjectTexture : RENDERCOLORTARGET <
+        int2 Dimensions = TEXBUFFSIZE;
+        MIP_SETTING
+    >;
+    // テクスチャの質感向上 異方性フィルタ
+    sampler ObjTexSampler = sampler_state {
+        texture = <UseMipmapObjectTexture>;
+        TEX_FILTER
+        AddressU  = WRAP; AddressV = WRAP;
+    };
+
+    // UseMipmapObjectTexture用深度バッファ
+    texture UMOTDepth : RENDERDEPTHSTENCILTARGET <
+        int2 Dimensions = TEXBUFFSIZE;
+    >;
+
+    const static float2 MipmapOffset = {0.5/TEXBUFFWIDTH, 0.5/TEXBUFFHEIGHT};
+    // レンダリングターゲットのクリア値
+    float4 ClearColor = {0,0,0,0};
+    float ClearDepth  = 1;
+
+    // テクスチャコピー
+    struct VS_OUT_COPYTEX {
+        float4 Pos    : POSITION;
+        float2 Tex    : TEXCOORD0;
+    };
+    VS_OUT_COPYTEX CopyTex_VS( float4 Pos : POSITION, float4 Tex : TEXCOORD0, uniform float2 TexOffset ){
+        VS_OUT_COPYTEX o;
+        o.Pos = Pos;
+        o.Tex = Tex + TexOffset;
+        return o;
+    }
+
+    float4 CopyTex_PS(float2 Tex: TEXCOORD0, uniform sampler TexSampler) : COLOR0 {
+        return tex2D(TexSampler,Tex);
+    }
+
+#elif ANISOTROPY_TYPE == 2 // MMD64bit版・32bitマルチコア版で異方向フィルタを使う場合 --------------
+
+    #define MIP_SETTING    int MipLevels = 0;
+    #define TEX_FILTER \
+        MinFilter = ANISOTROPIC; MagFilter = ANISOTROPIC; MipFilter = LINEAR; \
+        MaxAnisotropy = MAX_ANISOTROPY;
+
+    // オブジェクトのテクスチャ
+    texture ObjectTexture: MATERIALTEXTURE;
+    sampler ObjTexSampler = sampler_state {
+        texture = <ObjectTexture>;
+        TEX_FILTER
+        AddressU  = WRAP; AddressV = WRAP;
+    };
+
+#else // (ANISOTROPY_TYPE == 0) 異方向フィルタを使わない場合 ---------------------------------------
+
+    #define MIP_SETTING    
+    #define TEX_FILTER     MinFilter = LINEAR; MagFilter = LINEAR; MipFilter = LINEAR;
+
+    // オブジェクトのテクスチャ
+    texture ObjectTexture: MATERIALTEXTURE;
+    sampler ObjTexSampler = sampler_state {
+        texture = <ObjectTexture>;
+        TEX_FILTER
+        AddressU  = WRAP; AddressV = WRAP;
+    };
+
+#endif
+
+// スフィアマップのテクスチャ
+texture ObjectSphereMap: MATERIALSPHEREMAP;
+sampler ObjSphareSampler = sampler_state {
+    texture = <ObjectSphereMap>;
+    MinFilter = LINEAR; MagFilter = LINEAR; MipFilter = LINEAR;
+    AddressU  = WRAP; AddressV = WRAP;
+};
+
+// 通常用 ------------------------------------------------------------------------------------------
+#ifndef USE_FULLMODE // フルモード使用時は上書き用法線マップ等を読み込まない
+    #ifdef USE_NORMAL_MAP
+        texture2D NormalMap < string ResourceName = NORMAL_MAP_PATH; MIP_SETTING >;
+        sampler NormalMapSampler = sampler_state {
+            texture = <NormalMap>;
+            TEX_FILTER
+            AddressU  = WRAP; AddressV = WRAP;
+        };
+
+        #ifdef USE_HEIGHT_MAP
+            texture2D HeightMap < string ResourceName = HEIGHT_MAP_PATH; MIP_SETTING >;
+            sampler HeightMapSampler = sampler_state {
+                texture = <HeightMap>;
+                TEX_FILTER
+                AddressU  = WRAP; AddressV = WRAP;
+            };
+        #endif
+    #endif
+
+    #ifdef USE_SPECULAR_MAP
+        texture2D SpecularMap < string ResourceName = SPECULAR_MAP_PATH; MIP_SETTING >;
+        sampler SpecularMapSampler = sampler_state {
+            texture = <SpecularMap>;
+            TEX_FILTER
+            AddressU  = WRAP; AddressV = WRAP;
+        };
+    #endif
+#endif
+
+#ifdef USE_TEX_BLEND
+    texture TexBlend < string ResourceName = TEX_BLEND_PATH; MIP_SETTING >;
+    sampler TexBlendSampler = sampler_state {
+        texture = <TexBlend>;
+        TEX_FILTER
+        AddressU  = WRAP; AddressV = WRAP;
+    };
+#endif
+
+#ifdef USE_SPHERE_2ND
+    texture Sphere2nd < string ResourceName = SPHERE_2ND_PATH; >;
+    sampler Sphere2ndSampler = sampler_state {
+        texture = <Sphere2nd>;
+        MinFilter = LINEAR; MagFilter = LINEAR; MipFilter = LINEAR;
+        AddressU  = WRAP; AddressV = WRAP;
+    };
+#endif
+
+#ifdef USE_MIRROR
+    #include "_MirrorParam.fxsub"
+#endif
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+// 輪郭描画
+
+#ifdef EDGE_ENABLED
+    // 頂点シェーダ
+    float4 ColorRender_VS(float4 Pos : POSITION) : POSITION 
+    {
+        // カメラ視点のワールドビュー射影変換
+        return mul( Pos, WorldViewProjMatrix );
+    }
+
+    // ピクセルシェーダ
+    float4 ColorRender_PS() : COLOR
+    {
+        // 輪郭色で塗りつぶし
+        #ifdef USE_DARK
+            return EdgeColor * float4(LightAmbient,1.0);
+        #else
+            return EdgeColor;
+        #endif
+    }
+
+    // 輪郭描画用テクニック
+    technique EdgeTec < string MMDPass = "edge"; > {
+        pass DrawEdge {
+            VertexShader = compile vs_2_0 ColorRender_VS();
+            PixelShader  = compile ps_2_0 ColorRender_PS();
+        }
+    }
+#else
+    technique EdgeTec < string MMDPass = "edge"; > {}
+#endif
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+// 影（非セルフシャドウ）描画
+
+#ifdef SHADOW_ENABLED
+    // 頂点シェーダ
+    float4 Shadow_VS(float4 Pos : POSITION) : POSITION
+    {
+        // カメラ視点のワールドビュー射影変換
+        return mul( Pos, WorldViewProjMatrix );
+    }
+
+    // ピクセルシェーダ
+    float4 Shadow_PS() : COLOR
+    {
+        // 地面影色で塗りつぶし
+        return GroundShadowColor;
+    }
+
+    // 影描画用テクニック
+    technique ShadowTec < string MMDPass = "shadow"; > {
+        pass DrawShadow {
+            VertexShader = compile vs_2_0 Shadow_VS();
+            PixelShader  = compile ps_2_0 Shadow_PS();
+        }
+    }
+#else
+    technique ShadowTec < string MMDPass = "shadow"; > {}
+#endif
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+// セルフシャドウ用Z値プロット
+
+struct VS_ZValuePlot_OUTPUT {
+    float4 Pos : POSITION;              // 射影変換座標
+    float4 ShadowMapTex : TEXCOORD0;    // Zバッファテクスチャ
+};
+
+// 頂点シェーダ
+VS_ZValuePlot_OUTPUT ZValuePlot_VS( float4 Pos : POSITION )
+{
+    VS_ZValuePlot_OUTPUT Out = (VS_ZValuePlot_OUTPUT)0;
+
+    // ライトの目線によるワールドビュー射影変換をする
+    Out.Pos = mul( Pos, LightWorldViewProjMatrix );
+
+    // テクスチャ座標を頂点に合わせる
+    Out.ShadowMapTex = Out.Pos;
+
+    return Out;
+}
+
+// ピクセルシェーダ
+float4 ZValuePlot_PS( float4 ShadowMapTex : TEXCOORD0 ) : COLOR
+{
+    // R色成分にZ値を記録する
+    return float4(ShadowMapTex.z/ShadowMapTex.w,0,0,1);
+}
+
+// Z値プロット用テクニック
+technique ZplotTec < string MMDPass = "zplot"; > {
+    pass ZValuePlot {
+        AlphaBlendEnable = FALSE;
+    #ifndef CULLING_ENABLED
+        CullMode = NONE; // 常に両面を描画する
+    #endif
+        VertexShader = compile vs_2_0 ZValuePlot_VS();
+        PixelShader  = compile ps_2_0 ZValuePlot_PS();
+    }
+}
+
+////////////////////////////////////////////////////////////////////////////////
+// MMD標準のセルフシャドウの明るさ計算
+// シャドウバッファのサンプラ。"register(s0)"なのはMMDがs0を使っているから
+sampler DefSampler : register(s0);
+#define ShadowMapSampler DefSampler
+
+float MMDShadowBrightness(float2 ShadowMapPos, float DepthRef){
+    float shadow = max(DepthRef - tex2D(ShadowMapSampler,ShadowMapPos).r, 0);
+    float comp = 1 - saturate(shadow*
+        (parthf ? SKII2*ShadowMapPos.y // セルフシャドウモード2
+                : SKII1 // セルフシャドウモード1
+        )-0.3);
+    return comp;
+}
+
+static const float2 sampstep = float2(1.0/SHADOWMAP_WIDTH, 1.0/SHADOWMAP_HEIGHT);
+
+
+////////////////////////////////////////////////////////////////////////////////
+// 小さめのソフトシャドウ
+// VSM方式 9点サンプリング
+// Original Code: そぼろ氏 SpotLightShadow_Object
+float2 GetZBuffSampleD2(float2 pos){
+    float d=tex2D(ShadowMapSampler, pos).r;
+    return float2(d, d*d);
+}
+
+// 9点サンプリング
+float2 GetZBufSample(float2 texc){
+    float2 Out = float2(0,0);
+    float step = sampstep;
+    Out = GetZBuffSampleD2(texc) * 2;
+
+    Out += GetZBuffSampleD2(texc + float2(0, step));
+    Out += GetZBuffSampleD2(texc + float2(0, -step));
+    Out += GetZBuffSampleD2(texc + float2(step, 0));
+    Out += GetZBuffSampleD2(texc + float2(-step, 0));
+    Out += GetZBuffSampleD2(texc + float2(step, step)) * 0.7071; // 0.7071=sqrt(0.5) 中心からの距離
+    Out += GetZBuffSampleD2(texc + float2(-step, step))* 0.7071;
+    Out += GetZBuffSampleD2(texc + float2(step, -step))* 0.7071;
+    Out += GetZBuffSampleD2(texc + float2(-step, -step))* 0.7071;
+
+    Out /= 2 + 4 + 4*(0.7071);
+    return Out;
+}
+
+float ShadowBrightness(float2 ShadowMapPos, float DepthRef){
+    float comp;
+    if(parthf && (ShadowMapPos.y<SOFTSHADOW_DISTANCE)){
+        comp = MMDShadowBrightness(ShadowMapPos, DepthRef);
+    }
+    else{
+        float2 d = GetZBufSample(ShadowMapPos);
+        d.y += SOFTSHADOW_THRESHOLD;
+        float sigma2 = d.y - d.x * d.x;
+        comp = sigma2 / (sigma2 + DepthRef - d.x);
+        comp = (comp<0) + saturate(comp);
+    }
+    return comp;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+// 引用: From ビームマンP
+#ifdef USE_NORMAL_MAP
+    #define USE_CALC_NORMAL
+#else
+    #ifdef USE_NORMAL_MAP_SKIN
+        #define USE_CALC_NORMAL
+    #endif
+#endif
+#ifdef USE_CALC_NORMAL
+    // 法線マップの為、Tangent と Binormal を計算する関数
+    // MMDから Tangent と Binormal の値は渡されない為、ピクセルシェーダでこれらを計算している
+    // ※プログラム側で計算できるならその方が高速
+    float3x3 compute_tangent_frame(float3 Normal, float3 View, float2 UV) {
+        float3 dp1 = ddx(View);
+        float3 dp2 = ddy(View);
+        float2 duv1 = ddx(UV);
+        float2 duv2 = ddy(UV);
+        float3x3 M = float3x3(dp1, dp2, cross(dp1, dp2));
+        float2x3 inverseM = float2x3(cross(M[1], M[2]), cross(M[2], M[0]));
+        float3 Tangent = mul(float2(duv1.x, duv2.x), inverseM);
+        float3 Binormal = mul(float2(duv1.y, duv2.y), inverseM);
+        return float3x3(normalize(Tangent), normalize(Binormal), Normal);
+    }
+#endif
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+// オブジェクト描画（セルフシャドウON・OFF共用）
+
+struct BufferShadow_OUTPUT {
+    float4 Pos      : POSITION;     // 射影変換座標
+    float4 ZCalcTex : TEXCOORD0;    // Z値
+    float2 Tex      : TEXCOORD1;    // テクスチャ
+    float3 Normal   : TEXCOORD2;    // 法線
+    float3 Eye      : TEXCOORD3;    // カメラとの相対位置
+    float2 SpTex    : TEXCOORD4;    // スフィアマップテクスチャ座標
+    float4 Color    : COLOR0;       // ディフューズ色
+    float4 ScreenTex : TEXCOORD5;   // スクリーン座標
+    float4 WorldPos : TEXCOORD6;    // ワールド座標
+};
+
+// 頂点シェーダ
+BufferShadow_OUTPUT BufferShadow_VS(float4 Pos : POSITION, float3 Normal : NORMAL, float2 Tex : TEXCOORD0,
+    float2 Tex2 : TEXCOORD1)
+{
+    BufferShadow_OUTPUT Out = (BufferShadow_OUTPUT)0;
+
+    Out.WorldPos = mul(Pos, WorldMatrix);
+    // カメラ視点のワールドビュー射影変換
+    Out.Pos = mul(Pos,WorldViewProjMatrix);
+
+    // カメラとの相対位置
+    Out.Eye = CameraPosition - mul( Pos, WorldMatrix );
+    // 頂点法線
+    Out.Normal = mul( Normal, (float3x3)WorldMatrix );
+    // ライト視点によるワールドビュー射影変換
+    Out.ZCalcTex = mul(Pos, LightWorldViewProjMatrix);
+
+    // ディフューズ色＋アンビエント色 計算
+    #ifdef USE_DARK
+        Out.Color.rgb = DarkAmbient;
+    #else
+        Out.Color.rgb = AmbientColor;
+    #endif
+    if ( !use_toon ) {
+        Out.Color.rgb += max(0,dot( Out.Normal, -LightDirection )) * DiffuseColor.rgb;
+    }
+    Out.Color.a = DiffuseColor.a;
+    #ifndef USE_HDR
+        Out.Color = saturate( Out.Color );
+    #endif
+
+    // テクスチャ座標
+    Out.Tex = Tex;
+
+    // スフィアマップテクスチャ座標
+    float2 NormalWV = mul( Out.Normal, (float3x3)ViewMatrix );
+    Out.SpTex.x = NormalWV.x * 0.5f + 0.5f;
+    Out.SpTex.y = NormalWV.y * -0.5f + 0.5f;
+
+    //スクリーン座標取得
+    Out.ScreenTex = Out.Pos;
+
+    //超遠景におけるちらつき防止
+    Out.Pos.z -= max(0, (int)((CameraDistance1 - 6000) * 0.04));
+    return Out; 
+}
+
+// ピクセルシェーダ ================================================================================
+#ifdef USE_FULLMODE
+    float4 BufferShadow_PS(BufferShadow_OUTPUT IN, uniform bool useShadow, uniform bool useFull) : COLOR
+#else
+    float4 BufferShadow_PS(BufferShadow_OUTPUT IN, uniform bool useShadow) : COLOR
+#endif
+{
+    #ifdef USE_FULLMODE
+        #define FULL_BASE(tex) (frac(tex)*0.5)
+        #define FULL_NORMAL(tex) (frac(tex)*0.5+float2(0,0.5))
+        #define FULL_HEIGHT(tex) (frac(tex)*0.5+float2(0.5,0.5))
+        #define FULL_SPECULAR(tex) (frac(tex)*0.5+float2(0.5,0))
+    #endif
+    
+    float fOcclusionShadow = 1.0; // 影の強さ(POMで使用)
+    float height = 0;
+    float3 sc = 0; // スペキュラ色
+    float3 msc = 0; // 材質スペキュラ色
+    float4 Color = IN.Color;
+    #ifdef USE_DARK
+        float4 ShadowColor = float4(saturate(DarkAmbient), Color.a);  // 影の色
+    #else
+        float4 ShadowColor = float4(saturate(AmbientColor), Color.a);  // 影の色
+    #endif
+
+// --Normal--
+    float2 bTex = IN.Tex * TexBlendRepeat;
+    float2 nTex = IN.Tex * NormalMapRepeat;
+    float2 texNormal = nTex;
+    float2 texBase = IN.Tex;
+    float2 texBlend = bTex;
+#ifdef USE_FULLMODE 
+    if(useFull){ // ★★Fullモード使用時はFullモード対象だけに法線・高さを適用★ここから★★
+#endif
+    #ifdef USE_NORMAL_MAP
+        float3x3 tf = compute_tangent_frame(IN.Normal, IN.Eye, nTex);
+        float3x3 tfa = {
+            {tf[0] * IMAGE_DIRECTION_X}, // Tangent
+            {tf[1] * IMAGE_DIRECTION_Y}, // Binormal
+            tf[2]}; // Normal
+
+        #ifdef USE_HEIGHT_MAP
+            #if HEIGHT_MAP_METHOD == 1 // 視差マップ
+                #ifdef USE_FULLMODE
+                    height = tex2D( ObjTexSampler, FULL_HEIGHT(IN.Tex) ).r;
+                #else
+                    height = tex2D( HeightMapSampler, nTex ).r;
+                #endif
+                float3 eyeTangent = normalize( mul(IN.Eye, tf) );
+                texNormal = nTex - eyeTangent.xy * height * HeightScalePM;
+                texBase = IN.Tex - eyeTangent.xy * height * HeightScalePM / NormalMapRepeat;
+                texBlend = bTex - eyeTangent.xy * height * HeightScalePM * TexBlendRepeat / NormalMapRepeat;
+            #else // (HEIGHT_MAP_METHOD == 2) 視差遮蔽マップ
+                // ※DirectX11が使えるならテッセレーションの方が速くて綺麗
+                // セルフシャドウ付き視差遮蔽マップ ここから -----------------------------------
+                float3x3 mtf = {-tf[0], -tf[1], tf[2]};
+                float3x3 mtfa = {-tfa[0], -tfa[1], tfa[2]};
+                float3 NormalW   = normalize( tf[2] );
+                float3 Eye   = normalize( IN.Eye  );
+                //float3 vLightTS = normalize( mul( LightDirection, mtfa ) ); // 2013.04.11 del
+                float3 vLightTS = normalize( mul( LightDirection, tf ) ); // 2013.04.11 add
+                float3 vViewTS  = normalize( mul( mtf, IN.Eye ) );
+                float2 vParallaxDirection = normalize(  vViewTS.xy ); // 視差方向の初期値
+                float fLength         = length( vViewTS ); // 移動量の最大値
+                float fParallaxLength = sqrt( fLength * fLength - vViewTS.z * vViewTS.z ) / vViewTS.z; 
+                float2 vParallaxOffsetTS = vParallaxDirection * fParallaxLength * HeightScalePOM;
+                float4 cResultColor = float4( 0, 0, 0, 1 );
+
+                // シェーダ内Level-of-Detail(LOD)
+                // ミップレベルからPOMで処理するか、シンプルなバンプマップを使うか決定する。
+                float2 fTexCoordsPerSize = nTex * NormalMapSize; // 勾配
+                float2 dxSize, dySize;
+                float2 dx, dy;
+                float4( dxSize, dx ) = ddx( float4( fTexCoordsPerSize, nTex ) );
+                float4( dySize, dy ) = ddy( float4( fTexCoordsPerSize, nTex ) );
+                float  fMipLevel;      
+                float  fMipLevelInt;
+                float  fMipLevelFrac;
+                float  fMinTexCoordDelta;
+                float2 dTexCoords;
+                dTexCoords = dxSize * dxSize + dySize * dySize;
+                fMinTexCoordDelta = max( dTexCoords.x, dTexCoords.y );
+                fMipLevel = max( 0.5 * log2( fMinTexCoordDelta ), 0 );
+                float2 texSample = nTex;
+                float4 cLODColoring = float4( 1, 1, 3, 1 );
+                #ifdef USE_POM_LOD
+                if ( fMipLevel <= (float) MipLevelSikiiLOD )
+                #endif
+                {
+                    // スムージングの為のサンプリング数
+                    int nNumSteps = (int) lerp( POM_SMOOTHING_MAX, POM_SMOOTHING_MIN, dot( Eye, NormalW ) );
+
+                    float fCurrHeight = 0.0;
+                    float fStepSize   = 1.0 / (float) nNumSteps;
+                    float fPrevHeight = 1.0;
+                    float fNextHeight = 0.0;
+                    int    nStepIndex = 0;
+                    bool   bCondition = true;
+                    float2 vTexOffsetPerStep = fStepSize * vParallaxOffsetTS;
+                    float2 vTexCurrentOffset = nTex;
+                    float  fCurrentBound     = 1.0;
+                    float  fParallaxAmount   = 0.0;
+                    float2 pt1 = 0;
+                    float2 pt2 = 0;
+                    float2 texOffset2 = 0;
+                    while ( nStepIndex < nNumSteps ) 
+                    {
+                        vTexCurrentOffset -= vTexOffsetPerStep;
+                        #ifdef USE_FULLMODE
+                            fCurrHeight = tex2Dgrad( ObjTexSampler, FULL_HEIGHT(vTexCurrentOffset/NormalMapRepeat), dx, dy ).r;
+                        #else
+                            fCurrHeight = tex2Dgrad( HeightMapSampler, vTexCurrentOffset, dx, dy ).r;
+                        #endif
+                        #ifdef INVERSE_HIGHT
+                            fCurrHeight = 1 - fCurrHeight;
+                        #endif
+                        fCurrentBound -= fStepSize;
+                        if ( fCurrHeight > fCurrentBound ) {   
+                            pt1 = float2( fCurrentBound, fCurrHeight );
+                            pt2 = float2( fCurrentBound + fStepSize, fPrevHeight );
+                            texOffset2 = vTexCurrentOffset - vTexOffsetPerStep;
+                            nStepIndex = nNumSteps + 1;
+                            fPrevHeight = fCurrHeight;
+                        } else {
+                            nStepIndex++;
+                            fPrevHeight = fCurrHeight;
+                        }
+                    }
+                    float fDelta2 = pt2.x - pt2.y;
+                    float fDelta1 = pt1.x - pt1.y;
+                    float fDenominator = fDelta2 - fDelta1;
+                    if ( fDenominator == 0.0f ) { // 0除算チェック
+                        fParallaxAmount = 0.0f;
+                    } else {
+                        fParallaxAmount = (pt1.x * fDelta2 - pt2.x * fDelta1 ) / fDenominator;
+                    }
+
+                    float2 vParallaxOffset = vParallaxOffsetTS * (1 - fParallaxAmount );
+                    float2 texSampleBase = nTex - vParallaxOffset;
+                    texSample = texSampleBase;
+                    cLODColoring = float4( 1, 1, 1, 1 ); 
+                #ifdef USE_POM_LOD
+                    if ( fMipLevel > (float)(MipLevelSikiiLOD - 1) ) {
+                        fMipLevelFrac = modf( fMipLevel, fMipLevelInt );
+                        #ifdef VISUALIZE_LOD
+                            cLODColoring = float4( 1, 1, max( 1, 2 * fMipLevelFrac ), 1 ); // LOD可視化用に青くする
+                        #endif
+                        // POMでの座標から、バンプマップでの座標に mipレベルに応じて線形補間する
+                        texSample = lerp( texSampleBase, nTex, fMipLevelFrac );
+                    }
+                #endif
+                    #ifdef DISPLAY_SHADOWS
+                        float2 vLightRayTS = vLightTS.xy * HeightScalePOM;
+                    #ifdef USE_FULLMODE
+                        float sh0 =  tex2Dgrad( ObjTexSampler, FULL_HEIGHT(texSampleBase), dx, dy ).r;
+                        float shA = (tex2Dgrad( ObjTexSampler, FULL_HEIGHT(texSampleBase + vLightRayTS * 0.88), dx, dy ).r - sh0 - 0.88 ) *  1 * SoftShadow;
+                        float sh9 = (tex2Dgrad( ObjTexSampler, FULL_HEIGHT(texSampleBase + vLightRayTS * 0.77), dx, dy ).r - sh0 - 0.77 ) *  2 * SoftShadow;
+                        float sh8 = (tex2Dgrad( ObjTexSampler, FULL_HEIGHT(texSampleBase + vLightRayTS * 0.66), dx, dy ).r - sh0 - 0.66 ) *  4 * SoftShadow;
+                        float sh7 = (tex2Dgrad( ObjTexSampler, FULL_HEIGHT(texSampleBase + vLightRayTS * 0.55), dx, dy ).r - sh0 - 0.55 ) *  6 * SoftShadow;
+                        float sh6 = (tex2Dgrad( ObjTexSampler, FULL_HEIGHT(texSampleBase + vLightRayTS * 0.44), dx, dy ).r - sh0 - 0.44 ) *  8 * SoftShadow;
+                        float sh5 = (tex2Dgrad( ObjTexSampler, FULL_HEIGHT(texSampleBase + vLightRayTS * 0.33), dx, dy ).r - sh0 - 0.33 ) * 10 * SoftShadow;
+                        float sh4 = (tex2Dgrad( ObjTexSampler, FULL_HEIGHT(texSampleBase + vLightRayTS * 0.22), dx, dy ).r - sh0 - 0.22 ) * 12 * SoftShadow;
+                    #else
+                        float sh0 =  tex2Dgrad( HeightMapSampler, texSampleBase, dx, dy ).r;
+                        float shA = (tex2Dgrad( HeightMapSampler, texSampleBase + vLightRayTS * 0.88, dx, dy ).r - sh0 - 0.88 ) *  1 * SoftShadow;
+                        float sh9 = (tex2Dgrad( HeightMapSampler, texSampleBase + vLightRayTS * 0.77, dx, dy ).r - sh0 - 0.77 ) *  2 * SoftShadow;
+                        float sh8 = (tex2Dgrad( HeightMapSampler, texSampleBase + vLightRayTS * 0.66, dx, dy ).r - sh0 - 0.66 ) *  4 * SoftShadow;
+                        float sh7 = (tex2Dgrad( HeightMapSampler, texSampleBase + vLightRayTS * 0.55, dx, dy ).r - sh0 - 0.55 ) *  6 * SoftShadow;
+                        float sh6 = (tex2Dgrad( HeightMapSampler, texSampleBase + vLightRayTS * 0.44, dx, dy ).r - sh0 - 0.44 ) *  8 * SoftShadow;
+                        float sh5 = (tex2Dgrad( HeightMapSampler, texSampleBase + vLightRayTS * 0.33, dx, dy ).r - sh0 - 0.33 ) * 10 * SoftShadow;
+                        float sh4 = (tex2Dgrad( HeightMapSampler, texSampleBase + vLightRayTS * 0.22, dx, dy ).r - sh0 - 0.22 ) * 12 * SoftShadow;
+                    #endif
+                        // 影の強さを計算
+                        fOcclusionShadow = 1 - max( max( max( max( max( max( shA, sh9 ), sh8 ), sh7 ), sh6 ), sh5 ), sh4 );
+                        //fOcclusionShadow = fOcclusionShadow * 0.6 + 0.4;
+                    #endif
+                }
+                float3 eyeTangent = normalize( mul(IN.Eye, tf) );
+                texNormal = texSample;
+                texBase = texSample / NormalMapRepeat;
+                texBlend = texSample * TexBlendRepeat / NormalMapRepeat;
+                #ifdef USE_FULLMODE
+                    //height = tex2D( ObjTexSampler, FULL_HEIGHT(IN.Tex) ).r;
+                    height = tex2D( ObjTexSampler, FULL_HEIGHT(texBase) ).r;
+                #else
+                    //height = tex2D( HeightMapSampler, nTex ).r;
+                    height = tex2D( HeightMapSampler, texNormal ).r;
+                #endif
+                // セルフシャドウ付き視差遮蔽マップ ここまで -----------------------------------
+            #endif
+        #endif
+
+        // 法線マップを使い法線とスフィア座標を計算し直す
+        #ifdef USE_FULLMODE
+            IN.Normal = normalize(mul(tex2D( ObjTexSampler, FULL_NORMAL(texBase) ) * 2 - 1, tfa));
+        #else
+            IN.Normal = normalize(mul(tex2D( NormalMapSampler, texNormal ) * 2 - 1, tfa));
+        #endif
+
+        //float3 vNormalTS = normalize( tex2D( NormalMapSampler, texNormal ) * 2 - 1 ); // 0～1 から -1～1に
+        //float3 vNormalTS = tex2D( NormalMapSampler, nTex ) * 2 - 1; // 0～1 から -1～1に
+        //IN.Normal = normalize(mul(vNormalTS, tf));
+        float2 NormalWV = mul( IN.Normal, (float3x3)ViewMatrix );
+        IN.SpTex.x = NormalWV.x * 0.5f + 0.5f;
+        IN.SpTex.y = NormalWV.y * -0.5f + 0.5f;
+    #endif
+#ifdef USE_FULLMODE
+    } // ★★Fullモード使用時はFullモード対象だけに法線・高さを適用★ここまで★★
+#endif
+    #ifdef USE_SPECULAR_MAP
+        #ifdef USE_FULLMODE
+            if(useFull) {
+                msc = float3(1,1,1) * tex2D( ObjTexSampler, FULL_SPECULAR(texBase) ).r * SpecularMapBoost;
+                sc = msc * LightSpecular;
+            }
+            else {
+                msc = MaterialSpecular;
+                sc = SpecularColor;
+            }
+        #else
+            msc = float3(1,1,1) * tex2D(SpecularMapSampler, texNormal).r * SpecularMapBoost;
+            sc = msc * LightSpecular;
+        #endif
+    #else
+        msc = MaterialSpecular;
+        sc = SpecularColor;
+    #endif
+    {
+        float4 TexColor = float4(1,1,1,1);
+        if ( use_texture ) { // テクスチャ適用
+            #ifdef USE_FULLMODE
+                if (useFull) { TexColor = tex2D( ObjTexSampler, FULL_BASE(texBase) ); } // フルモード
+                else { TexColor = tex2D( ObjTexSampler, texBase ); }
+            #else
+                TexColor = tex2D( ObjTexSampler, texBase );
+            #endif
+            // テクスチャ材質モーフ
+            TexColor.rgb = lerp(1, TexColor * TextureMulValue + TextureAddValue, TextureMulValue.a + TextureAddValue.a);
+        }
+        #ifdef USE_TEX_BLEND // 第2テクスチャ
+            float4 BlendTexColor = tex2D( TexBlendSampler, texBlend );
+            TexColor.rgb = lerp( TexColor, BlendTexColor, saturate(TexBlendRatio) );
+        #endif
+        #ifdef USE_MIRROR // 鏡面反射
+            if(msc.r >= ReflectSpecularSikii) {
+                float3 reflVec = reflect(-normalize(IN.Eye), normalize(IN.Normal));
+                TexColor.rgb *= lerp(1,texDP(MirrorFSampler, MirrorBSampler, reflVec.xyz),MirrorParam).rgb;
+            }
+        #endif
+        Color *= TexColor;
+        ShadowColor *= TexColor;
+    }
+    
+    #ifndef IGNORE_SPHERE_1ST // 元のスフィアを無視しない場合実行
+        if ( use_spheremap ) {
+            // スフィアマップ適用
+            float4 TexColor = tex2D(ObjSphareSampler,IN.SpTex);
+            // スフィアテクスチャ材質モーフ
+            TexColor.rgb = lerp(spadd?0:1, TexColor * SphereMulValue + SphereAddValue, SphereMulValue.a + SphereAddValue.a);
+            if(spadd) {
+                #ifdef USE_DARK
+                    Color.rgb += TexColor.rgb * LightAmbient;
+                    ShadowColor.rgb += TexColor.rgb * LightAmbient;
+                #else
+                    Color.rgb += TexColor.rgb;
+                    ShadowColor.rgb += TexColor.rgb;
+                #endif
+            } else {
+                Color.rgb *= TexColor.rgb;
+                ShadowColor.rgb *= TexColor.rgb;
+            }
+            Color.a *= TexColor.a;
+            ShadowColor.a *= TexColor.a;
+        }
+    #endif
+        
+    #ifdef USE_SPHERE_2ND // 第2スフィア
+    {
+        Color *= float4(AmbientBoost, 1.0);
+        ShadowColor *= float4(AmbientBoost, 1.0);
+        float4 TexColor = tex2D(Sphere2ndSampler, IN.SpTex);
+        #ifdef SPHERE_ADD
+            #ifdef USE_DARK
+                Color.rgb += TexColor.rgb * SphereBoost * LightAmbient;
+                ShadowColor.rgb += TexColor.rgb * SphereBoost * LightAmbient;
+            #else
+                Color.rgb += TexColor.rgb * SphereBoost;
+                ShadowColor.rgb += TexColor.rgb * SphereBoost;
+            #endif
+        #else
+            Color.rgb *= TexColor.rgb * SphereBoost;
+            ShadowColor.rgb *= TexColor.rgb * SphereBoost;
+        #endif
+        Color.a *= TexColor.a;
+        ShadowColor.a *= TexColor.a;
+    }
+    #endif
+    
+/*
+    #ifdef USE_HEIGHT_MAP
+        //Zテクスチャ作り直し
+        float4 WP = IN.WorldPos;
+        WP.xyz += IN.Normal * height * HeightScalePM;
+        IN.ZCalcTex = mul( WP, LightWorldViewProjMatrix );
+    #endif
+*/
+// --Skin--
+    
+    float comp = 1.0;
+    if(use_toon){
+        float tp = ToonPower;
+        if(Exist_ExcellentShadow) { tp += ((1 - ShadowRate) * PMD_SHADOWPOWER); }
+        comp = dot(IN.Normal,-LightDirection);
+        ShadowColor.rgb *= pow(MaterialToon,tp);
+    }
+
+    // テクスチャ座標に変換
+    IN.ZCalcTex/=IN.ZCalcTex.w;
+    float2 ShadowMapPos;
+    ShadowMapPos.x = (1.0 + IN.ZCalcTex.x)*0.5;
+    ShadowMapPos.y = (1.0 - IN.ZCalcTex.y)*0.5;
+
+    float shadow=1;
+    if(Exist_ExcellentShadow)
+    {
+        IN.ScreenTex.xyz /= IN.ScreenTex.w;
+        float2 TransScreenTex;
+        TransScreenTex.x = (1.0f + IN.ScreenTex.x) * 0.5f;
+        TransScreenTex.y = (1.0f - IN.ScreenTex.y) * 0.5f;
+        TransScreenTex += ES_ViewportOffset;
+        float SadowMapVal = tex2D(ScreenShadowMapProcessedSamp, TransScreenTex).r;
+        shadow = SadowMapVal;
+        
+        // 補正
+        shadow = min(shadow, fOcclusionShadow);
+        comp = min(comp, fOcclusionShadow);
+        
+        // SSAO
+        float SSAOMapVal = 0;
+        if(Exist_ExShadowSSAO){
+            SSAOMapVal = tex2D(ExShadowSSAOMapSamp , TransScreenTex).r; //陰度取得
+        }
+
+        #ifdef MIKUMIKUMOVING
+            float3 lightdir = LightDirection[0];
+            bool toonflag = use_toon && usetoontexturemap;
+        #else
+            float3 lightdir = LightDirection;
+            bool toonflag = use_toon;
+        #endif
+
+
+        //影部分のSSAO合成
+        float4 ShadowColor2 = ShadowColor;
+        ShadowColor2.rgb -= ((Color.rgb - ShadowColor2.rgb) + 0.3) * SSAOMapVal * 0.2;
+        ShadowColor2.rgb = max(ShadowColor2.rgb, 0);//ShadowColor.rgb * 0.5);
+
+        //comp *= (comp>=0) ? (shadow*ShadowDarkness+1.0-ShadowDarkness) : 0;
+        comp *= (comp>=0) ? (shadow*ShadowDarkness+1.0-ShadowDarkness) : ShadowDarkness -1.0;
+        
+        //Color = lerp(ShadowColor, Color, comp);
+        //日向部分のSSAO合成
+        Color = lerp(Color, ShadowColor, saturate(SSAOMapVal * 0.4)*comp);
+
+        //最終合成
+        Color = lerp(ShadowColor2, Color, SadowMapVal*comp);
+        if( transp && useShadow ) { Color.a *= 0.5f; } 
+    }
+    else{
+        if( !any( saturate(ShadowMapPos) != ShadowMapPos ) )
+        {
+            shadow = ShadowBrightness(ShadowMapPos.xy, IN.ZCalcTex.z);
+        }
+        //comp *= (comp>=0) ? (shadow*ShadowDarkness+1.0-ShadowDarkness) : 0;
+        comp *= (comp>=0) ? (shadow*ShadowDarkness+1.0-ShadowDarkness) : ShadowDarkness -1.0;
+        shadow = min(shadow, fOcclusionShadow);
+        comp = min(comp, fOcclusionShadow);
+        Color = lerp(ShadowColor, Color, comp);
+    }
+    
+    // スペキュラ適用
+    // スペキュラ色計算
+    float3 HalfVector = normalize( normalize(IN.Eye) + -LightDirection );
+    float3 Specular = pow( max(0,dot( HalfVector, normalize(IN.Normal) )), SpecularPower ) * sc;
+    Color.rgb += Specular*shadow;
+
+    float EN = dot(normalize(IN.Normal),normalize(IN.Eye));
+    float d = pow(EN,EyeLightPower);
+    Color.rgb *= lerp(Color, OverBright*float3(1,1,1), d);
+    #ifndef USE_HDR
+        Color=saturate(Color);
+    #endif
+
+    float LN = dot(normalize(IN.Normal),-LightDirection);
+    d = FresnelCoef*pow(1.0-EN, FresnelFact) * (LN*0.4+0.6);
+    Color.rgb += sc*d;
+
+    // 皮下散乱
+    d = pow(abs(dot(normalize(IN.Normal),normalize(IN.Eye))),UnderSkinDiffuse);
+    Color.rgb += sc*(1.0-d);
+
+    if( transp && useShadow ) Color.a *= 0.5f;
+    return Color;
+}
+
+// オブジェクト描画用テクニック
+
+#ifdef CULLING_ENABLED
+    #define MAIN_PASS_OPTION
+#else
+    #define MAIN_PASS_OPTION CullMode = NONE; // 常に両面を描画する
+#endif
+
+#ifdef USE_FULLMODE // FullModeを使う場合 ==========================================================
+    #if ANISOTROPY_TYPE == 1 // 旧MMDで異方向フィルタを使う場合 ------------------------------------
+        #define MAIN_TEC(mmdp, nameDef, nameFull, shadow) \
+            technique nameDef < string MMDPass = mmdp; string Subset=DefSubset; \
+                string Script = \
+                    "RenderColorTarget=UseMipmapObjectTexture;" \
+                        "RenderDepthStencilTarget=UMOTDepth;" \
+                            "ClearSetColor=ClearColor;" \
+                            "ClearSetDepth=ClearDepth;" \
+                            "Clear=Color;" \
+                            "Clear=Depth;" \
+                        "Pass=CreateMipmap;" \
+                    "RenderColorTarget=;" \
+                        "RenderDepthStencilTarget=;" \
+                        "Pass=DrawObject;" \
+                ; \
+            > { \
+                pass CreateMipmap < string Script= "Draw=Buffer;"; >{ \
+                    AlphaBlendEnable = false; \
+                    AlphaTestEnable = false; \
+                    ZEnable = false; \
+                    VertexShader = compile vs_2_0 CopyTex_VS(MipmapOffset); \
+                    PixelShader  = compile ps_2_0 CopyTex_PS(OrgObjTexSampler); \
+                } \
+                pass DrawObject { \
+                    MAIN_PASS_OPTION \
+                    VertexShader = compile vs_3_0 BufferShadow_VS(); \
+                    PixelShader  = compile ps_3_0 BufferShadow_PS(shadow, false); \
+                } \
+            } \
+            technique nameFull < string MMDPass = mmdp; \
+                string Script = \
+                    "RenderColorTarget=UseMipmapObjectTexture;" \
+                        "RenderDepthStencilTarget=UMOTDepth;" \
+                            "ClearSetColor=ClearColor;" \
+                            "ClearSetDepth=ClearDepth;" \
+                            "Clear=Color;" \
+                            "Clear=Depth;" \
+                        "Pass=CreateMipmap;" \
+                    "RenderColorTarget=;" \
+                        "RenderDepthStencilTarget=;" \
+                        "Pass=DrawObject;" \
+                ; \
+            > { \
+                pass CreateMipmap < string Script= "Draw=Buffer;"; >{ \
+                    AlphaBlendEnable = false; \
+                    AlphaTestEnable = false; \
+                    ZEnable = false; \
+                    VertexShader = compile vs_2_0 CopyTex_VS(MipmapOffset); \
+                    PixelShader  = compile ps_2_0 CopyTex_PS(OrgObjTexSampler); \
+                } \
+                pass DrawObject { \
+                    MAIN_PASS_OPTION \
+                    VertexShader = compile vs_3_0 BufferShadow_VS(); \
+                    PixelShader  = compile ps_3_0 BufferShadow_PS(shadow, true); \
+                } \
+            }
+    #else // (ANISOTROPY_TYPE == 0 or 2) 異方向フィルタを使わない or 新MMDの機能を利用して使う場合 -
+        #define MAIN_TEC(mmdp, nameDef, nameFull, shadow) \
+            technique nameDef < string MMDPass = mmdp; string Subset=DefSubset; \
+            > { \
+                pass DrawObject { \
+                    MAIN_PASS_OPTION \
+                    VertexShader = compile ShaderVer(vs) BufferShadow_VS(); \
+                    PixelShader  = compile ShaderVer(ps) BufferShadow_PS(shadow, false); \
+                } \
+            } \
+            technique nameFull < string MMDPass = mmdp; \
+            > { \
+                pass DrawObject { \
+                    MAIN_PASS_OPTION \
+                    VertexShader = compile ShaderVer(vs) BufferShadow_VS(); \
+                    PixelShader  = compile ShaderVer(ps) BufferShadow_PS(shadow, true); \
+                } \
+            }
+    #endif
+    MAIN_TEC("object", MainTecDef, MainTecFull, false)
+    MAIN_TEC("object_ss", MainTecBSDef, MainTecBSFull, true)
+#else // Fullモードを使わない場合 ==================================================================
+    #if ANISOTROPY_TYPE == 1 // 旧MMDで異方向フィルタを使う場合 ------------------------------------
+        #define MAIN_TEC(mmdp, name, shadow) \
+            technique name < string MMDPass = mmdp; \
+                string Script = \
+                    "RenderColorTarget=UseMipmapObjectTexture;" \
+                        "RenderDepthStencilTarget=UMOTDepth;" \
+                            "ClearSetColor=ClearColor;" \
+                            "ClearSetDepth=ClearDepth;" \
+                            "Clear=Color;" \
+                            "Clear=Depth;" \
+                        "Pass=CreateMipmap;" \
+                    "RenderColorTarget=;" \
+                        "RenderDepthStencilTarget=;" \
+                        "Pass=DrawObject;" \
+                ; \
+            > { \
+                pass CreateMipmap < string Script= "Draw=Buffer;"; >{ \
+                    AlphaBlendEnable = false; \
+                    AlphaTestEnable = false; \
+                    ZEnable = false; \
+                    VertexShader = compile vs_2_0 CopyTex_VS(MipmapOffset); \
+                    PixelShader  = compile ps_2_0 CopyTex_PS(OrgObjTexSampler); \
+                } \
+                pass DrawObject { \
+                    MAIN_PASS_OPTION \
+                    VertexShader = compile vs_3_0 BufferShadow_VS(); \
+                    PixelShader  = compile ps_3_0 BufferShadow_PS(shadow); \
+                } \
+            }
+    #else // (ANISOTROPY_TYPE == 0 or 2) 異方向フィルタを使わない or 新MMDの機能を利用して使う場合 -
+        #define MAIN_TEC(mmdp, name, shadow) \
+            technique name < string MMDPass = mmdp; \
+            > { \
+                pass DrawObject { \
+                    MAIN_PASS_OPTION \
+                    VertexShader = compile ShaderVer(vs) BufferShadow_VS(); \
+                    PixelShader  = compile ShaderVer(ps) BufferShadow_PS(shadow); \
+                } \
+            }
+    #endif
+    MAIN_TEC("object", MainTec, false)
+    MAIN_TEC("object_ss", MainTecBS, true)
+#endif
+// =================================================================================================

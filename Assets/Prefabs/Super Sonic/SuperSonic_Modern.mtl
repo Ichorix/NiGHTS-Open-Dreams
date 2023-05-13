@@ -1,0 +1,70 @@
+newmtl super_sonic_gm_body
+Kd 1.000000 1.000000 1.000000
+Ks 1.000000 1.000000 1.000000
+Ns 1.000000
+map_Kd chr_supersonic_body01_dif_HD.png
+map_Ks chr_supersonic_body01_spc_HD.png
+
+newmtl super_sonic_gm_mouth
+Kd 1.000000 1.000000 1.000000
+Ks 1.000000 1.000000 1.000000
+Ns 1.000000
+map_Kd chr_supersonic_body01_dif_HD.png
+map_Ks chr_supersonic_body01_spc_HD.png
+
+newmtl super_sonic_gm_head
+Kd 1.000000 1.000000 1.000000
+Ks 1.000000 1.000000 1.000000
+Ns 1.000000
+map_Kd chr_supersonic_body01_dif_HD.png
+map_Ks chr_supersonic_body01_spc_HD.png
+
+newmtl super_sonic_gm_nose
+Kd 1.000000 1.000000 1.000000
+Ks 1.000000 1.000000 1.000000
+Ns 1.000000
+map_Kd chr_supersonic_body01_dif_HD.png
+map_Ks chr_supersonic_body01_spc_HD.png
+
+newmtl super_sonic_gm_shoes_red
+Kd 1.000000 1.000000 1.000000
+Ks 1.000000 1.000000 1.000000
+Ns 1.000000
+map_Kd chr_sonic_shoes_dif_HD.png
+map_Ks chr_sonic_shoes_spc_HD.png
+
+newmtl super_sonic_gm_shoes_belt
+Kd 1.000000 1.000000 1.000000
+Ks 1.000000 1.000000 1.000000
+Ns 1.000000
+map_Kd chr_sonic_shoes_dif_HD.png
+map_Ks chr_sonic_shoes_spc_HD.png
+
+newmtl super_sonic_gm_cloth
+Kd 1.000000 1.000000 1.000000
+Ks 1.000000 1.000000 1.000000
+Ns 1.000000
+map_Kd chr_sonic_cloth_dif_HD.png
+map_Ks chr_sonic_cloth_spc_HD.png
+
+newmtl super_sonic_gm_shoes_ring
+Kd 1.000000 1.000000 1.000000
+Ks 1.000000 1.000000 1.000000
+Ns 1.000000
+map_Kd chr_sonic_shoes_dif_HD.png
+map_Ks chr_sonic_shoes_spc_HD.png
+
+newmtl super_sonic_gm_eyeL
+Kd 1.000000 1.000000 1.000000
+Ks 1.000000 1.000000 1.000000
+Ns 1.000000
+map_Kd chr_supersonic_eye_dif_HD.png
+map_Ks chr_sonic_eye_spc_HD_Red.png
+
+newmtl super_sonic_gm_eyeR
+Kd 1.000000 1.000000 1.000000
+Ks 1.000000 1.000000 1.000000
+Ns 1.000000
+map_Kd chr_supersonic_eye_dif_HD.png
+map_Ks chr_sonic_eye_spc_HD_Red.png
+

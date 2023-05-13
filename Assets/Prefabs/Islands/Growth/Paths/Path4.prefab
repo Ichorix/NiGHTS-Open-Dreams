@@ -1,0 +1,145 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3391074726754062795
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3388820130251707877}
+  - component: {fileID: 3359480141377939401}
+  m_Layer: 0
+  m_Name: Path4
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &3388820130251707877
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3391074726754062795}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 512.7001, y: 49.6, z: 421.02002}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3359480141377939401
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3391074726754062795}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e5ac92bc18f545cc84cd886ece82b4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  editorData:
+    _bezierPath:
+      points:
+      - {x: -4.350128, y: 25.586159, z: 0.36956787}
+      - {x: 5.75766, y: 25.586159, z: -0.074279785}
+      - {x: 26.419434, y: 17.915447, z: -6.2318115}
+      - {x: 23.946411, y: 11.235226, z: -17.979492}
+      - {x: 21.473389, y: 4.555004, z: -29.727173}
+      - {x: 37.836426, y: -0.6131058, z: -56.73523}
+      - {x: 53.315308, y: -0.6131058, z: -60.803284}
+      - {x: 68.79419, y: -0.6131058, z: -64.87134}
+      - {x: 89.716675, y: -3.975319, z: -69.97565}
+      - {x: 100.69873, y: -3.975319, z: -80.81555}
+      - {x: 111.680786, y: -3.975319, z: -91.65546}
+      - {x: 116.3385, y: -9.962738, z: -124.60443}
+      - {x: 122.83789, y: -9.962738, z: -131.3858}
+      - {x: 129.33728, y: -9.962738, z: -138.16718}
+      - {x: 141.3695, y: -4.8683395, z: -149.72113}
+      - {x: 147.59851, y: -4.8683395, z: -156.38672}
+      - {x: 153.82751, y: -4.8683395, z: -163.0523}
+      - {x: 172.10522, y: 5.888756, z: -156.06024}
+      - {x: 180.28394, y: -3.0278244, z: -179.79413}
+      - {x: 188.46265, y: -11.944405, z: -203.52802}
+      - {x: 173.53613, y: -9.799576, z: -222.05292}
+      - {x: 161.48035, y: -9.799576, z: -237.40558}
+      - {x: 149.42456, y: -9.799576, z: -252.75824}
+      - {x: 129.59497, y: -12.069096, z: -275.15143}
+      - {x: 111.63794, y: -12.069096, z: -272.0877}
+      - {x: 93.68091, y: -12.069096, z: -269.024}
+      - {x: 112.60986, y: 9.764812, z: -250.11401}
+      - {x: 87.258545, y: 0, z: -238.2898}
+      - {x: 61.907227, y: -9.764812, z: -226.46558}
+      - {x: 46.848022, y: 2.3003845, z: -260.25708}
+      - {x: 34.44397, y: 6.911873, z: -244.93329}
+      - {x: 22.039917, y: 11.523361, z: -229.6095}
+      - {x: 40.52649, y: 18.42308, z: -198.55194}
+      - {x: 70.13013, y: 0, z: -176.86792}
+      - {x: 99.733765, y: -18.42308, z: -155.1839}
+      - {x: 84.83667, y: 0, z: -135.4765}
+      - {x: 77.0531, y: 0, z: -120.23096}
+      - {x: 69.26953, y: 0, z: -104.98541}
+      - {x: 29.06424, y: -10.847664, z: -94.81738}
+      - {x: 6.52417, y: 0, z: -81.2348}
+      - {x: -16.0159, y: 10.847664, z: -67.65222}
+      - {x: -27.669647, y: 3.626442, z: -64.9989}
+      - {x: -36.16519, y: 16.199425, z: -48.000305}
+      - {x: -44.660736, y: 28.772408, z: -31.001709}
+      - {x: -36.56479, y: 12.427448, z: -22.87677}
+      - {x: -31.847565, y: 17.625824, z: -14.209778}
+      - {x: -27.13034, y: 22.8242, z: -5.5427856}
+      - {x: -14.457916, y: 25.586159, z: 0.8134155}
+      isClosed: 1
+      space: 0
+      controlMode: 1
+      autoControlLength: 0.3
+      boundsUpToDate: 0
+      bounds:
+        m_Center: {x: 0.005713463, y: 0.5242511, z: -0.38885355}
+        m_Extent: {x: 4.3562183, y: 1.1864768, z: 2.670612}
+      perAnchorNormalsAngle:
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      globalNormalsAngle: 69
+      flipNormals: 0
+    vertexPathUpToDate: 0
+    vertexPathMaxAngleError: 0.3
+    vertexPathMinVertexSpacing: 0
+    showTransformTool: 1
+    showPathBounds: 0
+    showPerSegmentBounds: 0
+    displayAnchorPoints: 1
+    displayControlPoints: 1
+    bezierHandleScale: 14.63
+    globalDisplaySettingsFoldout: 0
+    keepConstantHandleSize: 0
+    showNormalsInVertexMode: 0
+    showBezierPathInVertexMode: 0
+    showDisplayOptions: 1
+    showPathOptions: 1
+    showVertexPathDisplayOptions: 0
+    showVertexPathOptions: 1
+    showNormals: 1
+    showNormalsHelpInfo: 0
+    tabIndex: 0
+  initialized: 1

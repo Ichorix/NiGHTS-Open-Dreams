@@ -1,0 +1,64 @@
+///////////////////////////////////////////////////////////////////
+//
+// 引用元：Mechanic_Mirror (ビームマンP)
+//
+///////////////////////////////////////////////////////////////////
+// 動的双放物面環境マップの宣言＆使用関数
+
+#define WIDTH       512
+#define HEIGHT      512
+#define ANTI_ALIAS  true
+
+
+texture MirrorF: OFFSCREENRENDERTARGET <
+    int Width = WIDTH;
+    int Height = HEIGHT;
+    float4 ClearColor = { 1, 1, 1, 1 };
+    float ClearDepth = 1.0;
+    bool AntiAlias = ANTI_ALIAS;
+    int Miplevels=1;
+    string DefaultEffect = 
+        "self = hide;"
+        "*=_MirrorF.fxsub;";
+>;
+
+sampler MirrorFSampler = sampler_state {
+    texture = <MirrorF>;
+    TEX_FILTER
+    AddressU  = CLAMP; AddressV = CLAMP;
+};
+
+texture MirrorB: OFFSCREENRENDERTARGET <
+    int Width = WIDTH;
+    int Height = HEIGHT;
+    float4 ClearColor = { 1, 1, 1, 1 };
+    float ClearDepth = 1.0;
+    bool AntiAlias = ANTI_ALIAS;
+    int Miplevels=1;
+    string DefaultEffect = 
+        "self = hide;"
+        "*=_MirrorB.fxsub;";
+>;
+
+sampler MirrorBSampler = sampler_state {
+    texture = <MirrorB>;
+    TEX_FILTER
+    AddressU  = CLAMP; AddressV = CLAMP;
+};
+
+float4 texDP(sampler2D sampFront, sampler2D sampBack, float3 vec) {
+    vec = normalize(vec);
+    bool front = (vec.z >= 0);
+    if ( !front ) vec.xz = -vec.xz;
+    
+    float2 uv;
+    uv = vec.xy / (1+vec.z);
+    uv.y = -uv.y;
+    uv = uv * 0.5 + 0.5;
+    
+    if ( front ) {
+        return tex2D(sampFront, uv);
+    } else {
+        return tex2D(sampBack, uv);
+    }
+}
