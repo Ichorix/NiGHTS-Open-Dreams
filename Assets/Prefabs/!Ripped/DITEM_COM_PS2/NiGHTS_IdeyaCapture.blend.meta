@@ -3,7 +3,12 @@ guid: a51d1d21557f2444aa5243d6d84c5007
 ModelImporter:
   serializedVersion: 22103
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: DITEM_COM_PS2-0.001
+    second: {fileID: 2100000, guid: c08ee53694144564294be7f09053e89b, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
