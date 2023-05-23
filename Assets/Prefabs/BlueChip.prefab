@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8787997438381868153}
   - component: {fileID: 711174523475700695}
   - component: {fileID: 3328546245433105507}
+  - component: {fileID: 817482504424977759}
   m_Layer: 0
   m_Name: BlueChip
   m_TagString: BlueChip
@@ -67,6 +68,20 @@ MonoBehaviour:
   levelPlayer: {fileID: 0}
   isBlueChip: 1
   isStarChip: 0
+--- !u!114 &817482504424977759
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8787997438381868152}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5e40447253950e40b4f150f8066bdad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  yellowRing: {fileID: 0}
+  chip: 1
 --- !u!1 &8787997438581496639
 GameObject:
   m_ObjectHideFlags: 0

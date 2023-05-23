@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8159065039951717420}
+  - component: {fileID: 6388241020540736324}
   m_Layer: 0
   m_Name: HalfRing
   m_TagString: Untagged
@@ -32,8 +33,24 @@ Transform:
   - {fileID: 8552453416591841408}
   - {fileID: 8552453415376241167}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6388241020540736324
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8159065039951717421}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5e40447253950e40b4f150f8066bdad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  yellowRing: {fileID: 8159065038801278233}
+  secondRing: {fileID: 8159065038879877087}
+  TwoRings: 1
+  chip: 0
 --- !u!1001 &8159065039198044011
 PrefabInstance:
   m_ObjectHideFlags: 0

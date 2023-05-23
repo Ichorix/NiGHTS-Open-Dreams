@@ -352,7 +352,7 @@ namespace PathCreation.Examples
             //Debug.Log("Blue Chip");
             Sounds.pitch = 1;
             Sounds.PlayOneShot(BlueChipSFX, 1.0f);
-            Destroy(other.gameObject);
+            other.gameObject.SetActive(false);
             score += 20;
             chipCounter += 1;
 
@@ -362,7 +362,7 @@ namespace PathCreation.Examples
         {
             Sounds.pitch = 1;
             Sounds.PlayOneShot(BlueChipSFX, 1.0f);
-            Destroy(other.gameObject);
+            other.gameObject.SetActive(false);
             score += 20;
             levelTimeLeft++;
             LinkIncrease();

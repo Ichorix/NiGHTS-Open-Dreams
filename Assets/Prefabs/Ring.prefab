@@ -925,6 +925,7 @@ GameObject:
   - component: {fileID: 4877338786067444672}
   - component: {fileID: 6245236227073673759}
   - component: {fileID: 4070395321468670150}
+  - component: {fileID: 7512783391545826284}
   m_Layer: 0
   m_Name: Ring
   m_TagString: YellowRing
@@ -1019,6 +1020,21 @@ MonoBehaviour:
   isCollected: 0
   timeUntilGone: 0
   YellowRingAnim: {fileID: 6245236227073673759}
+  currentTag: 
+--- !u!114 &7512783391545826284
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3464252980602988072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5e40447253950e40b4f150f8066bdad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  yellowRing: {fileID: 4070395321468670150}
+  chip: 0
 --- !u!1 &3631680492313312941
 GameObject:
   m_ObjectHideFlags: 0

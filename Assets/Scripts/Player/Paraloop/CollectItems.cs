@@ -39,14 +39,14 @@ public class CollectItems : MonoBehaviour
                 if(openPlayer != null)
                 {
                     openPlayer.Sounds.PlayOneShot(openPlayer.BlueChipSFX, 1.0f);
-                    Destroy(this.gameObject);
+                    this.gameObject.SetActive(false);
                     openPlayer.chipAmount += 1;
                 }
                 if(levelPlayer != null)
                 {
                     levelPlayer.Sounds.pitch = 1;
                     levelPlayer.Sounds.PlayOneShot(levelPlayer.BlueChipSFX, 1.0f);
-                    Destroy(this.gameObject);
+                    this.gameObject.SetActive(false);
                     levelPlayer.score += 20;
                     levelPlayer.chipCounter += 1;
 
@@ -57,7 +57,7 @@ public class CollectItems : MonoBehaviour
             {
                 levelPlayer.Sounds.pitch = 1;
                 levelPlayer.Sounds.PlayOneShot(levelPlayer.BlueChipSFX, 1.0f);
-                Destroy(this.gameObject);
+                this.gameObject.SetActive(false);
                 levelPlayer.score += 20;
                 levelPlayer.levelTimeLeft++;
                 levelPlayer.LinkIncrease();

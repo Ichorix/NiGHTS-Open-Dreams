@@ -5228,7 +5228,7 @@ Transform:
   - {fileID: 6681173485242343133}
   - {fileID: 6681173484920118229}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6681173484367410363
 GameObject:
@@ -5254,7 +5254,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6681173484367410363}
-  m_LocalRotation: {x: -0.0056960625, y: 0.21781392, z: 0.0012712255, w: 0.97597295}
+  m_LocalRotation: {x: -0.005696059, y: 0.21781395, z: 0.001271225, w: 0.97597295}
   m_LocalPosition: {x: -123.817085, y: -1.8956175, z: -276.9933}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -5332,7 +5332,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6681173484380529660}
-  m_LocalRotation: {x: 0.023145897, y: -0.74875396, z: -0.02618204, w: -0.6619262}
+  m_LocalRotation: {x: 0.023145882, y: -0.7487557, z: -0.026182164, w: -0.6619243}
   m_LocalPosition: {x: 0.000041513547, y: 0.0000005074086, z: 0.000087119784}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -5414,8 +5414,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6681173484920118230}
-  m_LocalRotation: {x: -0.024710841, y: -0.7066695, z: -0.024710465, w: 0.70668024}
-  m_LocalPosition: {x: 5.9999695, y: 0.0000009536743, z: -0.00009155278}
+  m_LocalRotation: {x: -0.02471096, y: -0.7066677, z: -0.024710458, w: 0.7066821}
+  m_LocalPosition: {x: 5.999939, y: 0, z: -0.00012207031}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5572,7 +5572,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6681173485147245527}
-  m_LocalRotation: {x: 0.046040047, y: -0.74739933, z: -0.052079316, w: -0.66072875}
+  m_LocalRotation: {x: 0.04603996, y: -0.74740094, z: -0.05207949, w: -0.66072685}
   m_LocalPosition: {x: 0.000041513547, y: 0.0000005074086, z: 0.000087119784}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -11564,6 +11564,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1a7463b4505fbb7498eb291fe60518b6, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1a7463b4505fbb7498eb291fe60518b6, type: 3}
+      propertyPath: m_TagString
+      value: levelPlayer
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects:

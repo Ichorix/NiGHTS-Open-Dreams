@@ -336,7 +336,7 @@ public class NewPlayerControl : MonoBehaviour
     public void CollectBlueChip(Collider other)
     {
         Sounds.PlayOneShot(BlueChipSFX, 1.0f);
-        Destroy(other.gameObject);
+        other.gameObject.SetActive(false);
         chipAmount += 1;
     }
 }

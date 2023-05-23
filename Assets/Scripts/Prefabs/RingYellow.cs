@@ -38,11 +38,12 @@ public class RingYellow : MonoBehaviour
             YellowRingAnim.SetTrigger("TrCollected");
         }
     }
-    void Respawn()
+    public void Respawn()
     {
         isCollected = false;
         timeUntilGone = 1f;
         this.tag = currentTag;
         this.gameObject.SetActive(true);
+        YellowRingAnim.SetTrigger("TrRespawn");
     }
 }
