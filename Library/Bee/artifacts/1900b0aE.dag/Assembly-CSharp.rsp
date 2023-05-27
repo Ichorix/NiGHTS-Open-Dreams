@@ -583,6 +583,7 @@
 "Assets/Scripts/DirectionalForcezone.cs"
 "Assets/Scripts/Enemies/EnemyColliders.cs"
 "Assets/Scripts/Enemies/EnemyMain.cs"
+"Assets/Scripts/Enemies/HollowProjectile.cs"
 "Assets/Scripts/Environment/LargeCloudStay.cs"
 "Assets/Scripts/Environment/LightingManager.cs"
 "Assets/Scripts/Environment/LightingPreset.cs"
