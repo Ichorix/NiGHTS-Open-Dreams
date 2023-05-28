@@ -25,6 +25,11 @@ public class NewPlayerControl : MonoBehaviour
     [SerializeField] private float normAcceleration, boostingAcceleration;
     [SerializeField] private float accelerationMult;
     [SerializeField] private float decelMult;
+    public AnimationCurve curve;
+    [SerializeField] private float currentSpeed;
+    [SerializeField] private float decelTime, decelLerpMult;
+    [SerializeField] private bool decelLerp;
+
 
     public bool isDrifting;
     public float driftingPower;
@@ -95,34 +100,39 @@ public class NewPlayerControl : MonoBehaviour
             power = true;
             powerTime = -999f;
         }
+        if(decelLerp)
+        {
+            speed = Mathf.Lerp(0, currentSpeed, curve.Evaluate(decelTime));
+            decelTime += Time.deltaTime * decelLerpMult;
+            if(decelTime >= 1)
+            {
+                decelLerp = false;
+                isMoving = false;
+            }
+        }
 
 
         //Boost Amount
         boostBar.SetBoost((int)BoostGauge);
 
-        if(BoostGauge <= 0 && isMoving == true)
+        if(BoostGauge <= 0 && isMoving)
         {
             //speed = normStartSpeed;
             isBoosting = false;
         }
 
         //BoostAttempts
-        if(BoostAttempt == true)
+        if(BoostAttempt)
         {
             speed = boostAttemptSpeed;
             BoostTime += Time.deltaTime;
         }
-        if(BoostTime >= 0.33f && isMoving == true)
+        if(BoostTime >= 0.33f)
         {
             BoostAttempt = false;
-            speed = normStartSpeed;
             BoostTime = 0;
-        }
-        if(BoostTime >= 0.33f && isMoving == false)
-        {
-            BoostAttempt = false;
-            speed = 0;
-            BoostTime = 0;
+            if(isMoving) speed = normMaxSpeed;
+            else speed = 0;
         }
 
         //Reorienting
@@ -182,7 +192,7 @@ public class NewPlayerControl : MonoBehaviour
         chipText.text = chipAmount.ToString();
 
         //power
-        if(power == true)
+        if(power)
         {
             BoostGauge = 100;
             powerTime += Time.deltaTime;
@@ -198,36 +208,37 @@ public class NewPlayerControl : MonoBehaviour
     {
         if(context.started)
         {
+            decelLerp = false;
             isMoving = true;
             speed = normStartSpeed;
             accelerationMult = normAcceleration;
             trailInstantiator.SetActive(true);
             //Gamepad.current.SetMotorSpeeds(.25f, .25f);
+            if(isBoosting)
+            {
+                accelerationMult = boostingAcceleration;
+                speed = boostingStartSpeed;
+                //Gamepad.current.SetMotorSpeeds(.5f, .6f)
+            }
         }
         if(context.canceled)
         {
-            isMoving = false;
-            speed = 0f;
+            currentSpeed = speed;
+            decelLerp = true;
+            decelTime = 0;
             trailInstantiator.SetActive(false);
             //Gamepad.current.SetMotorSpeeds(0f,0f);
 
             //Reorientation
             transform.rotation = PlayerRot;            
         }
-        if(isBoosting == true && context.started)
-        {
-            isMoving = true;
-            accelerationMult = boostingAcceleration;
-            speed = boostingStartSpeed;
-            trailInstantiator.SetActive(true);
-            //Gamepad.current.SetMotorSpeeds(.5f, .6f)
-        }
     }
     
     public void Boosting(InputAction.CallbackContext context)
     {
-        if(0 <= BoostGauge && isMoving == true && context.started)
+        if(0 <= BoostGauge && isMoving && context.started)
         {
+            decelLerp = false;
             isBoosting = true;
             if(speed < boostingStartSpeed)
             {
@@ -239,19 +250,22 @@ public class NewPlayerControl : MonoBehaviour
             Sounds.PlayOneShot(BoostStart, 1.0f);
             boostingSource.PlayScheduled(AudioSettings.dspTime + BoostStart.length);
         }
-        if(context.canceled && isMoving == true)
+        if(context.canceled)
         {
             isBoosting = false;
-            if(speed < normStartSpeed) speed = normStartSpeed;
-            else
+            if(isMoving)
             {
-                if(speed > normSpeedaBoosting) speed = normSpeedaBoosting;
-                else speed = speed;
+                if(speed < normStartSpeed) speed = normStartSpeed;
+                else
+                {
+                    if(speed > normSpeedaBoosting) speed = normSpeedaBoosting;
+                    else speed = speed;
+                }
+                accelerationMult = normAcceleration;
+                //Gamepad.current.SetMotorSpeeds(.25f, .25f);
+                boostingSource.Stop();
+                Sounds.PlayOneShot(BoostEnd, 1.0f);
             }
-            accelerationMult = normAcceleration;
-            //Gamepad.current.SetMotorSpeeds(.25f, .25f);
-            boostingSource.Stop();
-            Sounds.PlayOneShot(BoostEnd, 1.0f);
         }
         if(0 >= BoostGauge && context.started)
         {
@@ -260,31 +274,29 @@ public class NewPlayerControl : MonoBehaviour
             speed = normStartSpeed;
             //Gamepad.current.SetMotorSpeeds(.25f, .25f);
         }
-        if(isMoving == false)
+        if(!isMoving)
         {
             isBoosting = true;
-            speed = 0f;
+            currentSpeed = speed;
+            decelLerp = true;
+            decelTime = 0;
             //Gamepad.current.SetMotorSpeeds(0f,0f);
-        }
-        if(context.canceled)
-        {
-            isBoosting = false;
         }
     }
 
     public int chipAmount;
     void OnTriggerStay(Collider other)
     {
-        if(other.gameObject.CompareTag("lb_groundTarget"))
+        if(other.CompareTag("lb_groundTarget"))
         {
             Debug.Log("Ground");
             stateController.Activate2();
         }
-        if(other.gameObject.CompareTag("BlueChip"))
+        if(other.CompareTag("BlueChip"))
         {
             CollectBlueChip(other);
         }
-        if(other.gameObject.CompareTag("YellowRing"))
+        if(other.CompareTag("YellowRing"))
         {
             Sounds.PlayOneShot(YellowRingSFX, 1.0f);
             if(BoostGauge <= 90)
@@ -296,7 +308,7 @@ public class NewPlayerControl : MonoBehaviour
                 BoostGauge = 100;
             }
         }
-        if(other.gameObject.CompareTag("GreenRing"))
+        if(other.CompareTag("GreenRing"))
         {
             Sounds.PlayOneShot(GreenRingSFX, 1.0f);
             if(BoostGauge <= 90)
@@ -308,7 +320,7 @@ public class NewPlayerControl : MonoBehaviour
                 BoostGauge = 100;
             }
         }
-        if(other.gameObject.CompareTag("HalfRing"))
+        if(other.CompareTag("HalfRing"))
         {
             Sounds.PlayOneShot(HalfRingSFX, 1.0f);
             if(BoostGauge <= 90)
@@ -320,13 +332,13 @@ public class NewPlayerControl : MonoBehaviour
                 BoostGauge = 100;
             }
         }
-        if(other.gameObject.CompareTag("PowerRing"))
+        if(other.CompareTag("PowerRing"))
         {
             Sounds.PlayOneShot(PowerRingSFX, 1.0f);
             BoostGauge = 100;
             power = true;
         }
-        if(other.gameObject.CompareTag("SpikeRing"))
+        if(other.CompareTag("SpikeRing"))
         {
             Sounds.PlayOneShot(SpikeRingSFX, 1.0f);
             BoostGauge -= 5;

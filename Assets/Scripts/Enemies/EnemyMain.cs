@@ -12,11 +12,11 @@ public class EnemyMain : MonoBehaviour
     public StateController playerStates;
     public GameObject currentPlayer;
 
-    public NewPlayerControl openPlayer;
-    public LevelFollow levelPlayer;
+    public HollowAttack hollowAttackScript;
 
     void OnEnable()
     {///Reused from Paraloop Collect Script
+    /*
         //////////NASTY CODE DONT LOOK AT ME//////////
         //Determine Player
         playerStates = GameObject.Find("NiGHTSPlayerStates").GetComponent<StateController>();
@@ -30,6 +30,7 @@ public class EnemyMain : MonoBehaviour
         {
             levelPlayer = currentPlayer.GetComponent<LevelFollow>();
         }
+    */
     }
 
     void Update()
@@ -46,10 +47,5 @@ public class EnemyMain : MonoBehaviour
             transform.rotation = rotation;
             transform.Translate(Vector3.forward * Time.deltaTime * moveSpeed);
         }
-    }
-
-    void CheckPlayer()
-    {
-        
     }
 }

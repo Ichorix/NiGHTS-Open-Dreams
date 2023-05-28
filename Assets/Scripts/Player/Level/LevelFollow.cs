@@ -57,11 +57,11 @@ namespace PathCreation.Examples
             pathS11.gameObject.SetActive(true);
         }
 
-        public bool isBoosting, isMoving, BoostAttempt;
+        public bool isBoosting, BoostAttempt;
         public float BoostGauge, BoostTime;
         public void Boosting(InputAction.CallbackContext context)
         {
-            if(0 <= BoostGauge && context.started)
+            if(0 <= BoostGauge && context.started && isMoving(new Vector2(movingHorizontal, movingVertical)))
             {
                 isBoosting = true;
                 speed = boostingSpeed;
@@ -73,6 +73,7 @@ namespace PathCreation.Examples
             }
             if(context.canceled)
             {
+                Debug.Log("Not Boosting");
                 isBoosting = false;
                 speed = nonBoostingSpeed;
                 //Debug.Log("NotBoosting , canceled, still moving");
@@ -114,38 +115,29 @@ namespace PathCreation.Examples
             
 
             //BoostStuffs
-            if(speed >= 20f)
+            if(isMoving(new Vector2(movingHorizontal, movingVertical)) && isBoosting)
             {
                 BoostGauge -= Time.deltaTime * 10;
             }
-            if(BoostGauge <= 0 && isMoving == true)
+            if(BoostGauge <= 0)
             {
                 speed = nonBoostingSpeed;
                 isBoosting = false;
             }
-            if(BoostGauge <= 0 && isMoving == false)
-            {
-                speed = nonBoostingSpeed;
-                isBoosting = false;
-            }
+            
             //BoostAttempts
-            if(BoostAttempt == true)
+            if(BoostAttempt)
             {
                 speed = BoostAttemptSpeed;
                 BoostTime += Time.deltaTime;
             }
-            if(BoostTime >= 0.33f && isMoving == true)
+            if(BoostTime >= 0.33f)
             {
                 BoostAttempt = false;
                 speed = nonBoostingSpeed;
                 BoostTime = 0;
             }
-            if(BoostTime >= 0.33f && isMoving == false)
-            {
-                BoostAttempt = false;
-                speed = nonBoostingSpeed;
-                BoostTime = 0;
-            }
+            
             //Links
             if(linkTimeLeft <= 0)
             {
@@ -390,6 +382,17 @@ namespace PathCreation.Examples
                 {
                     stunned = false;
                 }
+            }
+        }
+
+        public bool isMoving(Vector2 direction)
+        {
+            if(direction != Vector2.zero)
+                 return true;
+            else
+            {
+                isBoosting = false;
+                return false;
             }
         }
 

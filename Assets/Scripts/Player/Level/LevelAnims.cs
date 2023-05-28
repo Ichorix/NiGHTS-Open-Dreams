@@ -42,7 +42,7 @@ namespace PathCreation.Examples
                 LeftHandSparkles.enableEmission = false;
                 RightHandSparkles.enableEmission = false;
             }
-            if(levelFollow.isBoosting == true)
+            if(levelFollow.isBoosting)
             {
                 BoostTrail.enableEmission = true;
                 trail.emitting = true;

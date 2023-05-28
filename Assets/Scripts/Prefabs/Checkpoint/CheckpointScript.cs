@@ -6,22 +6,27 @@ public class CheckpointScript : MonoBehaviour
 {
     public EEPoint Enter;
     public EEPoint Exit;
+    public bool disableMesh;
     public bool Outer;
     public bool allowDespawning;
     //public bool firstTime = true;
     public List<GameObject> respawnables;
     void Start()
     {
+        if(disableMesh)
         this.gameObject.transform.GetChild(0).gameObject.SetActive(false);
     }
-    void OnTriggerEnter()
+    void OnTriggerEnter(Collider other)
     {
-        Outer = true;
-        Debug.Log("Outer");
+        if(other.CompareTag("levelPlayer"))
+        {
+            Outer = true;
+            Debug.Log("Outer");
+        }
     }
-    void OnTriggerStay()
+    void OnTriggerStay(Collider other)
     {
-        if(Outer)
+        if(other.CompareTag("levelPlayer") && Outer)
         {
             if(Enter.active)
             {
@@ -37,10 +42,10 @@ public class CheckpointScript : MonoBehaviour
                 if(allowDespawning) DespawnStuff();
             }
         }
-        //firstTime = false;
     }
-    void OnTriggerExit()
+    void OnTriggerExit(Collider other)
     {
+        if(other.CompareTag("levelPlayer"))
         Outer = false;
     }
 

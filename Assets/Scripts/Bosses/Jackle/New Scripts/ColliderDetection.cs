@@ -17,49 +17,49 @@ public class ColliderDetection : MonoBehaviour
     {
         if(main.isVulnerable && isDamageBox)
         {
-            if(other.tag == "Player")
+            if(other.CompareTag("Player"))
             {
                 //DO the grab thing
             }
-            if(other.tag == "Player" || other.tag == "Paraloop")//Replace player with the drilldash effect
+            if(other.CompareTag("Player") || other.CompareTag("Paraloop"))//Replace player with the drilldash effect
             {
                 main.Damage();
             }
         }
-        if(!main.isVulnerable && other.tag == "Player" && isDamageBox)
+        if(!main.isVulnerable && other.CompareTag("Player") && isDamageBox)
         {
             Debug.Log("Damage Player");
             player.takeDamage(Vector3.zero, 0);
         }
-        if(!main.isVulnerable && other.tag == "Paraloop" && isDamageBox)
+        if(!main.isVulnerable && other.CompareTag("Paraloop") && isDamageBox)
         {
             main.Damage();
         }
 
-        if(isSawRange && other.tag == "Player" && main.sawWhenNear)
+        if(isSawRange && other.CompareTag("Player") && main.sawWhenNear)
         {
             //main.playerIsNear = true;
             Debug.Log("Sawwww");
             main.SawIt(false);
         }
 
-        if(isLeftZone && other.tag == "Player")
+        if(isLeftZone && other.CompareTag("Player"))
         {
             main.playerIsLeft = true;
         }
-        if(isRightZone && other.tag == "Player")
+        if(isRightZone && other.CompareTag("Player"))
         {
             main.playerIsRight = true;
         }
     }
     public void OnTriggerStay(Collider other)
     {
-        if(isLeftZone && other.tag == "Player")
+        if(isLeftZone && other.CompareTag("Player"))
         {
             //Debug.Log("Player on Left");
             main.playerIsLeft = true;
         }
-        if(isRightZone && other.tag == "Player")
+        if(isRightZone && other.CompareTag("Player"))
         {
             //Debug.Log("Player on Right");
             main.playerIsRight = true;
@@ -68,7 +68,7 @@ public class ColliderDetection : MonoBehaviour
     }
     public void OnTriggerExit(Collider other)
     {
-        if(isSawRange && other.tag == "Player" && main.sawWhenNear)
+        if(isSawRange && other.CompareTag("Player") && main.sawWhenNear)
         {
             //main.playerIsNear = true;
             Debug.Log("Un-Sawwww");
@@ -81,11 +81,11 @@ public class ColliderDetection : MonoBehaviour
             if(main._Phase == 11) main.Phase11();
         }
 
-        if(isLeftZone && other.tag == "Player")
+        if(isLeftZone && other.CompareTag("Player"))
         {
             main.playerIsLeft = false;
         }
-        if(isRightZone && other.tag == "Player")
+        if(isRightZone && other.CompareTag("Player"))
         {
             main.playerIsRight = false;
         }
