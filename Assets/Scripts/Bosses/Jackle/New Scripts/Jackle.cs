@@ -70,7 +70,12 @@ public class Jackle : MonoBehaviour
         if(rightHandScript.stunned) rightHandContributesHealth = false;
         if(rightHandScript.isAvailable && !rightHandScript.stunned) rightHandContributesHealth = true;
         
-        if(isSawing && leftHandContributesHealth && rightHandContributesHealth) sawParticles.SetActive(true);
+        if(isSawing && leftHandContributesHealth && rightHandContributesHealth)
+        {
+            sawParticles.SetActive(true);
+            leftHandScript.HandSaw();
+            rightHandScript.HandSaw();
+        }
         else sawParticles.SetActive(false);
 
         if(teleportIng)
@@ -126,10 +131,6 @@ public class Jackle : MonoBehaviour
         
 
         //////////BOSS PHASES//////////
-        if(sawWhenNear && playerIsNear)
-        {
-            //Debug.Log("Sawwww"); Moved to ColliderDetection.cs
-        }
 
 
 
@@ -157,7 +158,6 @@ public class Jackle : MonoBehaviour
     {
         while(true)
         {
-            //Debug.Log("MoveNormal");
             isVulnerable = true;
             _time = 0;
 
@@ -199,10 +199,12 @@ public class Jackle : MonoBehaviour
     {
         while(true)
         {
+            Debug.Log("SendGrabLoop");
             ChooseHand();
-            chosenHand.Grab();
+            if(chosenHand == null) Debug.Log("Chosen Hand is Null!"); 
+            if(chosenHand != null) chosenHand.Grab();
             yield return new WaitForSeconds(timeBetweenSend);
-            chosenHand.Return();
+            if(chosenHand != null) chosenHand.Return();
             yield return new WaitForSeconds(1.33f);
         }
     }
@@ -210,6 +212,7 @@ public class Jackle : MonoBehaviour
     {
         while(switchBetweenThrows)
         {
+            Debug.Log("SendPunchLoop isSwitch");
             ChooseHand();
             chosenHand.Punch(false);
             yield return new WaitForSeconds(timeBetweenSend * 0.5f);
@@ -222,6 +225,7 @@ public class Jackle : MonoBehaviour
         }
         while(!switchBetweenThrows)
         {
+            Debug.Log("SendPunchLoop !isSwitch");
             ChooseHand();
             chosenHand.Punch(false);
             yield return new WaitForSeconds(timeBetweenSend * 0.5f);
@@ -233,6 +237,7 @@ public class Jackle : MonoBehaviour
     {
         while(!isBatchShot)
         {
+            Debug.Log("SendD-PunchLoop !isBatch");
             ChooseHand();
             chosenHand.Punch(false);
             yield return new WaitForSeconds(timeBetweenSend);
@@ -241,6 +246,7 @@ public class Jackle : MonoBehaviour
         }
         while(isBatchShot)
         {
+            Debug.Log("SendD-PunchLoop isBatch");
             ChooseHand();
             chosenHand.Punch(false);
             yield return new WaitForSeconds(timeBetweenSend * 0.5f);
@@ -272,6 +278,11 @@ public class Jackle : MonoBehaviour
     {
         leftHandScript.Punch(true);
         rightHandScript.Punch(true);
+    }
+    void DoubleReturn()
+    {
+        leftHandScript.Return();
+        rightHandScript.Return();
     }
     public Quaternion rotBeforeTele;
     void Teleport(bool setLocation, Vector3 theLocation)/////Mostly finished, currently just teleports to the right tho
@@ -316,6 +327,7 @@ public class Jackle : MonoBehaviour
     void RealDamage()
     {
         StopAllCoroutines();
+        DoubleReturn();
         _health--;
         StartCoroutine(Stretch());
     }
@@ -326,7 +338,6 @@ public class Jackle : MonoBehaviour
 
     void ChooseHand() ////Working? idk it hasnt made any issues yet ///It was working fine but now it doesnt detect the player?
     {                   ///Wait the player didnt have a tag one moment
-        Debug.Log("ChooseHand");
 
         bool canBeLeft = false;
         bool canBeRight = false;
@@ -362,8 +373,8 @@ public class Jackle : MonoBehaviour
             chosenHand = leftHandScript;////^^^About that, idk but rn i need to work on the collision and the rest ***shouuuld*** be working because the only issue is it not knowing which side the player is
             if(!canBeRight)
             {
-                otherHand = rightHandScript;
-            }
+                otherHand = rightHandScript;//// Im back to this because all of a sudden it just doesnt pick a hand; Maybe something got messed up between the communication of the Colliders
+            }                               //// Found it; Collider detection was still checking for "Player" not "levelPlayer"
         }
         if(canBeRight)
         {
@@ -374,6 +385,20 @@ public class Jackle : MonoBehaviour
             }
         }
 
+        if(chosenHand == null)
+        {
+            int randomhand = Random.Range(0,2);
+            if (randomhand == 1)
+            {
+                chosenHand = leftHandScript;
+                otherHand = rightHandScript;
+            }
+            if(randomhand == 2)
+            {
+                chosenHand = rightHandScript;
+                otherHand = leftHandScript;
+            }
+        }
         Debug.Log("Hand Chosen As" + chosenHand + "With other Hand as" + otherHand);
     }
 
@@ -386,7 +411,6 @@ public class Jackle : MonoBehaviour
             float num = curve.Evaluate(t);
             Vector3 vec = new Vector3(num, 1.25f * num, transform.localScale.z);
             transform.localScale = vec;
-            Debug.Log(num);
 
             t += 0.01f;
             if(t > 1) TEnum();
@@ -410,50 +434,18 @@ public class Jackle : MonoBehaviour
             //StartCoroutine(OverallPhase1Start());
             Phase14();
         }
-        if(_health == 13)
-        {
-            Phase13();
-        }
-        if(_health == 12)
-        {
-            Phase12();
-        }
-        if(_health == 11)
-        {
-            Phase11();
-        }
-        if(_health == 10)
-        {
-            Phase10();
-        }
-        if(_health == 9)
-        {
-            Phase9();
-        }
-        if(_health == 8)
-        {
-            Phase8();
-        }
-        if(_health == 7)
-        {
-            Phase7();
-        }
-        if(_health == 6)
-        {
-            Phase6();
-        }
-        if(_health == 5)
-        {
-            Phase5();
-        }
-        if(_health == 4)
-        {
-            Phase4();
-        }
-        if(_health == 3)
-        {
-            FinalPhase();
-        }
+        if(_health == 13) Phase13();
+        if(_health == 12) Phase12();
+        if(_health == 11) Phase11();
+        if(_health == 10) Phase10();
+        if(_health == 9) Phase9();
+        if(_health == 8) Phase8();
+        if(_health == 7) Phase7();
+        if(_health == 6) Phase6();
+        if(_health == 5) Phase5();
+        if(_health == 4) Phase4();
+        if(_health == 3) FinalPhase();
+
         yield return new WaitForSeconds(2);
         isVulnerable = true;
     }

@@ -81,6 +81,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   yellowRing: {fileID: 0}
+  secondRing: {fileID: 0}
+  TwoRings: 0
   chip: 1
 --- !u!1 &8787997438581496639
 GameObject:
@@ -143,7 +145,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: ba2b486c38ea4c44cad2d2c927ca3787, type: 2}
+  - {fileID: 2100000, guid: b3acc88ebb77dca45996f59a6234fd1f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

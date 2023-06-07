@@ -37,10 +37,12 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _BluePower: 1.5
+    - _Alpha: 0
+    - _BluePower: 1
+    - _GreenPower: 0
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _RedPower: 1
+    - _RedPower: 0.75
     m_Colors: []
   m_BuildTextureStacks: []
 --- !u!114 &8506521297945880700

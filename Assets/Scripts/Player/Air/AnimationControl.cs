@@ -9,7 +9,7 @@ public class AnimationControl : MonoBehaviour
     public GameObject player;
     public Vector2 rotate;
     public Vector2 angle;
-    private Animator mAnimator;
+    public Animator mAnimator;
     PlayerInputActions controls;
     public ParticleSystem LeftHandSparkles, RightHandSparkles, BoostTrail;
     public TrailRenderer trail;
@@ -43,28 +43,31 @@ public class AnimationControl : MonoBehaviour
         BoostGauge = script.BoostGauge;
         angle = script.rotate;
         BoostNum = Random.Range(1,2);
+
+        isMoving = script.isMoving;
+        isBoosting = script.isBoosting;
         
         Vector2 a = new Vector2(angle.x, angle.y) * Time.deltaTime;
 
         //Particles
-        if(isMoving == true)
+        if(isMoving)
         {
             mAnimator.SetBool("isMoving", true);
             LeftHandSparkles.enableEmission = true;
             RightHandSparkles.enableEmission = true;
         }
-        if(isMoving == false)
+        if(!isMoving)
         {
             LeftHandSparkles.enableEmission = false;
             RightHandSparkles.enableEmission = false;
             mAnimator.SetBool("isMoving", false);
         }
-        if(isBoosting == true)
+        if(isBoosting)
         {
             BoostTrail.enableEmission = true;
             trail.emitting = true;
         }
-        if(isBoosting == false)
+        if(!isBoosting)
         {
             BoostTrail.enableEmission = false;
             trail.emitting = false;
@@ -73,8 +76,7 @@ public class AnimationControl : MonoBehaviour
         if(script.speed >= speedWindThreshold)
         {
             windEffects.enableEmission = true;
-            if(!windSFX.isPlaying)
-            windSFX.Play();
+            if(!windSFX.isPlaying) windSFX.Play();
         }
         else
         {
@@ -83,7 +85,7 @@ public class AnimationControl : MonoBehaviour
         }
         
         //Turn Anims
-        if(TurnAnim == true)
+        if(TurnAnim)
         {
             if(angle.x >= 0.7f)
             {
@@ -96,7 +98,7 @@ public class AnimationControl : MonoBehaviour
                 mAnimator.SetBool("isLeft", true);
             }
         }
-        if(TurnAnim == false)
+        if(!TurnAnim)
         {
             mAnimator.SetBool("isLeft", false);
             mAnimator.SetBool("isRight", false);
@@ -109,10 +111,7 @@ public class AnimationControl : MonoBehaviour
         {
             isMoving = true;
             mAnimator.SetBool("isMoving", true);
-            if(isBoosting)
-            {
-                mAnimator.SetBool("isBoosting", true);
-            }
+            if(isBoosting) mAnimator.SetBool("isBoosting", true);
         }
         if(context.canceled)
         {
@@ -123,12 +122,12 @@ public class AnimationControl : MonoBehaviour
     }
     public void Boosting(InputAction.CallbackContext context)
     {
-        if(0 <= BoostGauge && isMoving == true && context.started)
+        if(0 <= BoostGauge && isMoving && context.started)
         {
             isBoosting = true;
             mAnimator.SetBool("isBoosting", true);
         }
-        if(context.canceled && isMoving == true)
+        if(context.canceled && isMoving)
         {
             isBoosting = false;
             mAnimator.SetBool("isBoosting", false);
@@ -138,7 +137,7 @@ public class AnimationControl : MonoBehaviour
             isBoosting = false;
             mAnimator.SetBool("isBoosting", false);
         }
-        if(isMoving == false)
+        if(!isMoving)
         {
             isBoosting = true;
             mAnimator.SetBool("isMoving", false);
@@ -151,22 +150,13 @@ public class AnimationControl : MonoBehaviour
     }
     public void Rotating(InputAction.CallbackContext context)
     {
-        if(context.performed)
-        {
-            if(isMoving == true && isBoosting == false)
-            {
-                TurnAnim = true;
-            }
-        }
+        if(context.performed && isMoving && !isBoosting) TurnAnim = true;
         if(context.canceled)
         {
             mAnimator.SetBool("isLeft", false);
             mAnimator.SetBool("isRight", false);
-            if(isMoving == false) TurnAnim = false;
-            if(isMoving == true && isBoosting == false)
-            {
-                TurnAnim = false;
-            }
+            if(!isMoving) TurnAnim = false;
+            if(isMoving && !isBoosting) TurnAnim = false;
         }
     }
 }

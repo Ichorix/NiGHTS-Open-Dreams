@@ -6,6 +6,7 @@ public class RespawnScript : MonoBehaviour
 {
     public RingYellow yellowRing;
     public RingYellow secondRing;
+    public bool LOD;
     public bool TwoRings;
     public bool chip;
 
@@ -17,10 +18,15 @@ public class RespawnScript : MonoBehaviour
         }
         if (yellowRing != null)
         {
+            Debug.Log("Respawn");
             yellowRing.Respawn();
-            if(TwoRings)
+            if (TwoRings)
             {
                 secondRing.Respawn();
+            }
+            if (LOD)
+            {
+                this.gameObject.SetActive(true);
             }
         }
     }

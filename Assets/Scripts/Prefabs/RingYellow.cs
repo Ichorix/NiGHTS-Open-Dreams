@@ -5,9 +5,10 @@ using UnityEngine;
 public class RingYellow : MonoBehaviour
 {
     public bool isCollected;
-    public float timeUntilGone;
+    private float timeUntilGone;
     public Animator YellowRingAnim;
     public string currentTag;
+    public bool LOD;
 
     void Start()
     {
@@ -18,7 +19,7 @@ public class RingYellow : MonoBehaviour
 
     void Update()
     {
-        if(isCollected == true)
+        if(isCollected)
         {
             timeUntilGone -= Time.deltaTime;
             Debug.Log("Is Collected");
@@ -27,6 +28,7 @@ public class RingYellow : MonoBehaviour
         if(timeUntilGone <= 0)
         {
             this.gameObject.SetActive(false);
+            if (LOD) this.transform.parent.gameObject.SetActive(false);
             Debug.Log("Done COllected");
         }
     }
@@ -40,10 +42,12 @@ public class RingYellow : MonoBehaviour
     }
     public void Respawn()
     {
+        Debug.Log("Respawn2");
         isCollected = false;
         timeUntilGone = 1f;
         this.tag = currentTag;
         this.gameObject.SetActive(true);
         YellowRingAnim.SetTrigger("TrRespawn");
+        Debug.Log("REspawn3");
     }
 }

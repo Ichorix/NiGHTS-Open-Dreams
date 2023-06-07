@@ -199,6 +199,14 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: eb46999b-18a8-444b-9a4c-17961c070c78
     m_ActionName: Player/Continue[/Keyboard/anyKey,/DualShock4GamepadHID/start]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 8cdafcbb-b0b0-4285-93ec-986307d583be
+    m_ActionName: Player/RecenterCamera[/DualShock4GamepadHID/rightStickPress]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: a4c4d6c5-5687-46d1-9c40-900d51baef97
+    m_ActionName: Player/ChangeCamera[/DualShock4GamepadHID/rightStickPress]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -218,6 +226,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stateController: {fileID: 0}
   trailInstantiator: {fileID: 6484884326585770800}
+  anims: {fileID: 8227869631422590475}
+  cameraSettings: {fileID: 4566037068758797273}
+  cameraPlayerBound: 0
   playerRb: {fileID: 4566037068430761234}
   boostBar: {fileID: 0}
   chipText: {fileID: 0}
@@ -237,12 +248,66 @@ MonoBehaviour:
   normAcceleration: 10
   boostingAcceleration: 20
   accelerationMult: 0
-  decelMult: 0
+  decelMult: 5
+  curve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.99999994
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  currentSpeed: 0
+  decelTime: 0
+  decelLerpMult: 50
+  decelLerp: 0
+  vibrationCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 75.00045
+      value: 0.9998145
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  controllerVibration: {x: 0, y: 0}
+  boostingSpeedVibration: {x: 0.33, y: 0.5}
   isDrifting: 0
   driftingPower: 0
   BoostGauge: 10
   Sounds: {fileID: 4566037068430761229}
-  boostingSource: {fileID: 4566037068430761229}
+  boostingSource: {fileID: 4130533955874730613}
   BoostStart: {fileID: 8300000, guid: b4eb1cbefecc4994f8ff645ceca11525, type: 3}
   BoostIng: {fileID: 8300000, guid: 366616dd0d791f84b99cc79e78a2b3ef, type: 3}
   BoostEnd: {fileID: 8300000, guid: 9b13e7d8ed4078d44bfacc37afafe964, type: 3}
@@ -911,7 +976,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4566037068758797278}
   m_LocalRotation: {x: -0, y: 0.99811167, z: -0, w: 0.061426345}
-  m_LocalPosition: {x: 0, y: 0, z: -5.0000005}
+  m_LocalPosition: {x: 0.00002193451, y: 0, z: -4.9999714}
   m_LocalScale: {x: 1, y: 1.8795, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -979,8 +1044,8 @@ MonoBehaviour:
       m_LegacyVelocityFilterStrength: -1
   m_YAxisRecentering:
     m_enabled: 0
-    m_WaitTime: 1
-    m_RecenteringTime: 2
+    m_WaitTime: 0
+    m_RecenteringTime: 1
     m_LegacyHeadingDefinition: -1
     m_LegacyVelocityFilterStrength: -1
   m_XAxis:
@@ -1007,7 +1072,7 @@ MonoBehaviour:
     m_Bias: 0
   m_RecenterToTargetHeading:
     m_enabled: 0
-    m_WaitTime: 20
+    m_WaitTime: 0
     m_RecenteringTime: 1
     m_LegacyHeadingDefinition: -1
     m_LegacyVelocityFilterStrength: -1
@@ -1087,7 +1152,7 @@ Transform:
   - {fileID: 4566037068430761238}
   - {fileID: 4566037069461427479}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4566037069081458596
 GameObject:
@@ -1149,7 +1214,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4566037069461427481}
   m_LocalRotation: {x: -0.03494622, y: -0.0000000037230155, z: -1.3018484e-10, w: 0.99938923}
-  m_LocalPosition: {x: 0, y: 0, z: -5.0000005}
+  m_LocalPosition: {x: 0.00002193451, y: 0, z: -4.9999714}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1542,7 +1607,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4566037070122345784}
-  m_LocalRotation: {x: -0.0042698816, y: -0.99569726, z: -0.06938097, w: 0.06127774}
+  m_LocalRotation: {x: -0.004269884, y: -0.99569726, z: -0.06938097, w: 0.061277773}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -12501,6 +12566,7 @@ MonoBehaviour:
   player: {fileID: 4566037068430761237}
   rotate: {x: 0, y: 0}
   angle: {x: 0, y: 0}
+  mAnimator: {fileID: 0}
   LeftHandSparkles: {fileID: 7595902979215220321}
   RightHandSparkles: {fileID: 7423890107862989011}
   BoostTrail: {fileID: 1172190942530109668}
@@ -12835,6 +12901,7 @@ MonoBehaviour:
   player: {fileID: 4566037068430761237}
   rotate: {x: 0, y: 0}
   angle: {x: 0, y: 0}
+  mAnimator: {fileID: 0}
   LeftHandSparkles: {fileID: 8781802296136024346}
   RightHandSparkles: {fileID: 6831210068978118144}
   BoostTrail: {fileID: 5383675200640320012}

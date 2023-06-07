@@ -8727,6 +8727,7 @@ GameObject:
   - component: {fileID: 4646960483221017239}
   - component: {fileID: 5388258003715749055}
   - component: {fileID: 538692708349560440}
+  - component: {fileID: 4873152409973980865}
   m_Layer: 0
   m_Name: SpikeRing
   m_TagString: SpikeRing
@@ -8866,7 +8867,7 @@ Transform:
   - {fileID: 8226671207612233268}
   - {fileID: 3105388134754089658}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &4646960483221017239
 BoxCollider:
@@ -8916,6 +8917,23 @@ MonoBehaviour:
   isCollected: 0
   timeUntilGone: 0
   YellowRingAnim: {fileID: 5388258003715749055}
+  currentTag: 
+--- !u!114 &4873152409973980865
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7726719183059198420}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5e40447253950e40b4f150f8066bdad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  yellowRing: {fileID: 538692708349560440}
+  secondRing: {fileID: 0}
+  TwoRings: 0
+  chip: 0
 --- !u!1 &7747907502315667113
 GameObject:
   m_ObjectHideFlags: 0

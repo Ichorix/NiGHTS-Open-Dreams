@@ -32,6 +32,14 @@ public class NotATrailScript : MonoBehaviour
         }
     }
 
+    void OnDisable()
+    {
+        for(var i = trailObjects.Count - 1; i > -1; i--)
+        {
+            trailObjects.RemoveAt(i);
+        }
+    }
+
     public void SpawnTrail()
     {
         amountOfGameobjects++;

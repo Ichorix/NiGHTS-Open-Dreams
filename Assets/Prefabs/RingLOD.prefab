@@ -10,8 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7501750668055522397}
   - component: {fileID: 7501750668055522396}
-  - component: {fileID: 7501750668055522395}
-  - component: {fileID: 7501750668055522394}
+  - component: {fileID: 2551918808716105498}
   m_Layer: 0
   m_Name: RingLOD
   m_TagString: YellowRing
@@ -34,7 +33,7 @@ Transform:
   - {fileID: 5999706660469822979}
   - {fileID: 8039254095466962124}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!205 &7501750668055522396
 LODGroup:
@@ -132,7 +131,7 @@ LODGroup:
     - renderer: {fileID: 7521066374573417323}
     - renderer: {fileID: 5506201288762534451}
   m_Enabled: 1
---- !u!114 &7501750668055522395
+--- !u!114 &2551918808716105498
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -141,25 +140,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 7501750668055522399}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7fefbc721d08eaa4d944f54efc0dac82, type: 3}
+  m_Script: {fileID: 11500000, guid: f5e40447253950e40b4f150f8066bdad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isCollected: 0
-  timeUntilGone: 0
-  YellowRingAnim: {fileID: 4517140379935727758}
---- !u!65 &7501750668055522394
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7501750668055522399}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 3, y: 3, z: 0.3}
-  m_Center: {x: 0, y: 3, z: 0}
+  yellowRing: {fileID: 5793705575217478231}
+  secondRing: {fileID: 0}
+  LOD: 1
+  TwoRings: 0
+  chip: 0
 --- !u!1001 &7501750668399798929
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -171,6 +159,10 @@ PrefabInstance:
     - target: {fileID: 3464252980602988072, guid: de9caa586be88c544ae3db63168cb2ae, type: 3}
       propertyPath: m_Name
       value: Ring
+      objectReference: {fileID: 0}
+    - target: {fileID: 4070395321468670150, guid: de9caa586be88c544ae3db63168cb2ae, type: 3}
+      propertyPath: LOD
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4276360363170970770, guid: de9caa586be88c544ae3db63168cb2ae, type: 3}
       propertyPath: m_RootOrder
@@ -216,9 +208,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7512783391545826284, guid: de9caa586be88c544ae3db63168cb2ae, type: 3}
+      propertyPath: yellowRing
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents:
-    - {fileID: 4070395321468670150, guid: de9caa586be88c544ae3db63168cb2ae, type: 3}
-    - {fileID: 4877338786067444672, guid: de9caa586be88c544ae3db63168cb2ae, type: 3}
+    - {fileID: 7512783391545826284, guid: de9caa586be88c544ae3db63168cb2ae, type: 3}
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: de9caa586be88c544ae3db63168cb2ae, type: 3}
 --- !u!23 &244611209892697234 stripped
@@ -286,16 +281,22 @@ MeshRenderer:
   m_CorrespondingSourceObject: {fileID: 6145270756829748650, guid: de9caa586be88c544ae3db63168cb2ae, type: 3}
   m_PrefabInstance: {fileID: 7501750668399798929}
   m_PrefabAsset: {fileID: 0}
---- !u!95 &4517140379935727758 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 6245236227073673759, guid: de9caa586be88c544ae3db63168cb2ae, type: 3}
-  m_PrefabInstance: {fileID: 7501750668399798929}
-  m_PrefabAsset: {fileID: 0}
 --- !u!23 &4754020912410113498 stripped
 MeshRenderer:
   m_CorrespondingSourceObject: {fileID: 3018043593135710027, guid: de9caa586be88c544ae3db63168cb2ae, type: 3}
   m_PrefabInstance: {fileID: 7501750668399798929}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &5793705575217478231 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4070395321468670150, guid: de9caa586be88c544ae3db63168cb2ae, type: 3}
+  m_PrefabInstance: {fileID: 7501750668399798929}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fefbc721d08eaa4d944f54efc0dac82, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &5999706660469822979 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4276360363170970770, guid: de9caa586be88c544ae3db63168cb2ae, type: 3}

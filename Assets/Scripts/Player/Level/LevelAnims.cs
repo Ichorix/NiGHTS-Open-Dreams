@@ -8,7 +8,7 @@ namespace PathCreation.Examples
     public class LevelAnims : MonoBehaviour
     {
         public LevelFollow levelFollow;
-        private Animator mAnimator;
+        public Animator mAnimator;
         public ParticleSystem LeftHandSparkles, RightHandSparkles, BoostTrail;
         public TrailRenderer trail;
         public bool rotateIn, rotateOut, isBoosting;

@@ -15,7 +15,7 @@ public class JackleHands : MonoBehaviour
 
     public float speed;
     public float aimingTime;
-    public float chasingSpeed = 5;
+    public float chasingSpeed = 10;
     public float bounceSpeed = 7;
     public float defaultSpeed = 10;
     public float sawingSpeed = 25;
@@ -24,6 +24,7 @@ public class JackleHands : MonoBehaviour
     public float maxAimingTime;
     public float stunnedTime;
     public float recoveryTime;
+    public float timeToReturn;
     public float randx;
     public float randy;
     public Vector3 knockbackDir;
@@ -52,73 +53,72 @@ public class JackleHands : MonoBehaviour
         speed = defaultSpeed;
         active = true;
         Return();
+        this.tag = "JHands Stn";
     }
-    void Update()
+    void UGrab()
     {
-        if(isGrabbing)
-        {
-            moveToPos = target.transform.position;
-            transform.LookAt(target.transform);
-        }
-        if(isSawing)
-        {
-            //Debug.Log("Sawinggg");
+        moveToPos = target.transform.position;
+        transform.LookAt(target.transform);
+    }
+    void USaw()
+    {
+        transform.RotateAround(body.transform.position, Vector3.forward, -speed);
+    }
+    void UBounce()
+    {
+        animator.SetBool("BounceSaw", true);
+        transform.Translate(direction * speed * Time.deltaTime);
 
-            transform.RotateAround(body.transform.position, Vector3.forward, -speed);
-
-            //transform.rotation += new Quaternion(transform.rotation.x, transform.rotation.y, transform.rotation.z + Time.deltaTime * speed, transform.rotation.w);
-        }
-        if(aimingSingle)
-        {
-            aimingLocation = target.transform.position;
-
-            lineRend.SetPosition(0, transform.position);
-            lineRend.SetPosition(1, aimingLocation);
-
-            transform.LookAt(aimingLocation);
-            aimingTime += Time.deltaTime;
-        }
+        movingTo = new Vector3(transform.position.x + -direction.x * 20, transform.position.y + direction.y * 20, transform.position.z + direction.z * 20);
+        lineRend.SetPosition(0, transform.position);
+        lineRend.SetPosition(1, movingTo);
+    }
+    void UReturn()
+    {
+        returningTime += Time.deltaTime * 0.66f;
+        transform.position = Vector3.Lerp(transform.position, moveToPos, curve.Evaluate(returningTime));
+    }
+    void UAiming()
+    {
+        if(aimingSingle) aimingLocation = target.transform.position;
         if(aimingDouble)
         {
             if(isTop)
-            {
                 aimingLocation = new Vector3(target.transform.position.x, target.transform.position.y + aimingDifference, target.transform.position.z);
-            }
             else
-            {
                 aimingLocation = new Vector3(target.transform.position.x, target.transform.position.y - aimingDifference, target.transform.position.z);
-            }
+        }
 
-            lineRend.SetPosition(0, transform.position);
-            lineRend.SetPosition(1, aimingLocation);
+        lineRend.SetPosition(0, transform.position);
+        lineRend.SetPosition(1, aimingLocation);
 
-            transform.LookAt(aimingLocation);
-            aimingTime += Time.deltaTime;
-        }
-        if(aimingTime >= maxAimingTime)
+        transform.LookAt(aimingLocation);
+        aimingTime += Time.deltaTime;
+    }
+    void UPunch()
+    {
+        aimingTime = 0;
+        transform.Translate(Vector3.forward * punchSpeed * Time.deltaTime);
+        timeToReturn += Time.deltaTime;
+        if(timeToReturn >= 2)
         {
-            ActivatePunch();
+            timeToReturn = 0;
+            punch = false;
+            Return();
         }
-        if(punch)
-        {
-            aimingTime = 0;
-            transform.Translate(Vector3.forward * punchSpeed * Time.deltaTime);
-        }
-        if(bounceSaw)
-        {
-            animator.SetBool("BounceSaw", true);
-            transform.Translate(direction * speed * Time.deltaTime);
-
-            movingTo = new Vector3(transform.position.x + -direction.x * 20, transform.position.y + direction.y * 20, transform.position.z + direction.z * 20);
-            lineRend.SetPosition(0, transform.position);
-            lineRend.SetPosition(1, movingTo);
-        }
+    }
+    void Update()
+    {
+        if(isGrabbing) UGrab();
+        if(isSawing) USaw();
+        if(bounceSaw) UBounce();
+        if(returning) UReturn();
         
-        if(returning)
-        {
-            returningTime += Time.deltaTime * 0.66f;
-            transform.position = Vector3.Lerp(transform.position, moveToPos, curve.Evaluate(returningTime));
-        }
+        if(aimingSingle) UAiming();
+        if(aimingDouble) UAiming();
+        
+        if(aimingTime >= maxAimingTime) ActivatePunch();
+        if(punch) UPunch();
 
         if(active)
         {
@@ -197,6 +197,7 @@ public class JackleHands : MonoBehaviour
     }
     public void Grab()
     {
+        this.tag = "JHands Stn";
         isGrabbing = true;
         isAvailable = false;
         returning = false;
@@ -225,6 +226,7 @@ public class JackleHands : MonoBehaviour
     }
     public void ActivatePunch()
     {
+        this.tag = "JHands Dmg";
         returning = false;
         active = false;
         isAvailable = false;
@@ -232,9 +234,11 @@ public class JackleHands : MonoBehaviour
         aimingSingle = false;
         aimingDouble = false;
         punch = true;
+        timeToReturn = 0;
     }
     public void HandSaw()
     {
+        this.tag = "JHands Dmg";
         isAvailable = true;
         normalRotation = transform.rotation;
         isSawing = true;
@@ -267,6 +271,7 @@ public class JackleHands : MonoBehaviour
         stunned = true;
         stunnedTime = 0;
         returningTime = 0;
+        lineRend.enabled = false;
 
         randx = Random.Range(-5, 5);
         randy = Random.Range(-5, 5);

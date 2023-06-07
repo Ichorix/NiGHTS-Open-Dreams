@@ -4,20 +4,25 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using TMPro;
+using Cinemachine;
 
 public class NewPlayerControl : MonoBehaviour
 {
     PlayerInputActions controls;
     public StateController stateController;
     public GameObject trailInstantiator;
+    public AnimationControl anims;
+    public CinemachineFreeLook cameraSettings;
+    [SerializeField] private bool cameraPlayerBound;
     public Rigidbody playerRb;
     public BoostBar boostBar;
     public TextMeshProUGUI chipText;
+    public bool allowVibration;
     
     public Vector2 rotate;
     [SerializeField] private Quaternion PlayerRot;
 
-    [SerializeField] private bool isMoving, isBoosting, BoostAttempt, power;
+    public bool isMoving, isBoosting, BoostAttempt, power;
     private int maxBoost;
     public float speed;
     private float rotationSpeed, BoostTime, powerTime;
@@ -29,6 +34,9 @@ public class NewPlayerControl : MonoBehaviour
     [SerializeField] private float currentSpeed;
     [SerializeField] private float decelTime, decelLerpMult;
     [SerializeField] private bool decelLerp;
+    public AnimationCurve vibrationCurve;
+    [SerializeField] private Vector2 controllerVibration;
+    [SerializeField] private Vector2 boostingSpeedVibration;
 
 
     public bool isDrifting;
@@ -102,9 +110,18 @@ public class NewPlayerControl : MonoBehaviour
         }
         if(decelLerp)
         {
+            /* //Using Mathf.Lerp: doesnt allow for very good reacceleration
             speed = Mathf.Lerp(0, currentSpeed, curve.Evaluate(decelTime));
             decelTime += Time.deltaTime * decelLerpMult;
             if(decelTime >= 1)
+            {
+                decelLerp = false;
+                isMoving = false;
+            }
+            */
+            //Using simple deceleration
+            speed -= Time.deltaTime * decelLerpMult;
+            if(speed <= normStartSpeed)
             {
                 decelLerp = false;
                 isMoving = false;
@@ -119,6 +136,14 @@ public class NewPlayerControl : MonoBehaviour
         {
             //speed = normStartSpeed;
             isBoosting = false;
+
+            if(speed < normStartSpeed) speed = normStartSpeed;
+            else if(speed > normSpeedaBoosting) speed = normSpeedaBoosting;
+            else speed = speed;
+                
+            accelerationMult = normAcceleration;
+            boostingSource.Stop();
+            Sounds.PlayOneShot(BoostEnd, 1.0f);
         }
 
         //BoostAttempts
@@ -172,6 +197,12 @@ public class NewPlayerControl : MonoBehaviour
             {
                 speed += Time.deltaTime * accelerationMult;
             }
+            if(allowVibration)
+            {
+                controllerVibration = Vector2.Lerp(Vector2.zero, boostingSpeedVibration, vibrationCurve.Evaluate(speed));
+                Gamepad.current.SetMotorSpeeds(controllerVibration.x, controllerVibration.y);
+            }
+            
         }
 
         //Drifting
@@ -210,15 +241,13 @@ public class NewPlayerControl : MonoBehaviour
         {
             decelLerp = false;
             isMoving = true;
-            speed = normStartSpeed;
+            //speed = normStartSpeed;
             accelerationMult = normAcceleration;
             trailInstantiator.SetActive(true);
-            //Gamepad.current.SetMotorSpeeds(.25f, .25f);
             if(isBoosting)
             {
                 accelerationMult = boostingAcceleration;
                 speed = boostingStartSpeed;
-                //Gamepad.current.SetMotorSpeeds(.5f, .6f)
             }
         }
         if(context.canceled)
@@ -227,8 +256,7 @@ public class NewPlayerControl : MonoBehaviour
             decelLerp = true;
             decelTime = 0;
             trailInstantiator.SetActive(false);
-            //Gamepad.current.SetMotorSpeeds(0f,0f);
-
+            if(allowVibration) Gamepad.current.SetMotorSpeeds(0,0);
             //Reorientation
             transform.rotation = PlayerRot;            
         }
@@ -246,7 +274,6 @@ public class NewPlayerControl : MonoBehaviour
             }
             accelerationMult = boostingAcceleration;
             BoostGauge -= 1;
-            //Gamepad.current.SetMotorSpeeds(.5f, .6f);
             Sounds.PlayOneShot(BoostStart, 1.0f);
             boostingSource.PlayScheduled(AudioSettings.dspTime + BoostStart.length);
         }
@@ -256,13 +283,10 @@ public class NewPlayerControl : MonoBehaviour
             if(isMoving)
             {
                 if(speed < normStartSpeed) speed = normStartSpeed;
-                else
-                {
-                    if(speed > normSpeedaBoosting) speed = normSpeedaBoosting;
-                    else speed = speed;
-                }
+                else if(speed > normSpeedaBoosting) speed = normSpeedaBoosting;
+                else speed = speed;
+                
                 accelerationMult = normAcceleration;
-                //Gamepad.current.SetMotorSpeeds(.25f, .25f);
                 boostingSource.Stop();
                 Sounds.PlayOneShot(BoostEnd, 1.0f);
             }
@@ -271,8 +295,8 @@ public class NewPlayerControl : MonoBehaviour
         {
             isBoosting = false;
             BoostAttempt = true;
-            speed = normStartSpeed;
-            //Gamepad.current.SetMotorSpeeds(.25f, .25f);
+            anims.mAnimator.SetTrigger("TrBoostAttempt");
+            //speed = normStartSpeed;
         }
         if(!isMoving)
         {
@@ -280,7 +304,27 @@ public class NewPlayerControl : MonoBehaviour
             currentSpeed = speed;
             decelLerp = true;
             decelTime = 0;
-            //Gamepad.current.SetMotorSpeeds(0f,0f);
+        }
+    }
+
+
+    public void RecenterCamera(InputAction.CallbackContext context)
+    {
+        Debug.Log("RecenterCamera " + context);
+        StartCoroutine(Recenter());
+    }
+    public void ChangeCamera(InputAction.CallbackContext context)
+    {
+        //Debug.Log("ChangeCamera " + context);
+        if(context.performed)
+        {
+            Debug.Log("Set Camera to");
+            if(cameraPlayerBound)
+            {
+                Debug.Log("World");
+                CamSetWorld();
+            }
+            else CamSetPlayer();
         }
     }
 
@@ -350,6 +394,32 @@ public class NewPlayerControl : MonoBehaviour
         Sounds.PlayOneShot(BlueChipSFX, 1.0f);
         other.gameObject.SetActive(false);
         chipAmount += 1;
+    }
+
+    IEnumerator Recenter()
+    {
+        Debug.Log("Recenteringgg");
+        cameraSettings.m_RecenterToTargetHeading = new AxisState.Recentering(true, 0, 0.25f);
+        yield return new WaitForSeconds(1);
+        cameraSettings.m_RecenterToTargetHeading = new AxisState.Recentering(false, 0, 0.25f);
+        //public AxisState.Recentering m_RecenterToTargetHeading = new AxisState.Recentering(false, 1, 2);
+    }
+
+    public void CamSetWorld()
+    {
+        if(cameraSettings != null)
+        {
+            cameraSettings.m_BindingMode = CinemachineTransposer.BindingMode.SimpleFollowWithWorldUp;
+            cameraPlayerBound = false;
+        }
+    }
+    public void CamSetPlayer()
+    {
+        if(cameraSettings != null)
+        {
+            cameraSettings.m_BindingMode = CinemachineTransposer.BindingMode.LockToTarget;
+            cameraPlayerBound = true;
+        }
     }
 }
 

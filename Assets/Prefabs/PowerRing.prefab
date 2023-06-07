@@ -1423,6 +1423,7 @@ GameObject:
   - component: {fileID: 5369534552740980686}
   - component: {fileID: 5369534552740980684}
   - component: {fileID: 5369534552740980685}
+  - component: {fileID: 3576318311466682753}
   m_Layer: 0
   m_Name: PowerRing
   m_TagString: PowerRing
@@ -1527,8 +1528,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isCollected: 0
-  timeUntilGone: 0
   YellowRingAnim: {fileID: 5369534552740980684}
+  currentTag: 
+  LOD: 0
+--- !u!114 &3576318311466682753
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5063456567983776169}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5e40447253950e40b4f150f8066bdad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  yellowRing: {fileID: 5369534552740980685}
+  secondRing: {fileID: 0}
+  LOD: 0
+  TwoRings: 0
+  chip: 0
 --- !u!1 &5533523757823268813
 GameObject:
   m_ObjectHideFlags: 0
