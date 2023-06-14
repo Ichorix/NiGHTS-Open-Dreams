@@ -606,6 +606,7 @@
 "Assets/Scripts/Player/Level/LevelAnims.cs"
 "Assets/Scripts/Player/Level/LevelFollow.cs"
 "Assets/Scripts/Player/Level/NewLevelFollow.cs"
+"Assets/Scripts/Player/Level/NewScripts/LevelFollowUsingPhysics.cs"
 "Assets/Scripts/Player/Paraloop/AlwaysZero.cs"
 "Assets/Scripts/Player/Paraloop/CollectItems.cs"
 "Assets/Scripts/Player/Paraloop/DeleteScript.cs"

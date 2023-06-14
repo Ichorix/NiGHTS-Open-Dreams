@@ -169,6 +169,7 @@ namespace PathCreation.Examples
             playerRb.MovePosition(new Vector3(pathPosition.x, transform.position.y, pathPosition.z));
             playerRb.AddForce(Vector3.up * movingVertical * addForceMult * speed, ForceMode.VelocityChange);
 
+            ////The rest of this stuff deals with player rotation and needs to be revamped
             pathRotation = currentPath.path.GetRotationAtDistance(distanceTravelled, endOfPathInstruction).eulerAngles;
 
 
@@ -189,14 +190,7 @@ namespace PathCreation.Examples
             rotatingVertical = movingVertical;
             
             Vector3 verticalInput = new Vector3(transform.rotation.x, rotatingVertical * 2, transform.rotation.z);
-            transform.forward += verticalInput;
-
-
-            if(isClosedPath && distanceTravelled >= maxDistance)
-            {
-                distanceTravelled -= maxDistance;
-            }
-            
+            transform.forward += verticalInput;            
         }
 
         // If the path changes during the game, update the distance travelled so that the follower's position on the new path
