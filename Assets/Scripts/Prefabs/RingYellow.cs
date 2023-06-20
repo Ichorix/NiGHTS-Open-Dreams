@@ -22,14 +22,12 @@ public class RingYellow : MonoBehaviour
         if(isCollected)
         {
             timeUntilGone -= Time.deltaTime;
-            Debug.Log("Is Collected");
             this.tag = "Collected";
         }
         if(timeUntilGone <= 0)
         {
             this.gameObject.SetActive(false);
             if (LOD) this.transform.parent.gameObject.SetActive(false);
-            Debug.Log("Done COllected");
         }
     }
     void OnTriggerEnter(Collider other)
@@ -42,12 +40,10 @@ public class RingYellow : MonoBehaviour
     }
     public void Respawn()
     {
-        Debug.Log("Respawn2");
         isCollected = false;
         timeUntilGone = 1f;
         this.tag = currentTag;
         this.gameObject.SetActive(true);
         YellowRingAnim.SetTrigger("TrRespawn");
-        Debug.Log("REspawn3");
     }
 }

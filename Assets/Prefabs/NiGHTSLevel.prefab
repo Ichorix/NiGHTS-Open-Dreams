@@ -5226,7 +5226,7 @@ Transform:
   - {fileID: 3769683452783751093}
   - {fileID: 6681173485242343133}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6681173484367410363
 GameObject:
@@ -5252,7 +5252,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6681173484367410363}
-  m_LocalRotation: {x: -0.0056960327, y: 0.21781395, z: 0.0012712191, w: 0.97597295}
+  m_LocalRotation: {x: -0.005696033, y: 0.21781392, z: 0.001271219, w: 0.97597295}
   m_LocalPosition: {x: -123.817085, y: -1.8956175, z: -276.9933}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -5330,7 +5330,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6681173484380529660}
-  m_LocalRotation: {x: 0.023145882, y: -0.7487557, z: -0.026182164, w: -0.6619243}
+  m_LocalRotation: {x: 0.0231459, y: -0.74875396, z: -0.026182042, w: -0.6619262}
   m_LocalPosition: {x: 0.000041513547, y: 0.0000005074086, z: 0.000087119784}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -5408,7 +5408,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6681173485147245527}
-  m_LocalRotation: {x: 0.04603996, y: -0.74740094, z: -0.052079495, w: -0.66072685}
+  m_LocalRotation: {x: 0.046040047, y: -0.74739933, z: -0.052079316, w: -0.66072875}
   m_LocalPosition: {x: 0.000041513547, y: 0.0000005074086, z: 0.000087119784}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -11458,7 +11458,7 @@ SphereCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4547311314307364111}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 9f93f63d068b08c459038c40fce897d8, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -11785,6 +11785,114 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &3888770857468271970
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4547311314307364111}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d77b98dfabdfbda47b0d3125239fcdf5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  course1:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0.0002824183
+      outSlope: 0.0002824183
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.048714478
+    - serializedVersion: 3
+      time: 30000
+      value: 5
+      inSlope: 0.000018155548
+      outSlope: 0.000018155548
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.064952604
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  course2:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0.0002824183
+      outSlope: 0.0002824183
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.048714478
+    - serializedVersion: 3
+      time: 30000
+      value: 5
+      inSlope: 0.000018155548
+      outSlope: 0.000018155548
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.064952604
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  course3:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0.0002824183
+      outSlope: 0.0002824183
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.048714478
+    - serializedVersion: 3
+      time: 30000
+      value: 5
+      inSlope: 0.000018155548
+      outSlope: 0.000018155548
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.064952604
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  course4:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0.0002824183
+      outSlope: 0.0002824183
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.048714478
+    - serializedVersion: 3
+      time: 30000
+      value: 5
+      inSlope: 0.000018155548
+      outSlope: 0.000018155548
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.064952604
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!114 &5581108837463553737
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11799,6 +11907,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BossFight: 0
   playerRb: {fileID: 1095164174104684725}
+  evaluateScore: {fileID: 3888770857468271970}
   anims: {fileID: 7253337786867925101}
   levelTimeLeft: 0
   pathS11time: 0
@@ -11830,6 +11939,7 @@ MonoBehaviour:
   pathRotation: {x: 0, y: 0, z: 0}
   playerRotation: {x: 0, y: 0, z: 0}
   setRotation: {x: 0, y: 0, z: 0, w: 0}
+  grade: 0
   isBoosting: 0
   BoostAttempt: 0
   BoostGauge: 0
@@ -11937,6 +12047,14 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: eb46999b-18a8-444b-9a4c-17961c070c78
     m_ActionName: Player/Continue[/Keyboard/enter]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 8cdafcbb-b0b0-4285-93ec-986307d583be
+    m_ActionName: Player/RecenterCamera[/DualShock4GamepadHID/rightStickPress]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: a4c4d6c5-5687-46d1-9c40-900d51baef97
+    m_ActionName: Player/ChangeCamera[/DualShock4GamepadHID/rightStickPress]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player

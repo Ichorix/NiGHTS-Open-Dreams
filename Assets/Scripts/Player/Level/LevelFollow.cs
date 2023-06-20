@@ -12,6 +12,7 @@ namespace PathCreation.Examples
     {
         public bool BossFight;
         [SerializeField] private Rigidbody playerRb;
+        public EvaluateScore evaluateScore;
         public LevelAnims anims;
         public float levelTimeLeft;
         public float pathS11time, pathS12time, pathS13time, pathS14time;
@@ -32,9 +33,12 @@ namespace PathCreation.Examples
         [SerializeField] private Vector3 pathRotation, playerRotation;
         [SerializeField] private Quaternion setRotation;
 
-        
+        public int grade;
+        public int fullGrade;
 
-        void Start()
+        
+                        ///Copied from the example project, probably useful to have
+        void Start()    
         {
             if (currentPath != null)
             {
@@ -42,6 +46,13 @@ namespace PathCreation.Examples
                 currentPath.pathUpdated += OnPathChanged;
             }
         }
+        // If the path changes during the game, update the distance travelled so that the follower's position on the new path
+        // is as close as possible to its position on the old path
+        void OnPathChanged() {
+            distanceTravelled = currentPath.path.GetClosestDistanceAlongPath(transform.position);
+        }
+
+
         void OnEnable()
         {
             levelSegmentNum = 1;
@@ -169,34 +180,29 @@ namespace PathCreation.Examples
             playerRb.MovePosition(new Vector3(pathPosition.x, transform.position.y, pathPosition.z));
             playerRb.AddForce(Vector3.up * movingVertical * addForceMult * speed, ForceMode.VelocityChange);
 
-            ////The rest of this stuff deals with player rotation and needs to be revamped
+            //// The rest of this stuff deals with player rotation and needs to be revamped
             pathRotation = currentPath.path.GetRotationAtDistance(distanceTravelled, endOfPathInstruction).eulerAngles;
 
 
-            playerRotation.x = transform.rotation.x;
-            playerRotation.y = pathRotation.y;
+            playerRotation.x = transform.rotation.x; 
+            playerRotation.y = pathRotation.y;          // Gets the Left/Right rotation of the track
             playerRotation.z = transform.rotation.z;
 
-            setRotation.eulerAngles = playerRotation;
-            transform.rotation = setRotation;
+            setRotation.eulerAngles = playerRotation;   // Puts the Vector3 playerRotation into the Quaternion setRotation
+            transform.rotation = setRotation;           // So that the transform.rotation can then be set to the Quaternion
             
-            if(movingHorizontal < 0)
+            if(movingHorizontal < 0) // Checks if  you are moving backwards
             {
                 //transform.rotation = new Quaternion(transform.rotation.x, -transform.rotation.y, transform.rotation.z, transform.rotation.w);
                 Vector3 flippedRotation = new Vector3(transform.rotation.x, pathRotation.y + 180, transform.rotation.z);
                 transform.rotation = Quaternion.Euler(flippedRotation); 
             }
 
-            rotatingVertical = movingVertical;
-            
+            rotatingVertical = movingVertical;  // I dont know why i did this
+                                                // I dont know how this line below works
             Vector3 verticalInput = new Vector3(transform.rotation.x, rotatingVertical * 2, transform.rotation.z);
-            transform.forward += verticalInput;            
-        }
-
-        // If the path changes during the game, update the distance travelled so that the follower's position on the new path
-        // is as close as possible to its position on the old path
-        void OnPathChanged() {
-            distanceTravelled = currentPath.path.GetClosestDistanceAlongPath(transform.position);
+            transform.forward += verticalInput; // I have no idea why this line is needed
+                                                // But it all works so its all good
         }
 
         public TextMeshProUGUI scoreText, timeText, chipText;
@@ -210,15 +216,15 @@ namespace PathCreation.Examples
         [SerializeField] public AudioClip BlueChipSFX, YellowRingSFX, GreenRingSFX, HalfRingSFX, PowerRingSFX, SpikeRingSFX, DamageSFX, StunSFX;
         void OnTriggerEnter(Collider other)
         { 
-            if(other.gameObject.CompareTag("BlueChip"))
+            if(other.CompareTag("BlueChip"))
             {
                 CollectBlueChip(other);
             }
-            if(other.gameObject.CompareTag("Star"))
+            if(other.CompareTag("Star"))
             {
                 CollectStarChip(other);
             }
-            if(other.gameObject.CompareTag("YellowRing"))
+            if(other.CompareTag("YellowRing"))
             {
                 Sounds.pitch = RandomPitch();
                 Sounds.PlayOneShot(YellowRingSFX, 1.0f);
@@ -233,7 +239,7 @@ namespace PathCreation.Examples
                 score += 100;
                 LinkIncrease();
             }
-            if(other.gameObject.CompareTag("GreenRing"))
+            if(other.CompareTag("GreenRing"))
             {
 
                 Sounds.pitch = 1;
@@ -247,7 +253,7 @@ namespace PathCreation.Examples
                     BoostGauge = 100;
                 }
             }
-            if(other.gameObject.CompareTag("HalfRing"))
+            if(other.CompareTag("HalfRing"))
             {
                 Sounds.pitch = RandomPitch();
                 Sounds.PlayOneShot(HalfRingSFX, 1.0f);
@@ -262,7 +268,7 @@ namespace PathCreation.Examples
                 score += 60;
                 LinkIncrease();
             }
-            if(other.gameObject.CompareTag("PowerRing"))
+            if(other.CompareTag("PowerRing"))
             {
                 Sounds.pitch = 1;
                 Sounds.PlayOneShot(PowerRingSFX, 1.0f);
@@ -271,16 +277,18 @@ namespace PathCreation.Examples
                 power = true;
                 LinkIncrease();
             }
-            if(other.gameObject.CompareTag("SpikeRing"))
+            if(other.CompareTag("SpikeRing"))
             {
                 Sounds.pitch = 1;
                 Sounds.PlayOneShot(SpikeRingSFX, 1.0f);
                 BoostGauge -= 5;
                 score -= 100;
+                takeDamage();
             }
 
-            if(other.gameObject.CompareTag("GrowthPalace") && continueLevel)
+            if(other.CompareTag("GrowthPalace") && continueLevel)
             {
+                Debug.Log("Continue Level");
                 ContinueLevel();
             }
             if(BossFight)
@@ -311,10 +319,12 @@ namespace PathCreation.Examples
         public int levelSegmentNum;
         void ContinueLevel()
         {
+            grade = evaluateScore.CalculateGrade(levelSegmentNum, score);
             levelSegmentNum++;
             distanceTravelled = 0;
             continueLevel = false;
             chipCounter = 0;
+            score = 0;
             if(levelSegmentNum == 2)
             {
                 pathS11.gameObject.SetActive(false);
@@ -341,6 +351,7 @@ namespace PathCreation.Examples
             }
             if(levelSegmentNum >= 5)
             {
+                fullGrade = evaluateScore.CalculateFullGrade();
                 sc.Activate1();
             }
         }

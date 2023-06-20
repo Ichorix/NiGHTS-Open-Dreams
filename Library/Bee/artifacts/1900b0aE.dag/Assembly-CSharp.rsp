@@ -603,6 +603,7 @@
 "Assets/Scripts/Player/Ground/SurfaceAligning.cs"
 "Assets/Scripts/Player/IdeyaFollow.cs"
 "Assets/Scripts/Player/Level/CameraFollow.cs"
+"Assets/Scripts/Player/Level/EvaluateScore.cs"
 "Assets/Scripts/Player/Level/LevelAnims.cs"
 "Assets/Scripts/Player/Level/LevelFollow.cs"
 "Assets/Scripts/Player/Level/NewLevelFollow.cs"
