@@ -11,7 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SAGE23.unity
     guid: f35959e78626088428e901ae984ee5f2
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Menus.unity
     guid: e76badde9ba30c648819bbc2070b51de
   - enabled: 1

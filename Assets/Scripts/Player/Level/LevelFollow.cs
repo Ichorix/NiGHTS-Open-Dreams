@@ -404,7 +404,7 @@ namespace PathCreation.Examples
                 t += 0.01f;
                 speed = 0;
                 yield return new WaitForSeconds(0.01f);
-                if(t > 0.75f)
+                if(t > 0.5f)
                 {
                     stunned = false;
                     speed = nonBoostingSpeed;
