@@ -34,8 +34,7 @@ public class RingYellow : MonoBehaviour
     {
         if(other.CompareTag("Player")||other.CompareTag("levelPlayer"))
         {
-            isCollected = true;
-            YellowRingAnim.SetTrigger("TrCollected");
+            Collect();
         }
     }
     public void Respawn()
@@ -45,5 +44,11 @@ public class RingYellow : MonoBehaviour
         this.tag = currentTag;
         this.gameObject.SetActive(true);
         YellowRingAnim.SetTrigger("TrRespawn");
+    }
+
+    public void Collect()
+    {
+        isCollected = true;
+        YellowRingAnim.SetTrigger("TrCollected");
     }
 }

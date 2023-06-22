@@ -423,7 +423,7 @@
 "Assets/Imported/Prefabs/NatureStarterKit2/Editor/ImageEffects/SunShaftsEditor.cs"
 "Assets/Imported/Prefabs/NatureStarterKit2/Editor/ImageEffects/TonemappingEditor.cs"
 "Assets/Imported/Prefabs/NatureStarterKit2/Editor/ImageEffects/VignetteAndChromaticAberrationEditor.cs"
-"Assets/Imported/StylisedWater/URP/Scripts/Bitgem/Editor/FlagEnumAttributeDrawer.cs"
+"Assets/Materials/Water/StylisedWater/URP/Scripts/Bitgem/Editor/FlagEnumAttributeDrawer.cs"
 "Assets/PathCreator/Examples/Scripts/Editor/PathSceneToolEditor.cs"
 -langversion:9.0
 

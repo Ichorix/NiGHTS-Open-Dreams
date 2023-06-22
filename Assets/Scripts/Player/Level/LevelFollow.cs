@@ -121,6 +121,7 @@ namespace PathCreation.Examples
             timeText.text = levelTimeInt.ToString();
             chipText.text = chipCounter.ToString() + " / " + chipReq.ToString();
             boostBar.SetBoost((int)BoostGauge);
+            linkText.text = link.ToString();
 
             
             if(!BossFight) levelTimeLeft -= Time.deltaTime;
@@ -165,10 +166,8 @@ namespace PathCreation.Examples
             }
             
             //Links
-            if(linkTimeLeft <= 0)
-            {
-                LinkEmpty();
-            }
+            if(linkTimeLeft <= 0) LinkEmpty();
+            if(linkActive) linkTimeLeft -= Time.deltaTime;
         }
         public float addForceMult;
         void FixedUpdate()
@@ -228,44 +227,31 @@ namespace PathCreation.Examples
             {
                 Sounds.pitch = RandomPitch();
                 Sounds.PlayOneShot(YellowRingSFX, 1.0f);
-                if(BoostGauge <= 90)
-                {
-                    BoostGauge += 10;
-                }
-                if(BoostGauge >= 90)
-                {
-                    BoostGauge = 100;
-                }
-                score += 100;
+
+                if(BoostGauge <= 90) BoostGauge += 10;
+                else BoostGauge = 100;
+
+                score += 10 * link;
                 LinkIncrease();
+                other.GetComponent<RingYellow>().isCollected = true;
             }
             if(other.CompareTag("GreenRing"))
             {
-
                 Sounds.pitch = 1;
                 Sounds.PlayOneShot(GreenRingSFX, 1.0f);
-                if(BoostGauge <= 90)
-                {
-                    BoostGauge += 10;
-                }
-                if(BoostGauge >= 90)
-                {
-                    BoostGauge = 100;
-                }
+
+                if(BoostGauge <= 90) BoostGauge += 10;
+                else BoostGauge = 100;
             }
             if(other.CompareTag("HalfRing"))
             {
                 Sounds.pitch = RandomPitch();
                 Sounds.PlayOneShot(HalfRingSFX, 1.0f);
-                if(BoostGauge <= 90)
-                {
-                    BoostGauge += 10;
-                }
-                if(BoostGauge >= 90)
-                {
-                    BoostGauge = 100;
-                }
-                score += 60;
+
+                if(BoostGauge <= 90) BoostGauge += 10;
+                else BoostGauge = 100;
+
+                score += 5 * link;
                 LinkIncrease();
             }
             if(other.CompareTag("PowerRing"))
@@ -273,7 +259,7 @@ namespace PathCreation.Examples
                 Sounds.pitch = 1;
                 Sounds.PlayOneShot(PowerRingSFX, 1.0f);
                 BoostGauge = 100;
-                score += 250;
+                score += 50 * link;
                 power = true;
                 LinkIncrease();
             }
@@ -282,7 +268,7 @@ namespace PathCreation.Examples
                 Sounds.pitch = 1;
                 Sounds.PlayOneShot(SpikeRingSFX, 1.0f);
                 BoostGauge -= 5;
-                score -= 100;
+                score -= 50;
                 takeDamage();
             }
 
@@ -303,9 +289,11 @@ namespace PathCreation.Examples
                 }
             }
         }
+
+        public TextMeshProUGUI linkText; //////////REMOVE IN FUTURE////////////////
         public void LinkIncrease()
         {
-            linkTimeLeft = 10;
+            linkTimeLeft = 1;
             link += 1;
             linkActive = true;
         }
@@ -368,10 +356,9 @@ namespace PathCreation.Examples
             Sounds.pitch = 1;
             Sounds.PlayOneShot(BlueChipSFX, 1.0f);
             other.gameObject.SetActive(false);
-            score += 10;
+            score += 10 * link;
             chipCounter += 1;
 
-            LinkIncrease();
             if(continueLevel) score += 10;
         }
         public void CollectStarChip(Collider other)
@@ -379,9 +366,8 @@ namespace PathCreation.Examples
             Sounds.pitch = 1;
             Sounds.PlayOneShot(BlueChipSFX, 1.0f);
             other.gameObject.SetActive(false);
-            score += 10;
+            score += 10 * link;
             levelTimeLeft += 0.25f;
-            LinkIncrease();
         }
 
         public void takeDamage()
