@@ -21,9 +21,7 @@ public class CustomModal : MonoBehaviour
     }
     void OnEnable()
     {
-        chipCount = newPlayerControl.chipAmount;
-
-        timeBonus = chipCount * 0.25f;
+        timeBonus = newPlayerControl.chipAmount;
         bonusNumber.text = timeBonus.ToString() + "s";
     }
 

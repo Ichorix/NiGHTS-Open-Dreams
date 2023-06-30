@@ -142,8 +142,12 @@ public class NewPlayerControl : MonoBehaviour
             else speed = speed;
                 
             accelerationMult = normAcceleration;
-            boostingSource.Stop();
-            Sounds.PlayOneShot(BoostEnd, 1.0f);
+
+            if(boostingSource.isPlaying)
+            {
+                boostingSource.Stop();
+                Sounds.PlayOneShot(BoostEnd, 1.0f);
+            }
         }
 
         //BoostAttempts
@@ -287,8 +291,12 @@ public class NewPlayerControl : MonoBehaviour
                 else speed = speed;
                 
                 accelerationMult = normAcceleration;
-                boostingSource.Stop();
-                Sounds.PlayOneShot(BoostEnd, 1.0f);
+
+                if(boostingSource.isPlaying)
+                {
+                    boostingSource.Stop();
+                    Sounds.PlayOneShot(BoostEnd, 1.0f);
+                }
             }
         }
         if(0 >= BoostGauge && context.started)

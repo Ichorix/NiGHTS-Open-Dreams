@@ -16,6 +16,10 @@ namespace PathCreation.Examples
         public LevelAnims anims;
         public float levelTimeLeft;
         public float pathS11time, pathS12time, pathS13time, pathS14time;
+        public GameObject levelModal;
+        private float bonusTime;
+        public GameObject pathMusic;
+        public GameObject openLevel;
         public PathCreator currentPath;
         public PathCreator pathS11, pathS12, pathS13, pathS14;
         public EndOfPathInstruction endOfPathInstruction;
@@ -55,25 +59,35 @@ namespace PathCreation.Examples
 
         void OnEnable()
         {
-            levelSegmentNum = 1;
-            chipReq = 50;
-            continueLevel = false;
-            speed = nonBoostingSpeed;
+            bonusTime = levelModal.GetComponent<CustomModal>().timeBonus;
             playerRb = GetComponent<Rigidbody>();
-            boostBar.SetMaxBoost(maxBoost);
             Physics.gravity *= gravityModifier;
-
+            boostBar.SetMaxBoost(maxBoost);
             BoostGauge = 100;
             maxBoost = 100;
 
-            playerRb.AddForce(Vector3.up * 5f, ForceMode.Impulse);
+            levelSegmentNum = 1;
+            chipReq = 50;
             score = 0;
+
+            continueLevel = false;
+            distanceTravelled = 0;
+            /*transform.position = new Vector3(
+                transform.position.x,
+                58,
+                transform.position.z
+            );*/
+            
+            speed = nonBoostingSpeed;
+            playerRb.AddForce(Vector3.up * 5f, ForceMode.Impulse);
 
             if(!BossFight)
             {
                 pathS11.gameObject.SetActive(true);
                 currentPath = pathS11;
-                levelTimeLeft = pathS11time;
+                levelTimeLeft = pathS11time + bonusTime;
+                if(pathMusic != null) pathMusic.SetActive(true);
+                if(openLevel != null) openLevel.SetActive(false);
             }
         }
 
@@ -132,6 +146,8 @@ namespace PathCreation.Examples
             {
                 sc.Activate1();
                 currentPath.gameObject.SetActive(false);
+                if(pathMusic != null) pathMusic.SetActive(false);
+                if(openLevel != null) openLevel.SetActive(true);
             }
             
 
@@ -208,6 +224,7 @@ namespace PathCreation.Examples
         public int score, link, chipCounter, levelTimeInt;//public
         public int chipReq;
         public float linkTimeLeft;//public
+        public float linkPitch, linkPitchIncrease;
         public bool power, linkActive;
         public bool isInGround;
         public AudioSource Sounds;
@@ -225,7 +242,7 @@ namespace PathCreation.Examples
             }
             if(other.CompareTag("YellowRing"))
             {
-                Sounds.pitch = RandomPitch();
+                Sounds.pitch = linkPitch;
                 Sounds.PlayOneShot(YellowRingSFX, 1.0f);
 
                 if(BoostGauge <= 90) BoostGauge += 10;
@@ -296,11 +313,13 @@ namespace PathCreation.Examples
             linkTimeLeft = 1;
             link += 1;
             linkActive = true;
+            linkPitch += linkPitchIncrease;
         }
         void LinkEmpty()
         {
             linkTimeLeft = 0;
             link = 0;
+            linkPitch = 1 - linkPitchIncrease;
             linkActive = false;
         }
 
@@ -318,7 +337,7 @@ namespace PathCreation.Examples
                 pathS11.gameObject.SetActive(false);
                 pathS12.gameObject.SetActive(true);
                 currentPath = pathS12;
-                levelTimeLeft = pathS12time;
+                levelTimeLeft = pathS12time + bonusTime;;
                 camera.pathCreator = pathS12;
             }
             if(levelSegmentNum == 3)
@@ -326,7 +345,7 @@ namespace PathCreation.Examples
                 pathS12.gameObject.SetActive(false);
                 pathS13.gameObject.SetActive(true);
                 currentPath = pathS13;
-                levelTimeLeft = pathS13time;
+                levelTimeLeft = pathS13time + bonusTime;;
                 camera.pathCreator = pathS13;
             }
             if(levelSegmentNum == 4)
@@ -334,7 +353,7 @@ namespace PathCreation.Examples
                 pathS13.gameObject.SetActive(false);
                 pathS14.gameObject.SetActive(true);
                 currentPath = pathS14;
-                levelTimeLeft = pathS14time;
+                levelTimeLeft = pathS14time + bonusTime;;
                 camera.pathCreator = pathS14;
             }
             if(levelSegmentNum >= 5)
@@ -374,7 +393,7 @@ namespace PathCreation.Examples
         {
             StartCoroutine(TakeDamage(Vector3.up, 10));
         }
-
+        public float stunDir;
         IEnumerator TakeDamage(Vector3 knockbackDir, float knockbackPower)
         {
             speed = 0;
@@ -390,7 +409,7 @@ namespace PathCreation.Examples
                 t += 0.01f;
                 speed = 0;
                 yield return new WaitForSeconds(0.01f);
-                if(t > 0.5f)
+                if(t > stunDir)
                 {
                     stunned = false;
                     speed = nonBoostingSpeed;
@@ -409,7 +428,7 @@ namespace PathCreation.Examples
                 t += 0.01f;
                 speed = 0;
                 yield return new WaitForSeconds(0.01f);
-                if(t > 1.25f)
+                if(t > stunDir)
                 {
                     stunned = false;
                     speed = nonBoostingSpeed;

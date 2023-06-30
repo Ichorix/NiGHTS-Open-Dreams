@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class IdeyaFollow : MonoBehaviour
 {
+    public Vector3 initialPos;
     public AnimationCurve curveX, curveY, curveZ;
     public GameObject player;
     public Vector3 pos;
@@ -21,9 +22,17 @@ public class IdeyaFollow : MonoBehaviour
         t += Time.deltaTime * speed;
         transform.position = pos;
 
-        if(t >= maxT)
-        {
-            t = 0;
-        }
+        if(t >= maxT) t = 0;
+    }
+
+    void OnEnable()
+    {
+        initialPos = transform.position;
+    }
+    
+    void OnDisable()
+    {
+        transform.position = initialPos;
+        this.gameObject.GetComponent<IdeyaFollow>().enabled = false;
     }
 }
