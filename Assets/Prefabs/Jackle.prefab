@@ -60,6 +60,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   collider: {fileID: 6754402284941100152}
   main: {fileID: 6754402285524178959}
+  player: {fileID: 0}
   isDamageBox: 1
   isSawRange: 0
   isLeftZone: 0
@@ -294,6 +295,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   collider: {fileID: 6754402286163831016}
   main: {fileID: 6754402285524178959}
+  player: {fileID: 0}
   isDamageBox: 0
   isSawRange: 1
   isLeftZone: 0
@@ -363,6 +365,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   collider: {fileID: 6754402286260355017}
   main: {fileID: 6754402285524178959}
+  player: {fileID: 0}
   isDamageBox: 0
   isSawRange: 0
   isLeftZone: 0
@@ -626,6 +629,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   collider: {fileID: 6754402286747458849}
   main: {fileID: 6754402285524178959}
+  player: {fileID: 0}
   isDamageBox: 0
   isSawRange: 0
   isLeftZone: 1
@@ -987,24 +991,16 @@ MonoBehaviour:
   animator: {fileID: 6754402285042315058}
   body: {fileID: 5871881125912183274}
   target: {fileID: 0}
-  moveToPos: {x: 0, y: 0, z: 0}
-  normalRotation: {x: 0, y: 0, z: 0, w: 0}
-  speed: 0
-  aimingTime: 0
-  chasingSpeed: 5
+  chasingSpeed: 10
   bounceSpeed: 7
   defaultSpeed: 10
   sawingSpeed: 25
   punchSpeed: 100
-  returningTime: 0
   maxAimingTime: 3
-  stunnedTime: 0
-  recoveryTime: 30
-  randx: 0
-  randy: 0
+  recoveryTime: 5
+  timeToReturn: 0
   knockbackDir: {x: 0, y: 0, z: 0}
   knockbackForce: 1
-  oldForward: {x: 0, y: 0, z: 0}
   active: 0
   returning: 0
   isGrabbing: 0
@@ -1017,9 +1013,9 @@ MonoBehaviour:
   stunned: 0
   isAvailable: 0
   aimingDifference: 3
-  aimingLocation: {x: 0, y: 0, z: 0}
   direction: {x: 0, y: 0, z: 0}
   movingTo: {x: 0, y: 0, z: 0}
+  leftRight: 0
 --- !u!4 &6500607871706882691 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 66f320296963c00418724c68150bb128, type: 3}
@@ -1297,24 +1293,16 @@ MonoBehaviour:
   animator: {fileID: 6754402286746262489}
   body: {fileID: 5871881125912183274}
   target: {fileID: 0}
-  moveToPos: {x: 0, y: 0, z: 0}
-  normalRotation: {x: 0, y: 0, z: 0, w: 0}
-  speed: 0
-  aimingTime: 0
-  chasingSpeed: 5
+  chasingSpeed: 10
   bounceSpeed: 7
   defaultSpeed: 10
   sawingSpeed: 25
   punchSpeed: 100
-  returningTime: 0
   maxAimingTime: 3
-  stunnedTime: 0
-  recoveryTime: 30
-  randx: 0
-  randy: 0
+  recoveryTime: 5
+  timeToReturn: 0
   knockbackDir: {x: 0, y: 0, z: 0}
   knockbackForce: 1
-  oldForward: {x: 0, y: 0, z: 0}
   active: 0
   returning: 0
   isGrabbing: 0
@@ -1327,9 +1315,9 @@ MonoBehaviour:
   stunned: 0
   isAvailable: 0
   aimingDifference: 3
-  aimingLocation: {x: 0, y: 0, z: 0}
   direction: {x: 0, y: 0, z: 0}
   movingTo: {x: 0, y: 0, z: 0}
+  leftRight: 0
 --- !u!4 &6500607870825873921 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 49c52fc359494384b91e05c2d31aa172, type: 3}
@@ -1471,17 +1459,7 @@ MonoBehaviour:
   sawParticles: {fileID: 2630800651419550316}
   leftHandScript: {fileID: 6754402285042315059}
   rightHandScript: {fileID: 6754402286746262486}
-  leftHandContributesHealth: 0
-  rightHandContributesHealth: 0
-  chosenHand: {fileID: 0}
-  otherHand: {fileID: 0}
   target: {fileID: 0}
-  speed: 1
-  rotationPower: 10000
-  _time: 0
-  timeBetweenMove: 1
-  currentPos: {x: 0, y: 0, z: 0}
-  goToPos: {x: 0, y: 0, z: 0}
   curve:
     serializedVersion: 2
     m_Curve:
@@ -1506,6 +1484,52 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  damagedCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0.2004717
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.33342075
+      value: 0.33310476
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.66679996
+      value: 0.12499999
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.9972563
+      value: 0.19988485
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  leftHandContributesHealth: 0
+  rightHandContributesHealth: 0
+  chosenHand: {fileID: 0}
+  otherHand: {fileID: 0}
   _health: 15
   _Phase: 0
   isVulnerable: 1
@@ -1521,7 +1545,6 @@ MonoBehaviour:
   playerIsRight: 0
   bounding1: {fileID: 6754402286147400860}
   bounding2: {fileID: 6754402286606660731}
-  rotBeforeTele: {x: 0, y: 0, z: 0, w: 0}
 --- !u!4 &6500607870409726800 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: adb27ab566be3d14881e5cd7b8f3ed2e, type: 3}

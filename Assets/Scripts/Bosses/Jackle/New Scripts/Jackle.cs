@@ -4,27 +4,22 @@ using UnityEngine;
 
 public class Jackle : MonoBehaviour
 {
+    [Header("References")]
     public Animator animator;
     public Rigidbody rigidbody;
     public SkinnedMeshRenderer meshRenderer;
     public GameObject sawParticles;
     public JackleHands leftHandScript;
     public JackleHands rightHandScript;
+    public GameObject target;
+    public AnimationCurve curve, damagedCurve;
+
+    [Header("Information")]
+    public float speed;
     public bool leftHandContributesHealth;
     public bool rightHandContributesHealth;
     public JackleHands chosenHand;
     public JackleHands otherHand;
-    public GameObject target;
-
-    public float speed;
-    public float rotationPower;
-    public float _time;
-    public float timeBetweenMove;
-
-    public Vector3 currentPos;
-    public Vector3 goToPos;
-    public AnimationCurve curve, damagedCurve;
-
     public int _health = 15; //phase 1 : 5; phase 3 : 5; phase 5 : 5;
     public int _Phase;
     public bool isVulnerable;
@@ -38,23 +33,25 @@ public class Jackle : MonoBehaviour
     public float outTeleportTime;
     public float inTeleportTime;
 
-    private IEnumerator moveEnumerator;
-
-    //public ColliderDetection leftZone;
     public bool playerIsLeft;
-    //public ColliderDetection rightZone;
     public bool playerIsRight;
+    public Transform bounding1, bounding2;
 
+    private float rotationPower;
+    private float _time;
+    private float timeBetweenMove = 1;
+
+    private Vector3 currentPos;
+    private Vector3 goToPos;
+    private Quaternion rotBeforeTele;
 
     void Start()
     {
         rotBeforeTele = transform.rotation;
         currentPos = transform.position;
         goToPos = transform.position;
-        moveEnumerator = MoveNormal();
         _health = 15;
 
-        StartCoroutine(moveEnumerator);
     }
     void Update()
     {
@@ -73,8 +70,6 @@ public class Jackle : MonoBehaviour
         if(isSawing && leftHandContributesHealth && rightHandContributesHealth)
         {
             sawParticles.SetActive(true);
-            leftHandScript.HandSaw();
-            rightHandScript.HandSaw();
         }
         else sawParticles.SetActive(false);
 
@@ -152,38 +147,14 @@ public class Jackle : MonoBehaviour
         public Vector2 maximumXRange, maximumYRange;    // (min X, max X) (min Y, max Y) /// (-100, 100) (-100, 100)    //// if(randomRangePos.x < 0) maximumXRange.x + -randomRangePos.x; if(randomRangePos.x > 0) maximumXRange.y + -randomRangePos.x;
         public float minXBounding, maxXBounding, minYBounding, maxYBounding;                                            //// if(randomRangePos.y < 0) maximumYRange.x + -randomRangePos.y; if(randomRangePos.Y > 0) maximumYRange.y + -randomRangePos.y; 
     */
-    public Transform bounding1, bounding2;
 
+    //////////Send Attacks//////////
     IEnumerator MoveNormal()
     {
         while(true)
         {
             isVulnerable = true;
             _time = 0;
-
-            /*
-                float minX = -20; 
-                float maxX = 20;
-                if(minX > maximumXRange.x) minX = maximumXRange.x; Debug.Log(minX);
-                if(maxX < maximumXRange.y) maxX = maximumXRange.y; Debug.Log(maxX);
-                float randomX = Random.Range(minX, maxX);
-                float minY = -20;
-                float maxY = 20;
-                if(minY > maximumYRange.x) minY = maximumYRange.x; Debug.Log(minY);
-                if(maxY < maximumYRange.y) maxY = maximumYRange.y; Debug.Log(maxY);
-                float randomY = Random.Range(minY, maxY);
-
-                randomRangePos = new Vector2(randomX, randomY);/// Use this to make the "bounding area" for jackle
-
-                if(randomRangePos.x < 0) maximumXRange.x += -randomRangePos.x;
-                if(randomRangePos.x > 0) maximumXRange.y += -randomRangePos.x;
-
-                if(randomRangePos.y < 0) maximumYRange.x += -randomRangePos.y;
-                if(randomRangePos.y > 0) maximumYRange.y += -randomRangePos.y;
-
-                randomX *= 0.1f;
-                randomY *= 0.1f;
-            */
 
             float randomX = Random.Range(bounding1.position.x, bounding2.position.x);
             float randomY = Random.Range(bounding1.position.y, bounding2.position.y);
@@ -272,6 +243,40 @@ public class Jackle : MonoBehaviour
         }
     }
     
+    void Move()
+    {
+        isVulnerable = true;
+        _time = 0;
+
+        float randomX = Random.Range(bounding1.position.x, bounding2.position.x);
+        float randomY = Random.Range(bounding1.position.y, bounding2.position.y);
+        float randomZ = Random.Range(bounding1.position.z, bounding2.position.z);
+
+        currentPos = transform.position;
+        goToPos = new Vector3(randomX, randomY, randomZ);
+    }
+    void SendGrab()
+    {
+        Debug.Log("Send Grab");
+        EndSaw();
+        ChooseHand();
+        if(chosenHand == null) Debug.Log("Chosen Hand is Null!"); 
+        else chosenHand.Grab();
+    }
+    void SendPunch()
+    {
+        Debug.Log("SendPunch");
+        EndSaw();
+        ChooseHand();
+        chosenHand.Punch(false);
+    }
+    void SendDoublePunch()
+    {
+        Debug.Log("Send DoublePunch");
+        EndSaw();
+        ChooseHand();
+        DoublePunch();
+    }
 
     //////////Functions//////////
     void DoublePunch()
@@ -281,10 +286,30 @@ public class Jackle : MonoBehaviour
     }
     void DoubleReturn()
     {
+        if(isSawing) EndSaw();
+
+        leftHandScript.UnStun();
+        rightHandScript.UnStun();
         leftHandScript.Return();
         rightHandScript.Return();
     }
-    public Quaternion rotBeforeTele;
+    void SawIt()
+    {
+        isSawing = true;
+        
+        leftHandScript.Return();
+        rightHandScript.Return();
+
+        leftHandScript.HandSaw();
+        rightHandScript.HandSaw();
+    }
+    void EndSaw()
+    {
+        isSawing = false;
+
+        leftHandScript.Return();
+        rightHandScript.Return();
+    }
     void Teleport(bool setLocation, Vector3 theLocation)/////Mostly finished, currently just teleports to the right tho
     {
         rotBeforeTele = transform.rotation;
@@ -293,18 +318,6 @@ public class Jackle : MonoBehaviour
         teleportIng = true;
         outTeleportTime = 0;
         inTeleportTime = 0;
-    }
-    public void SawIt(bool keepMoving)
-    {
-        isSawing = true;
-        StopAllCoroutines();
-        if(keepMoving) StartCoroutine(moveEnumerator);
-        
-        leftHandScript.Return();
-        rightHandScript.Return();
-
-        leftHandScript.HandSaw();
-        rightHandScript.HandSaw();
     }
     public void Damage()
     {
@@ -338,7 +351,6 @@ public class Jackle : MonoBehaviour
 
     void ChooseHand() ////Working? idk it hasnt made any issues yet ///It was working fine but now it doesnt detect the player?
     {                   ///Wait the player didnt have a tag one moment
-
         bool canBeLeft = false;
         bool canBeRight = false;
 
@@ -429,143 +441,137 @@ public class Jackle : MonoBehaviour
         isVulnerable = false;
         yield return new WaitForSeconds(3);
 
-        if(_health == 14)//Working Here
-        {
-            //StartCoroutine(OverallPhase1Start());
-            Phase14();
-        }
-        if(_health == 13) Phase13();
-        if(_health == 12) Phase12();
-        if(_health == 11) Phase11();
-        if(_health == 10) Phase10();
-        if(_health == 9) Phase9();
-        if(_health == 8) Phase8();
-        if(_health == 7) Phase7();
-        if(_health == 6) Phase6();
-        if(_health == 5) Phase5();
-        if(_health == 4) Phase4();
-        if(_health == 3) FinalPhase();
+        if(_health == 14) StartCoroutine(Phase14());
+        else if(_health == 13) StartCoroutine(Phase13());
+        else if(_health == 12) StartCoroutine(Phase12());
+        else if(_health == 11) StartCoroutine(Phase11());
+        /*if(_health == 10) StartCoroutine(Phase10());
+        if(_health == 9) StartCoroutine(Phase9());
+        if(_health == 8) StartCoroutine(Phase8());
+        if(_health == 7) StartCoroutine(Phase7());
+        if(_health == 6) StartCoroutine(Phase6());
+        if(_health == 5) StartCoroutine(Phase5());
+        if(_health == 4) StartCoroutine(Phase4());
+        if(_health == 3) StartCoroutine(FinalPhase());
+        */
 
         yield return new WaitForSeconds(2);
         isVulnerable = true;
     }
 
     ////////Overall Phase 1////////    
-    void Phase14()
+    IEnumerator Phase14()
     {
-        _Phase = 14;
-        Debug.LogWarning("Phase 14");
-        StartCoroutine(moveEnumerator);
-
-        leftHandScript.Return();
-        rightHandScript.Return();
-
-        ChooseHand();
-        StartCoroutine(SendGrabLoop(5));
+        while(true)
+        {
+            Debug.Log("Phase 14");
+            Move();
+            yield return new WaitForSeconds(timeBetweenMove);
+            SendGrab();
+            yield return new WaitForSeconds(timeBetweenMove/2);
+            Move();
+            yield return new WaitForSeconds(timeBetweenMove);
+            Move();
+            yield return new WaitForSeconds(timeBetweenMove);
+            Move();
+            yield return new WaitForSeconds(timeBetweenMove);
+            Move();
+            yield return new WaitForSeconds(timeBetweenMove);
+            Move();
+            yield return new WaitForSeconds(timeBetweenMove);
+            chosenHand.Return();
+            yield return new WaitForSeconds(timeBetweenMove);
+        }
     }
-    public void Phase13()
+    IEnumerator Phase13()
     {
-        _Phase = 13;
-        Debug.LogWarning("Phase 13");
-        sawWhenNear = true;
-        StartCoroutine(moveEnumerator);
-
-        leftHandScript.Return();
-        rightHandScript.Return();
-
-        ChooseHand();
-        StartCoroutine(SendPunchLoop(15, true, false, 0));
+        while (true)
+        {
+            Debug.Log("Phase 13");
+            if(!playerIsNear)
+            {
+                Move();
+                yield return new WaitForSeconds(timeBetweenMove);
+                SendPunch();
+                yield return new WaitForSeconds(timeBetweenMove);
+                Move();
+                yield return new WaitForSeconds(timeBetweenMove);
+                Move();
+                yield return new WaitForSeconds(timeBetweenMove);
+                //chosenHand.Return();
+                
+            }
+            else
+            {
+                SawIt();
+                yield return new WaitForSeconds(5);
+                EndSaw();
+            }
+        }
     }
-    public void Phase12()///Fixed       ///Figure out a way to make it so that it waits a second before the grab so that the hand can return
-    {                                   ///The saw should fix this ^^^
-        _Phase = 12;                    ///What saw? dont you mean the teleport
-        Debug.LogWarning("Phase 12");   ///Plus the teleport sure did work we dotnt have any more issues
-        StartCoroutine(moveEnumerator);
-
-        leftHandScript.Return();
-        rightHandScript.Return();
-
-        ChooseHand();
-        chosenHand.Grab();
-    }
-    public void Phase11()
+    IEnumerator Phase12()
     {
-        _Phase = 11;
-        Debug.LogWarning("Phase 11");
-        StartCoroutine(moveEnumerator);
-
-        leftHandScript.Return();
-        rightHandScript.Return();
-
-        ChooseHand();
-        chosenHand.Grab();
-        StartCoroutine(SendPunchLoop(10, false, true, 4));
+        while (true)
+        {
+            Debug.Log("Phase 12");
+            if(!playerIsNear)
+            {
+                Move();
+                yield return new WaitForSeconds(timeBetweenMove);
+                SendGrab();
+                yield return new WaitForSeconds(timeBetweenMove);
+                Move();
+                yield return new WaitForSeconds(timeBetweenMove);
+                Move();
+                yield return new WaitForSeconds(timeBetweenMove);
+                Move();
+                yield return new WaitForSeconds(timeBetweenMove);
+                Move();
+                yield return new WaitForSeconds(timeBetweenMove);
+                chosenHand.Return();
+                
+            }
+            else
+            {
+                SawIt();
+                yield return new WaitForSeconds(5);
+                EndSaw();
+            }
+        }
     }
-    ////////Overall Phase 2////////
-    void Phase10()
+    IEnumerator Phase11()
     {
-        //a
-    }
-    ////////Overall Phase 3////////
-    void Phase9()
-    {
-        Debug.LogWarning("Phase 9");
-        StartCoroutine(moveEnumerator);
-
-        speed = 1.2f;
-        timeBetweenMove = 0.8f;
-        //DoubleSaw
-    }
-    void Phase8()
-    {
-        Debug.LogWarning("Phase 8");
-        StartCoroutine(moveEnumerator);
-
-        StartCoroutine(DoublePunchLoop(5, true));
-    }
-    void Phase7()
-    {
-        Debug.LogWarning("Phase 7");
-        StartCoroutine(moveEnumerator);
-
-        chosenHand.BounceSaw(true);
-        otherHand.Grab();
-    }
-    void Phase6()
-    {
-        Debug.LogWarning("Phase 6");
-        //StartCoroutine(moveEnumerator);
-
-        chosenHand.BounceSaw(true);
-        otherHand.BounceSaw(false);
-        crossSawAttack = true;
-        crossSawAttackTime = 0;
-    }
-    void Phase5()
-    {
-        Debug.LogWarning("Phase 5");
-        StartCoroutine(moveEnumerator);
-
-        chosenHand.BounceSaw(true);
-        ChooseHand();
-        StartCoroutine(SendPunchLoop(7, false, false, 0));
-    }
-    ////////Overall Phase 4////////
-    void Phase4()
-    {
-        Debug.LogWarning("Phase 4");
-
-    }
-    ////////Overall Phase 5////////
-    void FinalPhase()
-    {
-        Debug.LogWarning("This is the End");
-        StartCoroutine(moveEnumerator);
-
-        speed = 2;
-        timeBetweenMove = 0.5f;
-        chosenHand.BounceSaw(true);
-        otherHand.BounceSaw(false);
-        StartCoroutine(TarotCards(2));
+        while(true)
+        {
+            Debug.Log("Phase 11");
+            SendGrab();
+            yield return new WaitForSeconds(timeBetweenMove/2);
+            Move();
+            yield return new WaitForSeconds(timeBetweenMove);
+            Move();
+            SendPunch();
+            yield return new WaitForSeconds(timeBetweenMove/2);
+            chosenHand.Return();
+            yield return new WaitForSeconds(timeBetweenMove/2);
+            Move();
+            SendPunch();
+            yield return new WaitForSeconds(timeBetweenMove/2);
+            chosenHand.Return();
+            yield return new WaitForSeconds(timeBetweenMove/2);
+            Move();
+            SendPunch();
+            yield return new WaitForSeconds(timeBetweenMove/2);
+            chosenHand.Return();
+            yield return new WaitForSeconds(timeBetweenMove/2);
+            Move();
+            SendPunch();
+            yield return new WaitForSeconds(timeBetweenMove/2);
+            chosenHand.Return();
+            yield return new WaitForSeconds(timeBetweenMove/2);
+            Move();
+            yield return new WaitForSeconds(timeBetweenMove);
+            otherHand.Return();
+            yield return new WaitForSeconds(timeBetweenMove/2);
+        }
     }
 }

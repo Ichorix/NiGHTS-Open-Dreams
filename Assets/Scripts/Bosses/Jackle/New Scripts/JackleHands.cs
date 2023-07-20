@@ -4,32 +4,32 @@ using UnityEngine;
 
 public class JackleHands : MonoBehaviour
 {
+    [Header("References")]
     public LineRenderer lineRend;
     public AnimationCurve curve;
     public Animator animator;
     public GameObject body;
     public GameObject target;
-    public Vector3 moveToPos;
-    public Quaternion normalRotation;
+    private Vector3 moveToPos;
+    private Quaternion normalRotation;
     //public Rigidbody rigidbody;
 
-    public float speed;
-    public float aimingTime;
+    [Header("Information")]
+    private float speed;
+    private float aimingTime;
     public float chasingSpeed = 10;
     public float bounceSpeed = 7;
     public float defaultSpeed = 10;
     public float sawingSpeed = 25;
     public float punchSpeed = 150;
-    public float returningTime;
+    private float returningTime;
     public float maxAimingTime;
-    public float stunnedTime;
+    private float stunnedTime;
     public float recoveryTime;
     public float timeToReturn;
-    public float randx;
-    public float randy;
     public Vector3 knockbackDir;
     public float knockbackForce = 1;
-    public Vector3 oldForward;
+    private Vector3 oldForward;
 
     public bool active;
     public bool returning;
@@ -44,7 +44,12 @@ public class JackleHands : MonoBehaviour
     public bool isAvailable; /// SET AVAILABILITY SETTINGS
     
     public float aimingDifference;
-    public Vector3 aimingLocation;
+    private Vector3 aimingLocation;
+
+    [Header("Bounce Saw Stuff")]
+    public Vector3 direction;
+    public Vector3 movingTo;
+    public float leftRight;
     
     void Start()
     {
@@ -138,6 +143,7 @@ public class JackleHands : MonoBehaviour
         }
         if(stunned && stunnedTime >= recoveryTime)
         {
+            UnStun();
             Return();
         }
 
@@ -178,15 +184,12 @@ public class JackleHands : MonoBehaviour
     public void Return()
     {
         returningTime = 0;
-        active = true;
-        stunned = false;
+        if(!stunned) active = true;
+        //stunned = false;
         returning = true;
         isGrabbing = false;
-        //animator.SetBool("isGrab", false);
         isSawing = false;
-        //animator.SetBool("OuterSaw", false);
         punch = false;
-        //animator.SetBool("isPunch", false);
         bounceSaw = false;
         animator.SetBool("BounceSaw", false);
         lineRend.enabled = false;
@@ -194,6 +197,11 @@ public class JackleHands : MonoBehaviour
         transform.rotation = normalRotation;
         moveToPos = body.transform.position;
         isAvailable = true;
+    }
+    public void UnStun()
+    {
+        stunned = false;
+        //Return();
     }
     public void Grab()
     {
@@ -216,7 +224,7 @@ public class JackleHands : MonoBehaviour
             aimingSingle = true;
             aimingDouble = false;
         }
-        if(isDouble)
+        else
         {
             aimingTime = 0;
             aimingSingle = false;
@@ -245,10 +253,13 @@ public class JackleHands : MonoBehaviour
         animator.SetTrigger("OuterSaw");
         speed = sawingSpeed;
     }
-    
-    public Vector3 direction;
-    public Vector3 movingTo;
-    public float leftRight;
+    public void StopSaw()
+    {
+        transform.rotation = normalRotation;
+        isSawing = false;
+        animator.SetTrigger("TrIdle");
+        speed = defaultSpeed;
+    }
     public void BounceSaw(bool LRdirection/*false is left, true is right*/)
     {
         isAvailable = false;
@@ -273,8 +284,8 @@ public class JackleHands : MonoBehaviour
         returningTime = 0;
         lineRend.enabled = false;
 
-        randx = Random.Range(-5, 5);
-        randy = Random.Range(-5, 5);
+        float randx = Random.Range(-5, 5);
+        float randy = Random.Range(-5, 5);
 
         moveToPos = new Vector3(transform.position.x + randx, transform.position.y + randy, transform.position.z);
     }
@@ -287,6 +298,8 @@ public class JackleHands : MonoBehaviour
             Debug.Log("Bounce");
             direction = new Vector3(direction.x, -direction.y, 0);
             //make tags for ground and walls
+            //Alternatively, have it count how long it takes to reach one of the end points,
+            //and if it collides with something before then, then it must be a wall.
         }
         
     }

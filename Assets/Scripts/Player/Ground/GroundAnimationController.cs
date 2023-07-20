@@ -21,17 +21,14 @@ public class GroundAnimationController : MonoBehaviour
     {
         mAnimator.ResetTrigger("TrIdle");
         mAnimator.SetTrigger("TrRunning");
-        Debug.Log("Running");
     }
     public void JumpingAnimation()
     {
         mAnimator.SetTrigger("TrJump");
-        Debug.Log("Jumping");
     }
     public void IdleAnimation()
     {
         mAnimator.ResetTrigger("TrRunning");
         mAnimator.SetTrigger("TrIdle");
-        Debug.Log("Idle");
     }
 }

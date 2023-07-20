@@ -33,7 +33,7 @@ Transform:
   - {fileID: 5999706660469822979}
   - {fileID: 8039254095466962124}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!205 &7501750668055522396
 LODGroup:
@@ -49,7 +49,7 @@ LODGroup:
   m_AnimateCrossFading: 1
   m_LastLODIsBillboard: 0
   m_LODs:
-  - screenRelativeHeight: 0.60113573
+  - screenRelativeHeight: 0.019408165
     fadeTransitionWidth: 0
     renderers:
     - renderer: {fileID: 244611209892697234}
@@ -76,34 +76,7 @@ LODGroup:
     - renderer: {fileID: 7425022862074826082}
     - renderer: {fileID: 6102980499941468580}
     - renderer: {fileID: 8123335447319273724}
-  - screenRelativeHeight: 0.04491837
-    fadeTransitionWidth: 0
-    renderers:
-    - renderer: {fileID: 244611209892697234}
-    - renderer: {fileID: 2640123979499176341}
-    - renderer: {fileID: 724849011572471626}
-    - renderer: {fileID: 3306134985271426367}
-    - renderer: {fileID: 4353112731085470888}
-    - renderer: {fileID: 545895678791495506}
-    - renderer: {fileID: 8988316631104827993}
-    - renderer: {fileID: 7163981259149885939}
-    - renderer: {fileID: 4095784629586997961}
-    - renderer: {fileID: 8095247736116847344}
-    - renderer: {fileID: 6510886531024326729}
-    - renderer: {fileID: 4754020912410113498}
-    - renderer: {fileID: 2272848237806132717}
-    - renderer: {fileID: 8305675206652981875}
-    - renderer: {fileID: 6618296804155993771}
-    - renderer: {fileID: 1024621318604615989}
-    - renderer: {fileID: 1477727548036364502}
-    - renderer: {fileID: 1119672544557448360}
-    - renderer: {fileID: 2841640823533355826}
-    - renderer: {fileID: 4419140972846921531}
-    - renderer: {fileID: 9213125686135054362}
-    - renderer: {fileID: 7425022862074826082}
-    - renderer: {fileID: 6102980499941468580}
-    - renderer: {fileID: 8123335447319273724}
-  - screenRelativeHeight: 0.0119488705
+  - screenRelativeHeight: 0.002121001
     fadeTransitionWidth: 0
     renderers:
     - renderer: {fileID: 4591172376419065437}

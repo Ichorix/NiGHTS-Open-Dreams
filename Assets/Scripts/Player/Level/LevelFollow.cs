@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.InputSystem;
-using PathCreation;
+using PathCreation.Examples;
 
 namespace PathCreation.Examples
 {
@@ -12,8 +12,11 @@ namespace PathCreation.Examples
     {
         public bool BossFight;
         [SerializeField] private Rigidbody playerRb;
+        public LinkControl linkControl;
         public EvaluateScore evaluateScore;
+        public InstantiatePointItem pointItemScript;
         public LevelAnims anims;
+        public GrowthPalace growthPalace;
         public float levelTimeLeft;
         public float pathS11time, pathS12time, pathS13time, pathS14time;
         public GameObject levelModal;
@@ -88,6 +91,10 @@ namespace PathCreation.Examples
                 levelTimeLeft = pathS11time + bonusTime;
                 if(pathMusic != null) pathMusic.SetActive(true);
                 if(openLevel != null) openLevel.SetActive(false);
+
+                growthPalace.freedIdeas = 0;
+                growthPalace.UpdateStuff();
+                growthPalace.ReturnAllIdeyas();
             }
         }
 
@@ -135,7 +142,6 @@ namespace PathCreation.Examples
             timeText.text = levelTimeInt.ToString();
             chipText.text = chipCounter.ToString() + " / " + chipReq.ToString();
             boostBar.SetBoost((int)BoostGauge);
-            linkText.text = link.ToString();
 
             
             if(!BossFight) levelTimeLeft -= Time.deltaTime;
@@ -148,6 +154,10 @@ namespace PathCreation.Examples
                 currentPath.gameObject.SetActive(false);
                 if(pathMusic != null) pathMusic.SetActive(false);
                 if(openLevel != null) openLevel.SetActive(true);
+                
+                growthPalace.freedIdeas = 0;
+                growthPalace.UpdateStuff();
+                growthPalace.ReturnAllIdeyas();
             }
             
 
@@ -242,6 +252,8 @@ namespace PathCreation.Examples
             }
             if(other.CompareTag("YellowRing"))
             {
+                //pointItemScript.InstantiatePointAndChip(false);
+
                 Sounds.pitch = linkPitch;
                 Sounds.PlayOneShot(YellowRingSFX, 1.0f);
 
@@ -262,6 +274,8 @@ namespace PathCreation.Examples
             }
             if(other.CompareTag("HalfRing"))
             {
+                //pointItemScript.InstantiatePointAndChip(false);
+                
                 Sounds.pitch = RandomPitch();
                 Sounds.PlayOneShot(HalfRingSFX, 1.0f);
 
@@ -306,14 +320,18 @@ namespace PathCreation.Examples
                 }
             }
         }
-
-        public TextMeshProUGUI linkText; //////////REMOVE IN FUTURE////////////////
         public void LinkIncrease()
         {
             linkTimeLeft = 1;
             link += 1;
             linkActive = true;
             linkPitch += linkPitchIncrease;
+
+            if(linkControl != null)
+            {
+                linkControl.link = link;
+                linkControl.RunLinkIncrease();
+            }
         }
         void LinkEmpty()
         {
@@ -321,6 +339,11 @@ namespace PathCreation.Examples
             link = 0;
             linkPitch = 1 - linkPitchIncrease;
             linkActive = false;
+            if(linkControl != null)
+            {
+                linkControl.link = link;
+                linkControl.RunLinkIncrease();
+            }
         }
 
         public int levelSegmentNum;
@@ -372,6 +395,7 @@ namespace PathCreation.Examples
 
         public void CollectBlueChip(Collider other)
         {
+            pointItemScript.InstantiatePointAndChip(true);
             Sounds.pitch = 1;
             Sounds.PlayOneShot(BlueChipSFX, 1.0f);
             other.gameObject.SetActive(false);

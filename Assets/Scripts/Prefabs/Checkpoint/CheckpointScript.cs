@@ -21,7 +21,7 @@ public class CheckpointScript : MonoBehaviour
         if(other.CompareTag("levelPlayer"))
         {
             Outer = true;
-            Debug.Log("Outer");
+            //Debug.Log("Outer");
         }
     }
     void OnTriggerStay(Collider other)
@@ -30,13 +30,13 @@ public class CheckpointScript : MonoBehaviour
         {
             if(Enter.active)
             {
-                Debug.Log("Entered Direction");
+                //Debug.Log("Entered Direction");
                 Outer = false;
                 RespawnStuff();
             }
             if(Exit.active)
             {
-                Debug.Log("Exited Direction");
+                //Debug.Log("Exited Direction");
                 Outer = false;
 
                 if(allowDespawning) DespawnStuff();
@@ -53,14 +53,16 @@ public class CheckpointScript : MonoBehaviour
     {
         for(var i = respawnables.Count - 1; i > -1; i--)
         {
-            respawnables[i].GetComponent<RespawnScript>().Respawn();
+            if(respawnables[i].GetComponent<RespawnScript>() != null)
+                respawnables[i].GetComponent<RespawnScript>().Respawn();
         }
     }
     public void DespawnStuff()
     {
         for(var i = respawnables.Count - 1; i > -1; i--)
         {
-            respawnables[i].GetComponent<RespawnScript>().Despawn();
+            if(respawnables[i].GetComponent<RespawnScript>() != null)
+                respawnables[i].GetComponent<RespawnScript>().Despawn();
         }
     }
 }

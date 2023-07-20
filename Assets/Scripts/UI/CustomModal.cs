@@ -12,7 +12,6 @@ public class CustomModal : MonoBehaviour
     public TextMeshProUGUI bonusNumber;
     public int chipCount;
     public float timeBonus;
-    public int islandNum;
 
 
     void Start()
@@ -29,84 +28,22 @@ public class CustomModal : MonoBehaviour
     {
         Debug.Log("Boss");
         this.gameObject.SetActive(false);
-        if(islandNum == 1)
-        {
-            Debug.Log("Growth");
-            SceneManager.LoadScene("JackleFight");
-        }
-        if(islandNum == 2)
-        {
-            
-        }
-        if(islandNum == 3)
-        {
 
-        }
-        if(islandNum == 4)
-        {
-
-        }
-        if(islandNum == 5)
-        {
-
-        }
-        else
-        { Debug.Log("huh");}
+        Debug.Log("Growth");
+        SceneManager.LoadScene("JackleFight");
     }
     public void DayLevel()
     {
         Debug.Log("Day");
         this.gameObject.SetActive(false);
-        if(islandNum == 1)
-        {
-            Debug.Log("Growth Day");
-            stateController.Activate3(0);
-        }
-        if(islandNum == 2)
-        {
-            
-        }
-        if(islandNum == 3)
-        {
-
-        }
-        if(islandNum == 4)
-        {
-
-        }
-        if(islandNum == 5)
-        {
-
-        }
-        else
-        { Debug.Log("huh");}
+        Debug.Log("Growth Day");
+        stateController.Activate3(0);
     }
     public void NightLevel()
     {
         Debug.Log("Night");
         this.gameObject.SetActive(false);
-        if(islandNum == 1)
-        {
-            Debug.Log("Growth Night");
-        }
-        if(islandNum == 2)
-        {
-            
-        }
-        if(islandNum == 3)
-        {
-
-        }
-        if(islandNum == 4)
-        {
-
-        }
-        if(islandNum == 5)
-        {
-
-        }
-        else
-        { Debug.Log("huh");}
+        Debug.Log("Growth Night");
     }
     public void CancelStart()
     {

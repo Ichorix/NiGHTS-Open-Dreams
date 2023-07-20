@@ -91,13 +91,11 @@ GameObject:
   - component: {fileID: 4566037068430761235}
   - component: {fileID: 4566037068430761234}
   - component: {fileID: 4566037068430761229}
-  - component: {fileID: 8858899708764147814}
   - component: {fileID: 3139029534560651645}
-  - component: {fileID: 3546947573380477288}
   - component: {fileID: 3452051549751081849}
-  - component: {fileID: 4848206072352342863}
   - component: {fileID: 4130533955874730613}
   - component: {fileID: 7581437067744126517}
+  - component: {fileID: 8434333206553802877}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -226,6 +224,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stateController: {fileID: 0}
   trailInstantiator: {fileID: 6484884326585770800}
+  pointItemScript: {fileID: 8434333206553802877}
   anims: {fileID: 8227869631422590475}
   cameraSettings: {fileID: 4566037068758797273}
   cameraPlayerBound: 0
@@ -431,28 +430,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &8858899708764147814
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4566037068430761237}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58b43c2f40c420a489f7d23bbfab45b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spawnTime: 0
-  trailObject: {fileID: 3704127859138940599, guid: 83b8232a271377442863e25d5af92670, type: 3}
-  trailObjects: []
-  amountOfGameobjects: 0
-  collidedPosition: {x: 0, y: 0, z: 0}
-  oppositePosition: {x: 0, y: 0, z: 0}
-  centerPosition: {x: 0, y: 0, z: 0}
-  collidedNum: 0
-  otherNum: 0
-  instantiatedEffect: {fileID: 4354160562765775700, guid: 911d5b82da40d8a429869f4cc653eb67, type: 3}
 --- !u!135 &3139029534560651645
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -465,19 +442,6 @@ SphereCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 1.5
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!135 &3546947573380477288
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4566037068430761237}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!135 &3452051549751081849
 SphereCollider:
@@ -492,19 +456,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.35
   m_Center: {x: 0, y: 0, z: 0}
---- !u!65 &4848206072352342863
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4566037068430761237}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.5, y: 0.75, z: 0.75}
-  m_Center: {x: 0, y: 0.125, z: 0.125}
 --- !u!82 &4130533955874730613
 AudioSource:
   m_ObjectHideFlags: 0
@@ -697,6 +648,21 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &8434333206553802877
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4566037068430761237}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c346c50d64ac442419f3b128564f81eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parent: {fileID: 0}
+  pointItem: {fileID: 0}
+  chipItem: {fileID: 804359038377782977, guid: 4aa58e361a2559941ab23078ad2d1c36, type: 3}
 --- !u!1 &4566037068609261327
 GameObject:
   m_ObjectHideFlags: 0
@@ -1445,7 +1411,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4566037070122345784}
-  m_LocalRotation: {x: -0.0042698816, y: -0.99569726, z: -0.06938097, w: 0.06127774}
+  m_LocalRotation: {x: -0.004269884, y: -0.99569726, z: -0.06938097, w: 0.061277773}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

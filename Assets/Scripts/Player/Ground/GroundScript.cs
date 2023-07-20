@@ -29,7 +29,6 @@ public class GroundScript : MonoBehaviour
     }
     void OnEnable()
     {
-        Debug.Log("Was enabled");
         switchCoolDown = 0;
         switchCoolDownOver = false;
     }
@@ -63,7 +62,7 @@ public class GroundScript : MonoBehaviour
     }
     public void Moving(InputAction.CallbackContext context)// Jumping Control
     {
-        Debug.Log("Moving" + context);
+        //Debug.Log("Moving" + context);
         if(context.started && switchCoolDownOver == true)
         {
             playerRb.AddForce(Vector3.up * jumpPower);
@@ -76,7 +75,7 @@ public class GroundScript : MonoBehaviour
         Vector2 direction = context.ReadValue<Vector2>();
         rotatingVertical = direction.x;
         rotatingHorizontal = direction.y;
-        Debug.Log(rotatingVertical + "," + rotatingHorizontal);
+        //Debug.Log(rotatingVertical + "," + rotatingHorizontal);
     }
 
 
@@ -123,7 +122,6 @@ public class GroundScript : MonoBehaviour
         Ray ray = new Ray(transform.position, -transform.up);
         RaycastHit info = new RaycastHit();
         //Quaternion RotationRef = Quaternion.Euler(0, 0, 0);
-        //Debug.Log(info);
         if (Physics.Raycast(ray, out info, WhatIsGround))
         {
             //transform.rotation =
@@ -134,7 +132,6 @@ public class GroundScript : MonoBehaviour
     
     void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Collision");
         if(other.gameObject.CompareTag("SpeedBoost"))
         {
             Debug.Log("Speed Boost");

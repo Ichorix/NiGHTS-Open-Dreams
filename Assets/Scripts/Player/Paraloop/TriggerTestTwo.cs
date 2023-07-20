@@ -23,20 +23,22 @@ public class TriggerTestTwo : MonoBehaviour
         {
             collidedNum = trailScript.trailObjects.IndexOf(other.gameObject);
             
-            int totalObjects = trailScript.trailObjects.Count;
-            
-            otherNum = ((totalObjects - collidedNum) * 0.5f) + collidedNum;
-            otherNum = (int)otherNum;
+            if(collidedNum >= 0)
+            {
+                int totalObjects = trailScript.trailObjects.Count;
+                
+                otherNum = ((totalObjects - collidedNum) * 0.5f) + collidedNum;
+                otherNum = (int)otherNum;
+                Debug.Log("Paraloop; Total:" + totalObjects + "Collided: " + collidedNum + " at " + collidedPosition + " Other: " + otherNum + " at " + oppositePosition);
+                collidedPosition = trailScript.trailObjects[collidedNum].transform.position;
+                oppositePosition = trailScript.trailObjects[(int)otherNum].transform.position;
 
-            collidedPosition = trailScript.trailObjects[collidedNum].transform.position;
-            oppositePosition = trailScript.trailObjects[(int)otherNum].transform.position;
+                centerPosition = (collidedPosition + oppositePosition) * 0.5f;
 
-            centerPosition = (collidedPosition + oppositePosition) * 0.5f;
-
-            Instantiate(instantiatedEffect, centerPosition, Quaternion.identity);
-            cooldownTime = 0;
-            //Debug.Log("Paraloop; Total:" + totalObjects + "Collided: " + collidedNum + " at " + collidedPosition + " Other: " + otherNum + " at " + oppositePosition + " Midpoint: " + centerPosition);
+                Instantiate(instantiatedEffect, centerPosition, Quaternion.identity);
+                cooldownTime = 0;
+                //Debug.Log("Paraloop; Total:" + totalObjects + "Collided: " + collidedNum + " at " + collidedPosition + " Other: " + otherNum + " at " + oppositePosition + " Midpoint: " + centerPosition);
+            }
         }
     }
-    
 }

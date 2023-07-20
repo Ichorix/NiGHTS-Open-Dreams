@@ -39,7 +39,7 @@ Material:
     m_Floats:
     - _BaseScale: 0.005
     - _BaseScaleStrength: 0.96
-    - _CloudHeight: 30
+    - _CloudHeight: 25
     - _NoiseScale: 0.01
     - _Power: 1
     - _QueueControl: 0

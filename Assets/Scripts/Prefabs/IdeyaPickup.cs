@@ -6,18 +6,18 @@ using PathCreation.Examples;
 public class IdeyaPickup : MonoBehaviour
 {
     public int chipReq;
-    public bool collected;
     public GameObject thisPlayer;
     public LevelFollow Lplayer;
     public IdeyaFollow ideya;
+    public int ideyaNum;
     public Material blueChipMat;
+    public GrowthPalace palace;
 
     void Start()
     {
         Lplayer = thisPlayer.GetComponent<LevelFollow>();
         ideya.player = thisPlayer;
         ideya.enabled = false;
-        collected = false;
     }
 
     void OnTriggerEnter(Collider other)
@@ -27,13 +27,9 @@ public class IdeyaPickup : MonoBehaviour
             blueChipMat.SetFloat("_EmissionOn", 1f);
             Lplayer.continueLevel = true;
             ideya.enabled = true;
-            collected = true;
-        }
-    }
+            palace.freedIdeas = ideyaNum;
 
-    void OnDisable()
-    {//glowMat.SetFloat("_Alpha", sinCount);
-        blueChipMat.SetFloat("_EmissionOn", 0f);
-        collected = false;
+            palace.UpdateStuff();
+        }
     }
 }
