@@ -277,8 +277,30 @@
                 },
                 {
                     "name": "",
+                    "id": "daf7e380-f6ab-42d3-8699-82093275d059",
+                    "path": "<Keyboard>/v",
+                    "interactions": "Tap",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RecenterCamera",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "7697696f-91f1-46fe-94d3-9182056bf966",
                     "path": "<Gamepad>/rightStickPress",
+                    "interactions": "Hold",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ChangeCamera",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a1657598-35bc-4a10-ad43-d7c09dbe92dc",
+                    "path": "<Keyboard>/v",
                     "interactions": "Hold",
                     "processors": "",
                     "groups": "",

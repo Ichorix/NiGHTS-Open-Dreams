@@ -331,8 +331,9 @@ public class Jackle : MonoBehaviour
     IEnumerator Defeated()
     {
         sceneFade.BeginFade(1);
-        yield return new WaitForSeconds(1.5f);
-        mmS.PlayClicked();
+        yield return new WaitForSeconds(1f);
+        //mmS.PlayClicked();
+        Debug.Log("Load Scene");
     }
     public void Damage()
     {
@@ -459,20 +460,13 @@ public class Jackle : MonoBehaviour
         bool goinUp = true;
         leftHandScript.Diedededed();
         rightHandScript.Diedededed();
-        while (true)
-        {
-            float num = curve.Evaluate(t);
-            Vector3 vec = new Vector3(num, 1.25f * num, transform.localScale.z);
-            transform.localScale = vec;
-
-            if(goinUp) t += 0.1f;
-            else t -= 0.1f;
-
-            if(t > 1) goinUp = false;
-            if(t < -1) Disappear();
-
-            yield return new WaitForSeconds(0.1f);
-        }
+        //Turn on the Particle system
+        Debug.Log("Particle System");
+        yield return new WaitForSeconds(2);
+        //Activate the Explosion VFX Graph or smth
+        Debug.Log("Explosion");
+        yield return new WaitForSeconds(2);
+        Disappear();
     }
     void TEnum()
     {

@@ -348,6 +348,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Enter: {fileID: 850329750857371957}
   Exit: {fileID: 850329750749460230}
+  disableMesh: 0
   Outer: 0
-  firstTime: 1
+  allowDespawning: 0
   respawnables: []
