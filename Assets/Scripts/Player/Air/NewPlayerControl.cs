@@ -18,6 +18,7 @@ public class NewPlayerControl : MonoBehaviour
     public Rigidbody playerRb;
     public BoostBar boostBar;
     public TextMeshProUGUI chipText;
+    public Material blueChipMat;
     public bool allowVibration;
     
     public Vector2 rotate;
@@ -95,7 +96,7 @@ public class NewPlayerControl : MonoBehaviour
         BoostTime = 0;
         power = false;
         trailInstantiator.SetActive(false);
-
+        blueChipMat.SetFloat("_EmissionOn", 0f);
         
     }
     void OnDisable()
@@ -104,11 +105,6 @@ public class NewPlayerControl : MonoBehaviour
     }
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.F))
-        {
-            power = true;
-            powerTime = -999f;
-        }
         if(decelLerp)
         {
             /* //Using Mathf.Lerp: doesnt allow for very good reacceleration

@@ -37,7 +37,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 150, y: -30}
+  m_AnchoredPosition: {x: 200, y: -55}
   m_SizeDelta: {x: 70, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1925487732026138533
@@ -287,7 +287,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5551699109727864010
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1063,10 +1063,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   newPlayerControl: {fileID: 0}
   stateController: {fileID: 0}
+  growthPalace: {fileID: 0}
+  bossButton: {fileID: 0}
   bonusNumber: {fileID: 365940725512173315}
   chipCount: 0
   timeBonus: 0
-  islandNum: 0
 --- !u!1 &1766092730367473235
 GameObject:
   m_ObjectHideFlags: 0
@@ -1285,7 +1286,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 112.5, y: -75}
+  m_AnchoredPosition: {x: 100, y: -55}
   m_SizeDelta: {x: 70, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &963456508223980876
@@ -1826,7 +1827,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 150, y: -120}
+  m_AnchoredPosition: {x: 150, y: -110}
   m_SizeDelta: {x: 70, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &346585900725493350

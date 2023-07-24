@@ -15,9 +15,8 @@ public class IdeyaPickup : MonoBehaviour
 
     void Start()
     {
+        blueChipMat.SetFloat("_EmissionOn", 0f);
         Lplayer = thisPlayer.GetComponent<LevelFollow>();
-        ideya.player = thisPlayer;
-        ideya.enabled = false;
     }
 
     void OnTriggerEnter(Collider other)
@@ -26,7 +25,7 @@ public class IdeyaPickup : MonoBehaviour
         {
             blueChipMat.SetFloat("_EmissionOn", 1f);
             Lplayer.continueLevel = true;
-            ideya.enabled = true;
+            ideya.player = thisPlayer;
             palace.freedIdeas = ideyaNum;
 
             palace.UpdateStuff();

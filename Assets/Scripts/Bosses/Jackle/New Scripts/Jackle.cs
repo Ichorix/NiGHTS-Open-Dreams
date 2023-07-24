@@ -8,6 +8,8 @@ public class Jackle : MonoBehaviour
     public Animator animator;
     public Rigidbody rigidbody;
     public SkinnedMeshRenderer meshRenderer;
+    public SceneFade sceneFade;
+    public MainMenuSimplified mmS;
     public GameObject sawParticles;
     public JackleHands leftHandScript;
     public JackleHands rightHandScript;
@@ -126,20 +128,6 @@ public class Jackle : MonoBehaviour
         
 
         //////////BOSS PHASES//////////
-
-
-
-        //////////Debug Inputs//////////
-        if(Input.GetKeyDown(KeyCode.M))
-        {
-            Debug.Log("Damage");
-            Damage();
-        }
-        if(Input.GetKeyDown(KeyCode.H))
-        {
-            Debug.Log("Teleport");
-            Teleport(false, Vector3.zero);
-        }
     }
 
     /*
@@ -149,11 +137,10 @@ public class Jackle : MonoBehaviour
     */
 
     //////////Send Attacks//////////
-    IEnumerator MoveNormal()
+    /*IEnumerator MoveNormal()
     {
         while(true)
         {
-            isVulnerable = true;
             _time = 0;
 
             float randomX = Random.Range(bounding1.position.x, bounding2.position.x);
@@ -185,11 +172,11 @@ public class Jackle : MonoBehaviour
         {
             Debug.Log("SendPunchLoop isSwitch");
             ChooseHand();
-            chosenHand.Punch(false);
+            chosenHand.Punch(false, 3);
             yield return new WaitForSeconds(timeBetweenSend * 0.5f);
             ChooseHand();
             otherHand.Return();
-            chosenHand.Punch(false);
+            chosenHand.Punch(false, 3);
             yield return new WaitForSeconds(timeBetweenSend * 0.5f);
             ChooseHand();
             otherHand.Return();
@@ -198,7 +185,7 @@ public class Jackle : MonoBehaviour
         {
             Debug.Log("SendPunchLoop !isSwitch");
             ChooseHand();
-            chosenHand.Punch(false);
+            chosenHand.Punch(false, 3);
             yield return new WaitForSeconds(timeBetweenSend * 0.5f);
             chosenHand.Return();
             yield return new WaitForSeconds(timeBetweenSend * 0.5f);
@@ -210,7 +197,7 @@ public class Jackle : MonoBehaviour
         {
             Debug.Log("SendD-PunchLoop !isBatch");
             ChooseHand();
-            chosenHand.Punch(false);
+            chosenHand.Punch(false, 3);
             yield return new WaitForSeconds(timeBetweenSend);
             DoublePunch();
             yield return new WaitForSeconds(timeBetweenSend);
@@ -219,7 +206,7 @@ public class Jackle : MonoBehaviour
         {
             Debug.Log("SendD-PunchLoop isBatch");
             ChooseHand();
-            chosenHand.Punch(false);
+            chosenHand.Punch(false, 3);
             yield return new WaitForSeconds(timeBetweenSend * 0.5f);
             chosenHand.Return();
             yield return new WaitForSeconds(timeBetweenSend * 0.5f);
@@ -228,12 +215,12 @@ public class Jackle : MonoBehaviour
             chosenHand.Return();
             otherHand.Return();
             yield return new WaitForSeconds(timeBetweenSend * 0.5f);
-            chosenHand.Punch(false);
+            chosenHand.Punch(false, 3);
             yield return new WaitForSeconds(timeBetweenSend * 0.5f);
             chosenHand.Return();
             yield return new WaitForSeconds(timeBetweenSend * 2);
         }
-    }
+    }*/
     IEnumerator TarotCards(float timeBetweenSend)/////WIP
     {
         while(true)
@@ -245,7 +232,6 @@ public class Jackle : MonoBehaviour
     
     void Move()
     {
-        isVulnerable = true;
         _time = 0;
 
         float randomX = Random.Range(bounding1.position.x, bounding2.position.x);
@@ -258,31 +244,44 @@ public class Jackle : MonoBehaviour
     void SendGrab()
     {
         Debug.Log("Send Grab");
-        EndSaw();
+        //EndSaw();
         ChooseHand();
         if(chosenHand == null) Debug.Log("Chosen Hand is Null!"); 
         else chosenHand.Grab();
     }
-    void SendPunch()
+    void SendPunch(float aimingTime)
     {
         Debug.Log("SendPunch");
-        EndSaw();
+        //EndSaw();
         ChooseHand();
-        chosenHand.Punch(false);
+        chosenHand.Punch(false, aimingTime);
     }
-    void SendDoublePunch()
+    void SendDoublePunch(float aimingTime)
     {
         Debug.Log("Send DoublePunch");
         EndSaw();
         ChooseHand();
-        DoublePunch();
+        DoublePunch(aimingTime);
+    }
+    void SendSawHand()
+    {
+        Debug.Log("SendSaw");
+        ChooseHand();
+        chosenHand.BounceSaw(chosenHand.isTop);
+    }
+    void SendDoubleSaw()
+    {
+        Debug.Log("DoubleBounce");
+        ChooseHand();
+        chosenHand.BounceSaw(chosenHand.isTop);
+        otherHand.BounceSaw(otherHand.isTop);
     }
 
     //////////Functions//////////
-    void DoublePunch()
+    void DoublePunch(float aimingTime)
     {
-        leftHandScript.Punch(true);
-        rightHandScript.Punch(true);
+        leftHandScript.Punch(true, aimingTime);
+        rightHandScript.Punch(true, aimingTime);
     }
     void DoubleReturn()
     {
@@ -319,28 +318,46 @@ public class Jackle : MonoBehaviour
         outTeleportTime = 0;
         inTeleportTime = 0;
     }
+    void Disappear()
+    {
+        StopAllCoroutines();
+        rotBeforeTele = transform.rotation;
+        animator.SetTrigger("TrCloak");
+        rigidbody.AddTorque(Vector3.up * rotationPower, ForceMode.Impulse);
+        outTeleportTime = 0;
+        inTeleportTime = 0;
+        StartCoroutine(Defeated());
+    }
+    IEnumerator Defeated()
+    {
+        sceneFade.BeginFade(1);
+        yield return new WaitForSeconds(1.5f);
+        mmS.PlayClicked();
+    }
     public void Damage()
     {
         if(isVulnerable)
         {
-            if(leftHandContributesHealth)
-            {
-                leftHandScript.Stunned();
-            }
-            else if(rightHandContributesHealth)
-            {
-                rightHandScript.Stunned();
-            }
-            else
+            if(oneHit)
             {
                 RealDamage();
+                oneHit = false;
             }
+            else if(leftHandContributesHealth)
+                leftHandScript.Stunned();
+
+            else if(rightHandContributesHealth)
+                rightHandScript.Stunned();
+
+            else
+                RealDamage();
         }
     }
     void RealDamage()
     {
         StopAllCoroutines();
         DoubleReturn();
+        isVulnerable = false;
         _health--;
         StartCoroutine(Stretch());
     }
@@ -425,9 +442,36 @@ public class Jackle : MonoBehaviour
             transform.localScale = vec;
 
             t += 0.01f;
-            if(t > 1) TEnum();
+            
+                
+            if(t > 1)
+                if (_health <= 1)
+                    StartCoroutine(Dieded());
+                else
+                    TEnum();
 
             yield return new WaitForSeconds(0.01f);
+        }
+    }
+    IEnumerator Dieded()
+    {
+        float t = 0;
+        bool goinUp = true;
+        leftHandScript.Diedededed();
+        rightHandScript.Diedededed();
+        while (true)
+        {
+            float num = curve.Evaluate(t);
+            Vector3 vec = new Vector3(num, 1.25f * num, transform.localScale.z);
+            transform.localScale = vec;
+
+            if(goinUp) t += 0.1f;
+            else t -= 0.1f;
+
+            if(t > 1) goinUp = false;
+            if(t < -1) Disappear();
+
+            yield return new WaitForSeconds(0.1f);
         }
     }
     void TEnum()
@@ -438,30 +482,34 @@ public class Jackle : MonoBehaviour
     IEnumerator TeleportEnum()
     {
         Teleport(false, Vector3.zero);
-        isVulnerable = false;
         yield return new WaitForSeconds(3);
 
         if(_health == 14) StartCoroutine(Phase14());
         else if(_health == 13) StartCoroutine(Phase13());
         else if(_health == 12) StartCoroutine(Phase12());
         else if(_health == 11) StartCoroutine(Phase11());
-        /*if(_health == 10) StartCoroutine(Phase10());
-        if(_health == 9) StartCoroutine(Phase9());
-        if(_health == 8) StartCoroutine(Phase8());
-        if(_health == 7) StartCoroutine(Phase7());
-        if(_health == 6) StartCoroutine(Phase6());
-        if(_health == 5) StartCoroutine(Phase5());
-        if(_health == 4) StartCoroutine(Phase4());
-        if(_health == 3) StartCoroutine(FinalPhase());
-        */
+        else if(_health == 10) StartCoroutine(Phase9());
+        else if(_health == 9) StartCoroutine(Phase8());
+        else if(_health == 8) StartCoroutine(Phase7());
+        else if(_health <= 7) StartCoroutine(Phase5());
 
         yield return new WaitForSeconds(2);
         isVulnerable = true;
     }
 
     ////////Overall Phase 1////////    
-    IEnumerator Phase14()
+    IEnumerator Phase15() //Idle in place until first attacked, then teleport away.
     {
+        _Phase = 15;
+        while (true)
+        {
+            Move();
+            yield return new WaitForSeconds(timeBetweenMove);
+        }
+    }
+    IEnumerator Phase14() //send a hand to grab; if hit then teleport; if too long send hand back
+    {
+        _Phase = 14;
         while(true)
         {
             Debug.Log("Phase 14");
@@ -483,8 +531,9 @@ public class Jackle : MonoBehaviour
             yield return new WaitForSeconds(timeBetweenMove);
         }
     }
-    IEnumerator Phase13()
+    IEnumerator Phase13() //if far then send punch. if near, then activate sawblade
     {
+        _Phase = 13;
         while (true)
         {
             Debug.Log("Phase 13");
@@ -492,14 +541,18 @@ public class Jackle : MonoBehaviour
             {
                 Move();
                 yield return new WaitForSeconds(timeBetweenMove);
-                SendPunch();
+                SendPunch(2);
                 yield return new WaitForSeconds(timeBetweenMove);
                 Move();
                 yield return new WaitForSeconds(timeBetweenMove);
                 Move();
                 yield return new WaitForSeconds(timeBetweenMove);
-                //chosenHand.Return();
-                
+                Move();
+                yield return new WaitForSeconds(timeBetweenMove);
+                Move();
+                yield return new WaitForSeconds(timeBetweenMove);
+                Move();
+                yield return new WaitForSeconds(timeBetweenMove);          
             }
             else
             {
@@ -509,8 +562,9 @@ public class Jackle : MonoBehaviour
             }
         }
     }
-    IEnumerator Phase12()
+    IEnumerator Phase12() //if far send grab
     {
+        _Phase = 12;
         while (true)
         {
             Debug.Log("Phase 12");
@@ -539,39 +593,158 @@ public class Jackle : MonoBehaviour
             }
         }
     }
-    IEnumerator Phase11()
+    ///////NEW TIMINGS; TEST THIS
+    IEnumerator Phase11() //send grab followed by 4 fast punches, then wait
     {
+        _Phase = 11;
         while(true)
         {
             Debug.Log("Phase 11");
+            Move();
+            yield return new WaitForSeconds(timeBetweenMove/2);
             SendGrab();
             yield return new WaitForSeconds(timeBetweenMove/2);
             Move();
             yield return new WaitForSeconds(timeBetweenMove);
+            DoubleReturn();
             Move();
-            SendPunch();
-            yield return new WaitForSeconds(timeBetweenMove/2);
-            chosenHand.Return();
-            yield return new WaitForSeconds(timeBetweenMove/2);
-            Move();
-            SendPunch();
-            yield return new WaitForSeconds(timeBetweenMove/2);
-            chosenHand.Return();
-            yield return new WaitForSeconds(timeBetweenMove/2);
-            Move();
-            SendPunch();
-            yield return new WaitForSeconds(timeBetweenMove/2);
-            chosenHand.Return();
-            yield return new WaitForSeconds(timeBetweenMove/2);
-            Move();
-            SendPunch();
-            yield return new WaitForSeconds(timeBetweenMove/2);
-            chosenHand.Return();
-            yield return new WaitForSeconds(timeBetweenMove/2);
+            SendPunch(1);
+            yield return new WaitForSeconds(timeBetweenMove);
             Move();
             yield return new WaitForSeconds(timeBetweenMove);
-            otherHand.Return();
-            yield return new WaitForSeconds(timeBetweenMove/2);
+            Move();
+            SendPunch(1);
+            yield return new WaitForSeconds(timeBetweenMove);
+            Move();
+            yield return new WaitForSeconds(timeBetweenMove);
+            Move();
+            SendPunch(1);
+            yield return new WaitForSeconds(timeBetweenMove);
+            Move();
+            yield return new WaitForSeconds(timeBetweenMove);
+            Move();
+            SendPunch(1);
+            yield return new WaitForSeconds(timeBetweenMove);
+            Move();
+            yield return new WaitForSeconds(5);
         }
     }
+    ////////Overall Phase 2////////  Move to the next section
+    ////////Overall Phase 3////////  ~ Idle moves further and faster
+    public bool oneHit;
+    IEnumerator Phase9() //Fly with double sawblade until attacked
+    {
+        _Phase = 9;
+        oneHit = true;
+        SawIt();
+        while (true)
+        {
+            Move();
+            yield return new WaitForSeconds(timeBetweenMove);
+        }
+    }
+    /////NEW TIMINGS; TEST THIS
+    IEnumerator Phase8() //Send single punch, double punch, single punch, wait.
+    {
+        _Phase = 8;
+        oneHit = false;
+        while (true)
+        {   
+            Move();
+            SendPunch(1.5f);
+            yield return new WaitForSeconds(timeBetweenMove);
+            Move();
+            yield return new WaitForSeconds(timeBetweenMove);
+            Move();
+            yield return new WaitForSeconds(timeBetweenMove);
+            Move();
+            yield return new WaitForSeconds(timeBetweenMove);
+            Move();
+            SendDoublePunch(1.5f);
+            yield return new WaitForSeconds(timeBetweenMove);
+            Move();
+            yield return new WaitForSeconds(timeBetweenMove);
+            Move();
+            yield return new WaitForSeconds(timeBetweenMove);
+            Move();
+            yield return new WaitForSeconds(timeBetweenMove);
+            Move();
+            SendPunch(1.5f);
+            yield return new WaitForSeconds(5);
+        }
+    }
+    ////// MAKE THE HANDS RETURN EVERY ONCE IN A WHILE, ELSE BOUNCE HAND JUST LEAVES
+    IEnumerator Phase7() //Send 1 bouncing saw hand and 1 following grab hand.
+    {
+        _Phase = 7;
+        while (true)
+        {
+            SendSawHand();
+            SendGrab();
+
+            Move();
+            yield return new WaitForSeconds(timeBetweenMove);
+            Move();
+            yield return new WaitForSeconds(timeBetweenMove);
+            Move();
+            yield return new WaitForSeconds(timeBetweenMove);
+            Move();
+            yield return new WaitForSeconds(timeBetweenMove);
+            Move();
+            yield return new WaitForSeconds(timeBetweenMove);
+            Move();
+            yield return new WaitForSeconds(timeBetweenMove);
+            Move();
+            yield return new WaitForSeconds(timeBetweenMove);
+            Move();
+            yield return new WaitForSeconds(timeBetweenMove);
+            DoubleReturn();
+            Move();
+            yield return new WaitForSeconds(5);
+        }
+    }
+    //////NEED TO BE DONE
+    IEnumerator Phase6() //move back. Send both hands as bouncing saws that make an XXXXXXX pattern on the screen.
+    {
+        _Phase = 6;
+        //Double Bouncing Hand phase
+        yield return new WaitForSeconds(5);
+    }
+
+    //////NEW TIMINGS ; TEST THIS //////////ADD BOUNCING HAND
+    IEnumerator Phase5() //go forward and send a bouncing saw hand along with a consistent slow punch.
+    {
+        _Phase = 5;
+        while (true)
+        {
+            SendSawHand();
+            SendPunch(2);
+
+            Move();
+            yield return new WaitForSeconds(timeBetweenMove);
+            Move();
+            yield return new WaitForSeconds(timeBetweenMove);
+            //Fires Here
+            Move();
+            yield return new WaitForSeconds(timeBetweenMove);
+            Move();
+            yield return new WaitForSeconds(timeBetweenMove);
+            SendPunch(2);
+            Move();
+            yield return new WaitForSeconds(timeBetweenMove);
+            Move();
+            yield return new WaitForSeconds(timeBetweenMove);
+            //FiresHere
+            Move();
+            yield return new WaitForSeconds(timeBetweenMove);
+            Move();
+            yield return new WaitForSeconds(timeBetweenMove);
+            DoubleReturn();
+            Move();
+            yield return new WaitForSeconds(timeBetweenMove);
+        }
+    }
+    ////////Overall Phase 4//////// Move to the next section, Tarot cards do EOL/DOG style grid attacks
+    ////////Overall Phase 5//////// Rush to get 5 hits % Both hands bouncing saw and much faster now, Tarot Cards attacking every other second
+    
 }

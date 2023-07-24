@@ -47,6 +47,10 @@ public class JackleHands : MonoBehaviour
     private Vector3 aimingLocation;
 
     [Header("Bounce Saw Stuff")]
+    public ParticleSystem blazeParticles;
+    public GameObject trailObject;
+    public float timeBetweenInstantiation;
+    private float instTime;
     public Vector3 direction;
     public Vector3 movingTo;
     public float leftRight;
@@ -62,6 +66,7 @@ public class JackleHands : MonoBehaviour
     }
     void UGrab()
     {
+        lineRend.enabled = false;
         moveToPos = target.transform.position;
         transform.LookAt(target.transform);
     }
@@ -77,6 +82,14 @@ public class JackleHands : MonoBehaviour
         movingTo = new Vector3(transform.position.x + -direction.x * 20, transform.position.y + direction.y * 20, transform.position.z + direction.z * 20);
         lineRend.SetPosition(0, transform.position);
         lineRend.SetPosition(1, movingTo);
+        
+        if(instTime < timeBetweenInstantiation)
+            instTime += Time.deltaTime;
+        else
+        {
+            Instantiate(trailObject, transform.position, Quaternion.identity);
+            instTime = 0;
+        }
     }
     void UReturn()
     {
@@ -127,12 +140,14 @@ public class JackleHands : MonoBehaviour
 
         if(active)
         {
+            isAvailable = true;
             if(!isGrabbing)
             {
                 moveToPos = body.transform.position;
             }
             transform.position = Vector3.MoveTowards(transform.position, moveToPos, speed * Time.deltaTime);
         }
+        else isAvailable = false;
         if(stunned && stunnedTime < recoveryTime)/// Get a random location within like 100x100 of the hand then turn on active and make the moveToPos that place.
         {
             active = false;
@@ -149,36 +164,11 @@ public class JackleHands : MonoBehaviour
 
 
         //////////Debug Inputs//////////
-        if(Input.GetKeyDown(KeyCode.R))//Return
-        {
-            Debug.Log("Return");
-            Return();
-        }
-        if(Input.GetKeyDown(KeyCode.C))//Chase
-        {
-            Debug.Log("Chase");
-            Grab();
-        }
-        if(Input.GetKeyDown(KeyCode.X))//Saw
-        {
-            Debug.Log("Saw");
-            HandSaw();
-        }
-        if(Input.GetKeyDown(KeyCode.L))//Punch
-        {
-            Debug.Log("Punch");
-            Punch(false);
-        }
-        if(Input.GetKeyDown(KeyCode.J))//Double Punch
-        {
-            Debug.Log("DoublePunch");
-            Punch(true);
-        }
-        if(Input.GetKeyDown(KeyCode.T))//Bounce Saw
+        /*if(Input.GetKeyDown(KeyCode.T))//Bounce Saw
         {
             Debug.Log("Bounce Saw");
             BounceSaw(isTop);
-        }
+        }*/
     }
 
     public void Return()
@@ -197,6 +187,7 @@ public class JackleHands : MonoBehaviour
         transform.rotation = normalRotation;
         moveToPos = body.transform.position;
         isAvailable = true;
+        blazeParticles.enableEmission = false;
     }
     public void UnStun()
     {
@@ -213,8 +204,9 @@ public class JackleHands : MonoBehaviour
         moveToPos = target.transform.position;
         speed = chasingSpeed;
     }
-    public void Punch(bool isDouble)
+    public void Punch(bool isDouble, float newAimingTime)
     {
+        maxAimingTime = newAimingTime;
         lineRend.enabled = true;
         animator.SetTrigger("TrPunch");
         if(!isDouble)
@@ -262,6 +254,7 @@ public class JackleHands : MonoBehaviour
     }
     public void BounceSaw(bool LRdirection/*false is left, true is right*/)
     {
+        blazeParticles.enableEmission = true;
         isAvailable = false;
         returning = false;
         leftRight = 1;
@@ -277,6 +270,7 @@ public class JackleHands : MonoBehaviour
     public void Stunned()
     {
         Debug.Log(this.name + "Was Stunned");
+        animator.SetTrigger("TrIdle");
         active = false;
         isAvailable = false;
         stunned = true;
@@ -289,11 +283,27 @@ public class JackleHands : MonoBehaviour
 
         moveToPos = new Vector3(transform.position.x + randx, transform.position.y + randy, transform.position.z);
     }
+    public void Diedededed()
+    {
+        Debug.Log(this.name + "Was Stunned");
+        animator.SetTrigger("TrIdle");
+        active = false;
+        isAvailable = false;
+        stunned = true;
+        stunnedTime = -100;
+        returningTime = 0;
+        lineRend.enabled = false;
+
+        float randx = Random.Range(-50, 50);
+        float randy = Random.Range(-50, 50);
+
+        moveToPos = new Vector3(transform.position.x + randx, transform.position.y + randy, transform.position.z);
+    }
 
     void OnTriggerEnter(Collider other)
     {
         //Debug.Log(this.name + "Collided with something");
-        if(bounceSaw)
+        if(bounceSaw && !other.CompareTag("JHands Dmg"))
         {
             Debug.Log("Bounce");
             direction = new Vector3(direction.x, -direction.y, 0);

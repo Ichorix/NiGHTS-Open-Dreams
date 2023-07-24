@@ -2,9 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MainMenuSimplified : MonoBehaviour
 {
+    public GameObject loadingScreen;
+    public Slider slider;
     public GameObject mainMenu;
     public GameObject optionsMenu;
     public GameObject playMenu;
@@ -12,10 +15,15 @@ public class MainMenuSimplified : MonoBehaviour
 
     void Start()
     {
-        mainMenu.SetActive(true);
-        optionsMenu.SetActive(false);
-        playMenu.SetActive(false);
-        menuMusicScript.Main.Play();
+        if(mainMenu != null)
+        {
+            mainMenu.SetActive(true);
+            optionsMenu.SetActive(false);
+            playMenu.SetActive(false);
+            menuMusicScript.Main.Play();
+        }
+        if(loadingScreen != null)
+            loadingScreen.SetActive(false);
     }
     public void QuitGame()
     {
@@ -25,8 +33,12 @@ public class MainMenuSimplified : MonoBehaviour
 
     public void PlayClicked()
     {
+        Debug.Log("Loading... as NiGHTS");
+        StartCoroutine(LoadingGameAsync());
+        /*
         mainMenu.SetActive(false);
         playMenu.SetActive(true);
+        */
     }
     public void PlayBack()
     {
@@ -71,10 +83,11 @@ public class MainMenuSimplified : MonoBehaviour
     IEnumerator LoadingGameAsync()
     {
         AsyncOperation operation = SceneManager.LoadSceneAsync("TerrainMaker");
-
+        if(loadingScreen != null) loadingScreen.SetActive(true);
         while(!operation.isDone)
         {
-            Debug.Log(operation.progress);
+            float progress = Mathf.Clamp01(operation.progress / .9f);
+            if(slider != null) slider.value = progress;
 
             yield return null;
         }

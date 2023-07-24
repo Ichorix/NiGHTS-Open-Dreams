@@ -75,11 +75,6 @@ namespace PathCreation.Examples
 
             continueLevel = false;
             distanceTravelled = 0;
-            /*transform.position = new Vector3(
-                transform.position.x,
-                58,
-                transform.position.z
-            );*/
             
             speed = nonBoostingSpeed;
             playerRb.AddForce(Vector3.up * 5f, ForceMode.Impulse);
@@ -92,12 +87,21 @@ namespace PathCreation.Examples
                 if(pathMusic != null) pathMusic.SetActive(true);
                 if(openLevel != null) openLevel.SetActive(false);
 
+                chipCounter = 0;
                 growthPalace.freedIdeas = 0;
                 growthPalace.UpdateStuff();
-                growthPalace.ReturnAllIdeyas();
+                transform.localPosition = Vector3.zero;
             }
         }
+        void OnDisable()
+        {
+            if(pathMusic != null) pathMusic.SetActive(false);
+            if(openLevel != null) openLevel.SetActive(true);
 
+            growthPalace.ReturnAllIdeyas();
+            growthPalace.UpdateStuff();
+            currentPath.gameObject.SetActive(false);
+        }
         public bool isBoosting, BoostAttempt;
         public float BoostGauge, BoostTime;
         public void Boosting(InputAction.CallbackContext context)
@@ -382,7 +386,10 @@ namespace PathCreation.Examples
             if(levelSegmentNum >= 5)
             {
                 fullGrade = evaluateScore.CalculateFullGrade();
+                pathS14.gameObject.SetActive(false);
+                growthPalace.accessBossFight = true;
                 sc.Activate1();
+                growthPalace.UpdateStuff();
             }
         }
 

@@ -818,6 +818,7 @@ MonoBehaviour:
   ideyaLocation4: {fileID: 28464478901154795}
   ideya4: {fileID: 0}
   ideyaLocation5: {fileID: 4774956227955291193}
+  vfxBeam: {fileID: 2049701811488493582}
   gPopup: {fileID: 0}
 --- !u!1 &8562125794848733652
 GameObject:

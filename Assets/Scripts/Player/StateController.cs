@@ -20,22 +20,6 @@ public class StateController : MonoBehaviour
     }
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Z))
-        {
-            Debug.Log("1");
-            Activate1();
-        }
-        if(Input.GetKeyDown(KeyCode.X))
-        {
-            Debug.Log("2");
-            Activate2();
-        }
-        if(Input.GetKeyDown(KeyCode.C))
-        {
-            Debug.Log("3");
-            Activate3(0);
-        }
-
         if(hasJumped == true)
         {
             hasJumpedTime += Time.deltaTime;

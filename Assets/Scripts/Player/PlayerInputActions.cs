@@ -98,6 +98,15 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""c866faec-c6db-48b9-b133-03bc9eb8478f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -298,6 +307,28 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""action"": ""ChangeCamera"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""03eeee29-f0f0-4030-b5ee-eb1d1a8e248f"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""853d3c25-f6cc-43ac-86fe-07d11b9cbe04"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -314,6 +345,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         m_Player_Continue = m_Player.FindAction("Continue", throwIfNotFound: true);
         m_Player_RecenterCamera = m_Player.FindAction("RecenterCamera", throwIfNotFound: true);
         m_Player_ChangeCamera = m_Player.FindAction("ChangeCamera", throwIfNotFound: true);
+        m_Player_Pause = m_Player.FindAction("Pause", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -381,6 +413,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Continue;
     private readonly InputAction m_Player_RecenterCamera;
     private readonly InputAction m_Player_ChangeCamera;
+    private readonly InputAction m_Player_Pause;
     public struct PlayerActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -393,6 +426,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         public InputAction @Continue => m_Wrapper.m_Player_Continue;
         public InputAction @RecenterCamera => m_Wrapper.m_Player_RecenterCamera;
         public InputAction @ChangeCamera => m_Wrapper.m_Player_ChangeCamera;
+        public InputAction @Pause => m_Wrapper.m_Player_Pause;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -426,6 +460,9 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @ChangeCamera.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnChangeCamera;
                 @ChangeCamera.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnChangeCamera;
                 @ChangeCamera.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnChangeCamera;
+                @Pause.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPause;
+                @Pause.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPause;
+                @Pause.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPause;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -454,6 +491,9 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @ChangeCamera.started += instance.OnChangeCamera;
                 @ChangeCamera.performed += instance.OnChangeCamera;
                 @ChangeCamera.canceled += instance.OnChangeCamera;
+                @Pause.started += instance.OnPause;
+                @Pause.performed += instance.OnPause;
+                @Pause.canceled += instance.OnPause;
             }
         }
     }
@@ -468,5 +508,6 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         void OnContinue(InputAction.CallbackContext context);
         void OnRecenterCamera(InputAction.CallbackContext context);
         void OnChangeCamera(InputAction.CallbackContext context);
+        void OnPause(InputAction.CallbackContext context);
     }
 }

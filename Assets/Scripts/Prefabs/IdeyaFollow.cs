@@ -5,19 +5,13 @@ using UnityEngine;
 public class IdeyaFollow : MonoBehaviour
 {
     public AnimationCurve curveX, curveY, curveZ;
-    public Vector3 initialPos;
+    public Transform ideyaCapturePos;
     public Transform endingLocation;
     public GameObject player;
     public Vector3 pos;
     public float t, maxT;
     public float speed;
     public float offset;
-
-    void Start()
-    {
-        initialPos = transform.position;
-    }
-
     void Update()
     {
         if(player != null)
@@ -39,7 +33,7 @@ public class IdeyaFollow : MonoBehaviour
     public void ReturnToCapture()
     {
         player = null;
-        transform.position = initialPos;
+        transform.position = ideyaCapturePos.position;
     }
     public void LockInPalace()
     {

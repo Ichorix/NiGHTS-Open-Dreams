@@ -9,6 +9,8 @@ public class CustomModal : MonoBehaviour
 {
     public NewPlayerControl newPlayerControl;
     public StateController stateController;
+    public GrowthPalace growthPalace;
+    public Button bossButton;
     public TextMeshProUGUI bonusNumber;
     public int chipCount;
     public float timeBonus;
@@ -22,6 +24,9 @@ public class CustomModal : MonoBehaviour
     {
         timeBonus = newPlayerControl.chipAmount;
         bonusNumber.text = timeBonus.ToString() + "s";
+        if(growthPalace.accessBossFight)
+            bossButton.interactable = true;
+        else bossButton.interactable = false;
     }
 
     public void BossLevel()

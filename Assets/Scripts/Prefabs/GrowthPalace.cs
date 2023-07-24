@@ -19,16 +19,17 @@ public class GrowthPalace : MonoBehaviour
     public GameObject ideyaLocation4;
     public IdeyaFollow ideya4;
     public GameObject ideyaLocation5;
+    public GameObject vfxBeam;
 
     
     void Start()
     {
         UpdateStuff();
+        vfxBeam.SetActive(false);
     }
 
     public void UpdateStuff()
     {
-        
         if(freedIdeas == 0)
          {
             ideyaLocation1.GetComponent<LineRenderer>().enabled = false;
@@ -48,7 +49,9 @@ public class GrowthPalace : MonoBehaviour
                 accessBossFight = true;
             }
         }
-        
+        if(accessBossFight)
+            vfxBeam.SetActive(true);
+
         if(!got5thIdeya)
             ideyaLocation5.GetComponent<LineRenderer>().enabled = false; 
         else ideyaLocation5.GetComponent<LineRenderer>().enabled = true; 

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
@@ -19,16 +20,12 @@ public class PauseScript : MonoBehaviour
     {
         volume.profile.TryGet(out colorAdj);
     }
-    void Update()
+    public void CheckPause()
     {
-        if(Input.GetKeyDown(KeyCode.Escape))
-        {
-            if(!isGamePaused) Pause();
-            else{
-                if(pauseMenu.activeSelf) Continue();
-                if(optionsMenu.activeSelf) Back();
-            }
-            
+        if(!isGamePaused) Pause();
+        else{
+            if(pauseMenu.activeSelf) Continue();
+            if(optionsMenu.activeSelf) Back();
         }
     }
 

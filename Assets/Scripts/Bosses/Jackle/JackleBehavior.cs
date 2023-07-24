@@ -18,10 +18,6 @@ public class JackleBehavior : MonoBehaviour
     }
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.F))
-        {
-            Saw();
-        }
         if(sawing)
         {
             leftHand.transform.rotation = new Quaternion(leftHand.transform.rotation.x, leftHand.transform.rotation.y, leftHand.transform.rotation.z + Time.deltaTime, 1);

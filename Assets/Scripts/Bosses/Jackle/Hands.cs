@@ -27,19 +27,6 @@ public class Hands : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Q))
-        {
-            Grab();
-        }
-        if(Input.GetKeyDown(KeyCode.E))
-        {
-            Return();
-        }
-        if(Input.GetKeyDown(KeyCode.R))
-        {
-            Teleport();
-        }
-
         if(grabbing)
         {
             if(_time <= 1) //Time and speed of lerp

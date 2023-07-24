@@ -96,15 +96,6 @@ namespace PathCreation.Examples
             levelTimeLeft -= Time.deltaTime;
             levelTimeInt = (int)levelTimeLeft;
 
-            if(Input.GetKeyDown(KeyCode.E))
-            {
-                SetPath11();
-            }
-            if(Input.GetKeyDown(KeyCode.R))
-            {
-                SetPath12();
-            }
-
             //BoostStuffs
             if(speed >= 20f)
             {

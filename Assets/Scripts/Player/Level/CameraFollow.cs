@@ -26,6 +26,7 @@ namespace PathCreation.Examples
         {
             //If using LevelFollow
             distanceTravelled = levelFollow.distanceTravelled;
+            pathCreator = levelFollow.currentPath;
 
             playerYvalue = levelFollow.transform.position.y;
             levelYvalue = pathCreator.path.GetPointAtDistance(distanceTravelled, endOfPathInstruction).y;
