@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.VFX;
+using UnityEngine.UI;
 
 public class Jackle : MonoBehaviour
 {
@@ -15,6 +17,9 @@ public class Jackle : MonoBehaviour
     public JackleHands rightHandScript;
     public GameObject target;
     public AnimationCurve curve, damagedCurve;
+    public GameObject explosion;
+    public GameObject acquiredItem;
+    public Slider healthBar;
 
     [Header("Information")]
     public float speed;
@@ -53,11 +58,11 @@ public class Jackle : MonoBehaviour
         currentPos = transform.position;
         goToPos = transform.position;
         _health = 15;
-
     }
     void Update()
     {
         _time += Time.deltaTime * speed;
+        healthBar.value = _health;
         //transform.position = Vector3.Lerp(currentPos, goToPos, curve.Evaluate(_time));
         transform.position = Vector3.MoveTowards(currentPos, goToPos, curve.Evaluate(_time));
 
@@ -321,18 +326,35 @@ public class Jackle : MonoBehaviour
     void Disappear()
     {
         StopAllCoroutines();
-        rotBeforeTele = transform.rotation;
         animator.SetTrigger("TrCloak");
-        rigidbody.AddTorque(Vector3.up * rotationPower, ForceMode.Impulse);
-        outTeleportTime = 0;
-        inTeleportTime = 0;
+        transform.localScale = Vector3.zero;
+        acquiredItem.transform.position = transform.position;
+        acquiredItem.SetActive(true);
         StartCoroutine(Defeated());
     }
     IEnumerator Defeated()
     {
+        bool done = false;
+        float t = 0;
+        float j = 0;
+        while(!done)
+        {
+            t += Time.deltaTime;
+            j = t * 2f;
+
+            acquiredItem.transform.position = Vector3.Lerp(acquiredItem.transform.position, target.transform.position, t);
+
+            yield return new WaitForSeconds(Time.deltaTime);
+            if(t > 1)
+            {
+                done = true;
+                if(acquiredItem.GetComponent<IdeyaFollow>() != null)
+                    acquiredItem.GetComponent<IdeyaFollow>().enabled = true;
+            }
+        }
         sceneFade.BeginFade(1);
         yield return new WaitForSeconds(1f);
-        //mmS.PlayClicked();
+        mmS.PlayClicked();
         Debug.Log("Load Scene");
     }
     public void Damage()
@@ -444,9 +466,8 @@ public class Jackle : MonoBehaviour
 
             t += 0.01f;
             
-                
             if(t > 1)
-                if (_health <= 1)
+                if (_health <= 4)
                     StartCoroutine(Dieded());
                 else
                     TEnum();
@@ -456,16 +477,21 @@ public class Jackle : MonoBehaviour
     }
     IEnumerator Dieded()
     {
-        float t = 0;
-        bool goinUp = true;
         leftHandScript.Diedededed();
         rightHandScript.Diedededed();
-        //Turn on the Particle system
-        Debug.Log("Particle System");
-        yield return new WaitForSeconds(2);
-        //Activate the Explosion VFX Graph or smth
-        Debug.Log("Explosion");
-        yield return new WaitForSeconds(2);
+
+        explosion.transform.position = transform.position;
+        explosion.SetActive(true); 
+        Debug.Log("Explosion1");
+        yield return new WaitForSeconds(1);
+        explosion.SetActive(false);
+        explosion.SetActive(true);
+        Debug.Log("Explosion2");
+        yield return new WaitForSeconds(1);
+        explosion.SetActive(false);
+        explosion.SetActive(true);
+        Debug.Log("Explosion3");
+        yield return new WaitForSeconds(0.25f);
         Disappear();
     }
     void TEnum()

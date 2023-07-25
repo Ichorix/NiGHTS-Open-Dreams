@@ -525,6 +525,7 @@
 "Assets/Menu/MovementScripts/Moon.cs"
 "Assets/Menu/Scripts/Disclaimer.cs"
 "Assets/Menu/Scripts/Dropdown.cs"
+"Assets/Menu/Scripts/IconCenterToPos.cs"
 "Assets/Menu/Scripts/MainMenu.cs"
 "Assets/Menu/Scripts/MenuMusic.cs"
 "Assets/Menu/Scripts/MenuNights.cs"
