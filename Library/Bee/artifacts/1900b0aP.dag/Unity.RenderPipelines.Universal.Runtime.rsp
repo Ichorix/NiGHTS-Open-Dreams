@@ -112,6 +112,7 @@
 -define:ENABLE_INPUT_SYSTEM
 -define:ENABLE_LEGACY_INPUT_MANAGER
 -define:__DIGGER__
+-define:VISUAL_EFFECT_GRAPH_0_0_1_OR_NEWER
 -define:ENABLE_BURST_1_0_0_OR_NEWER
 -define:ENABLE_VR_MODULE
 -define:ENABLE_XR_MODULE
@@ -308,13 +309,13 @@
 -r:"C:/Program Files/Unity/Hub/Editor/2022.1.14f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/Variations/mono/Managed/UnityEngine.VRModule.dll"
 -r:"C:/Program Files/Unity/Hub/Editor/2022.1.14f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/Variations/mono/Managed/UnityEngine.WindModule.dll"
 -r:"C:/Program Files/Unity/Hub/Editor/2022.1.14f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/Variations/mono/Managed/UnityEngine.XRModule.dll"
--r:"C:/Users/Ianh5/Desktop/Unity/NiGHTS Return to Dreamtopia/Library/PackageCache/com.unity.burst@1.7.4/Unity.Burst.CodeGen/Unity.Burst.Cecil.dll"
--r:"C:/Users/Ianh5/Desktop/Unity/NiGHTS Return to Dreamtopia/Library/PackageCache/com.unity.burst@1.7.4/Unity.Burst.CodeGen/Unity.Burst.Cecil.Mdb.dll"
--r:"C:/Users/Ianh5/Desktop/Unity/NiGHTS Return to Dreamtopia/Library/PackageCache/com.unity.burst@1.7.4/Unity.Burst.CodeGen/Unity.Burst.Cecil.Pdb.dll"
--r:"C:/Users/Ianh5/Desktop/Unity/NiGHTS Return to Dreamtopia/Library/PackageCache/com.unity.burst@1.7.4/Unity.Burst.CodeGen/Unity.Burst.Cecil.Rocks.dll"
--r:"C:/Users/Ianh5/Desktop/Unity/NiGHTS Return to Dreamtopia/Library/PackageCache/com.unity.burst@1.7.4/Unity.Burst.Unsafe.dll"
--r:"C:/Users/Ianh5/Desktop/Unity/NiGHTS Return to Dreamtopia/Library/PackageCache/com.unity.nuget.newtonsoft-json@3.0.2/Runtime/AOT/Newtonsoft.Json.dll"
--r:"C:/Users/Ianh5/Desktop/Unity/NiGHTS Return to Dreamtopia/Library/PackageCache/com.unity.visualscripting@1.7.8/Runtime/VisualScripting.Flow/Dependencies/NCalc/Unity.VisualScripting.Antlr3.Runtime.dll"
+-r:"C:/Users/Ianh5/Documents/GitHub/NiGHTS-Open-Dreams/Library/PackageCache/com.unity.burst@1.7.4/Unity.Burst.CodeGen/Unity.Burst.Cecil.dll"
+-r:"C:/Users/Ianh5/Documents/GitHub/NiGHTS-Open-Dreams/Library/PackageCache/com.unity.burst@1.7.4/Unity.Burst.CodeGen/Unity.Burst.Cecil.Mdb.dll"
+-r:"C:/Users/Ianh5/Documents/GitHub/NiGHTS-Open-Dreams/Library/PackageCache/com.unity.burst@1.7.4/Unity.Burst.CodeGen/Unity.Burst.Cecil.Pdb.dll"
+-r:"C:/Users/Ianh5/Documents/GitHub/NiGHTS-Open-Dreams/Library/PackageCache/com.unity.burst@1.7.4/Unity.Burst.CodeGen/Unity.Burst.Cecil.Rocks.dll"
+-r:"C:/Users/Ianh5/Documents/GitHub/NiGHTS-Open-Dreams/Library/PackageCache/com.unity.burst@1.7.4/Unity.Burst.Unsafe.dll"
+-r:"C:/Users/Ianh5/Documents/GitHub/NiGHTS-Open-Dreams/Library/PackageCache/com.unity.nuget.newtonsoft-json@3.0.2/Runtime/AOT/Newtonsoft.Json.dll"
+-r:"C:/Users/Ianh5/Documents/GitHub/NiGHTS-Open-Dreams/Library/PackageCache/com.unity.visualscripting@1.7.8/Runtime/VisualScripting.Flow/Dependencies/NCalc/Unity.VisualScripting.Antlr3.Runtime.dll"
 -r:"Library/Bee/artifacts/1900b0aP.dag/Unity.Burst.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aP.dag/Unity.Mathematics.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aP.dag/Unity.RenderPipeline.Universal.ShaderLibrary.ref.dll"

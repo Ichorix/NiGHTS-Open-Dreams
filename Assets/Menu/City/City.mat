@@ -1,0 +1,83 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-7898371119155074675
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 6
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: City
+  m_Shader: {fileID: -6465566751694194690, guid: 2e8a07a0833d19648af01afbf35e3c41, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 2
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _CurbTexture:
+        m_Texture: {fileID: 2800000, guid: 3da32c32f2dac9c48871822240370a37, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _RoofTexture:
+        m_Texture: {fileID: 2800000, guid: e5ffcf5c88e61ce46af42cc9e60b6982, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _StreetTexture:
+        m_Texture: {fileID: 2800000, guid: eb4bf669382e4b84ebf049b2b3692993, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _WallTexture:
+        m_Texture: {fileID: 2800000, guid: 7cd23a54f0825dd4da48282f1853d996, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _CurbEdge: 0.987
+    - _Edge: 0.9999
+    - _QueueControl: 0
+    - _QueueOffset: 0
+    - _StreetEdge: 0.9999
+    - _WallEdge: 0.52
+    m_Colors:
+    - _MinMax: {r: 1, g: 1, b: 0, a: 0}
+    - _Rotation: {r: 1, g: 0, b: 0, a: 90}
+    - _StreetTiling: {r: 750, g: 750, b: 0, a: 0}
+    - _Tiling: {r: 500, g: 500, b: 0, a: 0}
+    - _Tiling_and_Offset: {r: 1, g: 1, b: 0, a: 1}
+    - _WallRotation: {r: -360, g: 360, b: 360, a: 120}
+    - _WallTIling: {r: 2, g: 3, b: 0, a: 0}
+  m_BuildTextureStacks: []

@@ -3818,11 +3818,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6681173484380529659, guid: b9e2fb5f8d7a7c24eae41e88587ce70a, type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.796682
+      value: -0.79668194
       objectReference: {fileID: 0}
     - target: {fileID: 6681173484380529659, guid: b9e2fb5f8d7a7c24eae41e88587ce70a, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.19819896
+      value: 0.19819893
       objectReference: {fileID: 0}
     - target: {fileID: 6681173484380529659, guid: b9e2fb5f8d7a7c24eae41e88587ce70a, type: 3}
       propertyPath: m_LocalRotation.y
@@ -3830,7 +3830,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6681173484380529659, guid: b9e2fb5f8d7a7c24eae41e88587ce70a, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.1378463
+      value: -0.13784626
       objectReference: {fileID: 0}
     - target: {fileID: 6681173484920118229, guid: b9e2fb5f8d7a7c24eae41e88587ce70a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4547,34 +4547,6 @@ PrefabInstance:
     - target: {fileID: 8639268769402435372, guid: 963b28550516e8b48b68b2e316b45b8a, type: 3}
       propertyPath: m_Name
       value: Game Menu
-      objectReference: {fileID: 0}
-    - target: {fileID: 8705574246732488950, guid: 963b28550516e8b48b68b2e316b45b8a, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8705574246732488950, guid: 963b28550516e8b48b68b2e316b45b8a, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 8705574246732488950, guid: 963b28550516e8b48b68b2e316b45b8a, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
-      value: 
-      objectReference: {fileID: 1724878318}
-    - target: {fileID: 8705574246732488950, guid: 963b28550516e8b48b68b2e316b45b8a, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8705574246732488950, guid: 963b28550516e8b48b68b2e316b45b8a, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
-      value: SetActive
-      objectReference: {fileID: 0}
-    - target: {fileID: 8705574246732488950, guid: 963b28550516e8b48b68b2e316b45b8a, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
-      value: UnityEngine.GameObject, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 8705574246732488950, guid: 963b28550516e8b48b68b2e316b45b8a, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 9068697231599444079, guid: 963b28550516e8b48b68b2e316b45b8a, type: 3}
       propertyPath: m_AnchorMax.y
@@ -5914,11 +5886,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -4877895602694482606, guid: b8f2350ccf7ae1c40ad741a98531e677, type: 3}
---- !u!1 &1724878318 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3509516069173151282, guid: 963b28550516e8b48b68b2e316b45b8a, type: 3}
-  m_PrefabInstance: {fileID: 1055121153}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1727608162 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -5577862626675725917, guid: b8f2350ccf7ae1c40ad741a98531e677, type: 3}

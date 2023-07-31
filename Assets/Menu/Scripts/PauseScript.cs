@@ -12,21 +12,41 @@ public class PauseScript : MonoBehaviour
     public GameObject pauseMenu;
     public GameObject optionsMenu;
     //pauseMenu.activeSelf
+    PlayerInputActions controls;
 
     public Volume volume;
     private ColorAdjustments colorAdj;
 
+    void Awake()
+    {
+        controls = new PlayerInputActions();
+        controls.Player.Enable();
+    }
+    void OnEnable()
+    {
+        controls.Player.Enable();
+    }
+    void OnDisable()
+    {
+        controls.Player.Disable();
+    }
     void Start()
     {
         volume.profile.TryGet(out colorAdj);
     }
     public void CheckPause()
     {
+        Debug.Log("CheckPause");
         if(!isGamePaused) Pause();
         else{
             if(pauseMenu.activeSelf) Continue();
-            if(optionsMenu.activeSelf) Back();
+            else if(optionsMenu.activeSelf) Back();
+            else isGamePaused = false;
         }
+    }
+    public void DebugLogIt()
+    {
+        Debug.Log("I was called");
     }
 
     public void Continue()
