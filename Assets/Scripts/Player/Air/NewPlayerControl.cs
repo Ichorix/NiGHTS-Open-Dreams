@@ -8,18 +8,18 @@ using Cinemachine;
 
 public class NewPlayerControl : MonoBehaviour
 {
-    PlayerInputActions controls;
-    public StateController stateController;
-    public GameObject trailInstantiator;
-    public InstantiatePointItem pointItemScript;
-    public AnimationControl anims;
-    public CinemachineFreeLook cameraSettings;
-    [SerializeField] private bool cameraPlayerBound;
-    public Rigidbody playerRb;
-    public BoostBar boostBar;
-    public TextMeshProUGUI chipText;
-    public Material blueChipMat;
-    public bool allowVibration;
+    PlayerInputActions controls; //
+    public StateController stateController; //SO
+    public GameObject trailInstantiator; //
+    public InstantiatePointItem pointItemScript; //
+    public AnimationControl anims; //Move into new script
+    public CinemachineFreeLook cameraSettings; 
+    [SerializeField] private bool cameraPlayerBound; //SO
+    public Rigidbody playerRb; //
+    public BoostBar boostBar; //Move into new Script
+    public TextMeshProUGUI chipText; //^
+    public Material blueChipMat; //SO Updater
+    public bool allowVibration; //SO
     
     public Vector2 rotate;
     [SerializeField] private Quaternion PlayerRot;

@@ -11,7 +11,7 @@
                     "id": "ad1c4d1b-24eb-40f0-b59e-2223e22e0825",
                     "expectedControlType": "",
                     "processors": "",
-                    "interactions": "Press(behavior=1)",
+                    "interactions": "Press(behavior=2)",
                     "initialStateCheck": true
                 },
                 {
@@ -20,7 +20,7 @@
                     "id": "a7db6111-ba83-459c-9aa7-8f53b2968efc",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "Press(behavior=1)",
+                    "interactions": "Press(behavior=2)",
                     "initialStateCheck": false
                 },
                 {
@@ -51,15 +51,6 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Continue",
-                    "type": "Button",
-                    "id": "eb46999b-18a8-444b-9a4c-17961c070c78",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "RecenterCamera",
                     "type": "Button",
                     "id": "8cdafcbb-b0b0-4285-93ec-986307d583be",
@@ -81,6 +72,15 @@
                     "name": "Pause",
                     "type": "Button",
                     "id": "c866faec-c6db-48b9-b133-03bc9eb8478f",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Continue",
+                    "type": "Button",
+                    "id": "eb46999b-18a8-444b-9a4c-17961c070c78",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -244,28 +244,6 @@
                 },
                 {
                     "name": "",
-                    "id": "61a72112-f046-4ffb-94b0-c738756e64bb",
-                    "path": "<Keyboard>/anyKey",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Continue",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "5a7c33b5-189d-4e94-a274-c8cc742651e1",
-                    "path": "<Gamepad>/start",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Continue",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "40739b26-3ae4-4f55-bf84-c83dca8482b6",
                     "path": "<Gamepad>/rightStickPress",
                     "interactions": "Tap",
@@ -327,6 +305,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "61a72112-f046-4ffb-94b0-c738756e64bb",
+                    "path": "<Keyboard>/anyKey",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Continue",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5a7c33b5-189d-4e94-a274-c8cc742651e1",
+                    "path": "<Gamepad>/start",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Continue",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

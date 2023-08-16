@@ -33,7 +33,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""id"": ""ad1c4d1b-24eb-40f0-b59e-2223e22e0825"",
                     ""expectedControlType"": """",
                     ""processors"": """",
-                    ""interactions"": ""Press(behavior=1)"",
+                    ""interactions"": ""Press(behavior=2)"",
                     ""initialStateCheck"": true
                 },
                 {
@@ -42,7 +42,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""id"": ""a7db6111-ba83-459c-9aa7-8f53b2968efc"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": ""Press(behavior=1)"",
+                    ""interactions"": ""Press(behavior=2)"",
                     ""initialStateCheck"": false
                 },
                 {
@@ -73,15 +73,6 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""Continue"",
-                    ""type"": ""Button"",
-                    ""id"": ""eb46999b-18a8-444b-9a4c-17961c070c78"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
                     ""name"": ""RecenterCamera"",
                     ""type"": ""Button"",
                     ""id"": ""8cdafcbb-b0b0-4285-93ec-986307d583be"",
@@ -103,6 +94,15 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""name"": ""Pause"",
                     ""type"": ""Button"",
                     ""id"": ""c866faec-c6db-48b9-b133-03bc9eb8478f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Continue"",
+                    ""type"": ""Button"",
+                    ""id"": ""eb46999b-18a8-444b-9a4c-17961c070c78"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -266,28 +266,6 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""61a72112-f046-4ffb-94b0-c738756e64bb"",
-                    ""path"": ""<Keyboard>/anyKey"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Continue"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""5a7c33b5-189d-4e94-a274-c8cc742651e1"",
-                    ""path"": ""<Gamepad>/start"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Continue"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""40739b26-3ae4-4f55-bf84-c83dca8482b6"",
                     ""path"": ""<Gamepad>/rightStickPress"",
                     ""interactions"": ""Tap"",
@@ -351,6 +329,28 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""action"": ""Pause"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""61a72112-f046-4ffb-94b0-c738756e64bb"",
+                    ""path"": ""<Keyboard>/anyKey"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Continue"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5a7c33b5-189d-4e94-a274-c8cc742651e1"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Continue"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -364,10 +364,10 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         m_Player_Rotating = m_Player.FindAction("Rotating", throwIfNotFound: true);
         m_Player_TurningLeft = m_Player.FindAction("TurningLeft", throwIfNotFound: true);
         m_Player_TurningRight = m_Player.FindAction("TurningRight", throwIfNotFound: true);
-        m_Player_Continue = m_Player.FindAction("Continue", throwIfNotFound: true);
         m_Player_RecenterCamera = m_Player.FindAction("RecenterCamera", throwIfNotFound: true);
         m_Player_ChangeCamera = m_Player.FindAction("ChangeCamera", throwIfNotFound: true);
         m_Player_Pause = m_Player.FindAction("Pause", throwIfNotFound: true);
+        m_Player_Continue = m_Player.FindAction("Continue", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -432,10 +432,10 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Rotating;
     private readonly InputAction m_Player_TurningLeft;
     private readonly InputAction m_Player_TurningRight;
-    private readonly InputAction m_Player_Continue;
     private readonly InputAction m_Player_RecenterCamera;
     private readonly InputAction m_Player_ChangeCamera;
     private readonly InputAction m_Player_Pause;
+    private readonly InputAction m_Player_Continue;
     public struct PlayerActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -445,10 +445,10 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         public InputAction @Rotating => m_Wrapper.m_Player_Rotating;
         public InputAction @TurningLeft => m_Wrapper.m_Player_TurningLeft;
         public InputAction @TurningRight => m_Wrapper.m_Player_TurningRight;
-        public InputAction @Continue => m_Wrapper.m_Player_Continue;
         public InputAction @RecenterCamera => m_Wrapper.m_Player_RecenterCamera;
         public InputAction @ChangeCamera => m_Wrapper.m_Player_ChangeCamera;
         public InputAction @Pause => m_Wrapper.m_Player_Pause;
+        public InputAction @Continue => m_Wrapper.m_Player_Continue;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -473,9 +473,6 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @TurningRight.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTurningRight;
                 @TurningRight.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTurningRight;
                 @TurningRight.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTurningRight;
-                @Continue.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnContinue;
-                @Continue.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnContinue;
-                @Continue.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnContinue;
                 @RecenterCamera.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRecenterCamera;
                 @RecenterCamera.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRecenterCamera;
                 @RecenterCamera.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRecenterCamera;
@@ -485,6 +482,9 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @Pause.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPause;
                 @Pause.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPause;
                 @Pause.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPause;
+                @Continue.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnContinue;
+                @Continue.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnContinue;
+                @Continue.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnContinue;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -504,9 +504,6 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @TurningRight.started += instance.OnTurningRight;
                 @TurningRight.performed += instance.OnTurningRight;
                 @TurningRight.canceled += instance.OnTurningRight;
-                @Continue.started += instance.OnContinue;
-                @Continue.performed += instance.OnContinue;
-                @Continue.canceled += instance.OnContinue;
                 @RecenterCamera.started += instance.OnRecenterCamera;
                 @RecenterCamera.performed += instance.OnRecenterCamera;
                 @RecenterCamera.canceled += instance.OnRecenterCamera;
@@ -516,6 +513,9 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @Pause.started += instance.OnPause;
                 @Pause.performed += instance.OnPause;
                 @Pause.canceled += instance.OnPause;
+                @Continue.started += instance.OnContinue;
+                @Continue.performed += instance.OnContinue;
+                @Continue.canceled += instance.OnContinue;
             }
         }
     }
@@ -527,9 +527,9 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         void OnRotating(InputAction.CallbackContext context);
         void OnTurningLeft(InputAction.CallbackContext context);
         void OnTurningRight(InputAction.CallbackContext context);
-        void OnContinue(InputAction.CallbackContext context);
         void OnRecenterCamera(InputAction.CallbackContext context);
         void OnChangeCamera(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
+        void OnContinue(InputAction.CallbackContext context);
     }
 }

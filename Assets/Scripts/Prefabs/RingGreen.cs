@@ -19,12 +19,12 @@ public class RingGreen : MonoBehaviour
 
     void Update()
     {
-        if(isCollected == false)
+        if(!isCollected)
         {
             Front.enableEmission = true;
             Back.enableEmission = true;
         }
-        if(isCollected == true)
+        else
         {
             timeUntilGone -= Time.deltaTime;
             Front.enableEmission = false;
@@ -41,7 +41,7 @@ public class RingGreen : MonoBehaviour
     }
     void OnTriggerEnter(Collider other)
     {
-        if(isCollected == false && other.CompareTag("levelPlayer"))
+        if(!isCollected && other.CompareTag("levelPlayer"))
         {
             isCollected = true;
             RingAnim.SetTrigger("TrCollected");
