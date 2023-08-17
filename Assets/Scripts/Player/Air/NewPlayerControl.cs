@@ -32,7 +32,7 @@ public class NewPlayerControl : MonoBehaviour
     [SerializeField] private float normAcceleration, boostingAcceleration;
     [SerializeField] private float accelerationMult;
     [SerializeField] private float decelMult;
-    public AnimationCurve curve;
+    public AnimationCurve curve; //unused
     [SerializeField] private float currentSpeed;
     [SerializeField] private float decelTime, decelLerpMult;
     [SerializeField] private bool decelLerp;

@@ -14,9 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   turningSpeed: 250
   normalSpeed: 25
-  normalAccelerationRate: 10
+  speedABoosting: 35
   boostingSpeed: 75
-  boostingAccelerationRate: 20
+  normalAccelerationRate: 20
+  boostingAccelerationRate: 30
+  decelerationRate: 50
+  recenterSpeed: 3
   maxBoost: 0
   boostGauge: 0
   MoveDirection: {x: 0, y: 0}

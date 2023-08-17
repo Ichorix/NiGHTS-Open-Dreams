@@ -44,6 +44,7 @@ public class NPlayerInput : MonoBehaviour
     void MoveInput(bool newMoveState)
     {
         _stats.isMoving = newMoveState;
+        if(!newMoveState) _openPlayer.StoppedMoving();
     }
     void BoostInput(bool newBoostState)
     {
