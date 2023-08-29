@@ -6,14 +6,28 @@ using Cinemachine;
 public class NPlayerOpenControl : MonoBehaviour
 {
     public NPlayerScriptableObject _stats;
-    //public NPlayerInput _input;
     public CinemachineFreeLook cameraSettings;
     [Space]
+    [SerializeField] private bool canBoost;
+    [SerializeField] private bool boostAttempt;
+    [SerializeField] private bool boostAttemptCooldown;
     [SerializeField] private float _speed;
+    private float timeOffset;
+
+    void Start()
+    {
+        _stats.boostGauge = _stats.maxBoost;
+    }
     void Update()
     {
+        timeOffset = Time.time;
         RotatePlayer();
-        MovePlayer();
+        if(!boostAttempt) MovePlayer();
+        BoostStuff();
+    }
+    void LateUpdate()
+    {
+        Debug.Log("It took " + (Time.time - timeOffset) + "seconds to complete update");
     }
     private void RotatePlayer()
     {
@@ -22,7 +36,20 @@ public class NPlayerOpenControl : MonoBehaviour
     }
     private void MovePlayer()
     {
-        float targetSpeed = _stats.isBoosting ? _stats.boostingSpeed : _stats.normalSpeed;
+        canBoost = false;
+        if(_stats.isBoosting) canBoost = true;
+        if(_stats.boostGauge <= 0)
+        {
+            canBoost = false;
+            if(_stats.runBoostAttempt && !boostAttemptCooldown)
+            {
+                _stats.runBoostAttempt = false;
+                boostAttempt = true;
+                RunBoostAttempt();
+            }
+        }
+
+        float targetSpeed = canBoost ? _stats.boostingSpeed : _stats.normalSpeed;
         
         //Checks if you are going faster than the target speed (true when target speed is 0 or when target speed is normal speed after boosting)
         //And if your speed is greater than the normal speed after boosting
@@ -55,16 +82,20 @@ public class NPlayerOpenControl : MonoBehaviour
         
         transform.Translate(Vector3.forward * Mathf.Clamp(_speed, 0, 100f) * Time.deltaTime);
     }
-    
+    private void BoostStuff()
+    {
+        if(canBoost)
+            _stats.boostGauge -= _stats.boostDepletionRate * Time.deltaTime;
+        _stats.boostGauge = Mathf.Clamp(_stats.boostGauge, 0, _stats.maxBoost);
+    }
 
-    public IEnumerator Recenter()
+    public IEnumerator RecenterCamera()
     {
         Debug.Log("Recenteringgg");
         cameraSettings.m_RecenterToTargetHeading = new AxisState.Recentering(true, 0, 0.25f);
         yield return new WaitForSeconds(1);
         cameraSettings.m_RecenterToTargetHeading = new AxisState.Recentering(false, 0, 0.25f);
     }
-
     public void CamSetWorld()
     {
         if(cameraSettings != null)
@@ -98,5 +129,34 @@ public class NPlayerOpenControl : MonoBehaviour
             transform.rotation = Quaternion.Slerp(fromRotation, toRotation, t);
             yield return null;
         }
+    }
+
+    public void RunBoostAttempt()
+    {
+        StartCoroutine(BoostAttempt());
+    }
+    IEnumerator BoostAttempt()
+    {
+        float t = 0;
+        while(boostAttempt)
+        {
+            t += Time.deltaTime;
+            transform.Translate(Vector3.forward * Mathf.Clamp(_stats.boostAttemptSpeed, 0, 100f) * Time.deltaTime);
+            if(t >= _stats.boostAttemptTime)
+            {
+                boostAttempt = false;
+                boostAttemptCooldown = true;
+            }
+            yield return null;
+        }
+        t = 0;
+        while(boostAttemptCooldown)
+        {
+            t += Time.deltaTime;
+            if(t >= _stats.boostAttemptCooldown)
+                boostAttemptCooldown = false;
+            yield return null;
+        }
+        _stats.runBoostAttempt = false;
     }
 }

@@ -19,6 +19,7 @@ public class NPlayerInput : MonoBehaviour
     public void OnBoosting(InputValue value)
     {
         BoostInput(value.isPressed);
+        if(value.isPressed) _stats.runBoostAttempt = true;
     }
     public void OnRotating(InputValue value)
     {
@@ -57,7 +58,7 @@ public class NPlayerInput : MonoBehaviour
 
     void RecenterCamera()
     {
-        StartCoroutine(_openPlayer.Recenter());
+        StartCoroutine(_openPlayer.RecenterCamera());
     }
     void ChangeCamera(bool isPerformed)
     {

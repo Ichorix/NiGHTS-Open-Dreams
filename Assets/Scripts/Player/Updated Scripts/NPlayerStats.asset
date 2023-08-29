@@ -16,13 +16,18 @@ MonoBehaviour:
   normalSpeed: 25
   speedABoosting: 35
   boostingSpeed: 75
+  boostAttemptSpeed: 35
+  boostAttemptTime: 0.5
+  boostAttemptCooldown: 0.25
   normalAccelerationRate: 20
   boostingAccelerationRate: 30
   decelerationRate: 50
   recenterSpeed: 3
-  maxBoost: 0
-  boostGauge: 0
+  maxBoost: 100
+  boostDepletionRate: 10
+  boostGauge: 100
   MoveDirection: {x: 0, y: 0}
   isMoving: 0
   isBoosting: 0
+  runBoostAttempt: 0
   cameraPlayerBound: 1
