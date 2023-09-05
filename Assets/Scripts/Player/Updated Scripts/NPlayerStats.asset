@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2849442670f399e4fbe3e4a70420bc2a, type: 3}
   m_Name: NPlayerStats
   m_EditorClassIdentifier: 
-  turningSpeed: 250
-  normalSpeed: 25
-  speedABoosting: 35
-  boostingSpeed: 75
-  boostAttemptSpeed: 35
-  boostAttemptTime: 0.5
+  turningSpeed: 125
+  normalSpeed: 15
+  speedABoosting: 25
+  boostingSpeed: 40
+  boostAttemptSpeed: 20
+  boostAttemptTime: 0.2
   boostAttemptCooldown: 0.25
   normalAccelerationRate: 20
   boostingAccelerationRate: 30
@@ -25,9 +25,10 @@ MonoBehaviour:
   recenterSpeed: 3
   maxBoost: 100
   boostDepletionRate: 10
-  boostGauge: 100
+  boostGauge: 11.206008
   MoveDirection: {x: 0, y: 0}
+  LookDirection: {x: 0, y: 0}
   isMoving: 0
   isBoosting: 0
-  runBoostAttempt: 0
+  runBoostAttempt: 1
   cameraPlayerBound: 1

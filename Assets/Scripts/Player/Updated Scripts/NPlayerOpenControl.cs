@@ -2,32 +2,45 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
+#if ENABLE_INPUT_SYSTEM
+using UnityEngine.InputSystem;
+#endif
 
 public class NPlayerOpenControl : MonoBehaviour
 {
+    
     public NPlayerScriptableObject _stats;
+    public NPlayerAnimations _animations;
     public CinemachineFreeLook cameraSettings;
     [Space]
     [SerializeField] private bool canBoost;
     [SerializeField] private bool boostAttempt;
     [SerializeField] private bool boostAttemptCooldown;
     [SerializeField] private float _speed;
+    public GameObject CinemachineCameraTarget;
+    private float _cinemachineTargetYaw;
+    private float _cinemachineTargetPitch;
+    public float Sensitivity;
+    public float CameraAngleOverride;
+    private const float _threshold = 0.01f;
     private float timeOffset;
+    public bool IsCurrentDeviceMouse;
+
 
     void Start()
     {
         _stats.boostGauge = _stats.maxBoost;
+        _cinemachineTargetYaw = CinemachineCameraTarget.transform.rotation.eulerAngles.y;
     }
     void Update()
     {
-        timeOffset = Time.time;
         RotatePlayer();
         if(!boostAttempt) MovePlayer();
         BoostStuff();
     }
     void LateUpdate()
     {
-        Debug.Log("It took " + (Time.time - timeOffset) + "seconds to complete update");
+        CameraRotation();
     }
     private void RotatePlayer()
     {
@@ -41,12 +54,13 @@ public class NPlayerOpenControl : MonoBehaviour
         if(_stats.boostGauge <= 0)
         {
             canBoost = false;
-            if(_stats.runBoostAttempt && !boostAttemptCooldown)
+            if(_stats.isMoving && _stats.runBoostAttempt && !boostAttemptCooldown)
             {
                 _stats.runBoostAttempt = false;
                 boostAttempt = true;
                 RunBoostAttempt();
             }
+            else _stats.runBoostAttempt = false;
         }
 
         float targetSpeed = canBoost ? _stats.boostingSpeed : _stats.normalSpeed;
@@ -84,9 +98,23 @@ public class NPlayerOpenControl : MonoBehaviour
     }
     private void BoostStuff()
     {
-        if(canBoost)
+        if(canBoost && _stats.isMoving)
             _stats.boostGauge -= _stats.boostDepletionRate * Time.deltaTime;
         _stats.boostGauge = Mathf.Clamp(_stats.boostGauge, 0, _stats.maxBoost);
+    }
+    private void CameraRotation()
+    {
+        if(_stats.LookDirection.sqrMagnitude >= _threshold)
+        {
+            
+            float deltaTimeMultiplier = IsCurrentDeviceMouse ? 1.0f : Time.deltaTime;
+
+            _cinemachineTargetYaw += _stats.LookDirection.x * deltaTimeMultiplier * Sensitivity;
+            _cinemachineTargetPitch += _stats.LookDirection.y * deltaTimeMultiplier * Sensitivity; 
+        }
+
+        CinemachineCameraTarget.transform.rotation = Quaternion.Euler(_cinemachineTargetPitch + CameraAngleOverride,
+            _cinemachineTargetYaw, 0.0f);
     }
 
     public IEnumerator RecenterCamera()
@@ -142,6 +170,7 @@ public class NPlayerOpenControl : MonoBehaviour
         {
             t += Time.deltaTime;
             transform.Translate(Vector3.forward * Mathf.Clamp(_stats.boostAttemptSpeed, 0, 100f) * Time.deltaTime);
+            _animations.BoostAnimationOverride(true);
             if(t >= _stats.boostAttemptTime)
             {
                 boostAttempt = false;
@@ -153,6 +182,7 @@ public class NPlayerOpenControl : MonoBehaviour
         while(boostAttemptCooldown)
         {
             t += Time.deltaTime;
+            _animations.BoostAnimationOverride(false);
             if(t >= _stats.boostAttemptCooldown)
                 boostAttemptCooldown = false;
             yield return null;
