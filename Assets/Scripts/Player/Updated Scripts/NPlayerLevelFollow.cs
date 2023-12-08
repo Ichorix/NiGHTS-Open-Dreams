@@ -20,8 +20,16 @@ public class NPlayerLevelFollow : MonoBehaviour
     private int levelTimeInt;
     private Vector3 pathPosition;
     private Vector3 pathRotation;
+
+    //Rotation Stuff
     private Vector3 playerRotation;
-    [SerializeField] private bool isBackwards;
+    private bool isBackwards;
+    public bool isUpsideDown;
+    public float upsideDownTime;
+    public float flipTimeThreshold;
+    public float flip = 180;
+    public float oppositeFlip = 180;
+    public bool flipped;
 
     void Start()    
     {
@@ -161,8 +169,9 @@ public class NPlayerLevelFollow : MonoBehaviour
 
         transform.rotation = Quaternion.Euler(pathRotation);
 
-        Vector3 lookDirection = new Vector3(_stats.MoveDirection.x, _stats.MoveDirection.y, transform.rotation.z).normalized; //Set Z to either 0 or 180 depending on if forward or backwards, then change the value through the IEnumerator for lerping
-        transform.forward = lookDirection;
+        Vector3 lookDirection = new Vector3(Mathf.Abs(_stats.MoveDirection.x), _stats.MoveDirection.y, 0).normalized; //Set Z to either 0 or 180 depending on if forward or backwards, then change the value through the IEnumerator for lerping
+        transform.forward += lookDirection * 5; // Whatever dark magic I used, this fixes it from being 45 to -45 to now be closer to 90 to -90
+        
 
         if(_stats.MoveDirection.x > 0) //Checks if moving forwards
             isBackwards = false;
@@ -171,22 +180,54 @@ public class NPlayerLevelFollow : MonoBehaviour
 
         if(isBackwards)
         {
-            //transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, transform.eulerAngles.z+180);
+            //Rotates the player properly. Negative Y flips left vs right, and z+flip (lerp between 0 and 180) flips over his head. Lerped for more dynamic effect in the Enumerator below
+            transform.eulerAngles = new Vector3(transform.eulerAngles.x, -transform.eulerAngles.y, transform.eulerAngles.z + flip);
         }
+        else if(flipped)
+        {
+            transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, transform.eulerAngles.z + oppositeFlip);
+        }
+
+        // Returns true when the player is upside Down. Used to determine whether to lerp for flip
+        if(transform.eulerAngles.z == 180)
+            upsideDownTime += Time.deltaTime;
+        else upsideDownTime = 0;
+        if(upsideDownTime >= flipTimeThreshold)
+        {
+            if(!flipped)
+                StartCoroutine(FlipPlayer(180, 0));
+            else
+                StartCoroutine(OppositeFlipPlayer(180, 0));
+        }
+        
 
     }
 
-    IEnumerator FlipPlayer()
+    IEnumerator FlipPlayer(int From, int To)
     {
         float t = 0;
-        Vector3 fromRotation = transform.eulerAngles;
-        Vector3 toRotation = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, transform.eulerAngles.z+180);
-
+        flipped = true;
+        upsideDownTime = 0;
         while(t < 1)
         {
             t += Time.deltaTime * _stats.recenterSpeed;
-            transform.eulerAngles = Vector3.Slerp(fromRotation, toRotation, t);
+            flip = Mathf.Lerp(From, To, t);
+            oppositeFlip = Mathf.Lerp(To, From, t);
             yield return null;
         }
     }
+    IEnumerator OppositeFlipPlayer(int From, int To)
+    {
+        float t = 0;
+        flipped = false;
+        upsideDownTime = 0;
+        while(t < 1)
+        {
+            t += Time.deltaTime * _stats.recenterSpeed;
+            oppositeFlip = Mathf.Lerp(From, To, t);
+            flip = Mathf.Lerp(To, From, t);
+            yield return null;
+        }
+    }
+    
 }
