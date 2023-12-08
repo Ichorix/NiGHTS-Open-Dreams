@@ -166,7 +166,7 @@ namespace PathCreation.Examples
             
 
             //Paraloop
-            if(speed >= nonBoostingSpeed && movingHorizontal != 0)
+            if(speed >= nonBoostingSpeed)
                 paraloopInstantiator.SetActive(true);
             else paraloopInstantiator.SetActive(false);
             

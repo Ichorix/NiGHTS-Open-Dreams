@@ -42,6 +42,8 @@ public class NPlayerScriptableObject : ScriptableObject
     public Vector2 MoveDirection; 
     [Tooltip("The direction that the camera should be moved towards")]
     public Vector2 LookDirection;
+    [Tooltip("The value from the Trigger to multiply values by")]
+    public float MovementMultiplier;
     [Tooltip("Reads if the player should be moving forward or not")]
     public bool isMoving; 
     [Tooltip("Reads if the player should boost when moving or not")]

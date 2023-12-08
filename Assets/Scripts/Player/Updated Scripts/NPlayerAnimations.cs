@@ -12,6 +12,8 @@ public class NPlayerAnimations : MonoBehaviour
     private TrailRenderer boostTrail;
     [SerializeField]
     private ParticleSystem boostParticles;
+    [SerializeField]
+    private float turningAnimationThreshold = 0.6f;
 
     private bool boostAnim;
     private bool boostOverride;
@@ -55,12 +57,12 @@ public class NPlayerAnimations : MonoBehaviour
     {
         if(_stats.isMoving && _stats.MoveDirection != Vector2.zero)
         {
-            if(_stats.MoveDirection.x > 0.8f)
+            if(_stats.MoveDirection.x > turningAnimationThreshold)
                 _animator.SetBool("isRight", true);
             else
                 _animator.SetBool("isRight", false);
 
-            if(_stats.MoveDirection.x < -0.8f)
+            if(_stats.MoveDirection.x < -turningAnimationThreshold)
                 _animator.SetBool("isLeft", true);
             else 
                 _animator.SetBool("isLeft", false);

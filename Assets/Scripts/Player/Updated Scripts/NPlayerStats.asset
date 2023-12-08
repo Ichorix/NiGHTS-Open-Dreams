@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: NPlayerStats
   m_EditorClassIdentifier: 
   turningSpeed: 125
-  normalSpeed: 15
+  normalSpeed: 0
   speedABoosting: 25
   boostingSpeed: 40
   boostAttemptSpeed: 20
@@ -25,9 +25,10 @@ MonoBehaviour:
   recenterSpeed: 3
   maxBoost: 100
   boostDepletionRate: 10
-  boostGauge: 11.206008
+  boostGauge: 100
   MoveDirection: {x: 0, y: 0}
   LookDirection: {x: 0, y: 0}
+  MovementMultiplier: 0
   isMoving: 0
   isBoosting: 0
   runBoostAttempt: 1

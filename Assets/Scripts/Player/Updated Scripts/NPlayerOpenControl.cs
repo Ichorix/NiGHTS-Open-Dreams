@@ -51,6 +51,7 @@ public class NPlayerOpenControl : MonoBehaviour
     {
         canBoost = false;
         if(_stats.isBoosting) canBoost = true;
+
         if(_stats.boostGauge <= 0)
         {
             canBoost = false;
@@ -63,7 +64,7 @@ public class NPlayerOpenControl : MonoBehaviour
             else _stats.runBoostAttempt = false;
         }
 
-        float targetSpeed = canBoost ? _stats.boostingSpeed : _stats.normalSpeed;
+        float targetSpeed = canBoost ? _stats.boostingSpeed : Mathf.Lerp(0, _stats.normalSpeed, _stats.MovementMultiplier);
         
         //Checks if you are going faster than the target speed (true when target speed is 0 or when target speed is normal speed after boosting)
         //And if your speed is greater than the normal speed after boosting
@@ -74,6 +75,7 @@ public class NPlayerOpenControl : MonoBehaviour
 
         if(!_stats.isMoving)
             targetSpeed = 0;
+        
         float speedChangeRate = _stats.isBoosting? _stats.boostingAccelerationRate : _stats.normalAccelerationRate;
         float speedOffset = 0.5f; //Default 0.5f
 
