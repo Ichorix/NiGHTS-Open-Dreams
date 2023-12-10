@@ -3,33 +3,44 @@ using System.Collections.Generic;
 using UnityEngine;
 using PathCreation;
 
+using UnityEngine.UI;
+using TMPro;
+
 public class NPlayerLevelFollow : MonoBehaviour
 {
     public NPlayerScriptableObject _stats;
     public NPlayerAnimations _animations;
     private Rigidbody rigidbody;
-    private int chipRequirement;
-    public float score;
-    private int levelSegment;
-    [SerializeField] private bool continueLevel;
-    [SerializeField] private float distanceTravelled;
-    public PathCreator[] IdeyaLevel1 = new PathCreator[4]; //Creates the level with the appropriate amount of paths. Paths assigned in Inspector
-    private PathCreator currentPath;
+    [Space]
+    public PathCreator[] Level1Paths = new PathCreator[4]; //Creates the level with the appropriate amount of paths. Paths assigned in Inspector
+    public AnimationCurve[] Level1Grading = new AnimationCurve[4]; //Score defined in Inspector. Mapped as Grade over Score. Grade 5 = A, Grade 0 = F
+    public float[] Level1Times = new float[4]; //Time defined in Inspector.
+    public PathCreator currentPath;
     public EndOfPathInstruction endOfPathInstruction;
-    [SerializeField] private float levelTimeLeft;
-    private int levelTimeInt;
+
+    public float distanceTravelled;
+    private int levelSegment;
+    private bool continueLevel;
+    public float levelTimeLeft;
+    private int chipRequirement;
+
+    public float currentChips;
+    public float currentScore;
+
+    public LinkControl linkControl;
+    public int link;
+    public bool linkActive;
+    public float linkTimeLeft;
+    
+
     private Vector3 pathPosition;
     private Vector3 pathRotation;
 
-    //Rotation Stuff
-    private Vector3 playerRotation;
-    private bool isBackwards;
-    public bool isUpsideDown;
-    public float upsideDownTime;
-    public float flipTimeThreshold;
-    public float flip = 180;
-    public float oppositeFlip = 180;
-    public bool flipped;
+    [SerializeField] private bool canBoost;
+    [SerializeField] private bool boostAttempt;
+    [SerializeField] private bool boostAttemptCooldown;
+    [SerializeField] private float _speed;
+
 
     void Start()    
     {
@@ -51,9 +62,9 @@ public class NPlayerLevelFollow : MonoBehaviour
         _stats.boostGauge = _stats.maxBoost;
 
         levelSegment = 0;
-        currentPath = IdeyaLevel1[levelSegment];
-        chipRequirement = 50;
-        score = 0;
+        currentPath = Level1Paths[levelSegment];
+        //chipRequirement = 50;
+        //score = 0;
 
         continueLevel = false;
         distanceTravelled = 0;
@@ -90,25 +101,97 @@ public class NPlayerLevelFollow : MonoBehaviour
 
     void Update()
     {
+        SpeedLogic(); // Mostly copied from NPlayerOpenControl.MovePlayer()
         MovePlayer();
+        BoostStuff();
         //UpdateUI(); //Updates Score, Time, Chip, and Boost Bar
         //LevelLogic(); //Counting time and logic for when Time is up
         //ParaloopLogic(); //Paraloop
-        //BoostLogic();
     }
-    void UpdateUI()
+    void MovePlayer()
     {
-        /*
-        scoreText.text = score.ToString();
-        timeText.text = levelTimeInt.ToString();
-        chipText.text = chipCounter.ToString() + " / " + chipReq.ToString();
-        boostBar.SetBoost((int)BoostGauge);
-        */
+        distanceTravelled += _stats.MoveDirection.x * _speed * Time.deltaTime;
+
+        pathPosition = currentPath.path.GetPointAtDistance(distanceTravelled, endOfPathInstruction);
+        pathRotation = currentPath.path.GetRotationAtDistance(distanceTravelled, endOfPathInstruction).eulerAngles;
+
+        rigidbody.MovePosition(new Vector3(pathPosition.x, transform.position.y, pathPosition.z));
+        rigidbody.AddForce(Vector3.up * _stats.MoveDirection.y * _speed, ForceMode.VelocityChange);
+
+        transform.eulerAngles = new Vector3(0, pathRotation.y, 0);
+
+        if(new Vector2(_stats.MoveDirection.x, _stats.MoveDirection.y) != Vector2.zero)
+            _stats.isMoving = true;
+        else _stats.isMoving = false;  
+    }  
+
+    void SpeedLogic()
+    {
+        canBoost = false;
+        if(_stats.isBoosting) canBoost = true;
+
+        if(_stats.boostGauge <= 0)
+        {
+            canBoost = false;
+            if(_stats.isMoving && _stats.runBoostAttempt && !boostAttemptCooldown)
+            {
+                _stats.runBoostAttempt = false;
+                boostAttempt = true;
+                RunBoostAttempt();
+            }
+            else _stats.runBoostAttempt = false;
+        }
+
+        float targetSpeed = canBoost ? _stats.boostingSpeedLevel : _stats.normalSpeedLevel;
+        
+        //Checks if you are going faster than the target speed (true when target speed is 0 or when target speed is normal speed after boosting)
+        //And if your speed is greater than the normal speed after boosting
+        if(_speed >= targetSpeed && _speed > _stats.speedABoostingLevel) // Will return true if you are decelerating after boosting.
+            targetSpeed = _stats.speedABoostingLevel;                    
+        // If the speed change rate is too high or if performance is bad, it will sometimes jump past speedABoosting resulting in decelerating to normal speed
+        // This can be fixed by increasing the speedOffset.
+
+        if(!_stats.isMoving)
+            targetSpeed = 0;
+        
+        float speedChangeRate = _stats.isBoosting? _stats.boostingAccelerationRate : _stats.normalAccelerationRate;
+        float speedOffset = 0.5f; //Default 0.5f
+
+        if(_speed < targetSpeed - speedOffset) //Accelerate
+        {
+            _speed += speedChangeRate * Time.deltaTime;
+
+            // round speed to 2 decimal places
+            _speed = Mathf.Round(_speed * 100f) / 100f;
+        }
+        else if(_speed > targetSpeed + speedOffset) //Decelerate
+        {
+            if(targetSpeed == 0) speedChangeRate = _stats.decelerationRate;
+
+            _speed -= speedChangeRate * Time.deltaTime;
+
+            _speed = Mathf.Round(_speed * 100f) / 100f;
+        }
+        if(_speed <= speedOffset) _speed = 0;
     }
+
+    private void BoostStuff()
+    {
+        if(canBoost && _stats.isMoving)
+            _stats.boostGauge -= _stats.boostDepletionRate * Time.deltaTime;
+        _stats.boostGauge = Mathf.Clamp(_stats.boostGauge, 0, _stats.maxBoost);
+    }
+
+    void ParaloopLogic()
+    {
+        //if(speed >= nonBoostingSpeed)
+        //    paraloopInstantiator.SetActive(true);
+        //else paraloopInstantiator.SetActive(false);
+    }
+
     void LevelLogic()
     {
         levelTimeLeft += Time.deltaTime;
-        levelTimeInt = (int)levelTimeLeft;
         
         if(levelTimeLeft < 0)
         {
@@ -122,112 +205,81 @@ public class NPlayerLevelFollow : MonoBehaviour
             //growthPalace.ReturnAllIdeyas();
         }
     }
-    void ParaloopLogic()
+
+    void UpdateUI()
     {
-        //if(speed >= nonBoostingSpeed)
-        //    paraloopInstantiator.SetActive(true);
-        //else paraloopInstantiator.SetActive(false);
+        //scoreText.text = score.ToString();
+        //timeText.text = (int)levelTime.ToString();
+        //chipText.text = chipCounter.ToString() + " / " + chipReq.ToString();
+        //boostBar.SetBoost((int)_stats.boostGauge);
     }
-    void BoostLogic()
+    
+
+    //////////FUNCTIONS//////////
+
+    private bool IsMoving(Vector2 direction)
     {
-        /*
-        if(isMoving(new Vector2(movingHorizontal, movingVertical)) && isBoosting)
-            BoostGauge -= Time.deltaTime * 10;
-        if(BoostGauge <= 0)
+        if(direction != Vector2.zero)
+             return true;
+        else
         {
-            speed = nonBoostingSpeed;
-            isBoosting = false;
-        }
-
-        if(BoostAttempt)
-        {
-            speed = BoostAttemptSpeed;
-            BoostTime += Time.deltaTime;
-        }
-        if(BoostTime >= 0.33f)
-        {
-            BoostAttempt = false;
-            speed = nonBoostingSpeed;
-            BoostTime = 0;
-        }
-        */
-    }
-
-    void MovePlayer()
-    {
-        distanceTravelled += _stats.MoveDirection.x * _stats.normalSpeed * Time.deltaTime;
-
-        pathPosition = currentPath.path.GetPointAtDistance(distanceTravelled, endOfPathInstruction);
-        pathRotation = currentPath.path.GetRotationAtDistance(distanceTravelled, endOfPathInstruction).eulerAngles;
-
-        rigidbody.MovePosition(new Vector3(pathPosition.x, transform.position.y, pathPosition.z));
-        rigidbody.AddForce(Vector3.up * _stats.MoveDirection.y * _stats.normalSpeed, ForceMode.VelocityChange);
-        
-        playerRotation.x = transform.rotation.x; 
-        playerRotation.y = pathRotation.y;          // Gets the Left/Right rotation of the track
-        playerRotation.z = transform.rotation.z;
-
-        transform.rotation = Quaternion.Euler(pathRotation);
-
-        Vector3 lookDirection = new Vector3(Mathf.Abs(_stats.MoveDirection.x), _stats.MoveDirection.y, 0).normalized; //Set Z to either 0 or 180 depending on if forward or backwards, then change the value through the IEnumerator for lerping
-        transform.forward += lookDirection * 5; // Whatever dark magic I used, this fixes it from being 45 to -45 to now be closer to 90 to -90
-        
-
-        if(_stats.MoveDirection.x > 0) //Checks if moving forwards
-            isBackwards = false;
-        else if(_stats.MoveDirection.x < 0) //Checks if moving backwards
-            isBackwards = true;
-
-        if(isBackwards)
-        {
-            //Rotates the player properly. Negative Y flips left vs right, and z+flip (lerp between 0 and 180) flips over his head. Lerped for more dynamic effect in the Enumerator below
-            transform.eulerAngles = new Vector3(transform.eulerAngles.x, -transform.eulerAngles.y, transform.eulerAngles.z + flip);
-        }
-        else if(flipped)
-        {
-            transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, transform.eulerAngles.z + oppositeFlip);
-        }
-
-        // Returns true when the player is upside Down. Used to determine whether to lerp for flip
-        if(transform.eulerAngles.z == 180)
-            upsideDownTime += Time.deltaTime;
-        else upsideDownTime = 0;
-        if(upsideDownTime >= flipTimeThreshold)
-        {
-            if(!flipped)
-                StartCoroutine(FlipPlayer(180, 0));
-            else
-                StartCoroutine(OppositeFlipPlayer(180, 0));
-        }
-        
-
-    }
-
-    IEnumerator FlipPlayer(int From, int To)
-    {
-        float t = 0;
-        flipped = true;
-        upsideDownTime = 0;
-        while(t < 1)
-        {
-            t += Time.deltaTime * _stats.recenterSpeed;
-            flip = Mathf.Lerp(From, To, t);
-            oppositeFlip = Mathf.Lerp(To, From, t);
-            yield return null;
-        }
-    }
-    IEnumerator OppositeFlipPlayer(int From, int To)
-    {
-        float t = 0;
-        flipped = false;
-        upsideDownTime = 0;
-        while(t < 1)
-        {
-            t += Time.deltaTime * _stats.recenterSpeed;
-            oppositeFlip = Mathf.Lerp(From, To, t);
-            flip = Mathf.Lerp(To, From, t);
-            yield return null;
+            _stats.isBoosting = false;
+            return false;
         }
     }
     
+    public void RunBoostAttempt()
+    {
+        StartCoroutine(BoostAttempt());
+    }
+    IEnumerator BoostAttempt()
+    {
+        float t = 0;
+        while(boostAttempt)
+        {
+            t += Time.deltaTime;
+            transform.Translate(Vector3.forward * Mathf.Clamp(_stats.boostAttemptSpeed, 0, 100f) * Time.deltaTime);
+            _animations.BoostAnimationOverride(true);
+            if(t >= _stats.boostAttemptTime)
+            {
+                boostAttempt = false;
+                boostAttemptCooldown = true;
+            }
+            yield return null;
+        }
+        t = 0;
+        while(boostAttemptCooldown)
+        {
+            t += Time.deltaTime;
+            _animations.BoostAnimationOverride(false);
+            if(t >= _stats.boostAttemptCooldown)
+                boostAttemptCooldown = false;
+            yield return null;
+        }
+        _stats.runBoostAttempt = false;
+    }
+
+    public void LinkIncrease()
+        {
+            linkTimeLeft = 1;
+            link += 1;
+            linkActive = true;
+
+            if(linkControl != null)
+            {
+                linkControl.link = link;
+                linkControl.RunLinkIncrease();
+            }
+        }
+        void LinkEmpty()
+        {
+            linkTimeLeft = 0;
+            link = 0;
+            linkActive = false;
+            if(linkControl != null)
+            {
+                linkControl.link = link;
+                linkControl.RunLinkIncrease();
+            }
+        }
 }

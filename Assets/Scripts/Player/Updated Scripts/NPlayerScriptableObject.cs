@@ -1,40 +1,60 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 [CreateAssetMenu(fileName = "PlayerScriptableObject", menuName = "ScriptableObjects/PlayerStats")]
 public class NPlayerScriptableObject : ScriptableObject
 {   
     [Header("Inspector Variables")]
+    
+    [Space]
+    [Header("Open Player Values")]
     [Tooltip("The speed that the player will rotate at"), Range(0, 500)]
     public float turningSpeed = 250;
     [Tooltip("The top speed that the player will reach normally"), Range(0, 100)] //Make sure to change the Clamp in NPlayerOpenControl if you increase past 100
-    public float normalSpeed = 25;
+    public float normalSpeed = 15;
     [Tooltip("The speed that the player will stay at after boosting while still moving"), Range(0, 100)]
-    public float speedABoosting = 35;
+    public float speedABoosting = 25;
     [Tooltip("The top speed that the player can reach while boosting"), Range(0, 100)]
-    public float boostingSpeed = 75;
+    public float boostingSpeed = 40;
     [Tooltip("The speed that the player will jump to when they boost while having no boostGauge"), Range(0, 100)]
-    public float boostAttemptSpeed = 35;
-    [Tooltip("How long the boost Attempt will last, in seconds"), Range(0, 10)]
-    public float boostAttemptTime = 1;
-    [Tooltip("The time that it will take before you can do another boost Attempt, in seconds"), Range(0, 10)]
-    public float boostAttemptCooldown = 1;
+    public float boostAttemptSpeed = 20;
+    [Tooltip("The speed that the player will recenter towards forward facing at"), Range(0, 100)]
+    public float recenterSpeed = 3;
+    
+    [Space]
+    [Header("Level Player Values")]
+    [Tooltip("The top speed that the player will reach normally"), Range(0, 100)] //Make sure to change the Clamp in NPlayerOpenControl if you increase past 100
+    public float normalSpeedLevel = 15;
+    [Tooltip("The speed that the player will stay at after boosting while still moving"), Range(0, 100)]
+    public float speedABoostingLevel = 17;
+    [Tooltip("The top speed that the player can reach while boosting"), Range(0, 100)]
+    public float boostingSpeedLevel = 28;
+    [Tooltip("The speed that the player will jump to when they boost while having no boostGauge"), Range(0, 100)]
+    public float boostAttemptSpeedLevel = 17;
+    [Tooltip("The speed that the player will flip to upright position in the Level."), Range(0, 100)]
+    public float flipSpeed = 3;
+    
+    [Space]
+    [Header("Both Players Values")]
     [Tooltip("The rate of acceleration when not boosting"), Range(0, 100)]
-    public float normalAccelerationRate = 10;
+    public float normalAccelerationRate = 20;
     [Tooltip("The rate of acceleration while boosting"), Range(0, 100)]
-    public float boostingAccelerationRate = 20;
+    public float boostingAccelerationRate = 30;
     [Tooltip("The rate that the player will decelerate at after the movement button has been released"), Range(0, 100)]
     public float decelerationRate = 50;
-    [Tooltip("The speed that the player will recenter towards forward facing at"), Range(0, 100)]
-    public float recenterSpeed = 3f;
+    [Tooltip("How long the boost Attempt will last, in seconds"), Range(0, 10)]
+    public float boostAttemptTime = 0.2f;
+    [Tooltip("The time that it will take before you can do another boost Attempt, in seconds"), Range(0, 10)]
+    public float boostAttemptCooldown = 0.25f;
     [Tooltip("The maximum boost that can be stored in boostGauge"), Range(0, 200)]
     public float maxBoost = 100;
     [Tooltip("The rate at which the player will consume boost"), Range(0, 100)]
     public float boostDepletionRate = 10;
     [Tooltip("The players Current boost")]
     public float boostGauge;
-
 
     [Space]
     [Header("Input Values")]
@@ -52,5 +72,10 @@ public class NPlayerScriptableObject : ScriptableObject
     public bool runBoostAttempt;
     [Tooltip("Reads whether or not the camera should be attatched to the player or not")]
     public bool cameraPlayerBound;
-    
+
+    [Space]
+    [Header("UI and Save Data")]
+    public float displayScore;
+    public float levelTime;
+    public float openChips;    
 }

@@ -11,7 +11,7 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Spike
-    second: {fileID: 2100000, guid: 7ad7d888ac8eec7419127023bc51bba1, type: 2}
+    second: {fileID: 2100000, guid: 9b0689cc80086b344b7064d2b2aff7d7, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

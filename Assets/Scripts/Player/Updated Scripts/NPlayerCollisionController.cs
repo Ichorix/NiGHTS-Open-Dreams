@@ -4,8 +4,13 @@ using UnityEngine;
 
 public class NPlayerCollisionController : MonoBehaviour
 {
-    public NPlayerScriptableObject _stats;
-    public SoundPlayerScriptableObject _sounds;
+    [SerializeField]
+    private NPlayerLevelFollow levelPlayer;
+
+    [SerializeField]
+    private NPlayerScriptableObject _stats;
+    [SerializeField]
+    private SoundPlayerScriptableObject _sounds;
     public AudioSource MainSounds;
 
     void OnTriggerEnter(Collider other)
@@ -24,6 +29,10 @@ public class NPlayerCollisionController : MonoBehaviour
             MainSounds.PlayOneShot(_sounds.YellowRingSFX, 1.0f);
             if(_stats.boostGauge < 90) _stats.boostGauge += 10;
             else _stats.boostGauge = 100;
+
+
+            if(levelPlayer != null)
+                levelPlayer.currentScore += 10;
         }
         if(other.CompareTag("GreenRing"))
         {
@@ -36,6 +45,9 @@ public class NPlayerCollisionController : MonoBehaviour
             MainSounds.PlayOneShot(_sounds.HalfRingSFX, 1.0f);
             if(_stats.boostGauge <= 90) _stats.boostGauge += 10;
             else _stats.boostGauge = 100;
+
+            if(levelPlayer != null)
+                levelPlayer.currentScore += 10 ;
         }
         if(other.CompareTag("PowerRing"))
         {
@@ -55,6 +67,9 @@ public class NPlayerCollisionController : MonoBehaviour
         //pointItemScript.InstantiatePointAndChip(true);
         MainSounds.PlayOneShot(_sounds.BlueChipSFX, 1.0f);
         other.gameObject.SetActive(false);
-        //chipAmount += 1;
+
+        if(levelPlayer != null)
+            levelPlayer.currentChips += 1;
+        else _stats.openChips += 1;
     }
 }

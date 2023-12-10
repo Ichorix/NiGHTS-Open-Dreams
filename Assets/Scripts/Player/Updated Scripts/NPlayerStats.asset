@@ -13,19 +13,24 @@ MonoBehaviour:
   m_Name: NPlayerStats
   m_EditorClassIdentifier: 
   turningSpeed: 125
-  normalSpeed: 0
+  normalSpeed: 15
   speedABoosting: 25
   boostingSpeed: 40
   boostAttemptSpeed: 20
-  boostAttemptTime: 0.2
-  boostAttemptCooldown: 0.25
+  recenterSpeed: 3
+  normalSpeedLevel: 15
+  speedABoostingLevel: 17
+  boostingSpeedLevel: 28
+  boostAttemptSpeedLevel: 17
+  flipSpeed: 3
   normalAccelerationRate: 20
   boostingAccelerationRate: 30
   decelerationRate: 50
-  recenterSpeed: 3
+  boostAttemptTime: 0.2
+  boostAttemptCooldown: 0.25
   maxBoost: 100
-  boostDepletionRate: 10
-  boostGauge: 100
+  boostDepletionRate: 20
+  boostGauge: 73.20133
   MoveDirection: {x: 0, y: 0}
   LookDirection: {x: 0, y: 0}
   MovementMultiplier: 0
@@ -33,3 +38,6 @@ MonoBehaviour:
   isBoosting: 0
   runBoostAttempt: 1
   cameraPlayerBound: 1
+  displayScore: 0
+  levelTime: 0
+  openChips: 10

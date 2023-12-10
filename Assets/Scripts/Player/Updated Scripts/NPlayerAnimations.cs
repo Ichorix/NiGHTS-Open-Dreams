@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class NPlayerAnimations : MonoBehaviour
 {
+    [SerializeField] private bool isLevelPlayer;
+    public NPlayerLevelRotations levelPlayer;
+    
     [SerializeField]
     private Animator _animator;
     [SerializeField]
@@ -24,7 +27,11 @@ public class NPlayerAnimations : MonoBehaviour
         BoostStateManagement();
 
         BoostingAnimations();
-        TurningAnimations();
+
+        if(!isLevelPlayer)
+        NPlayerOpenControl_TurningAnimations();
+        else
+        NPlayerLevelFollow_TurningAnimations();
     }
     private void BoostStateManagement()
     {
@@ -53,7 +60,7 @@ public class NPlayerAnimations : MonoBehaviour
             boostTrail.emitting = boostAnim;
         }
     }
-    private void TurningAnimations()
+    private void NPlayerOpenControl_TurningAnimations()
     {
         if(_stats.isMoving && _stats.MoveDirection != Vector2.zero)
         {
@@ -72,5 +79,24 @@ public class NPlayerAnimations : MonoBehaviour
             _animator.SetBool("isRight", false);
             _animator.SetBool("isLeft", false);
         }
+    }
+
+    private void NPlayerLevelFollow_TurningAnimations()
+    {
+        if(levelPlayer.upsideDownTime > 0 && _stats.isMoving)
+            _animator.SetBool("isUpsideDown", true);
+        else
+            _animator.SetBool("isUpsideDown", false);
+        
+        if(_stats.MoveDirection.y > turningAnimationThreshold)
+            _animator.SetBool("isUp", true);
+        else if(_stats.MoveDirection.y < -turningAnimationThreshold)
+            _animator.SetBool("isDown", true);
+        else
+        {
+            _animator.SetBool("isUp", false);
+            _animator.SetBool("isDown", false);
+        }
+        
     }
 }

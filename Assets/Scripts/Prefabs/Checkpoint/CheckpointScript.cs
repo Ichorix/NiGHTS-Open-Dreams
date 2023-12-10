@@ -18,7 +18,7 @@ public class CheckpointScript : MonoBehaviour
     }
     void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag("levelPlayer"))
+        if(other.CompareTag("Player"))
         {
             Outer = true;
             //Debug.Log("Outer");
@@ -26,7 +26,7 @@ public class CheckpointScript : MonoBehaviour
     }
     void OnTriggerStay(Collider other)
     {
-        if(other.CompareTag("levelPlayer") && Outer)
+        if(other.CompareTag("Player") && Outer)
         {
             if(Enter.active)
             {
@@ -45,7 +45,7 @@ public class CheckpointScript : MonoBehaviour
     }
     void OnTriggerExit(Collider other)
     {
-        if(other.CompareTag("levelPlayer"))
+        if(other.CompareTag("Player"))
         Outer = false;
     }
 
