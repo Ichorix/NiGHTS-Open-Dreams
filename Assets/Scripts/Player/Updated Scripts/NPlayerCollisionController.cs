@@ -78,7 +78,15 @@ public class NPlayerCollisionController : MonoBehaviour
             if(openPlayer != null)
             {
                 openPlayer.ReAdjustToNormals(other.contacts[0].normal);
+                openPlayer._animations.Grounded = true;
             }
+        }
+    }
+    void OnCollisionExit(Collision other)
+    {
+        if(other.gameObject.CompareTag("lb_groundTarget") && openPlayer != null)
+        {
+            openPlayer._animations.Grounded = false;
         }
     }
 

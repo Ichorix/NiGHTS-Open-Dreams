@@ -12,7 +12,7 @@ public class NPlayerScriptableObject : ScriptableObject
     [Space]
     [Header("Open Player Values")]
     [Tooltip("The speed that the player will rotate at"), Range(0, 500)]
-    public float turningSpeed = 250;
+    public float turningSpeed = 125;
     [Tooltip("The top speed that the player will reach normally"), Range(0, 100)] //Make sure to change the Clamp in NPlayerOpenControl if you increase past 100
     public float normalSpeed = 15;
     [Tooltip("The speed that the player will stay at after boosting while still moving"), Range(0, 100)]
@@ -23,6 +23,10 @@ public class NPlayerScriptableObject : ScriptableObject
     public float boostAttemptSpeed = 20;
     [Tooltip("The speed that the player will recenter towards forward facing at"), Range(0, 100)]
     public float recenterSpeed = 3;
+    [Tooltip("The amount that will be multiplied to the speed gained from angle value")]
+    public float momentumMultiplier = 2;
+    [Tooltip("Prevents momentum from slowing you down below the normal speed")]
+    public bool onlyPositiveMomentum = true;
     
     [Space]
     [Header("Level Player Values")]
@@ -33,9 +37,9 @@ public class NPlayerScriptableObject : ScriptableObject
     [Tooltip("The top speed that the player can reach while boosting"), Range(0, 100)]
     public float boostingSpeedLevel = 28;
     [Tooltip("The speed that the player will jump to when they boost while having no boostGauge"), Range(0, 100)]
-    public float boostAttemptSpeedLevel = 17;
-    [Tooltip("The speed that the player will flip to upright position in the Level."), Range(0, 100)]
-    public float flipSpeed = 3;
+    public float boostAttemptSpeedLevel = 28;
+    [Tooltip("The speed that the player will flip to upright position in the Level"), Range(0, 100)]
+    public float flipSpeed = 2;
     
     [Space]
     [Header("Both Players Values")]
@@ -52,7 +56,7 @@ public class NPlayerScriptableObject : ScriptableObject
     [Tooltip("The maximum boost that can be stored in boostGauge"), Range(0, 200)]
     public float maxBoost = 100;
     [Tooltip("The rate at which the player will consume boost"), Range(0, 100)]
-    public float boostDepletionRate = 10;
+    public float boostDepletionRate = 20;
     [Tooltip("The players Current boost")]
     public float boostGauge;
 

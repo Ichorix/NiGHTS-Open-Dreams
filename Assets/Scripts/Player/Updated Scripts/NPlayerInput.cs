@@ -23,7 +23,7 @@ public class NPlayerInput : MonoBehaviour
     #if ENABLE_INPUT_SYSTEM
     public void OnMoving(InputValue value)
     {
-        MoveInput(value.isPressed, value.Get<float>());
+        MoveInput(value.Get<float>());
     }
     public void OnLook(InputValue value)
     {
@@ -61,12 +61,13 @@ public class NPlayerInput : MonoBehaviour
         //_mainCamera.m_YAxis = new AxisState(0.5f, 2, )
     }
 
-    void MoveInput(bool newMoveState, float movementMultiplier)
+    void MoveInput(float movementMultiplier)
     {
         //_stats.isMoving = newMoveState; Runs normally at 0.5 for movementMultiplier. Now using an If to be more precise
-        if(movementMultiplier > 0.05f) _stats.isMoving = true;
+        if(movementMultiplier > 0) _stats.isMoving = true;
         else _stats.isMoving = false;
-        
+        bool newMoveState = _stats.isMoving;
+        //Debug.Log(newMoveState + ", " + movementMultiplier);
         _stats.MovementMultiplier = movementMultiplier;
         if(!newMoveState) _openPlayer.StoppedMoving();
     }

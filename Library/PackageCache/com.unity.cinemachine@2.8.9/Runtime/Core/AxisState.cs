@@ -224,7 +224,7 @@ namespace Cinemachine
                 try { m_InputAxisValue = CinemachineCore.GetInputAxis(m_InputAxisName); }
                 catch (ArgumentException e) { Debug.LogError(e.ToString()); }
             }
-            m_InputAxisValue = m_InputAxisName == "Mouse Y" ? 30 : 0;//
+
             float input = m_InputAxisValue;
             if (m_InvertInput)
                 input *= -1f;

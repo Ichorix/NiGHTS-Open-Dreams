@@ -24,10 +24,20 @@ public class NPlayerAnimations : MonoBehaviour
 
     private bool boostAnim;
     private bool boostOverride;
+    public bool Grounded;
+    
 
     void Update()
     {
         _animator.SetBool("isMoving", _stats.isMoving);
+        _animator.SetBool("Grounded", Grounded);
+        
+        // Prevents the AnyState from transitioning to itself since the animation is split in half
+        if(_animator.GetCurrentAnimatorStateInfo(0).IsName("Base Layer.LeftStep") ||
+            _animator.GetCurrentAnimatorStateInfo(0).IsName("Base Layer.RightStep"))
+            _animator.SetBool("DontTransitionToGrounded", true);
+        else _animator.SetBool("DontTransitionToGrounded", false);
+            
         BoostStateManagement();
 
         BoostingAnimations();
@@ -107,6 +117,5 @@ public class NPlayerAnimations : MonoBehaviour
             _animator.SetBool("isUp", false);
             _animator.SetBool("isDown", false);
         }
-        
     }
 }
