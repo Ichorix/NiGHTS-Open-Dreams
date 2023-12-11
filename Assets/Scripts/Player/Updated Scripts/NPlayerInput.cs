@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 #if ENABLE_INPUT_SYSTEM
 using UnityEngine.InputSystem;
@@ -12,6 +13,7 @@ public class NPlayerInput : MonoBehaviour
     private PlayerInputActions playerControls;
     public NPlayerScriptableObject _stats;
     public NPlayerOpenControl _openPlayer;
+    public CinemachineFreeLook _mainCamera;
 
     void Awake()
     {
@@ -21,14 +23,11 @@ public class NPlayerInput : MonoBehaviour
     #if ENABLE_INPUT_SYSTEM
     public void OnMoving(InputValue value)
     {
-        Debug.Log("On Move");
         MoveInput(value.isPressed, value.Get<float>());
-        Debug.Log(value.Get<float>());
-
     }
     public void OnLook(InputValue value)
     {
-        LookInput(value.Get<Vector2>());
+        LookInput(value.Get<Vector2>() * _stats.JoystickLookSensitivity);
     }
     public void OnBoosting(InputValue value)
     {
@@ -55,8 +54,12 @@ public class NPlayerInput : MonoBehaviour
     {
 
     }
-    
     #endif
+    void Update()
+    {
+        LookInput(new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y")) * _stats.MouseLookSensitivity);
+        //_mainCamera.m_YAxis = new AxisState(0.5f, 2, )
+    }
 
     void MoveInput(bool newMoveState, float movementMultiplier)
     {
@@ -77,7 +80,10 @@ public class NPlayerInput : MonoBehaviour
     }
     void LookInput(Vector2 dir)
     {
+        //Debug.Log(dir);
         _stats.LookDirection = dir;
+
+
     }
 
     void RecenterCamera()

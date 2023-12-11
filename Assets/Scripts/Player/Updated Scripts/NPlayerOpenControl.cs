@@ -12,6 +12,7 @@ public class NPlayerOpenControl : MonoBehaviour
     public NPlayerScriptableObject _stats;
     public NPlayerAnimations _animations;
     public CinemachineFreeLook cameraSettings;
+    private Rigidbody rigidbody;
     [Space]
     [SerializeField] private bool canBoost;
     [SerializeField] private bool boostAttempt;
@@ -25,12 +26,16 @@ public class NPlayerOpenControl : MonoBehaviour
     private const float _threshold = 0.01f;
     private float timeOffset;
     public bool IsCurrentDeviceMouse;
+    private Vector3 mostRecentGroundNormal;
+    [SerializeField] private float bumpForce = 10;
+
 
 
     void Start()
     {
+        rigidbody = GetComponent<Rigidbody>();
         _stats.boostGauge = _stats.maxBoost;
-        _cinemachineTargetYaw = CinemachineCameraTarget.transform.rotation.eulerAngles.y;
+        //_cinemachineTargetYaw = CinemachineCameraTarget.transform.rotation.eulerAngles.y;
     }
     void Update()
     {
@@ -115,8 +120,8 @@ public class NPlayerOpenControl : MonoBehaviour
             _cinemachineTargetPitch += _stats.LookDirection.y * deltaTimeMultiplier * Sensitivity; 
         }
 
-        CinemachineCameraTarget.transform.rotation = Quaternion.Euler(_cinemachineTargetPitch + CameraAngleOverride,
-            _cinemachineTargetYaw, 0.0f);
+        //CinemachineCameraTarget.transform.rotation = Quaternion.Euler(_cinemachineTargetPitch + CameraAngleOverride,
+        //    _cinemachineTargetYaw, 0.0f);
     }
 
     public IEnumerator RecenterCamera()
@@ -159,6 +164,17 @@ public class NPlayerOpenControl : MonoBehaviour
             transform.rotation = Quaternion.Slerp(fromRotation, toRotation, t);
             yield return null;
         }
+    }
+
+    //Called when you touch the ground
+    public void ReAdjustToNormals(Vector3 groundNormal)
+    {
+        mostRecentGroundNormal = groundNormal;
+        transform.forward = Vector3.Cross(mostRecentGroundNormal, -transform.right);
+    }
+    public void BumpUpFromGround()
+    {
+        rigidbody.AddForce(mostRecentGroundNormal * bumpForce, ForceMode.Impulse);
     }
 
     public void RunBoostAttempt()

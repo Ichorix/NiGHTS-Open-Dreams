@@ -12,6 +12,10 @@ public class NPlayerAnimations : MonoBehaviour
     [SerializeField]
     private NPlayerScriptableObject _stats;
     [SerializeField]
+    private ParticleSystem rightHandSparkles;
+    [SerializeField]
+    private ParticleSystem leftHandSparkles;
+    [SerializeField]
     private TrailRenderer boostTrail;
     [SerializeField]
     private ParticleSystem boostParticles;
@@ -42,9 +46,15 @@ public class NPlayerAnimations : MonoBehaviour
             else
             if(_stats.runBoostAttempt)
                 boostAnim = _stats.isBoosting;
+            rightHandSparkles.enableEmission = true;
+            leftHandSparkles.enableEmission = true;
         }
         else
+        {
             boostAnim = false;
+            rightHandSparkles.enableEmission = false;
+            leftHandSparkles.enableEmission = false;
+        }
     }
     public void BoostAnimationOverride(bool state)
     {

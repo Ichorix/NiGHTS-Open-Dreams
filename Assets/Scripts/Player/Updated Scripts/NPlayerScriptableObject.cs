@@ -74,7 +74,12 @@ public class NPlayerScriptableObject : ScriptableObject
     public bool cameraPlayerBound;
 
     [Space]
-    [Header("UI and Save Data")]
+    [Header("Save Data")]
+    [Tooltip("Multiplier for mouse input to Camera")]
+    public float MouseLookSensitivity = 1;
+    [Tooltip("Multiplier for joystic input to Camera")]
+    public float JoystickLookSensitivity = 1;
+
     public float displayScore;
     public float levelTime;
     public float openChips;    

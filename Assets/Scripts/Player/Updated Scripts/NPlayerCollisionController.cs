@@ -6,6 +6,8 @@ public class NPlayerCollisionController : MonoBehaviour
 {
     [SerializeField]
     private NPlayerLevelFollow levelPlayer;
+    [SerializeField]
+    private NPlayerOpenControl openPlayer;
 
     [SerializeField]
     private NPlayerScriptableObject _stats;
@@ -17,12 +19,20 @@ public class NPlayerCollisionController : MonoBehaviour
     {
         if(other.CompareTag("lb_groundTarget"))
         {
-            Debug.Log("Ground");
-            //stateController.Activate2();
+            if(openPlayer != null)
+            {
+                openPlayer.BumpUpFromGround();
+            }
         }
+
+        
         if(other.CompareTag("BlueChip"))
         {
             CollectBlueChip(other);
+        }
+        if(other.CompareTag("Star"))
+        {
+            CollectStarChip(other);
         }
         if(other.CompareTag("YellowRing"))
         {
@@ -47,7 +57,7 @@ public class NPlayerCollisionController : MonoBehaviour
             else _stats.boostGauge = 100;
 
             if(levelPlayer != null)
-                levelPlayer.currentScore += 10 ;
+                levelPlayer.currentScore += 10;
         }
         if(other.CompareTag("PowerRing"))
         {
@@ -61,6 +71,16 @@ public class NPlayerCollisionController : MonoBehaviour
             _stats.boostGauge -= 5;
         }
     }
+    void OnCollisionStay(Collision other)
+    {
+        if(other.gameObject.CompareTag("lb_groundTarget"))
+        {
+            if(openPlayer != null)
+            {
+                openPlayer.ReAdjustToNormals(other.contacts[0].normal);
+            }
+        }
+    }
 
     public void CollectBlueChip(Collider other)
     {
@@ -71,5 +91,12 @@ public class NPlayerCollisionController : MonoBehaviour
         if(levelPlayer != null)
             levelPlayer.currentChips += 1;
         else _stats.openChips += 1;
+    }
+    public void CollectStarChip(Collider other)
+    {
+        MainSounds.PlayOneShot(_sounds.BlueChipSFX, 1.0f);
+        other.gameObject.SetActive(false);
+        levelPlayer.currentScore += 10;
+        //levelTimeLeft += 0.25f;
     }
 }

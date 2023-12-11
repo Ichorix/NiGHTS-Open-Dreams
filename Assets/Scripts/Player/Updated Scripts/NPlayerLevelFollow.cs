@@ -142,8 +142,11 @@ public class NPlayerLevelFollow : MonoBehaviour
             else _stats.runBoostAttempt = false;
         }
 
-        float targetSpeed = canBoost ? _stats.boostingSpeedLevel : _stats.normalSpeedLevel;
-        
+        // Compares if it is boosting to use the boosting speed, if it is running the boost attempt to use the boost attempt speed, and if neither then the normal speed
+        _speed = canBoost ? _stats.boostingSpeedLevel : boostAttempt ? _stats.boostAttemptSpeedLevel : _stats.normalSpeedLevel;
+
+        ////TODO remove this acceleration code if i dont like it
+        /*
         //Checks if you are going faster than the target speed (true when target speed is 0 or when target speed is normal speed after boosting)
         //And if your speed is greater than the normal speed after boosting
         if(_speed >= targetSpeed && _speed > _stats.speedABoostingLevel) // Will return true if you are decelerating after boosting.
@@ -154,7 +157,7 @@ public class NPlayerLevelFollow : MonoBehaviour
         if(!_stats.isMoving)
             targetSpeed = 0;
         
-        float speedChangeRate = _stats.isBoosting? _stats.boostingAccelerationRate : _stats.normalAccelerationRate;
+        float speedChangeRate = _stats.isBoosting ? _stats.boostingAccelerationRate : _stats.normalAccelerationRate;
         float speedOffset = 0.5f; //Default 0.5f
 
         if(_speed < targetSpeed - speedOffset) //Accelerate
@@ -173,6 +176,7 @@ public class NPlayerLevelFollow : MonoBehaviour
             _speed = Mathf.Round(_speed * 100f) / 100f;
         }
         if(_speed <= speedOffset) _speed = 0;
+        */
     }
 
     private void BoostStuff()
@@ -238,7 +242,6 @@ public class NPlayerLevelFollow : MonoBehaviour
         while(boostAttempt)
         {
             t += Time.deltaTime;
-            transform.Translate(Vector3.forward * Mathf.Clamp(_stats.boostAttemptSpeed, 0, 100f) * Time.deltaTime);
             _animations.BoostAnimationOverride(true);
             if(t >= _stats.boostAttemptTime)
             {
@@ -260,26 +263,25 @@ public class NPlayerLevelFollow : MonoBehaviour
     }
 
     public void LinkIncrease()
+    {
+        linkTimeLeft = 1;
+        link += 1;
+        linkActive = true;
+        if(linkControl != null)
         {
-            linkTimeLeft = 1;
-            link += 1;
-            linkActive = true;
-
-            if(linkControl != null)
-            {
-                linkControl.link = link;
-                linkControl.RunLinkIncrease();
-            }
+            linkControl.link = link;
+            linkControl.RunLinkIncrease();
         }
-        void LinkEmpty()
+    }
+    void LinkEmpty()
+    {
+        linkTimeLeft = 0;
+        link = 0;
+        linkActive = false;
+        if(linkControl != null)
         {
-            linkTimeLeft = 0;
-            link = 0;
-            linkActive = false;
-            if(linkControl != null)
-            {
-                linkControl.link = link;
-                linkControl.RunLinkIncrease();
-            }
+            linkControl.link = link;
+            linkControl.RunLinkIncrease();
         }
+    }
 }
