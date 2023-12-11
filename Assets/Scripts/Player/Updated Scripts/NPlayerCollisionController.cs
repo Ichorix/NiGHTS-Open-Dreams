@@ -21,7 +21,7 @@ public class NPlayerCollisionController : MonoBehaviour
         {
             if(openPlayer != null)
             {
-                openPlayer.BumpUpFromGround();
+                openPlayer.BumpUpFromGround(100);
             }
         }
 
@@ -87,6 +87,7 @@ public class NPlayerCollisionController : MonoBehaviour
         if(other.gameObject.CompareTag("lb_groundTarget") && openPlayer != null)
         {
             openPlayer._animations.Grounded = false;
+            openPlayer.BumpUpFromGround(30);
         }
     }
 

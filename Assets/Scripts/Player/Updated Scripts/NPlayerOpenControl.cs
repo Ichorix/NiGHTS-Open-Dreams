@@ -18,7 +18,6 @@ public class NPlayerOpenControl : MonoBehaviour
     [SerializeField] private bool boostAttempt;
     [SerializeField] private bool boostAttemptCooldown;
     [SerializeField] private float _speed;
-    [SerializeField] private float bumpForce = 10;
     public AnimationCurve fieldOfViewBySpeed;
     private Vector3 mostRecentGroundNormal;
 
@@ -182,7 +181,7 @@ public class NPlayerOpenControl : MonoBehaviour
         mostRecentGroundNormal = groundNormal;
         transform.forward = Vector3.Cross(mostRecentGroundNormal, -transform.right);
     }
-    public void BumpUpFromGround()
+    public void BumpUpFromGround(float bumpForce)
     {
         rigidbody.AddForce(mostRecentGroundNormal * bumpForce, ForceMode.Impulse);
     }
