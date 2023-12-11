@@ -21,8 +21,8 @@ MonoBehaviour:
   normalSpeedLevel: 15
   speedABoostingLevel: 17
   boostingSpeedLevel: 28
-  boostAttemptSpeedLevel: 17
-  flipSpeed: 3
+  boostAttemptSpeedLevel: 28
+  flipSpeed: 2
   normalAccelerationRate: 20
   boostingAccelerationRate: 30
   decelerationRate: 50
@@ -30,14 +30,16 @@ MonoBehaviour:
   boostAttemptCooldown: 0.25
   maxBoost: 100
   boostDepletionRate: 20
-  boostGauge: 73.20133
+  boostGauge: 0
   MoveDirection: {x: 0, y: 0}
   LookDirection: {x: 0, y: 0}
   MovementMultiplier: 0
   isMoving: 0
   isBoosting: 0
-  runBoostAttempt: 1
+  runBoostAttempt: 0
   cameraPlayerBound: 1
+  MouseLookSensitivity: 1
+  JoystickLookSensitivity: 1
   displayScore: 0
   levelTime: 0
-  openChips: 10
+  openChips: 105
