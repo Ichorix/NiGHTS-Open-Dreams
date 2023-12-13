@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: cc8b8ebeb6360074f82cc1bbb2a52900
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - thisPlayer: {instanceID: 0}
+  - Lplayer: {instanceID: 0}
+  - ideya: {instanceID: 0}
+  - blueChipMat: {fileID: 2100000, guid: b3acc88ebb77dca45996f59a6234fd1f, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
