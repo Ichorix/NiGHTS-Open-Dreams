@@ -4,15 +4,11 @@ using UnityEngine;
 
 public class NPlayerCollisionController : MonoBehaviour
 {
-    [SerializeField]
-    private NPlayerLevelFollow levelPlayer;
-    [SerializeField]
-    private NPlayerOpenControl openPlayer;
+    [SerializeField] private NPlayerLevelFollow levelPlayer;
+    [SerializeField] private NPlayerOpenControl openPlayer;
 
-    [SerializeField]
-    private NPlayerScriptableObject _stats;
-    [SerializeField]
-    private SoundPlayerScriptableObject _sounds;
+    [SerializeField] private NPlayerScriptableObject _stats;
+    [SerializeField] private SoundPlayerScriptableObject _sounds;
     public AudioSource MainSounds;
 
     void OnTriggerEnter(Collider other)
@@ -21,7 +17,8 @@ public class NPlayerCollisionController : MonoBehaviour
         {
             if(openPlayer != null)
             {
-                openPlayer.BumpUpFromGround(100);
+                //Sets the player back by a frame along with bumping them up. Makes it more consistent
+                openPlayer.BumpUpFromGround(100, openPlayer._speed * Time.deltaTime);
             }
         }
 
