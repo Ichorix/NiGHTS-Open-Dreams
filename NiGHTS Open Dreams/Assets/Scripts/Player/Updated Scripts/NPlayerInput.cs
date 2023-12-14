@@ -55,11 +55,6 @@ public class NPlayerInput : MonoBehaviour
 
     }
     #endif
-    void Update()
-    {
-        LookInput(new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y")) * _stats.MouseLookSensitivity);
-        //_mainCamera.m_YAxis = new AxisState(0.5f, 2, )
-    }
 
     void MoveInput(float movementMultiplier)
     {
