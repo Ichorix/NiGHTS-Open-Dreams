@@ -55,24 +55,6 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""TurningLeft"",
-                    ""type"": ""Value"",
-                    ""id"": ""a4e44557-298d-4a9a-9fdb-ffa90d086f5a"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": ""Press(behavior=1)"",
-                    ""initialStateCheck"": true
-                },
-                {
-                    ""name"": ""TurningRight"",
-                    ""type"": ""Value"",
-                    ""id"": ""99b9c59b-17f4-4bef-81fe-bed4c95904b5"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": ""Press(behavior=1)"",
-                    ""initialStateCheck"": true
-                },
-                {
                     ""name"": ""RecenterCamera"",
                     ""type"": ""Button"",
                     ""id"": ""8cdafcbb-b0b0-4285-93ec-986307d583be"",
@@ -226,50 +208,6 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""processors"": ""InvertVector2(invertX=false,invertY=false)"",
                     ""groups"": """",
                     ""action"": ""Rotating"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""529fd553-27c0-42fb-960a-2b8d0db6854d"",
-                    ""path"": ""<Keyboard>/a"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""TurningLeft"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""6e16af93-e54e-4a45-95e9-c8b4cfd0f9c4"",
-                    ""path"": ""<Gamepad>/leftStick/left"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""TurningLeft"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""d11f2aa9-3845-442f-94ab-3a54597401ca"",
-                    ""path"": ""<Keyboard>/d"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""TurningRight"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""b2a3e2da-f6d9-43fc-aac8-c2461ca39bbf"",
-                    ""path"": ""<Gamepad>/leftStick/right"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""TurningRight"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -448,8 +386,6 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         m_Player_Moving = m_Player.FindAction("Moving", throwIfNotFound: true);
         m_Player_Boosting = m_Player.FindAction("Boosting", throwIfNotFound: true);
         m_Player_Rotating = m_Player.FindAction("Rotating", throwIfNotFound: true);
-        m_Player_TurningLeft = m_Player.FindAction("TurningLeft", throwIfNotFound: true);
-        m_Player_TurningRight = m_Player.FindAction("TurningRight", throwIfNotFound: true);
         m_Player_RecenterCamera = m_Player.FindAction("RecenterCamera", throwIfNotFound: true);
         m_Player_ChangeCamera = m_Player.FindAction("ChangeCamera", throwIfNotFound: true);
         m_Player_Pause = m_Player.FindAction("Pause", throwIfNotFound: true);
@@ -517,8 +453,6 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Moving;
     private readonly InputAction m_Player_Boosting;
     private readonly InputAction m_Player_Rotating;
-    private readonly InputAction m_Player_TurningLeft;
-    private readonly InputAction m_Player_TurningRight;
     private readonly InputAction m_Player_RecenterCamera;
     private readonly InputAction m_Player_ChangeCamera;
     private readonly InputAction m_Player_Pause;
@@ -531,8 +465,6 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         public InputAction @Moving => m_Wrapper.m_Player_Moving;
         public InputAction @Boosting => m_Wrapper.m_Player_Boosting;
         public InputAction @Rotating => m_Wrapper.m_Player_Rotating;
-        public InputAction @TurningLeft => m_Wrapper.m_Player_TurningLeft;
-        public InputAction @TurningRight => m_Wrapper.m_Player_TurningRight;
         public InputAction @RecenterCamera => m_Wrapper.m_Player_RecenterCamera;
         public InputAction @ChangeCamera => m_Wrapper.m_Player_ChangeCamera;
         public InputAction @Pause => m_Wrapper.m_Player_Pause;
@@ -556,12 +488,6 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @Rotating.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRotating;
                 @Rotating.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRotating;
                 @Rotating.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRotating;
-                @TurningLeft.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTurningLeft;
-                @TurningLeft.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTurningLeft;
-                @TurningLeft.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTurningLeft;
-                @TurningRight.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTurningRight;
-                @TurningRight.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTurningRight;
-                @TurningRight.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTurningRight;
                 @RecenterCamera.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRecenterCamera;
                 @RecenterCamera.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRecenterCamera;
                 @RecenterCamera.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRecenterCamera;
@@ -590,12 +516,6 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @Rotating.started += instance.OnRotating;
                 @Rotating.performed += instance.OnRotating;
                 @Rotating.canceled += instance.OnRotating;
-                @TurningLeft.started += instance.OnTurningLeft;
-                @TurningLeft.performed += instance.OnTurningLeft;
-                @TurningLeft.canceled += instance.OnTurningLeft;
-                @TurningRight.started += instance.OnTurningRight;
-                @TurningRight.performed += instance.OnTurningRight;
-                @TurningRight.canceled += instance.OnTurningRight;
                 @RecenterCamera.started += instance.OnRecenterCamera;
                 @RecenterCamera.performed += instance.OnRecenterCamera;
                 @RecenterCamera.canceled += instance.OnRecenterCamera;
@@ -620,8 +540,6 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         void OnMoving(InputAction.CallbackContext context);
         void OnBoosting(InputAction.CallbackContext context);
         void OnRotating(InputAction.CallbackContext context);
-        void OnTurningLeft(InputAction.CallbackContext context);
-        void OnTurningRight(InputAction.CallbackContext context);
         void OnRecenterCamera(InputAction.CallbackContext context);
         void OnChangeCamera(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
