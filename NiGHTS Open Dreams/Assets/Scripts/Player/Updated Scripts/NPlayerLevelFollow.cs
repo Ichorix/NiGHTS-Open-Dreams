@@ -8,10 +8,11 @@ using TMPro;
 
 public class NPlayerLevelFollow : MonoBehaviour
 {
-    public NPlayerScriptableObject _stats;
-    public NPlayerAnimations _animations;
+    [SerializeField] private NPlayerScriptableObject _stats;
+    [SerializeField] private NPlayerAnimations _animations;
     private Rigidbody rigidbody;
-    [Space]
+
+    [Header("Current Level Information")]
     public PathCreator[] Level1Paths = new PathCreator[4]; //Creates the level with the appropriate amount of paths. Paths assigned in Inspector
     public AnimationCurve[] Level1Grading = new AnimationCurve[4]; //Score defined in Inspector. Mapped as Grade over Score. Grade 5 = A, Grade 0 = F
     public float[] Level1Times = new float[4]; //Time defined in Inspector.

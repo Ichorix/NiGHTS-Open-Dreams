@@ -8,16 +8,16 @@ using UnityEngine.InputSystem;
 
 public class NPlayerOpenControl : MonoBehaviour
 {
-    
-    public NPlayerScriptableObject _stats;
+
+    [SerializeField] private NPlayerScriptableObject _stats;
     public NPlayerAnimations _animations;
-    public CinemachineFreeLook cameraSettings;
+    [SerializeField] private CinemachineFreeLook cameraSettings;
     private Rigidbody rigidbody;
     [Space]
     [SerializeField] private bool canBoost;
     [SerializeField] private bool boostAttempt;
     [SerializeField] private bool boostAttemptCooldown;
-    [SerializeField] private float _speed;
+    public float _speed;
     public AnimationCurve fieldOfViewBySpeed;
     private Vector3 mostRecentGroundNormal;
 
@@ -27,31 +27,52 @@ public class NPlayerOpenControl : MonoBehaviour
     {
         rigidbody = GetComponent<Rigidbody>();
         _stats.boostGauge = _stats.maxBoost;
-        //_cinemachineTargetYaw = CinemachineCameraTarget.transform.rotation.eulerAngles.y;
+        if(!_stats.cameraPlayerBound)
+        {
+            Debug.Log("World");
+            CamSetWorld();
+        }
+        else
+        {
+            Debug.Log("Player");
+            CamSetPlayer();
+        }
     }
+
     void Update()
     {
         RotatePlayer();
         if(!boostAttempt) MovePlayer(CalculateMomentumBonus());
         BoostStuff();
     }
+
     void LateUpdate()
     {
         CameraFunctions();
     }
+
+
     private void RotatePlayer()
     {
-        Vector2 rotation = new Vector2(-_stats.MoveDirection.y, _stats.MoveDirection.x); //I don't remember why they have to be reordered, but whatever
+        // I don't remember why they have to be reordered, but whatever
+        Vector2 rotation = new Vector2(-_stats.MoveDirection.y, _stats.MoveDirection.x);
         transform.Rotate(_stats.turningSpeed * rotation * Time.deltaTime);
     }
+
     private float CalculateMomentumBonus()
     {
-        float yForward = Mathf.Round(-transform.forward.y * 100f) / 100f; //Results in a value between -1 and 1 with precision to 2 decimal places
-        if(_stats.onlyPositiveMomentum)
-            yForward = Mathf.Clamp01(yForward);
-        yForward *= _stats.momentumMultiplier;
+        // Results in a value between -1 and 1 with precision to 2 decimal places
+         // yForward is -1 when looking straight up, and 1 when looking straight down
+        float yForward = Mathf.Round(-transform.forward.y * 100f) * 0.01f; 
+        
+        if(yForward >= 0)
+            yForward *= _stats.downwardsMomentumMultiplier;
+        else if(yForward < 0)
+            yForward *= _stats.upwardsMomentumMultiplier;
+        
         return yForward;
     }
+
     private void MovePlayer(float momentumBonus)
     {
         canBoost = false;
@@ -69,27 +90,34 @@ public class NPlayerOpenControl : MonoBehaviour
             else _stats.runBoostAttempt = false;
         }
 
+        // The target speed is the speed that _speed tries to get to through Acceleration and Deceleration
+        // Checks if you should be boosting and sets it to the appropriate speed + the inputted bonus from your up/down angle
+        // If you are not boosting however, It will lerp between 0 and the normal moving speed based on _stats.MovementMultiplier
+        // _stats.MovementMultiplier is the value recieved by the input to move. On keyboard it will either be 1, pressed, or 0, not pressed
+        // However on Gamepad it ranges from 0, not pressed, 0.5, half pressed, and 1, fully pressed.
         float targetSpeed = canBoost ? _stats.boostingSpeed + momentumBonus : Mathf.Lerp(0, _stats.normalSpeed, _stats.MovementMultiplier) + momentumBonus;
         
-        //Checks if you are going faster than the target speed (true when target speed is 0 or when target speed is normal speed after boosting)
-        //And if your speed is greater than the normal speed after boosting
-        if(_speed >= targetSpeed && _speed > _stats.speedABoosting) // Will return true if you are decelerating after boosting.
+        // Checks if you are going faster than the target speed (true when target speed is 0 or when target speed is normal speed after boosting)
+        // And if your speed is greater than the normal speed after boosting
+        // Will return true if you are decelerating after boosting.
+        if(_speed >= targetSpeed && _speed > _stats.speedABoosting)
             targetSpeed = _stats.speedABoosting;                    
         // If the speed change rate is too high or if performance is bad, it will sometimes jump past speedABoosting resulting in decelerating to normal speed
         // This can be fixed by increasing the speedOffset.
+        // Increasing speedOffset too much can cause bugs with acceleration on some devices, increase with moderation. The max I would do is 0.5f
 
         if(!_stats.isMoving)
             targetSpeed = 0;
         
         float speedChangeRate = _stats.isBoosting? _stats.boostingAccelerationRate : _stats.normalAccelerationRate;
-        float speedOffset = 0.05f; //Default 0.5f
+        float speedOffset = 0.05f; //Default 0.05f
 
         if(_speed < targetSpeed - speedOffset) //Accelerate
         {
             _speed += speedChangeRate * Time.deltaTime;
 
             // round speed to 2 decimal places
-            _speed = Mathf.Round(_speed * 100f) / 100f;
+            _speed = Mathf.Round(_speed * 100f) * 0.01f;
         }
         else if(_speed > targetSpeed + speedOffset) //Decelerate
         {
@@ -97,22 +125,24 @@ public class NPlayerOpenControl : MonoBehaviour
 
             _speed -= speedChangeRate * Time.deltaTime;
 
-            _speed = Mathf.Round(_speed * 100f) / 100f;
+            _speed = Mathf.Round(_speed * 100f) * 0.01f;
         }
         if(_speed <= speedOffset) _speed = 0;
 
         ///// If speed acts funky, activate these to determine it
-        Debug.Log("Target Speed = " + targetSpeed + ", Current Speed = " + _speed);
-        Debug.Log("Speed Change Rate = " + speedChangeRate * Time.deltaTime);
-        Debug.Log("Movement Multiplier = " + _stats.MovementMultiplier + ", Momentum Bonus = " + momentumBonus);
+        //Debug.Log("Target Speed = " + targetSpeed + ", Current Speed = " + _speed);
+        //Debug.Log("Speed Change Rate = " + speedChangeRate * Time.deltaTime);
+        //Debug.Log("Movement Multiplier = " + _stats.MovementMultiplier + ", Momentum Bonus = " + momentumBonus);
         transform.Translate(Vector3.forward * Mathf.Clamp(_speed, 0, 100f) * Time.deltaTime);
     }
+
     private void BoostStuff()
     {
         if(canBoost && _stats.isMoving)
             _stats.boostGauge -= _stats.boostDepletionRate * Time.deltaTime;
         _stats.boostGauge = Mathf.Clamp(_stats.boostGauge, 0, _stats.maxBoost);
     }
+    
     private void CameraFunctions()
     {
         /*
@@ -135,7 +165,6 @@ public class NPlayerOpenControl : MonoBehaviour
 
     public IEnumerator RecenterCamera()
     {
-        Debug.Log("Recenteringgg");
         cameraSettings.m_RecenterToTargetHeading = new AxisState.Recentering(true, 0, 0.25f);
         yield return new WaitForSeconds(1);
         cameraSettings.m_RecenterToTargetHeading = new AxisState.Recentering(false, 0, 0.25f);
@@ -179,11 +208,19 @@ public class NPlayerOpenControl : MonoBehaviour
     public void ReAdjustToNormals(Vector3 groundNormal)
     {
         mostRecentGroundNormal = groundNormal;
-        transform.forward = Vector3.Cross(mostRecentGroundNormal, -transform.right);
+        float step = _stats.groundAdjustSpeed * Time.deltaTime;
+        
+        //Move towards the ground normal retaining the general forward direction by using the Cross Product of the current right vector
+        transform.forward = Vector3.MoveTowards(transform.forward,
+                            Vector3.Cross(mostRecentGroundNormal, -transform.right),
+                            step);
     }
-    public void BumpUpFromGround(float bumpForce)
+
+    // See NPlayerCollisionController for 2 usage examples
+    public void BumpUpFromGround(float bumpForce, float translateDistance = 0)
     {
         rigidbody.AddForce(mostRecentGroundNormal * bumpForce, ForceMode.Impulse);
+        transform.Translate(mostRecentGroundNormal * translateDistance);
     }
 
     public void RunBoostAttempt()

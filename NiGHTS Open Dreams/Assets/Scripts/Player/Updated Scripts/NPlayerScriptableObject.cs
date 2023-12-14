@@ -8,7 +8,8 @@ using TMPro;
 public class NPlayerScriptableObject : ScriptableObject
 {   
     [Header("Inspector Variables")]
-    
+    [Tooltip("Determines if the player is currently in a Level")]
+    public bool isLevelPlayer = false;
     [Space]
     [Header("Open Player Values")]
     [Tooltip("The speed that the player will rotate at"), Range(0, 500)]
@@ -23,10 +24,12 @@ public class NPlayerScriptableObject : ScriptableObject
     public float boostAttemptSpeed = 20;
     [Tooltip("The speed that the player will recenter towards forward facing at"), Range(0, 100)]
     public float recenterSpeed = 3;
-    [Tooltip("The amount that will be multiplied to the speed gained from angle value")]
-    public float momentumMultiplier = 2;
-    [Tooltip("Prevents momentum from slowing you down below the normal speed")]
-    public bool onlyPositiveMomentum = true;
+    [Tooltip("The speed that the player will adjust to the normals of the ground upon collision"), Range(0, 50)]
+    public float groundAdjustSpeed = 10;
+    [Tooltip("This value will be multiplied by the direction vector and added to the movement speed, but only for looking downwards")]
+    public float downwardsMomentumMultiplier = 5;
+    [Tooltip("A value of 0 will prevent you from going below the normal speed. A positive number will make you slow down, and a negative number will make you speed up")]
+    public float upwardsMomentumMultiplier = 0;
     
     [Space]
     [Header("Level Player Values")]

@@ -6,22 +6,37 @@ using TMPro;
 
 public class NPlayerUI : MonoBehaviour
 {
-    public NPlayerOpenControl openPlayer;
-    public NPlayerLevelFollow levelPlayer;
-    public NPlayerScriptableObject _stats;
+    [SerializeField] private bool isLevelPlayer;
+    [SerializeField] private NPlayerOpenControl openPlayer;
+    [SerializeField] private NPlayerLevelFollow levelPlayer;
+    [SerializeField] private NPlayerScriptableObject _stats;
 
     public float chipReq = 50;
-
-    public TextMeshProUGUI scoreText;
-    public TextMeshProUGUI timeText;
-    public TextMeshProUGUI chipText;
-    public BoostBar boostBar;
+    [Space]
+    [SerializeField] private TextMeshProUGUI chipText;
+    [SerializeField] private TextMeshProUGUI scoreText;
+    [SerializeField] private GameObject scoreObject;
+    [SerializeField] private TextMeshProUGUI timeText;
+    [SerializeField] private GameObject timeObject;
+    [SerializeField] private BoostBar boostBar;
 
     void Update()
     {
-        scoreText.text = levelPlayer.currentScore.ToString();
-        timeText.text = levelPlayer.levelTimeLeft.ToString();
-        chipText.text = levelPlayer.currentChips.ToString() + " / " + chipReq.ToString();
         boostBar.SetBoost((int)_stats.boostGauge);
+
+        if(_stats.isLevelPlayer)
+        {
+            scoreText.text = levelPlayer.currentScore.ToString();
+            timeText.text = levelPlayer.levelTimeLeft.ToString();
+            chipText.text = levelPlayer.currentChips.ToString() + " / " + chipReq.ToString();
+        }
+        else
+        chipText.text = _stats.openChips.ToString();
+    }
+    
+    public void ActivateLevelUI(bool active)
+    {
+        scoreObject.SetActive(active);
+        timeObject.SetActive(active);
     }
 }
