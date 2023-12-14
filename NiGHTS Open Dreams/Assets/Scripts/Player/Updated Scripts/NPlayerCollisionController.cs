@@ -39,7 +39,10 @@ public class NPlayerCollisionController : MonoBehaviour
 
 
             if(levelPlayer != null)
+            {
                 levelPlayer.currentScore += 10;
+                levelPlayer.LinkIncrease();
+            }
         }
         if(other.CompareTag("GreenRing"))
         {
@@ -54,18 +57,28 @@ public class NPlayerCollisionController : MonoBehaviour
             else _stats.boostGauge = 100;
 
             if(levelPlayer != null)
+            {
                 levelPlayer.currentScore += 10;
+                levelPlayer.LinkIncrease();
+            }
         }
         if(other.CompareTag("PowerRing"))
         {
             MainSounds.PlayOneShot(_sounds.PowerRingSFX, 1.0f);
             _stats.boostGauge = 100;
             //power = true;
+            if(levelPlayer != null)
+            {
+                levelPlayer.currentScore += 10;
+                levelPlayer.LinkIncrease();
+            }
         }
         if(other.CompareTag("SpikeRing"))
         {
             MainSounds.PlayOneShot(_sounds.SpikeRingSFX, 1.0f);
             _stats.boostGauge -= 5;
+            if(levelPlayer != null)
+                levelPlayer.LinkEmpty();
         }
     }
     void OnCollisionStay(Collision other)
@@ -93,7 +106,7 @@ public class NPlayerCollisionController : MonoBehaviour
         //pointItemScript.InstantiatePointAndChip(true);
         MainSounds.PlayOneShot(_sounds.BlueChipSFX, 1.0f);
         other.gameObject.SetActive(false);
-
+        
         if(levelPlayer != null)
             levelPlayer.currentChips += 1;
         else _stats.openChips += 1;
@@ -102,7 +115,11 @@ public class NPlayerCollisionController : MonoBehaviour
     {
         MainSounds.PlayOneShot(_sounds.BlueChipSFX, 1.0f);
         other.gameObject.SetActive(false);
-        levelPlayer.currentScore += 10;
-        //levelTimeLeft += 0.25f;
+        if(levelPlayer != null)
+        {
+            levelPlayer.LinkIncrease();
+            levelPlayer.currentScore += 10;
+            levelPlayer.levelTimeLeft += 0.3f;
+        }
     }
 }

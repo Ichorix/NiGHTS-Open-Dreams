@@ -7,32 +7,32 @@ using TMPro;
 public class LinkControl : MonoBehaviour
 {
     public TextMeshProUGUI linkText;
-    public int link;
     public AnimationCurve curve;
     [SerializeField] private float speed;
-    public float time;
-    public float scale;
+    private float scaleTime;
+    private float scale;
 
     void OnEnable()
     {
-        RunLinkIncrease();
+        RunLinkIncrease(0);
     }
-    public void RunLinkIncrease()
+
+    public void RunLinkIncrease(int link)
     {
         if(link > 1)
         {
             linkText.text = link.ToString() + "Links";
-            time = 0;
+            scaleTime = 0;
         }
-        if(link == 0) time = 1;
+        if(link == 0) scaleTime = 1;
     }
     
     void Update()
     {
-        if(time <= 1)
+        if(scaleTime <= 1)
         {
-            time += Time.deltaTime * speed;
-            scale = curve.Evaluate(time);
+            scaleTime += Time.deltaTime * speed;
+            scale = curve.Evaluate(scaleTime);
             
             transform.localScale = new Vector3(
                 scale, scale, scale

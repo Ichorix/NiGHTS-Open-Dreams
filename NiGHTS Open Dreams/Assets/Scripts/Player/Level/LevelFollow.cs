@@ -332,10 +332,7 @@ namespace PathCreation.Examples
             linkPitch += linkPitchIncrease;
 
             if(linkControl != null)
-            {
-                linkControl.link = link;
-                linkControl.RunLinkIncrease();
-            }
+                linkControl.RunLinkIncrease(link);
         }
         void LinkEmpty()
         {
@@ -344,10 +341,7 @@ namespace PathCreation.Examples
             linkPitch = 1 - linkPitchIncrease;
             linkActive = false;
             if(linkControl != null)
-            {
-                linkControl.link = link;
-                linkControl.RunLinkIncrease();
-            }
+                linkControl.RunLinkIncrease(link);
         }
 
         public int levelSegmentNum;

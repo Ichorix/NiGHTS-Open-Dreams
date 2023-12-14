@@ -269,20 +269,14 @@ public class NPlayerLevelFollow : MonoBehaviour
         link += 1;
         linkActive = true;
         if(linkControl != null)
-        {
-            linkControl.link = link;
-            linkControl.RunLinkIncrease();
-        }
+            linkControl.RunLinkIncrease(link);
     }
-    void LinkEmpty()
+    public void LinkEmpty()
     {
         linkTimeLeft = 0;
         link = 0;
         linkActive = false;
         if(linkControl != null)
-        {
-            linkControl.link = link;
-            linkControl.RunLinkIncrease();
-        }
+            linkControl.RunLinkIncrease(link);
     }
 }
