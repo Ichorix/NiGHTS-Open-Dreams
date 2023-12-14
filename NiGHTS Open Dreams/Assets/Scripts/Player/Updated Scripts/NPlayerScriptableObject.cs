@@ -89,5 +89,5 @@ public class NPlayerScriptableObject : ScriptableObject
 
     public float displayScore;
     public float levelTime;
-    public float openChips;    
+    public int openChips;    
 }

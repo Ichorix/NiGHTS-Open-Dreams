@@ -2,19 +2,21 @@
 {
     using UnityEngine;
     using UnityEngine.UI;
+    using TMPro;
 
     public class GenericModal : Modal
     {
         [Tooltip("Modal title")]
-        [SerializeField] protected Text m_Title;
+        [SerializeField] protected TextMeshProUGUI m_Title;
         [Tooltip("Modal body")]
-        [SerializeField] protected Text m_Body;
+        [SerializeField] protected TextMeshProUGUI m_Body;
         [Tooltip("Buttons in the modal")]
         [SerializeField] protected Button[] m_Buttons;
 
         /// <summary>
         /// Deactivate buttons in awake
         /// </summary>
+        /*
         public void Awake()
         {
             for (int i = 0; i < m_Buttons.Length; i++)
@@ -22,7 +24,8 @@
                 m_Buttons[i].gameObject.SetActive(false);
             }
         }
-
+        */
+        
         public override void Show(ModalContentBase modalContent, ModalButton[] modalButton)
         {
             GenericModalContent content = (GenericModalContent) modalContent;

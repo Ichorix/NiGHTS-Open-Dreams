@@ -473,7 +473,7 @@ MonoBehaviour:
 
 '
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 2c0156faf317e714ab89e080630f1ad0, type: 2}
+  m_fontAsset: {fileID: 0}
   m_sharedMaterial: {fileID: 21847181677949026, guid: 2c0156faf317e714ab89e080630f1ad0, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -1034,7 +1034,7 @@ RectTransform:
   - {fileID: 1766092730367473234}
   - {fileID: 1449696760992291159}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1182,7 +1182,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: Boss
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 2c0156faf317e714ab89e080630f1ad0, type: 2}
+  m_fontAsset: {fileID: 0}
   m_sharedMaterial: {fileID: 21847181677949026, guid: 2c0156faf317e714ab89e080630f1ad0, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -1451,7 +1451,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: +12s
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8d020e2231077e247b0bf5e0e436adde, type: 2}
+  m_fontAsset: {fileID: 0}
   m_sharedMaterial: {fileID: 21556823966636244, guid: 8d020e2231077e247b0bf5e0e436adde, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -1588,8 +1588,8 @@ MonoBehaviour:
 
 '
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: b29e7b76fe0bcd943a375ee25a7e50ff, type: 2}
-  m_sharedMaterial: {fileID: 21779820041598622, guid: b29e7b76fe0bcd943a375ee25a7e50ff, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: bcd009b472b409246b43ee844fce7583, type: 2}
+  m_sharedMaterial: {fileID: -4932688244389207668, guid: bcd009b472b409246b43ee844fce7583, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1723,7 +1723,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: Level
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 2c0156faf317e714ab89e080630f1ad0, type: 2}
+  m_fontAsset: {fileID: 0}
   m_sharedMaterial: {fileID: 21847181677949026, guid: 2c0156faf317e714ab89e080630f1ad0, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -1992,7 +1992,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: GROWTH PALACE
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 2c0156faf317e714ab89e080630f1ad0, type: 2}
+  m_fontAsset: {fileID: 0}
   m_sharedMaterial: {fileID: 21847181677949026, guid: 2c0156faf317e714ab89e080630f1ad0, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}

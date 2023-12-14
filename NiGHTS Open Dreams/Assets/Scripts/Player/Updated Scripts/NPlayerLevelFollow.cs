@@ -13,9 +13,9 @@ public class NPlayerLevelFollow : MonoBehaviour
     private Rigidbody rigidbody;
 
     [Header("Current Level Information")]
-    public PathCreator[] Level1Paths = new PathCreator[4]; //Creates the level with the appropriate amount of paths. Paths assigned in Inspector
-    public AnimationCurve[] Level1Grading = new AnimationCurve[4]; //Score defined in Inspector. Mapped as Grade over Score. Grade 5 = A, Grade 0 = F
-    public float[] Level1Times = new float[4]; //Time defined in Inspector.
+    public PathCreator[] ActiveLevelPaths = new PathCreator[4]; //Creates the level with the appropriate amount of paths. Paths assigned in Inspector
+    public AnimationCurve[] ActiveLevelGrading = new AnimationCurve[4]; //Score defined in Inspector. Mapped as Grade over Score. Grade 5 = A, Grade 0 = F
+    public float[] ActiveLevelTimes = new float[4]; //Time defined in Inspector.
     public PathCreator currentPath;
     public EndOfPathInstruction endOfPathInstruction;
 
@@ -45,7 +45,6 @@ public class NPlayerLevelFollow : MonoBehaviour
 
     void Start()    
     {
-        rigidbody = GetComponent<Rigidbody>();
         if (currentPath != null)
         {
             // Subscribed to the pathUpdated event so that we're notified if the path changes during the game
@@ -63,13 +62,14 @@ public class NPlayerLevelFollow : MonoBehaviour
         _stats.boostGauge = _stats.maxBoost;
 
         levelSegment = 0;
-        currentPath = Level1Paths[levelSegment];
+        currentPath = ActiveLevelPaths[levelSegment];
         //chipRequirement = 50;
         //score = 0;
 
         continueLevel = false;
         distanceTravelled = 0;
         
+        rigidbody = GetComponent<Rigidbody>();
         rigidbody.AddForce(Vector3.up * 5f, ForceMode.Impulse);
         
         /*
