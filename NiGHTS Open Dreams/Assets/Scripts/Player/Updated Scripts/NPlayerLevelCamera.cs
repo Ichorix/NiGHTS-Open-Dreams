@@ -5,10 +5,11 @@ using PathCreation;
 
 public class NPlayerLevelCamera : MonoBehaviour
 {
-    public NPlayerLevelFollow _player;
+    [SerializeField] private NPlayerLevelFollow _player;
     private PathCreator currentPath;
     private EndOfPathInstruction endOfPathInstruction;
     public float distanceTravelled;
+
     [Header("Y Easing")]
     [SerializeField] private float playerYvalue;
     [SerializeField] private float levelYvalue;

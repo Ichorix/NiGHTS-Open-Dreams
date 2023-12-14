@@ -11,9 +11,9 @@ using UnityEngine.InputSystem;
 public class NPlayerInput : MonoBehaviour
 {
     private PlayerInputActions playerControls;
-    public NPlayerScriptableObject _stats;
-    public NPlayerOpenControl _openPlayer;
-    public CinemachineFreeLook _mainCamera;
+    [SerializeField] private NPlayerScriptableObject _stats;
+    [SerializeField] private NPlayerOpenControl _openPlayer;
+    [SerializeField] private CinemachineFreeLook _mainCamera;
 
     void Awake()
     {
@@ -76,10 +76,7 @@ public class NPlayerInput : MonoBehaviour
     }
     void LookInput(Vector2 dir)
     {
-        //Debug.Log(dir);
         _stats.LookDirection = dir;
-
-
     }
 
     void RecenterCamera()

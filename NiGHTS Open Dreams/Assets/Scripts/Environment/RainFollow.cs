@@ -5,10 +5,8 @@ using UnityEngine;
 public class RainFollow : MonoBehaviour
 {
     public StateController sc;
-    [SerializeField]
-    private Vector3 follow;
-    [SerializeField]
-    private float yVal;
+    [SerializeField] private Vector3 follow;
+    [SerializeField] private float yVal;
 
     void Update()
     {
