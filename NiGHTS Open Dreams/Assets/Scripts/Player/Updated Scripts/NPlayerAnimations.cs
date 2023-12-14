@@ -4,23 +4,15 @@ using UnityEngine;
 
 public class NPlayerAnimations : MonoBehaviour
 {
-    [SerializeField] private bool isLevelPlayer;
-    public NPlayerLevelRotations levelPlayer;
+    [SerializeField] private NPlayerLevelRotations levelPlayer;
     
-    [SerializeField]
-    private Animator _animator;
-    [SerializeField]
-    private NPlayerScriptableObject _stats;
-    [SerializeField]
-    private ParticleSystem rightHandSparkles;
-    [SerializeField]
-    private ParticleSystem leftHandSparkles;
-    [SerializeField]
-    private TrailRenderer boostTrail;
-    [SerializeField]
-    private ParticleSystem boostParticles;
-    [SerializeField]
-    private float turningAnimationThreshold = 0.6f;
+    [SerializeField] private Animator _animator;
+    [SerializeField] private NPlayerScriptableObject _stats;
+    [SerializeField] private ParticleSystem rightHandSparkles;
+    [SerializeField] private ParticleSystem leftHandSparkles;
+    [SerializeField] private TrailRenderer boostTrail;
+    [SerializeField] private ParticleSystem boostParticles;
+    [SerializeField] private float turningAnimationThreshold = 0.6f;
 
     private bool boostAnim;
     private bool boostOverride;
@@ -42,7 +34,7 @@ public class NPlayerAnimations : MonoBehaviour
 
         BoostingAnimations();
 
-        if(!isLevelPlayer)
+        if(!_stats.isLevelPlayer)
         NPlayerOpenControl_TurningAnimations();
         else
         NPlayerLevelFollow_TurningAnimations();
