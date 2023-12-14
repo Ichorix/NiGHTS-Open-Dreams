@@ -33,24 +33,6 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "TurningLeft",
-                    "type": "Value",
-                    "id": "a4e44557-298d-4a9a-9fdb-ffa90d086f5a",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "Press(behavior=1)",
-                    "initialStateCheck": true
-                },
-                {
-                    "name": "TurningRight",
-                    "type": "Value",
-                    "id": "99b9c59b-17f4-4bef-81fe-bed4c95904b5",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "Press(behavior=1)",
-                    "initialStateCheck": true
-                },
-                {
                     "name": "RecenterCamera",
                     "type": "Button",
                     "id": "8cdafcbb-b0b0-4285-93ec-986307d583be",
@@ -204,50 +186,6 @@
                     "processors": "InvertVector2(invertX=false,invertY=false)",
                     "groups": "",
                     "action": "Rotating",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "529fd553-27c0-42fb-960a-2b8d0db6854d",
-                    "path": "<Keyboard>/a",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "TurningLeft",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "6e16af93-e54e-4a45-95e9-c8b4cfd0f9c4",
-                    "path": "<Gamepad>/leftStick/left",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "TurningLeft",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "d11f2aa9-3845-442f-94ab-3a54597401ca",
-                    "path": "<Keyboard>/d",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "TurningRight",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "b2a3e2da-f6d9-43fc-aac8-c2461ca39bbf",
-                    "path": "<Gamepad>/leftStick/right",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "TurningRight",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
