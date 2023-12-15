@@ -22,7 +22,7 @@ public class NPlayerUI : MonoBehaviour
 
     void Update()
     {
-        boostBar.SetBoost((int)_stats.boostGauge);
+        boostBar.SetBoost((int)_stats.BoostGauge);
 
         if(_stats.isLevelPlayer)
         {
