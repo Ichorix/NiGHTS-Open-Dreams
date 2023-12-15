@@ -56,7 +56,7 @@ public class NPlayerOpenControl : MonoBehaviour
     {
         // I don't remember why they have to be reordered, but whatever
         Vector2 rotation = new Vector2(-_stats.MoveDirection.y, _stats.MoveDirection.x);
-        transform.Rotate(_stats.turningSpeed * rotation * Time.deltaTime);
+        transform.Rotate(_stats.turningSpeed * _stats.TurningMultiplier * rotation * Time.deltaTime);
     }
 
     private float CalculateMomentumBonus()

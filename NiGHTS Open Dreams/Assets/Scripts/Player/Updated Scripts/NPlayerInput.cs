@@ -54,15 +54,17 @@ public class NPlayerInput : MonoBehaviour
     {
 
     }
+    public void OnTightTurn(InputValue value)
+    {
+        TightTurnInput(value.Get<float>());
+    }
     #endif
 
     void MoveInput(float movementMultiplier)
     {
-        //_stats.isMoving = newMoveState; Runs normally at 0.5 for movementMultiplier. Now using an If to be more precise
         if(movementMultiplier > 0) _stats.isMoving = true;
         else _stats.isMoving = false;
         bool newMoveState = _stats.isMoving;
-        //Debug.Log(newMoveState + ", " + movementMultiplier);
         _stats.MovementMultiplier = movementMultiplier;
         if(!newMoveState) _openPlayer.StoppedMoving();
     }
@@ -99,5 +101,10 @@ public class NPlayerInput : MonoBehaviour
                 _openPlayer.CamSetPlayer();
             }
         }
+    }
+    void TightTurnInput(float multiplier)
+    {
+        Debug.Log(multiplier);
+        _stats.TurningMultiplier = multiplier + 1;
     }
 }

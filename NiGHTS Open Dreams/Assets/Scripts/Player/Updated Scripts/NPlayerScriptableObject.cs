@@ -71,6 +71,8 @@ public class NPlayerScriptableObject : ScriptableObject
     public Vector2 LookDirection;
     [Tooltip("The value from the Trigger to multiply values by")]
     public float MovementMultiplier;
+    [Tooltip("The value from the other trigger to multiply turning speed by")]
+    public float TurningMultiplier;
     [Tooltip("Reads if the player should be moving forward or not")]
     public bool isMoving; 
     [Tooltip("Reads if the player should boost when moving or not")]

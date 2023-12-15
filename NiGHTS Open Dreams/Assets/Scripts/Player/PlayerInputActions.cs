@@ -98,6 +98,15 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""TightTurn"",
+                    ""type"": ""Value"",
+                    ""id"": ""14c3a8e9-fdf2-41bd-9915-00b1362e9962"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -375,6 +384,28 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""action"": ""Look"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0dd5770d-93c2-4d24-aac1-66488c09efa9"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""TightTurn"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""86b96ce4-7b48-4da3-a04f-1506dc8d400b"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""TightTurn"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -391,6 +422,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         m_Player_Pause = m_Player.FindAction("Pause", throwIfNotFound: true);
         m_Player_Continue = m_Player.FindAction("Continue", throwIfNotFound: true);
         m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
+        m_Player_TightTurn = m_Player.FindAction("TightTurn", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -458,6 +490,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Pause;
     private readonly InputAction m_Player_Continue;
     private readonly InputAction m_Player_Look;
+    private readonly InputAction m_Player_TightTurn;
     public struct PlayerActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -470,6 +503,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         public InputAction @Pause => m_Wrapper.m_Player_Pause;
         public InputAction @Continue => m_Wrapper.m_Player_Continue;
         public InputAction @Look => m_Wrapper.m_Player_Look;
+        public InputAction @TightTurn => m_Wrapper.m_Player_TightTurn;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -503,6 +537,9 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @Look.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLook;
                 @Look.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLook;
                 @Look.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLook;
+                @TightTurn.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTightTurn;
+                @TightTurn.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTightTurn;
+                @TightTurn.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTightTurn;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -531,6 +568,9 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @Look.started += instance.OnLook;
                 @Look.performed += instance.OnLook;
                 @Look.canceled += instance.OnLook;
+                @TightTurn.started += instance.OnTightTurn;
+                @TightTurn.performed += instance.OnTightTurn;
+                @TightTurn.canceled += instance.OnTightTurn;
             }
         }
     }
@@ -545,5 +585,6 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         void OnPause(InputAction.CallbackContext context);
         void OnContinue(InputAction.CallbackContext context);
         void OnLook(InputAction.CallbackContext context);
+        void OnTightTurn(InputAction.CallbackContext context);
     }
 }

@@ -76,6 +76,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "TightTurn",
+                    "type": "Value",
+                    "id": "14c3a8e9-fdf2-41bd-9915-00b1362e9962",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -353,6 +362,28 @@
                     "action": "Look",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "0dd5770d-93c2-4d24-aac1-66488c09efa9",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "TightTurn",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "86b96ce4-7b48-4da3-a04f-1506dc8d400b",
+                    "path": "<Gamepad>/leftTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "TightTurn",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }
