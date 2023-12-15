@@ -28,10 +28,20 @@ public class NPlayerLevelFollow : MonoBehaviour
     public float currentChips;
     public float currentScore;
 
-    public LinkControl linkControl;
-    public int link;
-    public bool linkActive;
-    public float linkTimeLeft;
+    // Links
+    [SerializeField] private LinkControl linkControl;
+    [SerializeField] private int link;
+    [SerializeField] private bool linkActive;
+    private float linkTimeLeft;
+    public float LinkTimeLeft
+    {
+        get{ return linkTimeLeft; }
+        set
+        {
+            if(value <= 0) LinkEmpty();
+            linkTimeLeft = value;
+        }
+    }
     
 
     private Vector3 pathPosition;
@@ -105,8 +115,7 @@ public class NPlayerLevelFollow : MonoBehaviour
         SpeedLogic(); // Mostly copied from NPlayerOpenControl.MovePlayer()
         MovePlayer();
         BoostStuff();
-        //UpdateUI(); //Updates Score, Time, Chip, and Boost Bar
-        //LevelLogic(); //Counting time and logic for when Time is up
+        LevelLogic(); //Counting time and logic for when Time is up
         //ParaloopLogic(); //Paraloop
     }
     void MovePlayer()
@@ -146,39 +155,6 @@ public class NPlayerLevelFollow : MonoBehaviour
 
         // Compares if it is boosting to use the boosting speed, if it is running the boost attempt to use the boost attempt speed, and if neither then the normal speed
         _speed = canBoost ? _stats.boostingSpeedLevel : boostAttempt ? _stats.boostAttemptSpeedLevel : _stats.normalSpeedLevel;
-
-        ////TODO remove this acceleration code if i dont like it
-        /*
-        //Checks if you are going faster than the target speed (true when target speed is 0 or when target speed is normal speed after boosting)
-        //And if your speed is greater than the normal speed after boosting
-        if(_speed >= targetSpeed && _speed > _stats.speedABoostingLevel) // Will return true if you are decelerating after boosting.
-            targetSpeed = _stats.speedABoostingLevel;                    
-        // If the speed change rate is too high or if performance is bad, it will sometimes jump past speedABoosting resulting in decelerating to normal speed
-        // This can be fixed by increasing the speedOffset.
-
-        if(!_stats.isMoving)
-            targetSpeed = 0;
-        
-        float speedChangeRate = _stats.isBoosting ? _stats.boostingAccelerationRate : _stats.normalAccelerationRate;
-        float speedOffset = 0.5f; //Default 0.5f
-
-        if(_speed < targetSpeed - speedOffset) //Accelerate
-        {
-            _speed += speedChangeRate * Time.deltaTime;
-
-            // round speed to 2 decimal places
-            _speed = Mathf.Round(_speed * 100f) / 100f;
-        }
-        else if(_speed > targetSpeed + speedOffset) //Decelerate
-        {
-            if(targetSpeed == 0) speedChangeRate = _stats.decelerationRate;
-
-            _speed -= speedChangeRate * Time.deltaTime;
-
-            _speed = Mathf.Round(_speed * 100f) / 100f;
-        }
-        if(_speed <= speedOffset) _speed = 0;
-        */
     }
 
     private void BoostStuff()
@@ -198,7 +174,8 @@ public class NPlayerLevelFollow : MonoBehaviour
     void LevelLogic()
     {
         levelTimeLeft += Time.deltaTime;
-        
+        if(linkActive) LinkTimeLeft -= Time.deltaTime;
+
         if(levelTimeLeft < 0)
         {
             //sc.Activate1();
@@ -211,15 +188,6 @@ public class NPlayerLevelFollow : MonoBehaviour
             //growthPalace.ReturnAllIdeyas();
         }
     }
-
-    void UpdateUI()
-    {
-        //scoreText.text = score.ToString();
-        //timeText.text = (int)levelTime.ToString();
-        //chipText.text = chipCounter.ToString() + " / " + chipReq.ToString();
-        //boostBar.SetBoost((int)_stats.BoostGauge);
-    }
-    
 
     //////////FUNCTIONS//////////
 
@@ -266,7 +234,7 @@ public class NPlayerLevelFollow : MonoBehaviour
 
     public void LinkIncrease()
     {
-        linkTimeLeft = 1;
+        LinkTimeLeft = 1;
         link += 1;
         linkActive = true;
         if(linkControl != null)
@@ -274,7 +242,6 @@ public class NPlayerLevelFollow : MonoBehaviour
     }
     public void LinkEmpty()
     {
-        linkTimeLeft = 0;
         link = 0;
         linkActive = false;
         if(linkControl != null)

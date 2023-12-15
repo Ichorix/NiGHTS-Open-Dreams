@@ -44,7 +44,7 @@ public class NPlayerCollisionController : MonoBehaviour
 
             if(levelPlayer != null)
             {
-                levelPlayer.currentScore += 10;
+                levelPlayer.currentScore += 10 * levelPlayer.link;
                 levelPlayer.LinkIncrease();
             }
         }
@@ -62,7 +62,7 @@ public class NPlayerCollisionController : MonoBehaviour
 
             if(levelPlayer != null)
             {
-                levelPlayer.currentScore += 10;
+                levelPlayer.currentScore += 10 * levelPlayer.link;
                 levelPlayer.LinkIncrease();
             }
         }
@@ -73,7 +73,7 @@ public class NPlayerCollisionController : MonoBehaviour
             _stats.PowerBuff = true;
             if(levelPlayer != null)
             {
-                levelPlayer.currentScore += 10;
+                levelPlayer.currentScore += 10 * levelPlayer.link;
                 levelPlayer.LinkIncrease();
             }
         }
@@ -126,7 +126,7 @@ public class NPlayerCollisionController : MonoBehaviour
         if(levelPlayer != null)
         {
             levelPlayer.LinkIncrease();
-            levelPlayer.currentScore += 10;
+            levelPlayer.currentScore += 10 * levelPlayer.link;
             levelPlayer.levelTimeLeft += 0.3f;
         }
     }
