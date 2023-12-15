@@ -12,7 +12,7 @@ public class NPlayerStateController : MonoBehaviour
 
     void Start()
     {
-        //Activates the Open Player by default
+        // Activates the Open Player by default
         ActivatePlayer(false);
     }
 
@@ -25,18 +25,16 @@ public class NPlayerStateController : MonoBehaviour
     }
     public void ActivateLevelPlayer(PathCreator[] paths, float[] times, AnimationCurve[] grades)
     {
+        NPlayerLevelFollow levelFollow = levelPlayer.transform.GetChild(0).GetComponent<NPlayerLevelFollow>();
+
+        levelFollow.ActiveLevelPaths = paths;
+        levelFollow.ActiveLevelTimes = times;
+        levelFollow.ActiveLevelGrading = grades;
+
+        // Activation has to be after the assignment so that the OnEnable() function assigns the rest of the values properly
         openPlayer.SetActive(false);
         levelPlayer.SetActive(true);
         _stats.isLevelPlayer = true;
         UIController.ActivateLevelUI(true);
-
-        NPlayerLevelFollow levelFollow = levelPlayer.GetComponent<NPlayerLevelFollow>();
-        Debug.Log("Got to here");
-        levelFollow.ActiveLevelPaths = paths;
-        Debug.Log("1");
-        levelFollow.ActiveLevelTimes = times;
-        Debug.Log("2");
-        levelFollow.ActiveLevelGrading = grades;
-        Debug.Log(":)");
     }
 }
