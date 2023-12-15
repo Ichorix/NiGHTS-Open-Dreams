@@ -27,7 +27,7 @@ public class NPlayerUI : MonoBehaviour
         if(_stats.isLevelPlayer)
         {
             scoreText.text = levelPlayer.currentScore.ToString();
-            timeText.text = levelPlayer.levelTimeLeft.ToString();
+            timeText.text = ((int)levelPlayer.levelTimeLeft).ToString();
             chipText.text = levelPlayer.currentChips.ToString() + " / " + chipReq.ToString();
         }
         else

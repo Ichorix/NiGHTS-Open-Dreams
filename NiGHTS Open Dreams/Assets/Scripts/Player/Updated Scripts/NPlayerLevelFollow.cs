@@ -11,6 +11,8 @@ public class NPlayerLevelFollow : MonoBehaviour
     [SerializeField] private NPlayerScriptableObject _stats;
     [SerializeField] private NPlayerAnimations _animations;
     private Rigidbody rigidbody;
+    private Vector3 pathPosition;
+    private Vector3 pathRotation;
 
     [Header("Current Level Information")]
     public PathCreator[] ActiveLevelPaths = new PathCreator[4]; //Creates the level with the appropriate amount of paths. Paths assigned in Inspector
@@ -25,8 +27,8 @@ public class NPlayerLevelFollow : MonoBehaviour
     [Header("Player Level Data")]
     public float levelTimeLeft;
     private int chipRequirement;
-    public float currentChips;
-    public float currentScore;
+    public int currentChips;
+    public int currentScore;
 
     [Header("Links Data")]
     [SerializeField] private LinkControl linkControl;
@@ -42,11 +44,7 @@ public class NPlayerLevelFollow : MonoBehaviour
             linkTimeLeft = value;
         }
     }
-    
-
-    private Vector3 pathPosition;
-    private Vector3 pathRotation;
-
+    [Header("Movement Information")]
     [SerializeField] private bool canBoost;
     [SerializeField] private bool boostAttempt;
     [SerializeField] private bool boostAttemptCooldown;
@@ -73,8 +71,7 @@ public class NPlayerLevelFollow : MonoBehaviour
 
         levelSegment = 0;
         currentPath = ActiveLevelPaths[levelSegment];
-        //chipRequirement = 50;
-        //score = 0;
+        levelTimeLeft = ActiveLevelTimes[levelSegment];
 
         continueLevel = false;
         distanceTravelled = 0;
@@ -83,7 +80,7 @@ public class NPlayerLevelFollow : MonoBehaviour
         rigidbody.AddForce(Vector3.up * 5f, ForceMode.Impulse);
         
         /*
-        if(true) // TODO: Sort through later
+        if(!bossFight) // TODO: Sort through later
         {
             pathS11.gameObject.SetActive(true);
             currentPath = pathS11;
@@ -173,7 +170,7 @@ public class NPlayerLevelFollow : MonoBehaviour
 
     void LevelLogic()
     {
-        levelTimeLeft += Time.deltaTime;
+        levelTimeLeft -= Time.deltaTime;
         if(linkActive) LinkTimeLeft -= Time.deltaTime;
 
         if(levelTimeLeft < 0)
