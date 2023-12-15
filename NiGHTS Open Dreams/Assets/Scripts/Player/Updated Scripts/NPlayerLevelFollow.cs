@@ -18,17 +18,17 @@ public class NPlayerLevelFollow : MonoBehaviour
     public float[] ActiveLevelTimes = new float[4]; //Time defined in Inspector.
     public PathCreator currentPath;
     public EndOfPathInstruction endOfPathInstruction;
-
     public float distanceTravelled;
     private int levelSegment;
     private bool continueLevel;
+
+    [Header("Player Level Data")]
     public float levelTimeLeft;
     private int chipRequirement;
-
     public float currentChips;
     public float currentScore;
 
-    // Links
+    [Header("Links Data")]
     [SerializeField] private LinkControl linkControl;
     public int link;
     [SerializeField] private bool linkActive;
