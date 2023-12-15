@@ -30,9 +30,9 @@ public class NPlayerLevelFollow : MonoBehaviour
 
     // Links
     [SerializeField] private LinkControl linkControl;
-    [SerializeField] private int link;
+    public int link;
     [SerializeField] private bool linkActive;
-    private float linkTimeLeft;
+    [SerializeField] private float linkTimeLeft;
     public float LinkTimeLeft
     {
         get{ return linkTimeLeft; }
