@@ -103,6 +103,8 @@ public class NPlayerScriptableObject : ScriptableObject
     public bool isBoosting;
     [Tooltip("Reads if the player had just pressed the boost button")]
     public bool runBoostAttempt;
+    [Tooltip("Reads if the player is currently running the boostAttempt Coroutine")]
+    public bool BoostAttempt;
     [Tooltip("Reads whether or not the camera should be attatched to the player or not")]
     public bool cameraPlayerBound;
 

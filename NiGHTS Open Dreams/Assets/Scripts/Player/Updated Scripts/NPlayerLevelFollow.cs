@@ -10,6 +10,7 @@ public class NPlayerLevelFollow : MonoBehaviour
 {
     [SerializeField] private NPlayerScriptableObject _stats;
     [SerializeField] private NPlayerAnimations _animations;
+    [SerializeField] private NPlayerStateController _playerStates;
     private Rigidbody rigidbody;
     private Vector3 pathPosition;
     private Vector3 pathRotation;
@@ -25,7 +26,22 @@ public class NPlayerLevelFollow : MonoBehaviour
     private bool continueLevel;
 
     [Header("Player Level Data")]
-    public float levelTimeLeft;
+    [SerializeField] private float levelTimeLeft;
+    public float LevelTimeLeft
+    {
+        get{ return levelTimeLeft; }
+        set
+        {
+            if(value <= 5)
+            {
+                lowOnTime = true;
+                if(value <= 0)
+                    ExitLevel();
+            }
+            levelTimeLeft = value;
+        }
+    }
+    private bool lowOnTime;
     private int chipRequirement;
     public int currentChips;
     public int currentScore;
@@ -71,10 +87,11 @@ public class NPlayerLevelFollow : MonoBehaviour
 
         levelSegment = 0;
         currentPath = ActiveLevelPaths[levelSegment];
-        levelTimeLeft = ActiveLevelTimes[levelSegment];
+        LevelTimeLeft = ActiveLevelTimes[levelSegment];
 
         continueLevel = false;
         distanceTravelled = 0;
+        transform.position = currentPath.path.GetPointAtDistance(distanceTravelled, endOfPathInstruction);
         
         rigidbody = GetComponent<Rigidbody>();
         rigidbody.AddForce(Vector3.up * 5f, ForceMode.Impulse);
@@ -84,7 +101,7 @@ public class NPlayerLevelFollow : MonoBehaviour
         {
             pathS11.gameObject.SetActive(true);
             currentPath = pathS11;
-            levelTimeLeft = pathS11time + bonusTime;
+            LevelTimeLeft = pathS11time + bonusTime;
             if(pathMusic != null) pathMusic.SetActive(true);
             if(openLevel != null) openLevel.SetActive(false);
 
@@ -170,10 +187,10 @@ public class NPlayerLevelFollow : MonoBehaviour
 
     void LevelLogic()
     {
-        levelTimeLeft -= Time.deltaTime;
+        LevelTimeLeft -= Time.deltaTime;
         if(linkActive) LinkTimeLeft -= Time.deltaTime;
 
-        if(levelTimeLeft < 0)
+        if(LevelTimeLeft < 0)
         {
             //sc.Activate1();
             //currentPath.gameObject.SetActive(false);
@@ -197,6 +214,10 @@ public class NPlayerLevelFollow : MonoBehaviour
             _stats.isBoosting = false;
             return false;
         }
+    }
+    private void ExitLevel()
+    {
+        _playerStates.ActivateOpenPlayer();
     }
     
     public void RunBoostAttempt()

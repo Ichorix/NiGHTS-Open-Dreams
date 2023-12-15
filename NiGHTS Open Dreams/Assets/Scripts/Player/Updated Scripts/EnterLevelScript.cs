@@ -9,7 +9,9 @@ public class EnterLevelScript : MonoBehaviour
     public PathCreator[] Paths = new PathCreator[4];
     [SerializeField] private CustomStageScriptableObject thisStage;
     [SerializeField] private GameObject UIModal;
-    public GameObject modalInstance;
+    private GameObject modalInstance;
+    [SerializeField] private Animator scoreSpinner;
+    public int SavedGrade = 0;
 
     void OnTriggerEnter(Collider other)
     {
@@ -23,9 +25,26 @@ public class EnterLevelScript : MonoBehaviour
             {
                 if(modalInstance == null) // Spawn a new modal if one isnt already up. Prevents having multiple overlapping
                     modalInstance = Instantiate(UIModal);
-                modalInstance.GetComponent<UIModalButtons>().Enable(_stats.openChips,
-                            other.transform.parent.parent.GetComponent<NPlayerStateController>(),
-                            Paths, thisStage);
+                NPlayerStateController playerStates = other.transform.parent.parent.GetComponent<NPlayerStateController>();
+                playerStates.ResetStats();
+                modalInstance.GetComponent<UIModalButtons>().Enable(_stats.openChips, playerStates, Paths, thisStage);
+
+                scoreSpinner.SetInteger("Grade", SavedGrade);
+                scoreSpinner.SetTrigger("RunAnimation");
+            }
+        }
+    }
+    void OnTriggerExit(Collider other)
+    {
+        if(other.CompareTag("Player"))
+        {
+            if(_stats.isLevelPlayer)
+            {
+                //Unsure
+            }
+            else
+            {
+                Destroy(modalInstance);
             }
         }
     }

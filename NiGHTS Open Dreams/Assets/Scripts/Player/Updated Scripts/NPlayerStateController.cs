@@ -13,16 +13,18 @@ public class NPlayerStateController : MonoBehaviour
     void Start()
     {
         // Activates the Open Player by default
-        ActivatePlayer(false);
+        ActivateOpenPlayer();
     }
 
-    void ActivatePlayer(bool isLevelPlayer)
+    public void ActivateOpenPlayer()
     {
-        openPlayer.SetActive(!isLevelPlayer);
-        levelPlayer.SetActive(isLevelPlayer);
-        _stats.isLevelPlayer = isLevelPlayer;
-        UIController.ActivateLevelUI(isLevelPlayer);
+        openPlayer.SetActive(true);
+        levelPlayer.SetActive(false);
+        _stats.isLevelPlayer = false;
+        UIController.ActivateLevelUI(false);
+        ResetStats();
     }
+
     public void ActivateLevelPlayer(PathCreator[] paths, float[] times, AnimationCurve[] grades)
     {
         NPlayerLevelFollow levelFollow = levelPlayer.transform.GetChild(0).GetComponent<NPlayerLevelFollow>();
@@ -36,5 +38,17 @@ public class NPlayerStateController : MonoBehaviour
         levelPlayer.SetActive(true);
         _stats.isLevelPlayer = true;
         UIController.ActivateLevelUI(true);
+        ResetStats();
+    }
+
+    public void ResetStats()
+    {
+        _stats.PowerBuffTimeLeft = 0;
+        _stats.BoostGauge = _stats.maxBoost;
+        _stats.MoveDirection = Vector2.zero;
+        _stats.MovementMultiplier = 0;
+        _stats.TurningMultiplier = 1;
+        _stats.isMoving = false;
+        _stats.isBoosting = false;
     }
 }

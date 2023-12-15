@@ -214,12 +214,12 @@ public class NPlayerOpenControl : MonoBehaviour
     public void ReAdjustToNormals(Vector3 groundNormal)
     {
         mostRecentGroundNormal = groundNormal;
-        float step = _stats.groundAdjustSpeed * Time.deltaTime;
-        
-        //Move towards the ground normal retaining the general forward direction by using the Cross Product of the current right vector
-        transform.forward = Vector3.MoveTowards(transform.forward,
-                            Vector3.Cross(mostRecentGroundNormal, -transform.right),
-                            step);
+        Vector3 normalForward = Vector3.Cross(mostRecentGroundNormal, -transform.right);
+
+        // Calculates how far the player should rotate towards the intended forward by the speed inputted and how close the player is to that direction
+        float step = _stats.groundAdjustSpeed * Vector3.Distance(transform.forward, normalForward) * Time.deltaTime;
+        // Move towards the ground normal retaining the general forward direction by using the Cross Product of the current right vector
+        transform.forward = Vector3.MoveTowards(transform.forward, normalForward, step);
     }
 
     // See NPlayerCollisionController for 2 usage examples
@@ -239,6 +239,7 @@ public class NPlayerOpenControl : MonoBehaviour
         while(boostAttempt)
         {
             t += Time.deltaTime;
+            _stats.BoostAttempt = true;
             transform.Translate(Vector3.forward * Mathf.Clamp(_stats.boostAttemptSpeed + CalculateMomentumBonus(), 0, 100f) * Time.deltaTime);
             _animations.BoostAnimationOverride(true);
             if(t >= _stats.boostAttemptTime)
@@ -249,6 +250,7 @@ public class NPlayerOpenControl : MonoBehaviour
             yield return null;
         }
         t = 0;
+        _stats.BoostAttempt = false;
         while(boostAttemptCooldown)
         {
             t += Time.deltaTime;
@@ -257,6 +259,6 @@ public class NPlayerOpenControl : MonoBehaviour
                 boostAttemptCooldown = false;
             yield return null;
         }
-        _stats.runBoostAttempt = false;
+        //_stats.runBoostAttempt = false;
     }
 }

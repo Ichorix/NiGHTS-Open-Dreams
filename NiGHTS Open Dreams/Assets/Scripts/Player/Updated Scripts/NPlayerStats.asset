@@ -22,6 +22,7 @@ MonoBehaviour:
   groundAdjustSpeed: 10
   downwardsMomentumMultiplier: 5
   upwardsMomentumMultiplier: 0
+  PowerBuff: 1
   normalSpeedLevel: 15
   speedABoostingLevel: 17
   boostingSpeedLevel: 28
@@ -34,10 +35,10 @@ MonoBehaviour:
   boostAttemptCooldown: 0.25
   maxBoost: 100
   boostDepletionRate: 20
-  BoostGauge: 100
   MoveDirection: {x: 0, y: 0}
   LookDirection: {x: 0, y: -0}
   MovementMultiplier: 0
+  TurningMultiplier: 1
   isMoving: 0
   isBoosting: 0
   runBoostAttempt: 1
@@ -46,4 +47,4 @@ MonoBehaviour:
   JoystickLookSensitivity: 1
   displayScore: 0
   levelTime: 0
-  openChips: 376
+  openChips: 483

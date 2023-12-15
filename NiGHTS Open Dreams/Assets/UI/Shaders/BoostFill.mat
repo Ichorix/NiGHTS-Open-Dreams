@@ -38,9 +38,10 @@ Material:
     m_Ints: []
     m_Floats:
     - _Scale: 500
-    - _Speed: 0.2
+    - _Speed: -0.1
+    - _Stretch: 0.05
     m_Colors:
-    - _Remap: {r: 0.5, g: 1, b: 0, a: 0}
+    - _Remap: {r: 0.3, g: 2, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &1011670024503374156
 MonoBehaviour:

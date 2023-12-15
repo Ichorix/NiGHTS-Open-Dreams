@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class NPlayerAnimations : MonoBehaviour
 {
+    [SerializeField] private NPlayerOpenControl openPlayer;
     [SerializeField] private NPlayerLevelRotations levelPlayer;
     
     [SerializeField] private Animator _animator;
@@ -39,15 +40,16 @@ public class NPlayerAnimations : MonoBehaviour
         else
         NPlayerLevelFollow_TurningAnimations();
     }
+
     private void BoostStateManagement()
     {
         if(_stats.isMoving)
         {
+            boostAnim = false;
             if(_stats.BoostGauge > 0)
                 boostAnim = _stats.isBoosting;
-            else
-            if(_stats.runBoostAttempt)
-                boostAnim = _stats.isBoosting;
+            else if(_stats.BoostAttempt)
+                boostAnim = !Grounded;
             rightHandSparkles.enableEmission = true;
             leftHandSparkles.enableEmission = true;
         }
@@ -58,6 +60,8 @@ public class NPlayerAnimations : MonoBehaviour
             leftHandSparkles.enableEmission = false;
         }
     }
+
+    // Used for the boost attempt
     public void BoostAnimationOverride(bool state)
     {
         boostAnim = state;
@@ -72,6 +76,7 @@ public class NPlayerAnimations : MonoBehaviour
             boostTrail.emitting = boostAnim;
         }
     }
+
     private void NPlayerOpenControl_TurningAnimations()
     {
         if(_stats.isMoving && _stats.MoveDirection != Vector2.zero)

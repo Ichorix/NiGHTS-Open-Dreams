@@ -36,6 +36,22 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Mask:
+        m_Texture: {fileID: 2800000, guid: 9f829a0db9d66c14e9ffe04f5b6cc20d, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_5789d90240a74f92aa7eda5571249ba7_Texture_1:
+        m_Texture: {fileID: 2800000, guid: 23914cafab72418489a920c862e32a66, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_64fd166a9d254049a609e479d8d97a6b_Texture_1:
+        m_Texture: {fileID: 2800000, guid: 1724eed8694767b4b8e97031e3c911cb, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _SampleTexture2D_c9f760438cf94e8aaea3afc493075217_Texture_1:
         m_Texture: {fileID: 2800000, guid: 9f829a0db9d66c14e9ffe04f5b6cc20d, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -54,6 +70,9 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _Float: 2.25
+    - _Multiply: 2
+    - _NoiseScale: 15
     - _QueueControl: 0
     - _QueueOffset: 0
     m_Colors: []
