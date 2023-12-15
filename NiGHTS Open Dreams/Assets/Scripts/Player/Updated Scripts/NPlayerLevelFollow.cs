@@ -115,9 +115,10 @@ public class NPlayerLevelFollow : MonoBehaviour
 
         pathPosition = currentPath.path.GetPointAtDistance(distanceTravelled, endOfPathInstruction);
         pathRotation = currentPath.path.GetRotationAtDistance(distanceTravelled, endOfPathInstruction).eulerAngles;
-
-        rigidbody.MovePosition(new Vector3(pathPosition.x, transform.position.y, pathPosition.z));
-        rigidbody.AddForce(Vector3.up * _stats.MoveDirection.y * _speed, ForceMode.VelocityChange);
+        
+        float yMovement = _stats.MoveDirection.y * _speed * Time.deltaTime;
+        rigidbody.MovePosition(new Vector3(pathPosition.x, transform.position.y + yMovement, pathPosition.z));
+        //rigidbody.AddForce(Vector3.up * _stats.MoveDirection.y * _speed, ForceMode.VelocityChange);
 
         transform.eulerAngles = new Vector3(0, pathRotation.y, 0);
 

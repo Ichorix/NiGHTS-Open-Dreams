@@ -20,6 +20,10 @@ public class NPlayerCollisionController : MonoBehaviour
                 //Sets the player back by a frame along with bumping them up. Makes it more consistent
                 openPlayer.BumpUpFromGround(100, openPlayer._speed * Time.deltaTime);
             }
+            else if(levelPlayer != null)
+            {
+                levelPlayer.GetComponent<Rigidbody>().AddForce(Vector3.up * 50, ForceMode.Impulse);
+            }
         }
 
         
@@ -89,6 +93,10 @@ public class NPlayerCollisionController : MonoBehaviour
             {
                 openPlayer.ReAdjustToNormals(other.contacts[0].normal);
                 openPlayer._animations.Grounded = true;
+            }
+            else if(levelPlayer != null)
+            {
+                levelPlayer.GetComponent<Rigidbody>().AddForce(Vector3.up * 300);
             }
         }
     }
