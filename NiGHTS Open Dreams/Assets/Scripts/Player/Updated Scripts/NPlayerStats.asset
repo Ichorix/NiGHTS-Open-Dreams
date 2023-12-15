@@ -34,7 +34,7 @@ MonoBehaviour:
   boostAttemptCooldown: 0.25
   maxBoost: 100
   boostDepletionRate: 20
-  boostGauge: 100
+  BoostGauge: 100
   MoveDirection: {x: 0, y: 0}
   LookDirection: {x: 0, y: -0}
   MovementMultiplier: 0

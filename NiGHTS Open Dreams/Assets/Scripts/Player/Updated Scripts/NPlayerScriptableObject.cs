@@ -20,7 +20,7 @@ public class NPlayerScriptableObject : ScriptableObject
     public float speedABoosting = 25;
     [Tooltip("The top speed that the player can reach while boosting"), Range(0, 100)]
     public float boostingSpeed = 40;
-    [Tooltip("The speed that the player will jump to when they boost while having no boostGauge"), Range(0, 100)]
+    [Tooltip("The speed that the player will jump to when they boost while having no BoostGauge"), Range(0, 100)]
     public float boostAttemptSpeed = 20;
     [Tooltip("The speed that the player will recenter towards forward facing at"), Range(0, 100)]
     public float recenterSpeed = 3;
@@ -30,6 +30,21 @@ public class NPlayerScriptableObject : ScriptableObject
     public float downwardsMomentumMultiplier = 5;
     [Tooltip("A value of 0 will prevent you from going below the normal speed. A positive number will make you slow down, and a negative number will make you speed up")]
     public float upwardsMomentumMultiplier = 0;
+    [Tooltip("Displays whether the Power buff is active or not")]
+
+    [Space]
+    public bool PowerBuff;
+    private float powerBuffTimeLeft;
+    [Tooltip("Displays how much time is left on the Power Buff")]
+    public float PowerBuffTimeLeft
+    {
+        get{ return powerBuffTimeLeft;}
+        set
+        {
+            if(powerBuffTimeLeft <= 0) PowerBuff = false;
+            powerBuffTimeLeft = value;
+        }
+    }
     
     [Space]
     [Header("Level Player Values")]
@@ -39,7 +54,7 @@ public class NPlayerScriptableObject : ScriptableObject
     public float speedABoostingLevel = 17;
     [Tooltip("The top speed that the player can reach while boosting"), Range(0, 100)]
     public float boostingSpeedLevel = 28;
-    [Tooltip("The speed that the player will jump to when they boost while having no boostGauge"), Range(0, 100)]
+    [Tooltip("The speed that the player will jump to when they boost while having no BoostGauge"), Range(0, 100)]
     public float boostAttemptSpeedLevel = 28;
     [Tooltip("The speed that the player will flip to upright position in the Level"), Range(0, 100)]
     public float flipSpeed = 2;
@@ -56,12 +71,21 @@ public class NPlayerScriptableObject : ScriptableObject
     public float boostAttemptTime = 0.2f;
     [Tooltip("The time that it will take before you can do another boost Attempt, in seconds"), Range(0, 10)]
     public float boostAttemptCooldown = 0.25f;
-    [Tooltip("The maximum boost that can be stored in boostGauge"), Range(0, 200)]
+    [Tooltip("The maximum boost that can be stored in BoostGauge"), Range(0, 200)]
     public float maxBoost = 100;
     [Tooltip("The rate at which the player will consume boost"), Range(0, 100)]
     public float boostDepletionRate = 20;
+    private float boostGauge;
     [Tooltip("The players Current boost")]
-    public float boostGauge;
+    public float BoostGauge
+    {
+        get{ return boostGauge; }
+        set
+        {
+            boostGauge = Mathf.Clamp(value, 0, maxBoost);
+        }
+    }
+
 
     [Space]
     [Header("Input Values")]

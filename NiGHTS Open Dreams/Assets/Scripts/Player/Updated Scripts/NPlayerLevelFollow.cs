@@ -59,7 +59,7 @@ public class NPlayerLevelFollow : MonoBehaviour
     void OnEnable() //Resets all applicable values to start the level.
     {
         //Physics.gravity *= gravityModifier;
-        _stats.boostGauge = _stats.maxBoost;
+        _stats.BoostGauge = _stats.maxBoost;
 
         levelSegment = 0;
         currentPath = ActiveLevelPaths[levelSegment];
@@ -132,7 +132,7 @@ public class NPlayerLevelFollow : MonoBehaviour
         canBoost = false;
         if(_stats.isBoosting) canBoost = true;
 
-        if(_stats.boostGauge <= 0)
+        if(_stats.BoostGauge <= 0)
         {
             canBoost = false;
             if(_stats.isMoving && _stats.runBoostAttempt && !boostAttemptCooldown)
@@ -184,8 +184,8 @@ public class NPlayerLevelFollow : MonoBehaviour
     private void BoostStuff()
     {
         if(canBoost && _stats.isMoving)
-            _stats.boostGauge -= _stats.boostDepletionRate * Time.deltaTime;
-        _stats.boostGauge = Mathf.Clamp(_stats.boostGauge, 0, _stats.maxBoost);
+            _stats.BoostGauge -= _stats.boostDepletionRate * Time.deltaTime;
+        _stats.BoostGauge = Mathf.Clamp(_stats.BoostGauge, 0, _stats.maxBoost);
     }
 
     void ParaloopLogic()
@@ -217,7 +217,7 @@ public class NPlayerLevelFollow : MonoBehaviour
         //scoreText.text = score.ToString();
         //timeText.text = (int)levelTime.ToString();
         //chipText.text = chipCounter.ToString() + " / " + chipReq.ToString();
-        //boostBar.SetBoost((int)_stats.boostGauge);
+        //boostBar.SetBoost((int)_stats.BoostGauge);
     }
     
 

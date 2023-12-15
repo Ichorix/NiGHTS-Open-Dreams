@@ -43,7 +43,7 @@ public class NPlayerAnimations : MonoBehaviour
     {
         if(_stats.isMoving)
         {
-            if(_stats.boostGauge > 0)
+            if(_stats.BoostGauge > 0)
                 boostAnim = _stats.isBoosting;
             else
             if(_stats.runBoostAttempt)

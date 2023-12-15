@@ -38,8 +38,8 @@ public class NPlayerCollisionController : MonoBehaviour
         if(other.CompareTag("YellowRing"))
         {
             MainSounds.PlayOneShot(_sounds.YellowRingSFX, 1.0f);
-            if(_stats.boostGauge < 90) _stats.boostGauge += 10;
-            else _stats.boostGauge = 100;
+            if(_stats.BoostGauge < 90) _stats.BoostGauge += 10;
+            else _stats.BoostGauge = 100;
 
 
             if(levelPlayer != null)
@@ -51,14 +51,14 @@ public class NPlayerCollisionController : MonoBehaviour
         if(other.CompareTag("GreenRing"))
         {
             MainSounds.PlayOneShot(_sounds.GreenRingSFX, 1.0f);
-            if(_stats.boostGauge < 90) _stats.boostGauge += 10;
-            else _stats.boostGauge = 100;
+            if(_stats.BoostGauge < 90) _stats.BoostGauge += 10;
+            else _stats.BoostGauge = 100;
         }
         if(other.CompareTag("HalfRing"))
         {
             MainSounds.PlayOneShot(_sounds.HalfRingSFX, 1.0f);
-            if(_stats.boostGauge <= 90) _stats.boostGauge += 10;
-            else _stats.boostGauge = 100;
+            if(_stats.BoostGauge <= 90) _stats.BoostGauge += 10;
+            else _stats.BoostGauge = 100;
 
             if(levelPlayer != null)
             {
@@ -69,8 +69,8 @@ public class NPlayerCollisionController : MonoBehaviour
         if(other.CompareTag("PowerRing"))
         {
             MainSounds.PlayOneShot(_sounds.PowerRingSFX, 1.0f);
-            _stats.boostGauge = 100;
-            //power = true;
+            _stats.PowerBuffTimeLeft = 10;
+            _stats.PowerBuff = true;
             if(levelPlayer != null)
             {
                 levelPlayer.currentScore += 10;
@@ -80,7 +80,7 @@ public class NPlayerCollisionController : MonoBehaviour
         if(other.CompareTag("SpikeRing"))
         {
             MainSounds.PlayOneShot(_sounds.SpikeRingSFX, 1.0f);
-            _stats.boostGauge -= 5;
+            _stats.BoostGauge -= 5;
             if(levelPlayer != null)
                 levelPlayer.LinkEmpty();
         }

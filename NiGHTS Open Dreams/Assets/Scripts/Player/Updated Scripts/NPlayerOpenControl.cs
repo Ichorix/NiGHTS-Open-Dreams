@@ -26,7 +26,7 @@ public class NPlayerOpenControl : MonoBehaviour
     void Start()
     {
         rigidbody = GetComponent<Rigidbody>();
-        _stats.boostGauge = _stats.maxBoost;
+        _stats.BoostGauge = _stats.maxBoost;
         if(!_stats.cameraPlayerBound)
         {
             Debug.Log("World");
@@ -78,7 +78,7 @@ public class NPlayerOpenControl : MonoBehaviour
         canBoost = false;
         if(_stats.isBoosting) canBoost = true;
 
-        if(_stats.boostGauge <= 0)
+        if(_stats.BoostGauge <= 0)
         {
             canBoost = false;
             if(_stats.isMoving && _stats.runBoostAttempt && !boostAttemptCooldown)
@@ -138,9 +138,15 @@ public class NPlayerOpenControl : MonoBehaviour
 
     private void BoostStuff()
     {
+        if(_stats.PowerBuff)
+        {
+            _stats.BoostGauge = _stats.maxBoost;
+            _stats.PowerBuffTimeLeft -= Time.deltaTime;
+            return; //We dont need to do any more calculations if you have Power active
+        }
+
         if(canBoost && _stats.isMoving)
-            _stats.boostGauge -= _stats.boostDepletionRate * Time.deltaTime;
-        _stats.boostGauge = Mathf.Clamp(_stats.boostGauge, 0, _stats.maxBoost);
+            _stats.BoostGauge -= _stats.boostDepletionRate * Time.deltaTime;
     }
     
     private void CameraFunctions()
