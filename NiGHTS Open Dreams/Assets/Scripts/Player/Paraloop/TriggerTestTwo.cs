@@ -4,22 +4,16 @@ using UnityEngine;
 
 public class TriggerTestTwo : MonoBehaviour
 {
-    public NotATrailScript trailScript;
-    public float cooldownLength;
-    public float cooldownTime;
-    public Vector3 collidedPosition, oppositePosition, centerPosition;
-    public int collidedNum;
-    public float otherNum;
-    public GameObject instantiatedEffect;
-
-    void Update()
-    {
-        cooldownTime += Time.deltaTime;
-    }
+    [SerializeField] private NotATrailScript trailScript;
+    private Vector3 collidedPosition, oppositePosition, centerPosition;
+    private int collidedNum;
+    private float otherNum;
+    [SerializeField] private GameObject instantiatedEffect;
+    public GameObject instantiatedEffectInstance;
     
     void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.CompareTag("ParaloopTrail") && cooldownTime > cooldownLength)
+        if(other.gameObject.CompareTag("ParaloopTrail"))
         {
             collidedNum = trailScript.trailObjects.IndexOf(other.gameObject);
             
@@ -29,15 +23,18 @@ public class TriggerTestTwo : MonoBehaviour
                 
                 otherNum = ((totalObjects - collidedNum) * 0.5f) + collidedNum;
                 otherNum = (int)otherNum;
-                Debug.Log("Paraloop; Total:" + totalObjects + "Collided: " + collidedNum + " at " + collidedPosition + " Other: " + otherNum + " at " + oppositePosition);
+
                 collidedPosition = trailScript.trailObjects[collidedNum].transform.position;
                 oppositePosition = trailScript.trailObjects[(int)otherNum].transform.position;
 
                 centerPosition = (collidedPosition + oppositePosition) * 0.5f;
 
-                Instantiate(instantiatedEffect, centerPosition, Quaternion.identity);
-                cooldownTime = 0;
-                //Debug.Log("Paraloop; Total:" + totalObjects + "Collided: " + collidedNum + " at " + collidedPosition + " Other: " + otherNum + " at " + oppositePosition + " Midpoint: " + centerPosition);
+
+                // TODO Figure out how to spawn the paraloop but only once but without cooldown
+                if(instantiatedEffectInstance == null)
+                    instantiatedEffectInstance = Instantiate(instantiatedEffect, centerPosition, Quaternion.identity);
+
+                trailScript.RemoveTrail();
             }
         }
     }

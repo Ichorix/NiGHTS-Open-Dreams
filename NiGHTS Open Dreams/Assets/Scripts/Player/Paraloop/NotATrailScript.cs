@@ -4,45 +4,37 @@ using UnityEngine;
 
 public class NotATrailScript : MonoBehaviour
 {
-    public float spawnTime;
-    public GameObject trailObject;
+    [SerializeField] private NPlayerAnimations _animations;
+    [SerializeField] private GameObject trailObject;
+    [SerializeField] private float distanceThreshold;
     public List<GameObject> trailObjects;
-    public int amountOfGameobjects;
-    
-    public bool isLevel;
-    public GameObject player;
-    
 
-    void Start()
+    void OnEnable()
     {
-        spawnTime = 0;
-        amountOfGameobjects = 0;
+        RemoveTrail();
     }
     void Update()
     {
-        spawnTime += Time.deltaTime;
-        if(spawnTime >= 0.05f)
+        if(trailObjects.Count <= 0)
         {
-            spawnTime = 0;
             SpawnTrail();
+            return;
         }
-        if(isLevel)
-        {
-            transform.position = player.transform.position;
-        }
+        if(Vector3.Distance(transform.position, trailObjects[trailObjects.Count - 1].transform.position) >= distanceThreshold)
+            SpawnTrail();
     }
-
-    void OnDisable()
+    public void RemoveTrail()
     {
         for(var i = trailObjects.Count - 1; i > -1; i--)
         {
+            Destroy(trailObjects[i]);
             trailObjects.RemoveAt(i);
+            _animations.rightHandSparkles.Clear();
+            _animations.leftHandSparkles.Clear();
         }
     }
-
     public void SpawnTrail()
     {
-        amountOfGameobjects++;
         GameObject newTrail = Instantiate(trailObject, transform.position, Quaternion.identity);
         trailObjects.Add(newTrail);
 

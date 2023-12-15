@@ -19,10 +19,10 @@ MonoBehaviour:
   boostingSpeed: 40
   boostAttemptSpeed: 20
   recenterSpeed: 3
-  groundAdjustSpeed: 10
+  groundAdjustSpeed: 20
   downwardsMomentumMultiplier: 5
   upwardsMomentumMultiplier: 0
-  PowerBuff: 1
+  PowerBuff: 0
   normalSpeedLevel: 15
   speedABoostingLevel: 17
   boostingSpeedLevel: 28
@@ -42,9 +42,10 @@ MonoBehaviour:
   isMoving: 0
   isBoosting: 0
   runBoostAttempt: 1
+  BoostAttempt: 0
   cameraPlayerBound: 1
   MouseLookSensitivity: 1
   JoystickLookSensitivity: 1
   displayScore: 0
   levelTime: 0
-  openChips: 483
+  openChips: 522

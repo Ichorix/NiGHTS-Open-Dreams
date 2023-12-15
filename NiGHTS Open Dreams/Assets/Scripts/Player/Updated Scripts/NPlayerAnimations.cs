@@ -9,8 +9,8 @@ public class NPlayerAnimations : MonoBehaviour
     
     [SerializeField] private Animator _animator;
     [SerializeField] private NPlayerScriptableObject _stats;
-    [SerializeField] private ParticleSystem rightHandSparkles;
-    [SerializeField] private ParticleSystem leftHandSparkles;
+    public ParticleSystem rightHandSparkles;
+    public ParticleSystem leftHandSparkles;
     [SerializeField] private TrailRenderer boostTrail;
     [SerializeField] private ParticleSystem boostParticles;
     [SerializeField] private float turningAnimationThreshold = 0.6f;

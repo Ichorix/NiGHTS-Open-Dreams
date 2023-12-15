@@ -11,6 +11,7 @@ public class NPlayerLevelFollow : MonoBehaviour
     [SerializeField] private NPlayerScriptableObject _stats;
     [SerializeField] private NPlayerAnimations _animations;
     [SerializeField] private NPlayerStateController _playerStates;
+    [SerializeField] private NotATrailScript trailInstantiator;
     private Rigidbody rigidbody;
     private Vector3 pathPosition;
     private Vector3 pathRotation;
@@ -130,7 +131,6 @@ public class NPlayerLevelFollow : MonoBehaviour
         MovePlayer();
         BoostStuff();
         LevelLogic(); //Counting time and logic for when Time is up
-        //ParaloopLogic(); //Paraloop
     }
     void MovePlayer()
     {
@@ -147,7 +147,9 @@ public class NPlayerLevelFollow : MonoBehaviour
 
         if(new Vector2(_stats.MoveDirection.x, _stats.MoveDirection.y) != Vector2.zero)
             _stats.isMoving = true;
-        else _stats.isMoving = false;  
+        else _stats.isMoving = false;
+
+        trailInstantiator.enabled = _stats.isMoving;
     }  
 
     void SpeedLogic()
@@ -176,13 +178,6 @@ public class NPlayerLevelFollow : MonoBehaviour
         if(canBoost && _stats.isMoving)
             _stats.BoostGauge -= _stats.boostDepletionRate * Time.deltaTime;
         _stats.BoostGauge = Mathf.Clamp(_stats.BoostGauge, 0, _stats.maxBoost);
-    }
-
-    void ParaloopLogic()
-    {
-        //if(speed >= nonBoostingSpeed)
-        //    paraloopInstantiator.SetActive(true);
-        //else paraloopInstantiator.SetActive(false);
     }
 
     void LevelLogic()
