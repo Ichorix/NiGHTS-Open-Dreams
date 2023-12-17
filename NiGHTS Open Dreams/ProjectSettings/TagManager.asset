@@ -4,24 +4,15 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - BlueChip
-  - HalfRing
-  - GreenRing
-  - YellowRing
-  - SpikeRing
-  - PowerRing
-  - AnimStarter
   - Ground
   - unForcable
-  - Enemy
-  - Water
   - ParaloopTrail
-  - Star
-  - MovingRing
-  - GrowthPalace
-  - SpeedBoost
-  - Ball
   - Paraloop
+  - lb_perchTarget
+  - lb_groundTarget
+  - ParaloopCollectable
+  - IdeyaCapture
+  - IdeyaPalace
   layers:
   - Default
   - TransparentFX
