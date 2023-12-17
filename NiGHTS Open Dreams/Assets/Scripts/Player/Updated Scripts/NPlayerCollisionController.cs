@@ -10,18 +10,10 @@ public class NPlayerCollisionController : MonoBehaviour
     [SerializeField] private NPlayerScriptableObject _stats;
     [SerializeField] private SoundPlayerScriptableObject _sounds;
     public AudioSource MainSounds;
-    [Space]
-    [Header("Collection Data")]
-    public CollectablesData blueChip;
-    public CollectablesData starChip;
-    public CollectablesData yellowRing;
-    public CollectablesData halfRing;
-    public CollectablesData powerRing;
-    public CollectablesData spikeRing;
-    public CollectablesData greenRing;
 
     void OnTriggerEnter(Collider other)
     {
+        // Bump in case you actually triggered with the ground
         if(other.CompareTag("lb_groundTarget"))
         {
             if(openPlayer != null)
@@ -40,6 +32,7 @@ public class NPlayerCollisionController : MonoBehaviour
         if(item != null)
             CollectItem(other, item);
     }
+    // Constant Ground Orientation
     void OnCollisionStay(Collision other)
     {
         if(other.gameObject.CompareTag("lb_groundTarget"))
@@ -55,6 +48,7 @@ public class NPlayerCollisionController : MonoBehaviour
             }
         }
     }
+    // Little Hop after leaving the ground
     void OnCollisionExit(Collision other)
     {
         if(other.gameObject.CompareTag("lb_groundTarget") && openPlayer != null)
