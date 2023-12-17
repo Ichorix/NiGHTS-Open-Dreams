@@ -11,6 +11,7 @@ public class NPlayerOpenControl : MonoBehaviour
 
     [SerializeField] private NPlayerScriptableObject _stats;
     public NPlayerAnimations _animations;
+    [SerializeField] private NotATrailScript trialInstantiator;
     [SerializeField] private CinemachineFreeLook cameraSettings;
     private Rigidbody rigidbody;
     [Space]
@@ -44,6 +45,7 @@ public class NPlayerOpenControl : MonoBehaviour
         RotatePlayer();
         if(!boostAttempt) MovePlayer(CalculateMomentumBonus());
         BoostStuff();
+        ActivateParaloop();
     }
 
     void LateUpdate()
@@ -135,7 +137,10 @@ public class NPlayerOpenControl : MonoBehaviour
         //Debug.Log("Movement Multiplier = " + _stats.MovementMultiplier + ", Momentum Bonus = " + momentumBonus);
         transform.Translate(Vector3.forward * Mathf.Clamp(_speed, 0, 100f) * Time.deltaTime);
     }
-
+    private void ActivateParaloop()
+    {
+        trialInstantiator.enabled = _stats.isMoving;
+    }
     private void BoostStuff()
     {
         if(_stats.PowerBuff)
@@ -151,7 +156,7 @@ public class NPlayerOpenControl : MonoBehaviour
     
     private void CameraFunctions()
     {
-        /*
+        /* TODO Manual Camera code
         if(_stats.LookDirection.sqrMagnitude >= _threshold)
         {
             
@@ -236,7 +241,7 @@ public class NPlayerOpenControl : MonoBehaviour
     }
     */
 
-    // See NPlayerCollisionController for 2 usage examples
+    // See NPlayerCollisionController for the 2 usage examples
     public void BumpUpFromGround(float bumpForce, float translateDistance = 0)
     {
         rigidbody.AddForce(mostRecentGroundNormal * bumpForce, ForceMode.Impulse);
@@ -263,6 +268,7 @@ public class NPlayerOpenControl : MonoBehaviour
             }
             yield return null;
         }
+
         t = 0;
         _stats.BoostAttempt = false;
         while(boostAttemptCooldown)
@@ -273,6 +279,5 @@ public class NPlayerOpenControl : MonoBehaviour
                 boostAttemptCooldown = false;
             yield return null;
         }
-        //_stats.runBoostAttempt = false;
     }
 }

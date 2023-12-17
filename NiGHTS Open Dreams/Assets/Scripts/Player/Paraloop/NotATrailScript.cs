@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class NotATrailScript : MonoBehaviour
 {
+    [SerializeField] private Collider collider;
     [SerializeField] private NPlayerAnimations _animations;
     [SerializeField] private GameObject trailObject;
     [SerializeField] private float distanceThreshold;
@@ -12,6 +13,11 @@ public class NotATrailScript : MonoBehaviour
     void OnEnable()
     {
         RemoveTrail();
+        collider.enabled = true;
+    }
+    void OnDisable()
+    {
+        collider.enabled = false;
     }
     void Update()
     {

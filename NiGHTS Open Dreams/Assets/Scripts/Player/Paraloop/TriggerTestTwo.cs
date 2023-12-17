@@ -29,13 +29,13 @@ public class TriggerTestTwo : MonoBehaviour
                 oppositePosition = trailScript.trailObjects[(int)otherNum].transform.position;
 
                 centerPosition = (collidedPosition + oppositePosition) * 0.5f;
-
-
-                // TODO Figure out how to spawn the paraloop but only once but without cooldown
+                
                 if(instantiatedEffectInstance == null)
                 {
                     instantiatedEffectInstance = Instantiate(instantiatedEffect, centerPosition, Quaternion.identity);
-                    instantiatedEffectInstance.GetComponent<ParaloopCollection>()._player = playerReference; 
+                    ParaloopCollection loopCol = instantiatedEffectInstance.GetComponent<ParaloopCollection>();
+                    loopCol._player = playerReference;
+                    loopCol._trigger = this;
                 }
 
                 trailScript.RemoveTrail();

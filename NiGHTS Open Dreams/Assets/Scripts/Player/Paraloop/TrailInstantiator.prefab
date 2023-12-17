@@ -128,12 +128,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36da4b7036d021941802aa8ef77e25d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnTime: 0
+  collider: {fileID: 802365098474613281}
+  _animations: {fileID: 0}
   trailObject: {fileID: 6396525116974032318, guid: 08b1cfd279f9ea04598e9bdfcc7e1642, type: 3}
+  distanceThreshold: 0
   trailObjects: []
-  amountOfGameobjects: 0
-  isLevel: 0
-  player: {fileID: 0}
 --- !u!114 &802365098474613283
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -147,11 +146,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   trailScript: {fileID: 802365098474613280}
-  cooldownLength: 2
-  cooldownTime: 0
-  collidedPosition: {x: 0, y: 0, z: 0}
-  oppositePosition: {x: 0, y: 0, z: 0}
-  centerPosition: {x: 0, y: 0, z: 0}
-  collidedNum: 0
-  otherNum: 0
+  playerReference: {fileID: 0}
   instantiatedEffect: {fileID: 5189622957647777209, guid: 260a554cec6de444bb4cbdf1d6134792, type: 3}
+  instantiatedEffectInstance: {fileID: 0}
