@@ -14,8 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Score: 0
   timesLink: 0
+  increaseLink: 0
+  clearLink: 0
   Boost: 0
   Time: 0
   givePower: 0
   powerTime: 0
-  interactionSound: {fileID: 0}
+  Chips: 1
+  chipItem: 1
+  instantOff: 1
+  interactionSound: {fileID: 8300000, guid: 7ce80e262e4cc48419f0e2fd141fb206, type: 3}

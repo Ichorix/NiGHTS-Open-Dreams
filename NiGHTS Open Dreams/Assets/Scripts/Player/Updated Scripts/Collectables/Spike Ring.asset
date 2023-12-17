@@ -15,9 +15,12 @@ MonoBehaviour:
   Score: 0
   timesLink: 0
   increaseLink: 0
-  Boost: 0
-  Time: 0
+  clearLink: 1
+  Boost: -15
+  Time: -5
   givePower: 0
   powerTime: 0
   Chips: 0
-  interactionSound: {fileID: 0}
+  chipItem: 0
+  instantOff: 0
+  interactionSound: {fileID: 8300000, guid: 662fb1a85add048438cbd01efd977230, type: 3}

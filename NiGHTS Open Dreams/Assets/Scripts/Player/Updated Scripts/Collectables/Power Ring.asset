@@ -12,12 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53b35d5a90cf7aa41a2b87ea32fdd3d4, type: 3}
   m_Name: Power Ring
   m_EditorClassIdentifier: 
-  Score: 0
-  timesLink: 0
-  increaseLink: 0
-  Boost: 0
+  Score: 10
+  timesLink: 1
+  increaseLink: 1
+  clearLink: 0
+  Boost: 100
   Time: 0
-  givePower: 0
-  powerTime: 0
+  givePower: 1
+  powerTime: 10
   Chips: 0
-  interactionSound: {fileID: 0}
+  chipItem: 0
+  instantOff: 0
+  interactionSound: {fileID: 8300000, guid: dd0596c64b2bb8a4581ce8dbfd73e478, type: 3}
