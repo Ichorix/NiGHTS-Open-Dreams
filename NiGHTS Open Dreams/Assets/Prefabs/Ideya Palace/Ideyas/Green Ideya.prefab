@@ -4828,6 +4828,8 @@ GameObject:
   - component: {fileID: 3261191954420552996}
   - component: {fileID: 1339542318759519815}
   - component: {fileID: 2875380862809390182}
+  - component: {fileID: 1327574857052114548}
+  - component: {fileID: 8665990897203637019}
   m_Layer: 0
   m_Name: Green Ideya
   m_TagString: Untagged
@@ -5399,6 +5401,40 @@ MonoBehaviour:
   maxT: 5
   speed: 1
   offset: 1
+--- !u!54 &1327574857052114548
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5555994532624764803}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 1
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 112
+  m_CollisionDetection: 0
+--- !u!114 &8665990897203637019
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5555994532624764803}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2ba93d8a47a83c4f8d7174b429ff975, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rigidbody: {fileID: 1327574857052114548}
+  goToPosition: {fileID: 0}
+  inPlace: 0
+  chaseSpeed: 70
+  forceMode: 0
+  maxDrag: 3
 --- !u!1 &5555994532728154597
 GameObject:
   m_ObjectHideFlags: 0

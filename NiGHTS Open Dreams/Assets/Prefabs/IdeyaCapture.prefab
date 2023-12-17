@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4535362083584943098}
   - component: {fileID: 3827620658461274236}
   - component: {fileID: 3811344534862842089}
+  - component: {fileID: 2608003999307839597}
   m_Layer: 0
   m_Name: IdeyaCapture
   m_TagString: Untagged
@@ -70,7 +71,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3022833451512567022}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cc8b8ebeb6360074f82cc1bbb2a52900, type: 3}
   m_Name: 
@@ -82,6 +83,22 @@ MonoBehaviour:
   ideyaNum: 0
   blueChipMat: {fileID: 2100000, guid: b3acc88ebb77dca45996f59a6234fd1f, type: 2}
   palace: {fileID: 0}
+--- !u!114 &2608003999307839597
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3022833451512567022}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9118e95ee8f589e48a0ddf71c847ba0c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _stats: {fileID: 11400000, guid: 15afd228b40b218489c2a975b000e97f, type: 2}
+  ideyaReleased: 0
+  ideyaHomePos: {fileID: 1482162149389624600}
+  ideya: {fileID: 0}
 --- !u!1 &8348723920819736832
 GameObject:
   m_ObjectHideFlags: 0

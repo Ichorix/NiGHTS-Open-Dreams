@@ -4828,6 +4828,8 @@ GameObject:
   - component: {fileID: 2017673216197639062}
   - component: {fileID: 2385546786619710385}
   - component: {fileID: 3447598449317599086}
+  - component: {fileID: 274353913355371478}
+  - component: {fileID: 2291215570608727272}
   m_Layer: 0
   m_Name: Blue Ideya
   m_TagString: Untagged
@@ -5391,7 +5393,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 0
     m_RotationOrder: 4
-  initialPos: {x: 0, y: 0, z: 0}
+  ideyaCapturePos: {fileID: 0}
   endingLocation: {fileID: 0}
   player: {fileID: 0}
   pos: {x: 0, y: 0, z: 0}
@@ -5399,6 +5401,40 @@ MonoBehaviour:
   maxT: 5
   speed: 1
   offset: 1
+--- !u!54 &274353913355371478
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7738986901748400661}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 1
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &2291215570608727272
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7738986901748400661}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2ba93d8a47a83c4f8d7174b429ff975, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rigidbody: {fileID: 274353913355371478}
+  goToPosition: {fileID: 0}
+  inPlace: 0
+  chaseSpeed: 70
+  forceMode: 0
+  maxDrag: 3
 --- !u!1 &7738986902484118526
 GameObject:
   m_ObjectHideFlags: 0

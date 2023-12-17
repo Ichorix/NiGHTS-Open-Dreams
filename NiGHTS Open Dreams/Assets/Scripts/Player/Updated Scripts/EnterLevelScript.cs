@@ -6,6 +6,7 @@ using PathCreation;
 public class EnterLevelScript : MonoBehaviour
 {
     [SerializeField] private NPlayerScriptableObject _stats;
+    [SerializeField] private Transform[] ideyaDestinations = new Transform[4];
     public PathCreator[] Paths = new PathCreator[4];
     [SerializeField] private CustomStageScriptableObject thisStage;
     [SerializeField] private GameObject UIModal;
@@ -21,6 +22,10 @@ public class EnterLevelScript : MonoBehaviour
                 NPlayerLevelFollow levelFollow = other.GetComponent<NPlayerLevelFollow>();
                 if(levelFollow.ContinueLevel)
                 {
+                    IdeyaChase ideya = levelFollow.recoveredIdeya;
+                    ideya.inPlace = true;
+                    ideya.goToPosition = ideyaDestinations[levelFollow.levelSegment];
+
                     // TODO Fix the grade check to incorporate all tracks
                     thisStage.SavedScore = levelFollow.currentScore > thisStage.SavedScore ? levelFollow.currentScore : thisStage.SavedScore;
                     int grade = (int)thisStage.Grades[levelFollow.levelSegment].Evaluate(levelFollow.currentScore);

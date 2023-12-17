@@ -26,6 +26,7 @@ public class NPlayerLevelFollow : MonoBehaviour
     public EndOfPathInstruction endOfPathInstruction;
     public float distanceTravelled;
     public int levelSegment;
+    public IdeyaChase recoveredIdeya;
     [SerializeField] private bool continueLevel;
     public bool ContinueLevel
     {
@@ -67,7 +68,7 @@ public class NPlayerLevelFollow : MonoBehaviour
         }
     }
     private bool lowOnTime;
-    private int chipRequirement;
+    public int chipRequirement;
     public int currentChips;
     public int currentScore;
 
