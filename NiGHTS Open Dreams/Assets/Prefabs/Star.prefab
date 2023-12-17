@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 8457161730447246972}
   - component: {fileID: 5960840115332248246}
   - component: {fileID: 6923443208893615989}
-  - component: {fileID: 3612300179117020155}
   - component: {fileID: -8607519797590706537}
   m_Layer: 0
   m_Name: Star
@@ -99,24 +98,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.02, y: 0.02, z: 0.02}
   m_Center: {x: 0, y: 0, z: 0.0005}
---- !u!114 &3612300179117020155
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5312511366809604963}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 59362825c0224054e85fdbc010fd9095, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerStates: {fileID: 0}
-  currentPlayer: {fileID: 0}
-  openPlayer: {fileID: 0}
-  levelPlayer: {fileID: 0}
-  isBlueChip: 0
-  isStarChip: 1
 --- !u!114 &-8607519797590706537
 MonoBehaviour:
   m_ObjectHideFlags: 0

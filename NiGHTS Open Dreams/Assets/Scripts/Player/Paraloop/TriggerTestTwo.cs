@@ -5,6 +5,7 @@ using UnityEngine;
 public class TriggerTestTwo : MonoBehaviour
 {
     [SerializeField] private NotATrailScript trailScript;
+    [SerializeField] private GameObject playerReference;
     private Vector3 collidedPosition, oppositePosition, centerPosition;
     private int collidedNum;
     private float otherNum;
@@ -32,7 +33,10 @@ public class TriggerTestTwo : MonoBehaviour
 
                 // TODO Figure out how to spawn the paraloop but only once but without cooldown
                 if(instantiatedEffectInstance == null)
+                {
                     instantiatedEffectInstance = Instantiate(instantiatedEffect, centerPosition, Quaternion.identity);
+                    instantiatedEffectInstance.GetComponent<ParaloopCollection>()._player = playerReference; 
+                }
 
                 trailScript.RemoveTrail();
             }

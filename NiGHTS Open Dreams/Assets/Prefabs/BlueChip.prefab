@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8787997438381868153}
   - component: {fileID: 711174523475700695}
-  - component: {fileID: 3328546245433105507}
   - component: {fileID: 817482504424977759}
   m_Layer: 0
   m_Name: BlueChip
@@ -50,24 +49,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &3328546245433105507
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8787997438381868152}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 59362825c0224054e85fdbc010fd9095, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerStates: {fileID: 0}
-  currentPlayer: {fileID: 0}
-  openPlayer: {fileID: 0}
-  levelPlayer: {fileID: 0}
-  isBlueChip: 1
-  isStarChip: 0
 --- !u!114 &817482504424977759
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -82,6 +63,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   yellowRing: {fileID: 0}
   secondRing: {fileID: 0}
+  LOD: 0
   TwoRings: 0
   chip: 1
 --- !u!1 &8787997438581496639
