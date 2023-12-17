@@ -66,10 +66,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 912d16a83c65ec54eb8cd1e0f1a8cfd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  needToRespawn: 0
   timeForRespawn: 90
   respawnTime: 0
-  startRing: {fileID: 5287270604398150551}
+  start: {fileID: 4688148084816147833}
   respawnables:
   - {fileID: 4445968188114723155}
   - {fileID: 6303275840497723445}
@@ -1611,8 +1610,14 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5693976709937678663, guid: ee675c637cdf22047acd1677ac4ac406, type: 3}
   m_PrefabInstance: {fileID: 8265883384172849172}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &5287270604398150551 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4311767547166419843, guid: ee675c637cdf22047acd1677ac4ac406, type: 3}
+--- !u!114 &4688148084816147833 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3727279532303572333, guid: ee675c637cdf22047acd1677ac4ac406, type: 3}
   m_PrefabInstance: {fileID: 8265883384172849172}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fefbc721d08eaa4d944f54efc0dac82, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

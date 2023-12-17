@@ -15,7 +15,9 @@ public class RespawnScript : MonoBehaviour
         if (chip)
         {
             this.gameObject.SetActive(true);
+            return;
         }
+        
         if (yellowRing != null)
         {
             Debug.Log("Respawn");

@@ -82,10 +82,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 912d16a83c65ec54eb8cd1e0f1a8cfd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  needToRespawn: 0
   timeForRespawn: 90
   respawnTime: 0
-  startRing: {fileID: 653887227220405868}
+  start: {fileID: 107136095766157442}
   respawnables:
   - {fileID: 8394825847678269129}
   - {fileID: 6547944920162605918}
@@ -1498,11 +1497,17 @@ PrefabInstance:
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: ee675c637cdf22047acd1677ac4ac406, type: 3}
---- !u!1 &653887227220405868 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4311767547166419843, guid: ee675c637cdf22047acd1677ac4ac406, type: 3}
+--- !u!114 &107136095766157442 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3727279532303572333, guid: ee675c637cdf22047acd1677ac4ac406, type: 3}
   m_PrefabInstance: {fileID: 3658448240955246063}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fefbc721d08eaa4d944f54efc0dac82, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &4809118004572186508 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8104227610491331171, guid: ee675c637cdf22047acd1677ac4ac406, type: 3}

@@ -48,6 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   yellowRing: {fileID: 4536404031468047905}
   secondRing: {fileID: 3727279532303572333}
+  LOD: 0
   TwoRings: 1
   chip: 0
 --- !u!1001 &470759838071185127
@@ -151,7 +152,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4276360363170970770, guid: de9caa586be88c544ae3db63168cb2ae, type: 3}
       propertyPath: m_LocalScale.z
-      value: 1
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 4276360363170970770, guid: de9caa586be88c544ae3db63168cb2ae, type: 3}
       propertyPath: m_LocalPosition.x

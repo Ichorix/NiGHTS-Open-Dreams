@@ -2712,10 +2712,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 912d16a83c65ec54eb8cd1e0f1a8cfd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  needToRespawn: 0
   timeForRespawn: 90
   respawnTime: 0
-  startRing: {fileID: 8778482160015198784}
+  start: {fileID: 1392522531651745199}
   respawnables:
   - {fileID: 4197102012271292258}
   - {fileID: 1018285290361586864}
@@ -79708,7 +79707,7 @@ Transform:
   m_GameObject: {fileID: 8778482160015198784}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: -1.5, z: 0}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2903205229293575128}

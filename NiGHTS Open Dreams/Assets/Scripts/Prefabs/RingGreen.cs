@@ -32,8 +32,6 @@ public class RingGreen : MonoBehaviour
         }
         if(timeUntilGone <= 0)
         {
-            //Destroy(gameObject);
-            //Debug.Log("");
             RingAnim.SetTrigger("TrReset");
             timeUntilGone = 1f;
             isCollected = false;

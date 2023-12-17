@@ -4,35 +4,35 @@ using UnityEngine;
 
 public class OpenRespawn : MonoBehaviour
 {
-    public bool needToRespawn;
-    public int timeForRespawn;
-    public float respawnTime;
-    public GameObject startRing;
-    private RingYellow start;
+    [SerializeField] private float timeForRespawn;
+    [SerializeField] private float respawnTime;
+    public float RespawnTime
+    {
+        get{ return respawnTime; }
+        set
+        {
+            respawnTime = Mathf.Clamp(value, 0, timeForRespawn);
+            if(respawnTime <= 0)
+                RespawnStuff();
+        }
+    }
+    [SerializeField] private RingYellow start;
     public List<GameObject> respawnables;
 
     void Start()
     {
-        start = startRing.GetComponent<RingYellow>();
-        respawnTime = timeForRespawn;
+        RespawnTime = timeForRespawn;
     }
+
     void Update()
     {
         if(start.isCollected)
-        {
-            needToRespawn = true;
-            respawnTime -= Time.deltaTime;
-        }
-        if(respawnTime <= 0)
-        {
-            needToRespawn = false;
-            RespawnStuff();
-        }
+            RespawnTime -= Time.deltaTime;
     }
 
     public void RespawnStuff()
     {
-        respawnTime = timeForRespawn;
+        RespawnTime = timeForRespawn;
         for(var i = respawnables.Count - 1; i > -1; i--)
         {
             respawnables[i].GetComponent<RespawnScript>().Respawn();

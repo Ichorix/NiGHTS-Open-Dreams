@@ -5,7 +5,20 @@ using UnityEngine;
 public class RingYellow : MonoBehaviour
 {
     public bool isCollected;
-    private float timeUntilGone;
+    [SerializeField] private float timeUntilGone;
+    public float TimeUntilGone
+    {
+        get{ return timeUntilGone; }
+        set
+        {
+            timeUntilGone = Mathf.Clamp01(value);
+            if(timeUntilGone <= 0)
+            {
+                this.gameObject.SetActive(false);
+                if (LOD) this.transform.parent.gameObject.SetActive(false);
+            }
+        }
+    }
     public Animator YellowRingAnim;
     public string currentTag;
     public bool LOD;
@@ -13,7 +26,7 @@ public class RingYellow : MonoBehaviour
     void Start()
     {
         isCollected = false;
-        timeUntilGone = 1f;
+        TimeUntilGone = 1f;
         currentTag = this.tag;
     }
 
@@ -21,13 +34,8 @@ public class RingYellow : MonoBehaviour
     {
         if(isCollected)
         {
-            timeUntilGone -= Time.deltaTime;
+            TimeUntilGone -= Time.deltaTime;
             this.tag = "Collected";
-        }
-        if(timeUntilGone <= 0)
-        {
-            this.gameObject.SetActive(false);
-            if (LOD) this.transform.parent.gameObject.SetActive(false);
         }
     }
     void OnTriggerEnter(Collider other)
@@ -40,7 +48,7 @@ public class RingYellow : MonoBehaviour
     public void Respawn()
     {
         isCollected = false;
-        timeUntilGone = 1f;
+        TimeUntilGone = 1f;
         this.tag = currentTag;
         this.gameObject.SetActive(true);
         YellowRingAnim.SetTrigger("TrRespawn");
