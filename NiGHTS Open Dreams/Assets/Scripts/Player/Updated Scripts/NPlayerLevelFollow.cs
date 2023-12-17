@@ -199,6 +199,7 @@ public class NPlayerLevelFollow : MonoBehaviour
     }
     private void ExitLevel()
     {
+        currentPath.gameObject.SetActive(false);
         _playerStates.ActivateOpenPlayer();
     }
     
