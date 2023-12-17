@@ -26,6 +26,8 @@ public class IdeyaCapture : MonoBehaviour
                 levelFollow.ContinueLevel = true;
                 levelFollow.recoveredIdeya = ideya;
                 ReleaseIdeya(other);
+                levelFollow.blueChipMaterial.SetFloat("_EmissionOn", 1f);
+                levelFollow.blueChipData.Score = 10;
             }
         }
     }
@@ -35,7 +37,5 @@ public class IdeyaCapture : MonoBehaviour
         ideyaReleased = true;
         ideya.inPlace = false;
         ideya.goToPosition = other.gameObject.transform;
-        ideya.gameObject.transform.LookAt(ideya.goToPosition);
-        ideya.rigidbody.AddForce(transform.forward * ideya.chaseSpeed, ForceMode.Impulse);
     }
 }

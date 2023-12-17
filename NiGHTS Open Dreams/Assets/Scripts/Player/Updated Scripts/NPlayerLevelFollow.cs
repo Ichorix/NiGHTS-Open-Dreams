@@ -12,6 +12,8 @@ public class NPlayerLevelFollow : MonoBehaviour
     [SerializeField] private NPlayerAnimations _animations;
     [SerializeField] private NPlayerStateController _playerStates;
     [SerializeField] private NotATrailScript trailInstantiator;
+    public Material blueChipMaterial;
+    public CollectablesData blueChipData;
     private Rigidbody rigidbody;
     private Vector3 pathPosition;
     private Vector3 pathRotation;
@@ -44,8 +46,11 @@ public class NPlayerLevelFollow : MonoBehaviour
                 LevelTimeLeft = ActiveLevelTimes[levelSegment];
                 // And sets it active again
                 currentPath.gameObject.SetActive(true);
+                // Resets the necessary values
                 currentChips = 0;
                 currentScore = 0;
+                blueChipMaterial.SetFloat("_EmissionOn", 0f);
+                blueChipData.Score = 0;
             }
         }
     }
@@ -202,6 +207,8 @@ public class NPlayerLevelFollow : MonoBehaviour
     {
         currentPath.gameObject.SetActive(false);
         _playerStates.ActivateOpenPlayer();
+        blueChipMaterial.SetFloat("_EmissionOn", 0f);
+        blueChipData.Score = 0;
     }
     
     public void RunBoostAttempt()

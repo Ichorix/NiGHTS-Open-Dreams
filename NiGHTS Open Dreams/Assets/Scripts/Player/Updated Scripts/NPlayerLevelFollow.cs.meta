@@ -3,7 +3,16 @@ guid: 5df45b655caa82d45812d355c5d26f38
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - _stats: {instanceID: 0}
+  - _animations: {instanceID: 0}
+  - _playerStates: {instanceID: 0}
+  - trailInstantiator: {instanceID: 0}
+  - blueChipMaterial: {fileID: 2100000, guid: b3acc88ebb77dca45996f59a6234fd1f, type: 2}
+  - blueChipData: {instanceID: 0}
+  - currentPath: {instanceID: 0}
+  - recoveredIdeya: {instanceID: 0}
+  - linkControl: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

@@ -6,6 +6,7 @@ using PathCreation;
 public class EnterLevelScript : MonoBehaviour
 {
     [SerializeField] private NPlayerScriptableObject _stats;
+    [SerializeField] private GameObject asscoiatedOpenLevel;
     [SerializeField] private Transform[] ideyaDestinations = new Transform[4];
     public PathCreator[] Paths = new PathCreator[4];
     [SerializeField] private CustomStageScriptableObject thisStage;
@@ -20,6 +21,8 @@ public class EnterLevelScript : MonoBehaviour
             if(_stats.isLevelPlayer)
             {
                 NPlayerLevelFollow levelFollow = other.GetComponent<NPlayerLevelFollow>();
+                // Since the levelPlayer triggers the palace when it first spawns, turn off the level here
+                asscoiatedOpenLevel.SetActive(false);
                 if(levelFollow.ContinueLevel)
                 {
                     IdeyaChase ideya = levelFollow.recoveredIdeya;
@@ -37,6 +40,7 @@ public class EnterLevelScript : MonoBehaviour
             }
             else
             {
+                asscoiatedOpenLevel.SetActive(true);
                 if(modalInstance == null) // Spawn a new modal if one isnt already up. Prevents having multiple overlapping
                     modalInstance = Instantiate(UIModal);
                 NPlayerStateController playerStates = other.transform.parent.parent.GetComponent<NPlayerStateController>();
