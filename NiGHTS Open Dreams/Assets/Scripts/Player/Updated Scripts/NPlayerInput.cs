@@ -62,11 +62,14 @@ public class NPlayerInput : MonoBehaviour
 
     void MoveInput(float movementMultiplier)
     {
-        if(movementMultiplier > 0) _stats.isMoving = true;
-        else _stats.isMoving = false;
-        bool newMoveState = _stats.isMoving;
-        _stats.MovementMultiplier = movementMultiplier;
-        if(!newMoveState) _openPlayer.StoppedMoving();
+        if(!_stats.isLevelPlayer)
+        {
+            if(movementMultiplier > 0) _stats.isMoving = true;
+            else _stats.isMoving = false;
+            bool newMoveState = _stats.isMoving;
+            _stats.MovementMultiplier = movementMultiplier;
+            if(!newMoveState) _openPlayer.StoppedMoving();
+        }
     }
     void BoostInput(bool newBoostState)
     {
