@@ -926,9 +926,10 @@ GameObject:
   - component: {fileID: 6245236227073673759}
   - component: {fileID: 4070395321468670150}
   - component: {fileID: 7512783391545826284}
+  - component: {fileID: -6919625617001350528}
   m_Layer: 0
   m_Name: Ring
-  m_TagString: YellowRing
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1020,7 +1021,8 @@ MonoBehaviour:
   isCollected: 0
   timeUntilGone: 0
   YellowRingAnim: {fileID: 6245236227073673759}
-  currentTag: 
+  selfCollider: {fileID: 0}
+  LOD: 0
 --- !u!114 &7512783391545826284
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1034,7 +1036,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   yellowRing: {fileID: 4070395321468670150}
+  secondRing: {fileID: 0}
+  LOD: 0
+  TwoRings: 0
   chip: 0
+--- !u!114 &-6919625617001350528
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3464252980602988072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a474a7cb6e914a14185c51a2e04edbd0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data: {fileID: 11400000, guid: 0dae734f93a0d224da993a80a6b411cf, type: 2}
 --- !u!1 &3631680492313312941
 GameObject:
   m_ObjectHideFlags: 0

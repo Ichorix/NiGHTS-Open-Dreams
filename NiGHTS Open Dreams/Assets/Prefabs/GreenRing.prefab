@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 2024775670187084267}
   - component: {fileID: 2024775670187084266}
   - component: {fileID: 2024775670187084268}
+  - component: {fileID: -6254536481341491118}
   m_Layer: 0
   m_Name: GreenRing
-  m_TagString: GreenRing
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -87,6 +88,19 @@ MonoBehaviour:
   RingAnim: {fileID: 2024775670187084266}
   Front: {fileID: 4364932937857341074}
   Back: {fileID: 2111617316785066272}
+--- !u!114 &-6254536481341491118
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1213750264303299590}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a474a7cb6e914a14185c51a2e04edbd0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data: {fileID: 11400000, guid: 1c43a35ece51c9248b3fa1c37553ad70, type: 2}
 --- !u!1 &3341637198002147181
 GameObject:
   m_ObjectHideFlags: 0

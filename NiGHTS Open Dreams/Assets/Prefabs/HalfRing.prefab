@@ -33,7 +33,7 @@ Transform:
   - {fileID: 8552453416591841408}
   - {fileID: 8552453415376241167}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6388241020540736324
 MonoBehaviour:
@@ -49,6 +49,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   yellowRing: {fileID: 8159065038801278233}
   secondRing: {fileID: 8159065038879877087}
+  LOD: 0
   TwoRings: 1
   chip: 0
 --- !u!1001 &8159065039198044011
@@ -107,10 +108,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: HalfRing
       objectReference: {fileID: 0}
-    - target: {fileID: 919132149155446097, guid: cd018311eb05e1c41bfaf7de1fc2d758, type: 3}
-      propertyPath: m_TagString
-      value: HalfRing
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: cd018311eb05e1c41bfaf7de1fc2d758, type: 3}
@@ -157,6 +154,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &6057910987539693753
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9078055895739925050}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a474a7cb6e914a14185c51a2e04edbd0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data: {fileID: 11400000, guid: 6ce942f1fb5fd224ba7f911544f93bc6, type: 2}
 --- !u!114 &8159065038879877087
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -172,7 +182,8 @@ MonoBehaviour:
   isCollected: 0
   timeUntilGone: 0
   YellowRingAnim: {fileID: 8159065038879877072}
-  currentTag: 
+  selfCollider: {fileID: 0}
+  LOD: 0
 --- !u!1001 &8159065039919150567
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -229,10 +240,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: HalfRing (1)
       objectReference: {fileID: 0}
-    - target: {fileID: 919132149155446097, guid: cd018311eb05e1c41bfaf7de1fc2d758, type: 3}
-      propertyPath: m_TagString
-      value: HalfRing
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: cd018311eb05e1c41bfaf7de1fc2d758, type: 3}
@@ -279,6 +286,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &3926315372184863823
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9078055895387949238}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a474a7cb6e914a14185c51a2e04edbd0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data: {fileID: 11400000, guid: 6ce942f1fb5fd224ba7f911544f93bc6, type: 2}
 --- !u!114 &8159065038801278233
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -294,7 +314,8 @@ MonoBehaviour:
   isCollected: 0
   timeUntilGone: 0
   YellowRingAnim: {fileID: 8159065038801278234}
-  currentTag: 
+  selfCollider: {fileID: 0}
+  LOD: 0
 --- !u!1001 &8159065040447514084
 PrefabInstance:
   m_ObjectHideFlags: 0

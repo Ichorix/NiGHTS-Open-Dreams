@@ -1425,7 +1425,7 @@ GameObject:
   - component: {fileID: 135261172516867172}
   m_Layer: 0
   m_Name: Ring
-  m_TagString: YellowRing
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1515,8 +1515,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isCollected: 0
+  timeUntilGone: 0
   YellowRingAnim: {fileID: 7098690037935010521}
-  currentTag: 
+  selfCollider: {fileID: 0}
   LOD: 1
 --- !u!1 &155103409013546091
 GameObject:
@@ -1697,7 +1698,7 @@ GameObject:
   - component: {fileID: 6076293947543983515}
   m_Layer: 0
   m_Name: RingLOD(Clone)
-  m_TagString: YellowRing
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3566,7 +3567,7 @@ GameObject:
   - component: {fileID: 7591101866547894875}
   m_Layer: 0
   m_Name: Ring
-  m_TagString: YellowRing
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3656,8 +3657,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isCollected: 0
+  timeUntilGone: 0
   YellowRingAnim: {fileID: 8329014046362978365}
-  currentTag: 
+  selfCollider: {fileID: 0}
   LOD: 0
 --- !u!114 &7591101866547894875
 MonoBehaviour:
@@ -5100,7 +5102,7 @@ GameObject:
   - component: {fileID: 8973337564510301642}
   m_Layer: 0
   m_Name: RingLOD(Clone)
-  m_TagString: YellowRing
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5803,7 +5805,7 @@ GameObject:
   - component: {fileID: 1173368061727504597}
   m_Layer: 0
   m_Name: Ring
-  m_TagString: YellowRing
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5893,8 +5895,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isCollected: 0
+  timeUntilGone: 0
   YellowRingAnim: {fileID: 3145261578610491720}
-  currentTag: 
+  selfCollider: {fileID: 0}
   LOD: 1
 --- !u!1 &631301440353811683
 GameObject:
@@ -9202,7 +9205,7 @@ GameObject:
   - component: {fileID: 782352496152081588}
   m_Layer: 0
   m_Name: Ring
-  m_TagString: YellowRing
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9292,8 +9295,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isCollected: 0
+  timeUntilGone: 0
   YellowRingAnim: {fileID: 2252526256025808082}
-  currentTag: 
+  selfCollider: {fileID: 0}
   LOD: 1
 --- !u!1 &929439427119611599
 GameObject:
@@ -10222,7 +10226,7 @@ GameObject:
   - component: {fileID: 8575475501131451352}
   m_Layer: 0
   m_Name: Ring
-  m_TagString: YellowRing
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10312,8 +10316,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isCollected: 0
+  timeUntilGone: 0
   YellowRingAnim: {fileID: 8590722250337251842}
-  currentTag: 
+  selfCollider: {fileID: 0}
   LOD: 1
 --- !u!1 &1007945946697053835
 GameObject:
@@ -10577,7 +10582,7 @@ GameObject:
   - component: {fileID: 7714850175379205843}
   m_Layer: 0
   m_Name: RingLOD(Clone)
-  m_TagString: YellowRing
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -13521,7 +13526,7 @@ GameObject:
   - component: {fileID: 8897376479880999317}
   m_Layer: 0
   m_Name: Ring
-  m_TagString: YellowRing
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -13611,8 +13616,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isCollected: 0
+  timeUntilGone: 0
   YellowRingAnim: {fileID: 2253516103224210768}
-  currentTag: 
+  selfCollider: {fileID: 0}
   LOD: 1
 --- !u!1 &1315202521305583241
 GameObject:
@@ -15896,7 +15902,7 @@ GameObject:
   - component: {fileID: 4041293915868740343}
   m_Layer: 0
   m_Name: Ring
-  m_TagString: YellowRing
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -15986,8 +15992,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isCollected: 0
+  timeUntilGone: 0
   YellowRingAnim: {fileID: 5471605959829286340}
-  currentTag: 
+  selfCollider: {fileID: 0}
   LOD: 1
 --- !u!1 &1579050017394484637
 GameObject:
@@ -16202,7 +16209,7 @@ GameObject:
   - component: {fileID: 4763502875281099397}
   m_Layer: 0
   m_Name: RingLOD(Clone)
-  m_TagString: YellowRing
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -17320,7 +17327,7 @@ GameObject:
   - component: {fileID: 8272276181607715966}
   m_Layer: 0
   m_Name: HalfRing
-  m_TagString: HalfRing
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -17399,8 +17406,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isCollected: 0
+  timeUntilGone: 0
   YellowRingAnim: {fileID: 611559379336663506}
-  currentTag: 
+  selfCollider: {fileID: 0}
   LOD: 0
 --- !u!1 &1722231413771359540
 GameObject:
@@ -21483,7 +21491,7 @@ GameObject:
   - component: {fileID: 4470772645945269745}
   m_Layer: 0
   m_Name: Ring
-  m_TagString: YellowRing
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -21573,8 +21581,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isCollected: 0
+  timeUntilGone: 0
   YellowRingAnim: {fileID: 3503026285491931018}
-  currentTag: 
+  selfCollider: {fileID: 0}
   LOD: 1
 --- !u!1 &2091780028054982778
 GameObject:
@@ -24578,7 +24587,7 @@ GameObject:
   - component: {fileID: 6045335578332291964}
   m_Layer: 0
   m_Name: HalfRing (1)
-  m_TagString: HalfRing
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -24657,8 +24666,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isCollected: 0
+  timeUntilGone: 0
   YellowRingAnim: {fileID: 456968343343918535}
-  currentTag: 
+  selfCollider: {fileID: 0}
   LOD: 0
 --- !u!1 &2457723690513991813
 GameObject:
@@ -28216,7 +28226,7 @@ GameObject:
   - component: {fileID: 3519479198492100749}
   m_Layer: 0
   m_Name: PowerRing(Clone)
-  m_TagString: PowerRing
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -28318,8 +28328,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isCollected: 0
+  timeUntilGone: 0
   YellowRingAnim: {fileID: 8656930040560791937}
-  currentTag: 
+  selfCollider: {fileID: 0}
   LOD: 0
 --- !u!114 &3519479198492100749
 MonoBehaviour:
@@ -28517,7 +28528,7 @@ GameObject:
   - component: {fileID: 3658035192653002156}
   m_Layer: 0
   m_Name: RingLOD(Clone)
-  m_TagString: YellowRing
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -28721,7 +28732,7 @@ GameObject:
   - component: {fileID: 3719145355964977246}
   m_Layer: 0
   m_Name: RingLOD(Clone)
-  m_TagString: YellowRing
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -39900,7 +39911,7 @@ GameObject:
   - component: {fileID: 3049148583051132661}
   m_Layer: 0
   m_Name: RingLOD(Clone) (3)
-  m_TagString: YellowRing
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -40022,7 +40033,7 @@ GameObject:
   - component: {fileID: 3304031139597770209}
   m_Layer: 0
   m_Name: Ring
-  m_TagString: YellowRing
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -40112,8 +40123,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isCollected: 0
+  timeUntilGone: 0
   YellowRingAnim: {fileID: 8600755495271094837}
-  currentTag: 
+  selfCollider: {fileID: 0}
   LOD: 1
 --- !u!1 &4265707110551764765
 GameObject:
@@ -40212,7 +40224,7 @@ GameObject:
   - component: {fileID: 2834256615233109224}
   m_Layer: 0
   m_Name: HalfRing
-  m_TagString: HalfRing
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -40291,8 +40303,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isCollected: 0
+  timeUntilGone: 0
   YellowRingAnim: {fileID: 799621382671935585}
-  currentTag: 
+  selfCollider: {fileID: 0}
   LOD: 0
 --- !u!1 &4295859114266895224
 GameObject:
@@ -40308,7 +40321,7 @@ GameObject:
   - component: {fileID: 123292866720782690}
   m_Layer: 0
   m_Name: Ring
-  m_TagString: YellowRing
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -40398,8 +40411,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isCollected: 0
+  timeUntilGone: 0
   YellowRingAnim: {fileID: 6723464358115641588}
-  currentTag: 
+  selfCollider: {fileID: 0}
   LOD: 1
 --- !u!1 &4306313860019446378
 GameObject:
@@ -40414,7 +40428,7 @@ GameObject:
   - component: {fileID: 5154181687190482208}
   m_Layer: 0
   m_Name: RingLOD(Clone)
-  m_TagString: YellowRing
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -42029,7 +42043,7 @@ GameObject:
   - component: {fileID: 6672743914954252815}
   m_Layer: 0
   m_Name: RingLOD(Clone)
-  m_TagString: YellowRing
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -42898,7 +42912,7 @@ GameObject:
   - component: {fileID: 4367666882359493502}
   m_Layer: 0
   m_Name: HalfRing
-  m_TagString: HalfRing
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -42977,8 +42991,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isCollected: 0
+  timeUntilGone: 0
   YellowRingAnim: {fileID: 6974572920135413416}
-  currentTag: 
+  selfCollider: {fileID: 0}
   LOD: 0
 --- !u!1 &4541746162541742358
 GameObject:
@@ -43243,7 +43258,7 @@ GameObject:
   - component: {fileID: 389487973027588051}
   m_Layer: 0
   m_Name: Ring
-  m_TagString: YellowRing
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -43333,8 +43348,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isCollected: 0
+  timeUntilGone: 0
   YellowRingAnim: {fileID: 8124804879200439962}
-  currentTag: 
+  selfCollider: {fileID: 0}
   LOD: 1
 --- !u!1 &4578111953473622385
 GameObject:
@@ -43682,7 +43698,7 @@ GameObject:
   - component: {fileID: 5038048109824073842}
   m_Layer: 0
   m_Name: Ring
-  m_TagString: YellowRing
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -43772,8 +43788,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isCollected: 0
+  timeUntilGone: 0
   YellowRingAnim: {fileID: 920491972347766984}
-  currentTag: 
+  selfCollider: {fileID: 0}
   LOD: 1
 --- !u!1 &4638861385910120900
 GameObject:
@@ -43872,7 +43889,7 @@ GameObject:
   - component: {fileID: 8019241368119051186}
   m_Layer: 0
   m_Name: Ring
-  m_TagString: YellowRing
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -43962,8 +43979,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isCollected: 0
+  timeUntilGone: 0
   YellowRingAnim: {fileID: 1120359990756702631}
-  currentTag: 
+  selfCollider: {fileID: 0}
   LOD: 1
 --- !u!1 &4644250005359372175
 GameObject:
@@ -53797,7 +53815,7 @@ GameObject:
   - component: {fileID: 5685679465571074925}
   m_Layer: 0
   m_Name: Ring
-  m_TagString: YellowRing
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -53887,8 +53905,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isCollected: 0
+  timeUntilGone: 0
   YellowRingAnim: {fileID: 4065695834106843481}
-  currentTag: 
+  selfCollider: {fileID: 0}
   LOD: 1
 --- !u!1 &5690773826078167128
 GameObject:
@@ -54401,7 +54420,7 @@ GameObject:
   - component: {fileID: 6083084381845399129}
   m_Layer: 0
   m_Name: RingLOD(Clone)
-  m_TagString: YellowRing
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -59668,7 +59687,7 @@ GameObject:
   - component: {fileID: 3194195012166876364}
   m_Layer: 0
   m_Name: RingLOD(Clone) (1)
-  m_TagString: YellowRing
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -65772,7 +65791,7 @@ GameObject:
   - component: {fileID: 4132051804942128604}
   m_Layer: 0
   m_Name: Ring
-  m_TagString: YellowRing
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -65862,8 +65881,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isCollected: 0
+  timeUntilGone: 0
   YellowRingAnim: {fileID: 6413359255078907203}
-  currentTag: 
+  selfCollider: {fileID: 0}
   LOD: 1
 --- !u!1 &7199278018524190502
 GameObject:
@@ -68590,7 +68610,7 @@ GameObject:
   - component: {fileID: 3245042980659843410}
   m_Layer: 0
   m_Name: Ring
-  m_TagString: YellowRing
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -68680,8 +68700,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isCollected: 0
+  timeUntilGone: 0
   YellowRingAnim: {fileID: 959817905034974666}
-  currentTag: 
+  selfCollider: {fileID: 0}
   LOD: 1
 --- !u!1 &7489293102394278509
 GameObject:
@@ -69443,7 +69464,7 @@ GameObject:
   - component: {fileID: 632617154650434070}
   m_Layer: 0
   m_Name: RingLOD(Clone)
-  m_TagString: YellowRing
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -70145,7 +70166,7 @@ GameObject:
   - component: {fileID: 6747728781208644381}
   m_Layer: 0
   m_Name: RingLOD(Clone)
-  m_TagString: YellowRing
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -71263,7 +71284,7 @@ GameObject:
   - component: {fileID: 6081971448316427768}
   m_Layer: 0
   m_Name: HalfRing (1)
-  m_TagString: HalfRing
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -71342,8 +71363,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isCollected: 0
+  timeUntilGone: 0
   YellowRingAnim: {fileID: 6242394122180587757}
-  currentTag: 
+  selfCollider: {fileID: 0}
   LOD: 0
 --- !u!1 &7850084479267232221
 GameObject:
@@ -73239,7 +73261,7 @@ GameObject:
   - component: {fileID: 7042577279193629442}
   m_Layer: 0
   m_Name: RingLOD(Clone) (2)
-  m_TagString: YellowRing
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -73941,7 +73963,7 @@ GameObject:
   - component: {fileID: 3372369132366588511}
   m_Layer: 0
   m_Name: RingLOD(Clone)
-  m_TagString: YellowRing
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -76773,7 +76795,7 @@ GameObject:
   - component: {fileID: 4483504960953857741}
   m_Layer: 0
   m_Name: RingLOD(Clone)
-  m_TagString: YellowRing
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -79693,7 +79715,7 @@ GameObject:
   - component: {fileID: 3672581958799035921}
   m_Layer: 0
   m_Name: Ring (1)
-  m_TagString: YellowRing
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -79783,8 +79805,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isCollected: 0
+  timeUntilGone: 0
   YellowRingAnim: {fileID: 4610180196223605513}
-  currentTag: 
+  selfCollider: {fileID: 0}
   LOD: 0
 --- !u!114 &3672581958799035921
 MonoBehaviour:
@@ -82777,7 +82800,7 @@ GameObject:
   - component: {fileID: 8187301613609169766}
   m_Layer: 0
   m_Name: HalfRing (1)
-  m_TagString: HalfRing
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -82856,8 +82879,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isCollected: 0
+  timeUntilGone: 0
   YellowRingAnim: {fileID: 7341588796632099819}
-  currentTag: 
+  selfCollider: {fileID: 0}
   LOD: 0
 --- !u!1 &9146500903221091047
 GameObject:
@@ -83094,7 +83118,7 @@ GameObject:
   - component: {fileID: 6923696087956735231}
   m_Layer: 0
   m_Name: Ring
-  m_TagString: YellowRing
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -83184,8 +83208,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isCollected: 0
+  timeUntilGone: 0
   YellowRingAnim: {fileID: 4592530366333328820}
-  currentTag: 
+  selfCollider: {fileID: 0}
   LOD: 1
 --- !u!1 &9177768454373369792
 GameObject:

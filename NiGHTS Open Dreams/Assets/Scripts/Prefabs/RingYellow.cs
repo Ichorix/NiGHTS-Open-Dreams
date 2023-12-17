@@ -20,14 +20,18 @@ public class RingYellow : MonoBehaviour
         }
     }
     public Animator YellowRingAnim;
-    public string currentTag;
+    public Collider selfCollider;
     public bool LOD;
 
+    void Awake()
+    {
+        selfCollider = GetComponent<Collider>();
+    }
     void Start()
     {
         isCollected = false;
         TimeUntilGone = 1f;
-        currentTag = this.tag;
+        selfCollider.enabled = true;
     }
 
     void Update()
@@ -35,7 +39,7 @@ public class RingYellow : MonoBehaviour
         if(isCollected)
         {
             TimeUntilGone -= Time.deltaTime;
-            this.tag = "Collected";
+            selfCollider.enabled = false;
         }
     }
     void OnTriggerEnter(Collider other)
@@ -49,7 +53,7 @@ public class RingYellow : MonoBehaviour
     {
         isCollected = false;
         TimeUntilGone = 1f;
-        this.tag = currentTag;
+        selfCollider.enabled = true;
         this.gameObject.SetActive(true);
         YellowRingAnim.SetTrigger("TrRespawn");
     }

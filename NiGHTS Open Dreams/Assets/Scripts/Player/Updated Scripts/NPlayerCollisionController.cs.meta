@@ -3,7 +3,19 @@ guid: 261b99105fc69944da9c50f16431beb8
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - levelPlayer: {instanceID: 0}
+  - openPlayer: {instanceID: 0}
+  - _stats: {instanceID: 0}
+  - _sounds: {instanceID: 0}
+  - MainSounds: {instanceID: 0}
+  - blueChip: {fileID: 11400000, guid: 44623dce1b0c37e4e84b063383f6b19d, type: 2}
+  - starChip: {fileID: 11400000, guid: 1403ed3a807cba542a06728756939455, type: 2}
+  - yellowRing: {fileID: 11400000, guid: 0dae734f93a0d224da993a80a6b411cf, type: 2}
+  - halfRing: {fileID: 11400000, guid: 6ce942f1fb5fd224ba7f911544f93bc6, type: 2}
+  - powerRing: {fileID: 11400000, guid: 4a7212d822b047447b41df77571cfe75, type: 2}
+  - spikeRing: {fileID: 11400000, guid: 5c213348b6248044f8a111fcc410ee73, type: 2}
+  - greenRing: {fileID: 11400000, guid: 1c43a35ece51c9248b3fa1c37553ad70, type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

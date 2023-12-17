@@ -13,9 +13,10 @@ GameObject:
   - component: {fileID: 5960840115332248246}
   - component: {fileID: 6923443208893615989}
   - component: {fileID: -8607519797590706537}
+  - component: {fileID: 4985996249641311326}
   m_Layer: 0
   m_Name: Star
-  m_TagString: Star
+  m_TagString: ParaloopCollectable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -115,3 +116,16 @@ MonoBehaviour:
   LOD: 0
   TwoRings: 0
   chip: 1
+--- !u!114 &4985996249641311326
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5312511366809604963}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a474a7cb6e914a14185c51a2e04edbd0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data: {fileID: 11400000, guid: 1403ed3a807cba542a06728756939455, type: 2}

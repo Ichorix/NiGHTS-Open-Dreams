@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 8787997438381868153}
   - component: {fileID: 711174523475700695}
   - component: {fileID: 817482504424977759}
+  - component: {fileID: 3421747162778824313}
   m_Layer: 0
   m_Name: BlueChip
-  m_TagString: BlueChip
+  m_TagString: ParaloopCollectable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -66,6 +67,19 @@ MonoBehaviour:
   LOD: 0
   TwoRings: 0
   chip: 1
+--- !u!114 &3421747162778824313
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8787997438381868152}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a474a7cb6e914a14185c51a2e04edbd0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data: {fileID: 11400000, guid: 44623dce1b0c37e4e84b063383f6b19d, type: 2}
 --- !u!1 &8787997438581496639
 GameObject:
   m_ObjectHideFlags: 0
