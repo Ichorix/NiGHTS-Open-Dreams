@@ -22,13 +22,9 @@ public class RespawnScript : MonoBehaviour
         {
             yellowRing.Respawn();
             if (TwoRings)
-            {
                 secondRing.Respawn();
-            }
             if (LOD)
-            {
                 this.gameObject.SetActive(true);
-            }
         }
     }
     public void Despawn()
