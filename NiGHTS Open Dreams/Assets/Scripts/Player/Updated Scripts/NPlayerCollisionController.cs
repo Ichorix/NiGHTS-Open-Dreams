@@ -38,9 +38,7 @@ public class NPlayerCollisionController : MonoBehaviour
         if(other.CompareTag("YellowRing"))
         {
             MainSounds.PlayOneShot(_sounds.YellowRingSFX, 1.0f);
-            if(_stats.BoostGauge < 90) _stats.BoostGauge += 10;
-            else _stats.BoostGauge = 100;
-
+            _stats.BoostGauge += 10;
 
             if(levelPlayer != null)
             {
@@ -51,14 +49,12 @@ public class NPlayerCollisionController : MonoBehaviour
         if(other.CompareTag("GreenRing"))
         {
             MainSounds.PlayOneShot(_sounds.GreenRingSFX, 1.0f);
-            if(_stats.BoostGauge < 90) _stats.BoostGauge += 10;
-            else _stats.BoostGauge = 100;
+            _stats.BoostGauge += 10;
         }
         if(other.CompareTag("HalfRing"))
         {
             MainSounds.PlayOneShot(_sounds.HalfRingSFX, 1.0f);
-            if(_stats.BoostGauge <= 90) _stats.BoostGauge += 10;
-            else _stats.BoostGauge = 100;
+            _stats.BoostGauge += 10;
 
             if(levelPlayer != null)
             {
