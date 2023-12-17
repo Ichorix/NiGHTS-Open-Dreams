@@ -213,6 +213,7 @@ public class NPlayerLevelFollow : MonoBehaviour
         while(boostAttempt)
         {
             t += Time.deltaTime;
+            _stats.BoostAttempt = true;
             _animations.BoostAnimationOverride(true);
             if(t >= _stats.boostAttemptTime)
             {
@@ -221,7 +222,9 @@ public class NPlayerLevelFollow : MonoBehaviour
             }
             yield return null;
         }
+
         t = 0;
+        _stats.BoostAttempt = false;
         while(boostAttemptCooldown)
         {
             t += Time.deltaTime;
