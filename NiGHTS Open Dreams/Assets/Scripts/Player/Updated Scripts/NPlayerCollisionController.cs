@@ -122,7 +122,7 @@ public class NPlayerCollisionController : MonoBehaviour
         if(levelPlayer != null)
         {
             levelPlayer.LinkIncrease();
-            levelPlayer.currentScore += 10 * levelPlayer.link;
+            levelPlayer.currentScore += 3 * levelPlayer.link;
             levelPlayer.LevelTimeLeft += 0.3f;
         }
     }
