@@ -11,7 +11,6 @@ public class EnterLevelScript : MonoBehaviour
     [SerializeField] private GameObject UIModal;
     private GameObject modalInstance;
     [SerializeField] private Animator scoreSpinner;
-    public int SavedGrade = 0;
 
     void OnTriggerEnter(Collider other)
     {
@@ -19,7 +18,17 @@ public class EnterLevelScript : MonoBehaviour
         {
             if(_stats.isLevelPlayer)
             {
-                //New Track
+                NPlayerLevelFollow levelFollow = other.GetComponent<NPlayerLevelFollow>();
+                if(levelFollow.ContinueLevel)
+                {
+                    // TODO Fix the grade check to incorporate all tracks
+                    thisStage.SavedScore = levelFollow.currentScore > thisStage.SavedScore ? levelFollow.currentScore : thisStage.SavedScore;
+                    int grade = (int)thisStage.Grades[levelFollow.levelSegment].Evaluate(levelFollow.currentScore);
+                    thisStage.SavedGrade = grade > thisStage.SavedGrade ? grade : thisStage.SavedGrade;
+
+                    levelFollow.levelSegment++;
+                    levelFollow.ContinueLevel = false;
+                }
             }
             else
             {
@@ -29,7 +38,7 @@ public class EnterLevelScript : MonoBehaviour
                 playerStates.ResetStats();
                 modalInstance.GetComponent<UIModalButtons>().Enable(_stats.openChips, playerStates, Paths, thisStage);
 
-                scoreSpinner.SetInteger("Grade", SavedGrade);
+                scoreSpinner.SetInteger("Grade", thisStage.SavedGrade);
                 scoreSpinner.SetTrigger("RunAnimation");
             }
         }

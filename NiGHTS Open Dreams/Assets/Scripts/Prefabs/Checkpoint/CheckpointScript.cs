@@ -4,17 +4,22 @@ using UnityEngine;
 
 public class CheckpointScript : MonoBehaviour
 {
-    public EEPoint Enter;
-    public EEPoint Exit;
-    public bool disableMesh;
-    public bool Outer;
-    public bool allowDespawning;
-    //public bool firstTime = true;
+    [SerializeField] private EEPoint Enter;
+    [SerializeField] private EEPoint Exit;
+    [Tooltip("Prevents the mesh from being disabled on start. Used for debugging")]
+    [SerializeField] private bool dontDisableMesh;
+    private bool Outer;
+    [Tooltip("Allows you to make it so that this checkpoint despawns collectables when the player goes the wrong way")]
+    [SerializeField] private bool allowDespawning;
     public List<GameObject> respawnables;
     void Start()
     {
-        if(disableMesh)
+        if(!dontDisableMesh)
         this.gameObject.transform.GetChild(0).gameObject.SetActive(false);
+    }
+    void OnEnable()
+    {
+        RespawnStuff();
     }
     void OnTriggerEnter(Collider other)
     {
@@ -28,6 +33,7 @@ public class CheckpointScript : MonoBehaviour
     {
         if(other.CompareTag("Player") && Outer)
         {
+            // Checks the left and right triggers to see which direction the player went through
             if(Enter.active)
             {
                 //Debug.Log("Entered Direction");

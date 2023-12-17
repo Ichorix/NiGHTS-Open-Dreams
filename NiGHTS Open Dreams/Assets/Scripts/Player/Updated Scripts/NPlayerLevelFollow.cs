@@ -20,11 +20,35 @@ public class NPlayerLevelFollow : MonoBehaviour
     public PathCreator[] ActiveLevelPaths = new PathCreator[4]; //Creates the level with the appropriate amount of paths. Paths assigned in Inspector
     public AnimationCurve[] ActiveLevelGrading = new AnimationCurve[4]; //Score defined in Inspector. Mapped as Grade over Score. Grade 5 = A, Grade 0 = F
     public float[] ActiveLevelTimes = new float[4]; //Time defined in Inspector.
+    public int[] TopGrades = new int[4];
+    public float[] TopScore = new float[4];
     public PathCreator currentPath;
     public EndOfPathInstruction endOfPathInstruction;
     public float distanceTravelled;
-    private int levelSegment;
-    private bool continueLevel;
+    public int levelSegment;
+    [SerializeField] private bool continueLevel;
+    public bool ContinueLevel
+    {
+        get{ return continueLevel; }
+        set
+        {
+            continueLevel = value;
+            if(!continueLevel)
+            {
+                // Makes the previous path inactive
+                currentPath.gameObject.SetActive(false);
+                // Then sets the current path to the proper path
+                distanceTravelled = 0;
+                currentPath = ActiveLevelPaths[levelSegment];
+                LevelTimeLeft = ActiveLevelTimes[levelSegment];
+                // And sets it active again
+                currentPath.gameObject.SetActive(true);
+                currentChips = 0;
+                currentScore = 0;
+            }
+        }
+    }
+    
 
     [Header("Player Level Data")]
     [SerializeField] private float levelTimeLeft;
@@ -85,44 +109,19 @@ public class NPlayerLevelFollow : MonoBehaviour
     {
         //Physics.gravity *= gravityModifier;
         _stats.BoostGauge = _stats.maxBoost;
+        currentChips = 0;
+        currentScore = 0;
 
         levelSegment = 0;
         currentPath = ActiveLevelPaths[levelSegment];
         LevelTimeLeft = ActiveLevelTimes[levelSegment];
-
-        continueLevel = false;
+        
+        ContinueLevel = false;
         distanceTravelled = 0;
         transform.position = currentPath.path.GetPointAtDistance(distanceTravelled, endOfPathInstruction);
         
         rigidbody = GetComponent<Rigidbody>();
         rigidbody.AddForce(Vector3.up * 5f, ForceMode.Impulse);
-        
-        /*
-        if(!bossFight) // TODO: Sort through later
-        {
-            pathS11.gameObject.SetActive(true);
-            currentPath = pathS11;
-            LevelTimeLeft = pathS11time + bonusTime;
-            if(pathMusic != null) pathMusic.SetActive(true);
-            if(openLevel != null) openLevel.SetActive(false);
-
-            chipCounter = 0;
-            growthPalace.freedIdeas = 0;
-            growthPalace.UpdateStuff();
-            transform.localPosition = Vector3.zero;
-        }
-        */
-    }
-    void OnDisable()
-    {
-        /*
-        if(pathMusic != null) pathMusic.SetActive(false);
-        if(openLevel != null) openLevel.SetActive(true);
-
-        growthPalace.ReturnAllIdeyas();
-        growthPalace.UpdateStuff();
-        currentPath.gameObject.SetActive(false);
-        */
     }
 
     void Update()
@@ -184,18 +183,6 @@ public class NPlayerLevelFollow : MonoBehaviour
     {
         LevelTimeLeft -= Time.deltaTime;
         if(linkActive) LinkTimeLeft -= Time.deltaTime;
-
-        if(LevelTimeLeft < 0)
-        {
-            //sc.Activate1();
-            //currentPath.gameObject.SetActive(false);
-            //if(pathMusic != null) pathMusic.SetActive(false);
-            //if(openLevel != null) openLevel.SetActive(true);
-            
-            //growthPalace.freedIdeas = 0;
-            //growthPalace.UpdateStuff();
-            //growthPalace.ReturnAllIdeyas();
-        }
     }
 
     //////////FUNCTIONS//////////
@@ -259,5 +246,11 @@ public class NPlayerLevelFollow : MonoBehaviour
         linkActive = false;
         if(linkControl != null)
             linkControl.RunLinkIncrease(link);
+    }
+
+    public int CalculateGrade(AnimationCurve GradingCurve, float ScoreToBeGraded)
+    {
+        float OutputGrade = GradingCurve.Evaluate(ScoreToBeGraded);
+        return (int)OutputGrade;
     }
 }

@@ -116,6 +116,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bonusTimeText: {fileID: 7650592074550324108}
+  HighScoreText: {fileID: 5137562198462115684}
 --- !u!1001 &3202630196675113698
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -311,6 +312,17 @@ PrefabInstance:
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 4c0ac30bcdc37354fb74d3a10d82d76b, type: 3}
+--- !u!114 &5137562198462115684 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7727700508723207558, guid: 4c0ac30bcdc37354fb74d3a10d82d76b, type: 3}
+  m_PrefabInstance: {fileID: 3202630196675113698}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &7199072612346075235 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5735960108767373953, guid: 4c0ac30bcdc37354fb74d3a10d82d76b, type: 3}

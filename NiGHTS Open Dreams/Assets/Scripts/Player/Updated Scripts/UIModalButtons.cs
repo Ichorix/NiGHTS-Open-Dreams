@@ -8,6 +8,7 @@ using PathCreation;
 public class UIModalButtons : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI bonusTimeText;
+    [SerializeField] private TextMeshProUGUI HighScoreText;
     private NPlayerStateController _playerStates;
     private PathCreator[] pathsInstance = new PathCreator[4];
     private CustomStageScriptableObject stageInformation;
@@ -18,6 +19,7 @@ public class UIModalButtons : MonoBehaviour
         _playerStates = playerStates;
         pathsInstance = bakedPaths;
         stageInformation = stageInfo;
+        HighScoreText.text = stageInformation.SavedScore.ToString();
     }
     public void EnterStage()
     {
