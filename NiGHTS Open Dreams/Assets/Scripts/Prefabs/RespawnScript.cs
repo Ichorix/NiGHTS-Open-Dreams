@@ -20,7 +20,6 @@ public class RespawnScript : MonoBehaviour
         
         if (yellowRing != null)
         {
-            Debug.Log("Respawn");
             yellowRing.Respawn();
             if (TwoRings)
             {
