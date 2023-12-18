@@ -19,6 +19,7 @@ public class NPlayerLevelFollow : MonoBehaviour
     private Vector3 pathRotation;
 
     [Header("Current Level Information")]
+    public EnterLevelScript ActiveLevelPalace;
     public PathCreator[] ActiveLevelPaths = new PathCreator[4]; //Creates the level with the appropriate amount of paths. Paths assigned in Inspector
     public AnimationCurve[] ActiveLevelGrading = new AnimationCurve[4]; //Score defined in Inspector. Mapped as Grade over Score. Grade 5 = A, Grade 0 = F
     public float[] ActiveLevelTimes = new float[4]; //Time defined in Inspector.
@@ -42,15 +43,15 @@ public class NPlayerLevelFollow : MonoBehaviour
                 currentPath.gameObject.SetActive(false);
                 // Then sets the current path to the proper path
                 distanceTravelled = 0;
-                currentPath = ActiveLevelPaths[levelSegment];
-                LevelTimeLeft = ActiveLevelTimes[levelSegment];
+                currentPath = ActiveLevelPaths[Mathf.Clamp(levelSegment, 0, ActiveLevelPaths.Length-1)];
+                LevelTimeLeft = ActiveLevelTimes[Mathf.Clamp(levelSegment, 0, ActiveLevelTimes.Length-1)];
                 // And sets it active again
                 currentPath.gameObject.SetActive(true);
                 // Resets the necessary values
                 currentChips = 0;
                 currentScore = 0;
                 blueChipMaterial.SetFloat("_EmissionOn", 0f);
-                blueChipData.Score = 0;
+                blueChipData.Score = 10;
             }
         }
     }
@@ -125,7 +126,8 @@ public class NPlayerLevelFollow : MonoBehaviour
         ContinueLevel = false;
         distanceTravelled = 0;
         transform.position = currentPath.path.GetPointAtDistance(distanceTravelled, endOfPathInstruction);
-        
+        //ActiveLevelPalace.ResetIdeyas();
+
         rigidbody = GetComponent<Rigidbody>();
         rigidbody.AddForce(Vector3.up * 5f, ForceMode.Impulse);
     }
@@ -205,10 +207,18 @@ public class NPlayerLevelFollow : MonoBehaviour
     }
     private void ExitLevel()
     {
+        ActiveLevelPalace.ResetIdeyas();
         currentPath.gameObject.SetActive(false);
         _playerStates.ActivateOpenPlayer();
         blueChipMaterial.SetFloat("_EmissionOn", 0f);
-        blueChipData.Score = 0;
+        blueChipData.Score = 10;
+    }
+    public void BeatLevel()
+    {
+        currentPath.gameObject.SetActive(false);
+        _playerStates.ActivateOpenPlayer();
+        blueChipMaterial.SetFloat("_EmissionOn", 0f);
+        blueChipData.Score = 10;
     }
     
     public void RunBoostAttempt()

@@ -10,6 +10,7 @@ public class InstantiatePointItem : MonoBehaviour
     public GameObject pointItem;
     public GameObject chipItem;
     public GameObject damageItem;
+    public GameObject scoreSpinner;
 
     public Material PointItemMaterial;
     [ColorUsage(true, true)]
@@ -29,7 +30,6 @@ public class InstantiatePointItem : MonoBehaviour
             case 2: // Points
                 GameObject pointItemRef = Instantiate(pointItem, parent);
                 pointItemRef.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = value.ToString();
-                Debug.Log("1");
                 if(PointItemMaterial != null)
                 {
                     PointNChipCircles pointItemScript = pointItemRef.GetComponent<PointNChipCircles>();
@@ -44,13 +44,14 @@ public class InstantiatePointItem : MonoBehaviour
                     
                     pointItemScript.image = pointItemRef.GetComponent<Image>();
                     pointItemScript.image.material = pointItemScript.matInstance;
-                    Debug.Log("7");
                 }
-                Debug.Log("Got to here just fine");
                 break;
             case 3: // Damage
                 GameObject damageItemRef = Instantiate(damageItem, parent);
                 damageItemRef.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = value.ToString();
+                break;
+            case 4: // Score Spinner
+                Instantiate(scoreSpinner, parent);
                 break;
         }
 

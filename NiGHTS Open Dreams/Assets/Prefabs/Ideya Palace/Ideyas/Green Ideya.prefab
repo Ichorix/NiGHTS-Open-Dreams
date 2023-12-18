@@ -5432,7 +5432,7 @@ MonoBehaviour:
   rigidbody: {fileID: 1327574857052114548}
   goToPosition: {fileID: 0}
   inPlace: 0
-  chaseSpeed: 70
+  chaseSpeed: 100
   forceMode: 0
   maxDrag: 3
 --- !u!1 &5555994532728154597

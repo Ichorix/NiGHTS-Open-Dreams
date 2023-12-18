@@ -62,23 +62,24 @@ public class NPlayerCollisionController : MonoBehaviour
     {
         if(levelPlayer != null)
         {
+            int points = data.Score * (data.timesLink ? levelPlayer.link : 1);
+
             if(data.increaseLink) levelPlayer.LinkIncrease();
             else if(data.clearLink) levelPlayer.LinkEmpty();
 
-            int points = data.Score * (data.timesLink ? levelPlayer.link : 1);
-
             levelPlayer.currentScore += points;
-            if(points > 0) pointItemScript.InstantiateUItem(2, points);
+            if(points > 0)
+                pointItemScript.InstantiateUItem(2, points);
 
             levelPlayer.LevelTimeLeft += data.Time;
-            if(data.Time < 0) pointItemScript.InstantiateUItem(3, data.Time);
+            if(data.Time < 0)
+                pointItemScript.InstantiateUItem(3, data.Time);
             levelPlayer.currentChips += data.Chips;
         }
         else if(openPlayer != null)
         {
             _stats.openChips += data.Chips;
         }
-
         if(data.Chips > 0)
             pointItemScript.InstantiateUItem(1);
 

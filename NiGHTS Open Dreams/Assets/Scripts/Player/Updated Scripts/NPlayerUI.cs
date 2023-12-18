@@ -26,12 +26,12 @@ public class NPlayerUI : MonoBehaviour
 
         if(_stats.isLevelPlayer)
         {
-            scoreText.text = levelPlayer.currentScore.ToString();
+            scoreText.text = levelPlayer.currentScore.ToString("n0");
             timeText.text = ((int)levelPlayer.LevelTimeLeft).ToString();
-            chipText.text = levelPlayer.currentChips.ToString() + " / " + chipReq.ToString();
+            chipText.text = levelPlayer.currentChips.ToString("n0") + " / " + chipReq.ToString();
         }
         else
-        chipText.text = _stats.openChips.ToString();
+        chipText.text = _stats.openChips.ToString("n0");
     }
     
     public void ActivateLevelUI(bool active)

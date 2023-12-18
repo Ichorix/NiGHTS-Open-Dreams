@@ -77,7 +77,6 @@ public class NPlayerLevelRotations : MonoBehaviour
             t += Time.deltaTime * _stats.flipSpeed;
             flip = Mathf.SmoothStep(180, 0, t);
             oppositeFlip = Mathf.SmoothStep(360, 180, t);
-            Debug.Log("Flipping");
             yield return null;
         }
     }
@@ -91,7 +90,6 @@ public class NPlayerLevelRotations : MonoBehaviour
             t += Time.deltaTime * _stats.flipSpeed;
             flip = Mathf.SmoothStep(0, 180, t);
             oppositeFlip = Mathf.SmoothStep(180, 360, t);
-            Debug.Log("ReFlipping");
             yield return null;
         }
         //Delayed to let the lerp happen. If not it would snap back

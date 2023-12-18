@@ -8,11 +8,15 @@ public class EnterLevelScript : MonoBehaviour
     [SerializeField] private NPlayerScriptableObject _stats;
     [SerializeField] private GameObject asscoiatedOpenLevel;
     [SerializeField] private Transform[] ideyaDestinations = new Transform[4];
+    [SerializeField] private IdeyaCapture[] ideyaCaptures = new IdeyaCapture[4];
     public PathCreator[] Paths = new PathCreator[4];
+    public float[] ActiveAttemptScores = new float[4];
+    public int [] ActiveAttemptGrades = new int[4];
     [SerializeField] private CustomStageScriptableObject thisStage;
     [SerializeField] private GameObject UIModal;
     private GameObject modalInstance;
     [SerializeField] private Animator scoreSpinner;
+    private GameObject scoreSpinnerInstance;
 
     void OnTriggerEnter(Collider other)
     {
@@ -20,22 +24,46 @@ public class EnterLevelScript : MonoBehaviour
         {
             if(_stats.isLevelPlayer)
             {
+                // First spawn
                 NPlayerLevelFollow levelFollow = other.GetComponent<NPlayerLevelFollow>();
+                levelFollow.ActiveLevelPalace = this;
                 // Since the levelPlayer triggers the palace when it first spawns, turn off the level here
                 asscoiatedOpenLevel.SetActive(false);
+
+                // Continue Level
                 if(levelFollow.ContinueLevel)
                 {
                     IdeyaChase ideya = levelFollow.recoveredIdeya;
                     ideya.inPlace = true;
                     ideya.goToPosition = ideyaDestinations[levelFollow.levelSegment];
 
-                    // TODO Fix the grade check to incorporate all tracks
-                    thisStage.SavedScore = levelFollow.currentScore > thisStage.SavedScore ? levelFollow.currentScore : thisStage.SavedScore;
-                    int grade = (int)thisStage.Grades[levelFollow.levelSegment].Evaluate(levelFollow.currentScore);
-                    thisStage.SavedGrade = grade > thisStage.SavedGrade ? grade : thisStage.SavedGrade;
+                    
+                    ActiveAttemptScores[levelFollow.levelSegment] = levelFollow.currentScore;
+                    ActiveAttemptGrades[levelFollow.levelSegment] = (int)(thisStage.Grades[levelFollow.levelSegment].Evaluate(levelFollow.currentScore));
+                    
+                    other.GetComponent<InstantiatePointItem>().InstantiateUItem(4);
+                    scoreSpinner.SetInteger("Grade", ActiveAttemptGrades[levelFollow.levelSegment]);
+                    scoreSpinner.SetTrigger("RunAnimation");
 
                     levelFollow.levelSegment++;
                     levelFollow.ContinueLevel = false;
+                    if(levelFollow.levelSegment >= Paths.Length)
+                    {
+                        // Calculate and Save Final Grades
+                        int sumGrade = 0;
+                        foreach(int item in ActiveAttemptGrades)
+                            sumGrade += item;
+                        int fullGrade = (int)((sumGrade + 2) * 0.25f);
+
+                        float fullScore = 0;
+                        foreach(float item in ActiveAttemptScores)
+                            fullScore += item;
+
+                        thisStage.SavedGrade = fullGrade > thisStage.SavedGrade ? fullGrade : thisStage.SavedGrade;
+                        thisStage.SavedScore = fullScore > thisStage.SavedScore ? fullScore : thisStage.SavedScore;
+
+                        levelFollow.BeatLevel();
+                    }
                 }
             }
             else
@@ -64,6 +92,15 @@ public class EnterLevelScript : MonoBehaviour
             {
                 Destroy(modalInstance);
             }
+        }
+    }
+
+    public void ResetIdeyas()
+    {
+        for(int i = 0; i < ideyaCaptures.Length; i++)
+        {
+            Debug.Log(i);
+            ideyaCaptures[i].ReturnMyIdeya();
         }
     }
 }

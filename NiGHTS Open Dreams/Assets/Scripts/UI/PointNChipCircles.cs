@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class PointNChipCircles : MonoBehaviour
 {
+    [SerializeField] private bool externalDeath = false;
     private float t;
     public float speed;
     private Vector3 center = Vector3.zero;
@@ -31,7 +32,7 @@ public class PointNChipCircles : MonoBehaviour
     void Update()
     {
         t += Time.deltaTime * speed;
-        if (t > 1)
+        if (t > 1 && !externalDeath)
         {
             Destroy(this.gameObject);
             return;

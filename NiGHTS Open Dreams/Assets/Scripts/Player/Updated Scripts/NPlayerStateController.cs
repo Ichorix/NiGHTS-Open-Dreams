@@ -44,7 +44,6 @@ public class NPlayerStateController : MonoBehaviour
     public void ResetStats()
     {
         _stats.PowerBuffTimeLeft = 0;
-        _stats.BoostGauge = _stats.maxBoost;
         _stats.MoveDirection = Vector2.zero;
         _stats.MovementMultiplier = 0;
         _stats.TurningMultiplier = 1;

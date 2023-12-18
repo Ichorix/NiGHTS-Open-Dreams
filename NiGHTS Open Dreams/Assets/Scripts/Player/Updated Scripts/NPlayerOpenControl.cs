@@ -29,15 +29,9 @@ public class NPlayerOpenControl : MonoBehaviour
         rigidbody = GetComponent<Rigidbody>();
         _stats.BoostGauge = _stats.maxBoost;
         if(!_stats.cameraPlayerBound)
-        {
-            Debug.Log("World");
             CamSetWorld();
-        }
         else
-        {
-            Debug.Log("Player");
             CamSetPlayer();
-        }
     }
 
     void Update()

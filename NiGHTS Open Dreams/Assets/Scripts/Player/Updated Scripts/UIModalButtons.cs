@@ -19,7 +19,7 @@ public class UIModalButtons : MonoBehaviour
         _playerStates = playerStates;
         pathsInstance = bakedPaths;
         stageInformation = stageInfo;
-        HighScoreText.text = stageInformation.SavedScore.ToString();
+        HighScoreText.text = stageInformation.SavedScore.ToString("n0");
     }
     public void EnterStage()
     {

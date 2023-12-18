@@ -11,9 +11,7 @@ public class IdeyaCapture : MonoBehaviour
 
     void Start()
     {
-        ideyaReleased = false;
-        ideya.inPlace = true;
-        ideya.goToPosition = ideyaHomePos;
+        ReturnMyIdeya();
     }
 
     void OnTriggerEnter(Collider other)
@@ -27,7 +25,7 @@ public class IdeyaCapture : MonoBehaviour
                 levelFollow.recoveredIdeya = ideya;
                 ReleaseIdeya(other);
                 levelFollow.blueChipMaterial.SetFloat("_EmissionOn", 1f);
-                levelFollow.blueChipData.Score = 10;
+                levelFollow.blueChipData.Score = 20;
             }
         }
     }
@@ -37,5 +35,11 @@ public class IdeyaCapture : MonoBehaviour
         ideyaReleased = true;
         ideya.inPlace = false;
         ideya.goToPosition = other.gameObject.transform;
+    }
+    public void ReturnMyIdeya()
+    {
+        ideyaReleased = false;
+        ideya.inPlace = true;
+        ideya.goToPosition = ideyaHomePos;
     }
 }
