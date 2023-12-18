@@ -21,6 +21,5 @@ MonoBehaviour:
   givePower: 0
   powerTime: 0
   Chips: 0
-  chipItem: 0
   instantOff: 0
   interactionSound: {fileID: 8300000, guid: 1babe687b2f11834f93cff3fcb2d2371, type: 3}

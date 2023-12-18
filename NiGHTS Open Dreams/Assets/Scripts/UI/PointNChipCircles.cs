@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PointNChipCircles : MonoBehaviour
 {
@@ -17,15 +18,31 @@ public class PointNChipCircles : MonoBehaviour
     public AnimationCurve negVariation; //y neg x pos
     private float variationMult; // input as t
 
+    [Header("Point item instance Information")]
+    [SerializeField] private float pulseSpeed;
+    public AnimationCurve pointColorBellCurve;
+    public Material matInstance;
+    public Image image;
+
     void Start()
     {
         variationMult = Random.Range(-10, 10) * 0.1f;
-        //Also get a new Destination;
     }
     void Update()
     {
         t += Time.deltaTime * speed;
+        if (t > 1)
+        {
+            Destroy(this.gameObject);
+            return;
+        }
+        PositionCalculations();
+        if(matInstance != null)
+            ColorCalculations();
+    }
 
+    void PositionCalculations()
+    {
         xPos = Mathf.Lerp(center.x, Destination.x, middleCurve.Evaluate(t));
         yPos = Mathf.Lerp(center.y, Destination.y, middleCurve.Evaluate(t));
 
@@ -47,7 +64,10 @@ public class PointNChipCircles : MonoBehaviour
         }
         
         transform.localPosition = new Vector3(xPos, yPos, 0);
-
-        if (t > 1) Destroy(this.gameObject);
+    }
+    void ColorCalculations()
+    {
+        matInstance.SetFloat("_TimeOffset", pointColorBellCurve.Evaluate(t * pulseSpeed));
+        image.material = matInstance;
     }
 }

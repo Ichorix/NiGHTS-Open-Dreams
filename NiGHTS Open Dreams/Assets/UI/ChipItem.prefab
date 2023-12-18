@@ -28,7 +28,7 @@ RectTransform:
   m_GameObject: {fileID: 804359038377782977}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -89,12 +89,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe4c739832cdc4e449ea427624cb3a06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  t: 0
   speed: 1
-  center: {x: 0, y: 0, z: 0}
   Destination: {x: -1200, y: 500, z: 0}
-  xPos: 0
-  yPos: 0
   middleCurve:
     serializedVersion: 2
     m_Curve:
@@ -167,4 +163,3 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  variationMult: 0

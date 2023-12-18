@@ -396,7 +396,7 @@ namespace PathCreation.Examples
 
         public void CollectBlueChip(Collider other)
         {
-            pointItemScript.InstantiatePointAndChip(true);
+            //pointItemScript.InstantiatePointAndChip(true);
             Sounds.pitch = 1;
             Sounds.PlayOneShot(BlueChipSFX, 1.0f);
             other.gameObject.SetActive(false);

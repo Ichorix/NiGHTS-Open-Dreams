@@ -6,7 +6,7 @@ using UnityEngine;
 public class CollectablesData : ScriptableObject
 {
     [Tooltip("How much score is given when you collect this item")]
-    public float Score;
+    public int Score;
     [Tooltip("Should the score be multiplied by the link?")]
     public bool timesLink;
     [Tooltip("Should collecting this item increase the link?")]
@@ -23,8 +23,6 @@ public class CollectablesData : ScriptableObject
     public float powerTime;
     [Tooltip("How many chips should be given when you collect this item")]
     public int Chips;
-    [Tooltip("Should collecting this item spawn a chip item on the screen?")]
-    public bool chipItem;
     [Tooltip("Should this item be turned off immediately? Rings should have this off, chips have this on")]
     public bool instantOff;
     [Space]

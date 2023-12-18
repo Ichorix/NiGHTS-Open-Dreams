@@ -6,7 +6,7 @@ public class NPlayerCollisionController : MonoBehaviour
 {
     [SerializeField] private NPlayerLevelFollow levelPlayer;
     [SerializeField] private NPlayerOpenControl openPlayer;
-
+    [SerializeField] private InstantiatePointItem pointItemScript;
     [SerializeField] private NPlayerScriptableObject _stats;
     [SerializeField] private SoundPlayerScriptableObject _sounds;
     public AudioSource MainSounds;
@@ -62,10 +62,16 @@ public class NPlayerCollisionController : MonoBehaviour
     {
         if(levelPlayer != null)
         {
-            levelPlayer.currentScore += (int)(data.Score * (data.timesLink ? levelPlayer.link : 1));
             if(data.increaseLink) levelPlayer.LinkIncrease();
             else if(data.clearLink) levelPlayer.LinkEmpty();
+
+            int points = data.Score * (data.timesLink ? levelPlayer.link : 1);
+
+            levelPlayer.currentScore += points;
+            if(points > 0) pointItemScript.InstantiateUItem(2, points);
+
             levelPlayer.LevelTimeLeft += data.Time;
+            if(data.Time < 0) pointItemScript.InstantiateUItem(3, data.Time);
             levelPlayer.currentChips += data.Chips;
         }
         else if(openPlayer != null)
@@ -73,11 +79,13 @@ public class NPlayerCollisionController : MonoBehaviour
             _stats.openChips += data.Chips;
         }
 
+        if(data.Chips > 0)
+            pointItemScript.InstantiateUItem(1);
+
         _stats.PowerBuff = data.givePower;
         _stats.PowerBuffTimeLeft = data.powerTime;
         _stats.BoostGauge += data.Boost;
 
-        // if(data.chipItem) pointItemScript.InstantiatePointAndChip(true);
         if(data.instantOff) other.gameObject.SetActive(false);
         MainSounds.PlayOneShot(data.interactionSound, 1.0f);
     }

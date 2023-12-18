@@ -396,7 +396,7 @@ public class NewPlayerControl : MonoBehaviour
 
     public void CollectBlueChip(Collider other)
     {
-        pointItemScript.InstantiatePointAndChip(true);
+        //pointItemScript.InstantiatePointAndChip(true);
         Sounds.PlayOneShot(BlueChipSFX, 1.0f);
         other.gameObject.SetActive(false);
         chipAmount += 1;
