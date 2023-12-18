@@ -106,9 +106,9 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   Times:
-  - 9000
+  - 30
   - 75
   - 60
   - 90
-  SavedGrade: 4
-  SavedScore: 20689
+  SavedGrade: 5
+  SavedScore: 16788778
