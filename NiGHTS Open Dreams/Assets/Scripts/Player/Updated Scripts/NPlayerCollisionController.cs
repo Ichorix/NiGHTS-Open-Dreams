@@ -60,12 +60,13 @@ public class NPlayerCollisionController : MonoBehaviour
 
     public void CollectItem(Collider other, CollectablesData data)
     {
+        int points = 0;
         if(levelPlayer != null)
         {
-            int points = data.Score * (data.timesLink ? levelPlayer.link : 1);
-
             if(data.increaseLink) levelPlayer.LinkIncrease();
             else if(data.clearLink) levelPlayer.LinkEmpty();
+
+            points = data.Score * (data.timesLink ? levelPlayer.link : 1);
 
             levelPlayer.currentScore += points;
             if(points > 0)
@@ -79,12 +80,24 @@ public class NPlayerCollisionController : MonoBehaviour
         else if(openPlayer != null)
         {
             _stats.openChips += data.Chips;
+
+            if(data.increaseLink) openPlayer.LinkIncrease();
+            else if(data.clearLink) openPlayer.LinkEmpty();
+
+            points = data.Score * (data.timesLink ? openPlayer.link : 1);
+            if(points > 0)
+                pointItemScript.InstantiateUItem(2, points);
         }
         if(data.Chips > 0)
             pointItemScript.InstantiateUItem(1);
 
-        _stats.PowerBuff = data.givePower;
-        _stats.PowerBuffTimeLeft = data.powerTime;
+        if(data.givePower)
+        {
+            _stats.PowerBuffTimeLeft = data.powerTime > _stats.PowerBuffTimeLeft ? data.powerTime : _stats.PowerBuffTimeLeft;
+            _stats.PowerBuff = true;
+        }
+
+
         _stats.BoostGauge += data.Boost;
 
         if(data.instantOff) other.gameObject.SetActive(false);

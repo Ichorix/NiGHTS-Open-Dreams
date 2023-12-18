@@ -56,7 +56,7 @@ public class NPlayerLevelFollow : MonoBehaviour
         }
     }
     
-
+    [Space]
     [Header("Player Level Data")]
     [SerializeField] private float levelTimeLeft;
     public float LevelTimeLeft
@@ -77,7 +77,7 @@ public class NPlayerLevelFollow : MonoBehaviour
     public int chipRequirement;
     public int currentChips;
     public int currentScore;
-
+    [Space]
     [Header("Links Data")]
     [SerializeField] private LinkControl linkControl;
     public int link;
@@ -92,6 +92,7 @@ public class NPlayerLevelFollow : MonoBehaviour
             linkTimeLeft = value;
         }
     }
+    [Space]
     [Header("Movement Information")]
     [SerializeField] private bool canBoost;
     [SerializeField] private bool boostAttempt;

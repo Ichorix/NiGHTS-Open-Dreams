@@ -91,7 +91,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe4c739832cdc4e449ea427624cb3a06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
+  externalDeath: 0
+  speed: 0.8
   Destination: {x: 1200, y: 500, z: 0}
   middleCurve:
     serializedVersion: 2
@@ -165,7 +166,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  pulseSpeed: 2.5
+  pulseSpeed: 2
   pointColorBellCurve:
     serializedVersion: 2
     m_Curve:

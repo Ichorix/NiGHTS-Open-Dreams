@@ -15,6 +15,22 @@ public class NPlayerOpenControl : MonoBehaviour
     [SerializeField] private CinemachineFreeLook cameraSettings;
     private Rigidbody rigidbody;
     [Space]
+    [Header("Links Data")]
+    [SerializeField] private LinkControl linkControl;
+    public int link;
+    [SerializeField] private bool linkActive;
+    [SerializeField] private float linkTimeLeft;
+    public float LinkTimeLeft
+    {
+        get{ return linkTimeLeft; }
+        set
+        {
+            if(value <= 0) LinkEmpty();
+            linkTimeLeft = value;
+        }
+    }
+    [Space]
+    [Header("Movement Information")]
     [SerializeField] private bool canBoost;
     [SerializeField] private bool boostAttempt;
     [SerializeField] private bool boostAttemptCooldown;
@@ -40,6 +56,7 @@ public class NPlayerOpenControl : MonoBehaviour
         if(!boostAttempt) MovePlayer(CalculateMomentumBonus());
         BoostStuff();
         ActivateParaloop();
+        if(linkActive) LinkTimeLeft -= Time.deltaTime;
     }
 
     void LateUpdate()
@@ -274,4 +291,23 @@ public class NPlayerOpenControl : MonoBehaviour
             yield return null;
         }
     }
+
+    public void LinkIncrease()
+    {
+        LinkTimeLeft = 1;
+        link += 1;
+        linkActive = true;
+        if(linkControl != null)
+            linkControl.RunLinkIncrease(link);
+    }
+    public void LinkEmpty()
+    {
+        link = 0;
+        linkActive = false;
+        if(linkControl != null)
+            linkControl.RunLinkIncrease(link);
+    }
+
+
+    
 }

@@ -34,7 +34,7 @@ public class NPlayerScriptableObject : ScriptableObject
 
     [Space]
     public bool PowerBuff;
-    private float powerBuffTimeLeft;
+    [SerializeField] private float powerBuffTimeLeft;
     [Tooltip("Displays how much time is left on the Power Buff")]
     public float PowerBuffTimeLeft
     {
@@ -42,6 +42,7 @@ public class NPlayerScriptableObject : ScriptableObject
         set
         {
             if(powerBuffTimeLeft <= 0) PowerBuff = false;
+            else PowerBuff = true;
             powerBuffTimeLeft = value;
         }
     }
