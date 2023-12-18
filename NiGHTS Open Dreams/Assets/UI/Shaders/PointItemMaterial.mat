@@ -45,12 +45,12 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _MaskPower: 10
+    - _MaskPower: 2
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _TimeOffset: 0
+    - _TimeOffset: 1
     m_Colors:
-    - _FullColor: {r: 1, g: 0.28235295, b: 0, a: 0}
+    - _FullColor: {r: 0, g: 0.9148698, b: 1, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &8135612887897710349
 MonoBehaviour:
