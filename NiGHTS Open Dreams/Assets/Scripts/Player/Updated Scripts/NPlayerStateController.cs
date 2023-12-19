@@ -5,8 +5,8 @@ using PathCreation;
 
 public class NPlayerStateController : MonoBehaviour
 {
-    [SerializeField] private GameObject openPlayer;
-    [SerializeField] private GameObject levelPlayer;
+    public GameObject openPlayer;
+    public GameObject levelPlayer;
     [SerializeField] private NPlayerUI UIController;
     [SerializeField] private NPlayerScriptableObject _stats;
 

@@ -125,7 +125,8 @@ public class NPlayerLevelFollow : MonoBehaviour
         ContinueLevel = false;
         distanceTravelled = 0;
         transform.position = currentPath.path.GetPointAtDistance(distanceTravelled, endOfPathInstruction);
-        //ActiveLevelPalace.ResetIdeyas();
+
+        ActiveLevelPalace.ResetIdeyas();
 
         rigidbody = GetComponent<Rigidbody>();
         rigidbody.AddForce(Vector3.up * 5f, ForceMode.Impulse);
