@@ -25,13 +25,12 @@ public class NPlayerStateController : MonoBehaviour
         ResetStats();
     }
 
-    public void ActivateLevelPlayer(PathCreator[] paths, float[] times, AnimationCurve[] grades)
+    public void ActivateLevelPlayer(PathCreator[] paths, float[] times)
     {
         NPlayerLevelFollow levelFollow = levelPlayer.transform.GetChild(0).GetComponent<NPlayerLevelFollow>();
 
         levelFollow.ActiveLevelPaths = paths;
         levelFollow.ActiveLevelTimes = times;
-        levelFollow.ActiveLevelGrading = grades;
 
         // Activation has to be after the assignment so that the OnEnable() function assigns the rest of the values properly
         openPlayer.SetActive(false);

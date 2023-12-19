@@ -22,10 +22,7 @@ public class NPlayerLevelFollow : MonoBehaviour
     [Header("Current Level Information")]
     public EnterLevelScript ActiveLevelPalace;
     public PathCreator[] ActiveLevelPaths = new PathCreator[4]; //Creates the level with the appropriate amount of paths. Paths assigned in Inspector
-    public AnimationCurve[] ActiveLevelGrading = new AnimationCurve[4]; //Score defined in Inspector. Mapped as Grade over Score. Grade 5 = A, Grade 0 = F
     public float[] ActiveLevelTimes = new float[4]; //Time defined in Inspector.
-    public int[] TopGrades = new int[4];
-    public float[] TopScore = new float[4];
     public PathCreator currentPath;
     public EndOfPathInstruction endOfPathInstruction;
     public float distanceTravelled;
