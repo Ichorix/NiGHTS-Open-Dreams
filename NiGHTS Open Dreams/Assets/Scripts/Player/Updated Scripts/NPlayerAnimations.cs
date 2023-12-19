@@ -91,15 +91,8 @@ public class NPlayerAnimations : MonoBehaviour
     {
         if(_stats.isMoving && _stats.MoveDirection != Vector2.zero)
         {
-            if(_stats.MoveDirection.x > turningAnimationThreshold)
-                _animator.SetBool("isRight", true);
-            else
-                _animator.SetBool("isRight", false);
-
-            if(_stats.MoveDirection.x < -turningAnimationThreshold)
-                _animator.SetBool("isLeft", true);
-            else 
-                _animator.SetBool("isLeft", false);
+            _animator.SetBool("isRight", _stats.MoveDirection.x > turningAnimationThreshold);
+            _animator.SetBool("isLeft", _stats.MoveDirection.x < -turningAnimationThreshold);
         }
         else
         {
@@ -110,10 +103,7 @@ public class NPlayerAnimations : MonoBehaviour
 
     private void NPlayerLevelFollow_TurningAnimations()
     {
-        if(levelPlayer.upsideDownTime > 0 && _stats.isMoving)
-            _animator.SetBool("isUpsideDown", true);
-        else
-            _animator.SetBool("isUpsideDown", false);
+        _animator.SetBool("isUpsideDown", levelPlayer.upsideDownTime > 0 && _stats.isMoving);
         
         if(_stats.MoveDirection.y > turningAnimationThreshold)
             _animator.SetBool("isUp", true);
