@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2849442670f399e4fbe3e4a70420bc2a, type: 3}
   m_Name: NPlayerStats
   m_EditorClassIdentifier: 
-  isLevelPlayer: 0
   turningSpeed: 125
   normalSpeed: 15
   speedABoosting: 25
@@ -22,8 +21,6 @@ MonoBehaviour:
   groundAdjustSpeed: 20
   downwardsMomentumMultiplier: 5
   upwardsMomentumMultiplier: 0
-  PowerBuff: 0
-  powerBuffTimeLeft: -0.064648375
   normalSpeedLevel: 15
   speedABoostingLevel: 17
   boostingSpeedLevel: 28
@@ -36,6 +33,7 @@ MonoBehaviour:
   boostAttemptCooldown: 0.25
   maxBoost: 100
   boostDepletionRate: 20
+  boostGauge: 100
   MoveDirection: {x: 0, y: 0}
   LookDirection: {x: 0, y: -0}
   MovementMultiplier: 0
@@ -45,8 +43,9 @@ MonoBehaviour:
   runBoostAttempt: 1
   BoostAttempt: 0
   cameraPlayerBound: 1
+  isLevelPlayer: 1
+  PowerBuff: 0
+  powerBuffTimeLeft: 0
   MouseLookSensitivity: 1
   JoystickLookSensitivity: 1
-  displayScore: 0
-  levelTime: 0
-  openChips: 608
+  openChips: 611
