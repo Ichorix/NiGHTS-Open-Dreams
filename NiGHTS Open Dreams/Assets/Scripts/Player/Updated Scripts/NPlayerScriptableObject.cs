@@ -8,8 +8,6 @@ using TMPro;
 public class NPlayerScriptableObject : ScriptableObject
 {   
     [Header("Inspector Variables")]
-    [Tooltip("Determines if the player is currently in a Level")]
-    public bool isLevelPlayer = false;
     [Space]
     [Header("Open Player Values")]
     [Tooltip("The speed that the player will rotate at"), Range(0, 500)]
@@ -25,27 +23,11 @@ public class NPlayerScriptableObject : ScriptableObject
     [Tooltip("The speed that the player will recenter towards forward facing at"), Range(0, 100)]
     public float recenterSpeed = 3;
     [Tooltip("The speed that the player will adjust to the normals of the ground upon collision"), Range(0, 50)]
-    public float groundAdjustSpeed = 10;
+    public float groundAdjustSpeed = 20;
     [Tooltip("This value will be multiplied by the direction vector and added to the movement speed, but only for looking downwards")]
     public float downwardsMomentumMultiplier = 5;
     [Tooltip("A value of 0 will prevent you from going below the normal speed. A positive number will make you slow down, and a negative number will make you speed up")]
     public float upwardsMomentumMultiplier = 0;
-    [Tooltip("Displays whether the Power buff is active or not")]
-
-    [Space]
-    public bool PowerBuff;
-    [SerializeField] private float powerBuffTimeLeft;
-    [Tooltip("Displays how much time is left on the Power Buff")]
-    public float PowerBuffTimeLeft
-    {
-        get{ return powerBuffTimeLeft;}
-        set
-        {
-            if(powerBuffTimeLeft <= 0) PowerBuff = false;
-            else PowerBuff = true;
-            powerBuffTimeLeft = value;
-        }
-    }
     
     [Space]
     [Header("Level Player Values")]
@@ -110,13 +92,30 @@ public class NPlayerScriptableObject : ScriptableObject
     public bool cameraPlayerBound;
 
     [Space]
+    [Header("Else/Dont touch")]
+    [Tooltip("Determines if the player is currently in a Level")]
+    public bool isLevelPlayer = false;
+    [Space]
+    [Tooltip("Displays whether the Power buff is active or not")]
+    public bool PowerBuff;
+    [SerializeField] private float powerBuffTimeLeft;
+    [Tooltip("Displays how much time is left on the Power Buff")]
+    public float PowerBuffTimeLeft
+    {
+        get{ return powerBuffTimeLeft;}
+        set
+        {
+            if(powerBuffTimeLeft <= 0) PowerBuff = false;
+            else PowerBuff = true;
+            powerBuffTimeLeft = value;
+        }
+    }
+
+    [Space]
     [Header("Save Data")]
     [Tooltip("Multiplier for mouse input to Camera")]
     public float MouseLookSensitivity = 1;
     [Tooltip("Multiplier for joystic input to Camera")]
     public float JoystickLookSensitivity = 1;
-
-    public float displayScore;
-    public float levelTime;
     public int openChips;    
 }
