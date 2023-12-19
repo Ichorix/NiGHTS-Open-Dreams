@@ -23,6 +23,7 @@ MonoBehaviour:
   downwardsMomentumMultiplier: 5
   upwardsMomentumMultiplier: 0
   PowerBuff: 0
+  powerBuffTimeLeft: -0.064648375
   normalSpeedLevel: 15
   speedABoostingLevel: 17
   boostingSpeedLevel: 28
@@ -48,4 +49,4 @@ MonoBehaviour:
   JoystickLookSensitivity: 1
   displayScore: 0
   levelTime: 0
-  openChips: 524
+  openChips: 608
