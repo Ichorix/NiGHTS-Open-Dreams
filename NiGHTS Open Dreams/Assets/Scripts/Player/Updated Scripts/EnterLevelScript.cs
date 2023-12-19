@@ -62,7 +62,7 @@ public class EnterLevelScript : MonoBehaviour
                         thisStage.SavedGrade = fullGrade > thisStage.SavedGrade ? fullGrade : thisStage.SavedGrade;
                         thisStage.SavedScore = fullScore > thisStage.SavedScore ? fullScore : thisStage.SavedScore;
 
-                        levelFollow.BeatLevel();
+                        StartCoroutine(levelFollow.BeatLevel());
                     }
                 }
             }

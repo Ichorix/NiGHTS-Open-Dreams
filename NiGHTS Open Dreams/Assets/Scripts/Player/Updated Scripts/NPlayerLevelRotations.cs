@@ -14,6 +14,7 @@ public class NPlayerLevelRotations : MonoBehaviour
     private float oppositeFlip = 180;
     private bool flipped;
     private bool oppositeFlipped;
+    public bool flipping;
 
     void Update()
     {
@@ -69,6 +70,7 @@ public class NPlayerLevelRotations : MonoBehaviour
     IEnumerator FlipPlayer()
     {
         float t = 0;
+        flipping = true;
         flipped = true;
         oppositeFlipped = false;
         upsideDownTime = 0;
@@ -79,10 +81,12 @@ public class NPlayerLevelRotations : MonoBehaviour
             oppositeFlip = Mathf.SmoothStep(360, 180, t);
             yield return null;
         }
+        flipping = false;
     }
     IEnumerator OppositeFlipPlayer()
     {
         float t = 0;
+        flipping = true;
         oppositeFlipped = true;
         upsideDownTime = 0;
         while(t < 1)
@@ -94,5 +98,6 @@ public class NPlayerLevelRotations : MonoBehaviour
         }
         //Delayed to let the lerp happen. If not it would snap back
         flipped = false;
+        flipping = false;
     }
 }

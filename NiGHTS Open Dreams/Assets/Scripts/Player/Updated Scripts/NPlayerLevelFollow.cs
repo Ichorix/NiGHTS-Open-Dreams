@@ -10,6 +10,7 @@ public class NPlayerLevelFollow : MonoBehaviour
 {
     [SerializeField] private NPlayerScriptableObject _stats;
     [SerializeField] private NPlayerAnimations _animations;
+    [SerializeField] private NPlayerLevelRotations _rotationAnimation;
     [SerializeField] private NPlayerStateController _playerStates;
     [SerializeField] private NotATrailScript trailInstantiator;
     public Material blueChipMaterial;
@@ -68,7 +69,7 @@ public class NPlayerLevelFollow : MonoBehaviour
             {
                 lowOnTime = true;
                 if(value <= 0)
-                    ExitLevel();
+                    StartCoroutine(ExitLevel());
             }
             levelTimeLeft = value;
         }
@@ -206,16 +207,25 @@ public class NPlayerLevelFollow : MonoBehaviour
             return false;
         }
     }
-    private void ExitLevel()
+    IEnumerator ExitLevel()
     {
+        // Prevent the level from ending while you are flipping
+        // If that happens then a whole lot of ugly bugs pop up with the rotations
+        // There's probably another workaround but this is the simplest.
+        while(_rotationAnimation.flipping)
+            yield return null;
+            
         ActiveLevelPalace.ResetIdeyas();
         currentPath.gameObject.SetActive(false);
         _playerStates.ActivateOpenPlayer();
         blueChipMaterial.SetFloat("_EmissionOn", 0f);
         blueChipData.Score = 10;
     }
-    public void BeatLevel()
+    public IEnumerator BeatLevel()
     {
+        while(_rotationAnimation.flipping)
+            yield return null;
+
         currentPath.gameObject.SetActive(false);
         _playerStates.ActivateOpenPlayer();
         blueChipMaterial.SetFloat("_EmissionOn", 0f);
