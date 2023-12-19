@@ -9,10 +9,13 @@ public class NPlayerAnimations : MonoBehaviour
     
     [SerializeField] private Animator _animator;
     [SerializeField] private NPlayerScriptableObject _stats;
+    //Public so that they can be cleared by the paraloop
     public ParticleSystem rightHandSparkles;
     public ParticleSystem leftHandSparkles;
     [SerializeField] private TrailRenderer boostTrail;
     [SerializeField] private ParticleSystem boostParticles;
+    [SerializeField] private ParticleSystem speedWindParticles;
+    [SerializeField] private float speedWindSpeedThreshold = 30f;
     [SerializeField] private float turningAnimationThreshold = 0.6f;
 
     private bool boostAnim;
@@ -36,7 +39,10 @@ public class NPlayerAnimations : MonoBehaviour
         BoostingAnimations();
 
         if(!_stats.isLevelPlayer)
-        NPlayerOpenControl_TurningAnimations();
+        {
+            NPlayerOpenControl_TurningAnimations();
+            SpeedWindManagement();
+        }
         else
         NPlayerLevelFollow_TurningAnimations();
     }
@@ -75,6 +81,10 @@ public class NPlayerAnimations : MonoBehaviour
             boostParticles.enableEmission = boostAnim;
             boostTrail.emitting = boostAnim;
         }
+    }
+    private void SpeedWindManagement()
+    {
+        speedWindParticles.enableEmission = openPlayer._speed > speedWindSpeedThreshold;
     }
 
     private void NPlayerOpenControl_TurningAnimations()
