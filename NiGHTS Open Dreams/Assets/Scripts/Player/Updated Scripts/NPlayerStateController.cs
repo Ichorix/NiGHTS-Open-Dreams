@@ -5,11 +5,42 @@ using PathCreation;
 
 public class NPlayerStateController : MonoBehaviour
 {
+    [SerializeField] private bool gamePaused;
+    public bool GamePaused
+    {
+        get{ return gamePaused; }
+        set
+        {
+            gamePaused = value;
+                openControl._speed = 0;
+                openControl.enabled = !gamePaused;
+                OpenLevelMusic.SetActive(!gamePaused);
+                gameUI.SetActive(!gamePaused);
+                MainMenuUI.SetActive(gamePaused);
+                _input._stats = gamePaused ? null : _stats;
+                ResetStats();
+        }
+    }
+    public float UsableDeltaTime
+    {
+        get{ return gamePaused ? 0 : Time.deltaTime; }
+    }
     public GameObject openPlayer;
+    private NPlayerOpenControl openControl;
     public GameObject levelPlayer;
+    private NPlayerLevelFollow levelFollow;
+    [SerializeField] private GameObject MainMenuUI;
+    [SerializeField] private GameObject gameUI;
+    [SerializeField] private NPlayerInput _input;
     [SerializeField] private NPlayerUI UIController;
+    public GameObject OpenLevelMusic;
     [SerializeField] private NPlayerScriptableObject _stats;
-
+    void Awake()
+    {
+        openControl = openPlayer.transform.GetChild(0).GetComponent<NPlayerOpenControl>();
+        levelFollow = levelPlayer.transform.GetChild(0).GetComponent<NPlayerLevelFollow>();
+        GamePaused = GamePaused; // Sets the GamePaused state to whatever was defined in the inspector.
+    }
     void Start()
     {
         // Activates the Open Player by default

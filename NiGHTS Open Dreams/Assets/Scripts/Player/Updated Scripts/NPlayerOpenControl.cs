@@ -11,7 +11,7 @@ public class NPlayerOpenControl : MonoBehaviour
 
     [SerializeField] private NPlayerScriptableObject _stats;
     public NPlayerAnimations _animations;
-    [SerializeField] private NotATrailScript trialInstantiator;
+    [SerializeField] private NotATrailScript trailInstantiator;
     [SerializeField] private CinemachineFreeLook cameraSettings;
     private Rigidbody rigidbody;
     [Space]
@@ -39,7 +39,10 @@ public class NPlayerOpenControl : MonoBehaviour
     private Vector3 mostRecentGroundNormal;
 
 
-
+    void OnDisable()
+    {
+        trailInstantiator.enabled = false;
+    }
     void Start()
     {
         rigidbody = GetComponent<Rigidbody>();
@@ -150,7 +153,7 @@ public class NPlayerOpenControl : MonoBehaviour
     }
     private void ActivateParaloop()
     {
-        trialInstantiator.enabled = _stats.isMoving;
+        trailInstantiator.enabled = _stats.isMoving;
     }
     private void BoostStuff()
     {

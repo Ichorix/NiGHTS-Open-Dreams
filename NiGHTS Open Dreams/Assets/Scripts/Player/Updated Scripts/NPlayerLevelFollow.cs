@@ -132,6 +132,10 @@ public class NPlayerLevelFollow : MonoBehaviour
         rigidbody = GetComponent<Rigidbody>();
         rigidbody.AddForce(Vector3.up * 5f, ForceMode.Impulse);
     }
+    void OnDisable()
+    {
+        trailInstantiator.enabled = false;
+    }
 
     void Update()
     {
@@ -142,12 +146,12 @@ public class NPlayerLevelFollow : MonoBehaviour
     }
     void MovePlayer()
     {
-        distanceTravelled += _stats.MoveDirection.x * _speed * Time.deltaTime;
+        distanceTravelled += _stats.MoveDirection.x * _speed * _playerStates.UsableDeltaTime;
 
         pathPosition = currentPath.path.GetPointAtDistance(distanceTravelled, endOfPathInstruction);
         pathRotation = currentPath.path.GetRotationAtDistance(distanceTravelled, endOfPathInstruction).eulerAngles;
         
-        float yMovement = _stats.MoveDirection.y * _speed * Time.deltaTime;
+        float yMovement = _stats.MoveDirection.y * _speed * _playerStates.UsableDeltaTime;
         rigidbody.MovePosition(new Vector3(pathPosition.x, transform.position.y + yMovement, pathPosition.z));
         //rigidbody.AddForce(Vector3.up * _stats.MoveDirection.y * _speed, ForceMode.VelocityChange);
 
@@ -184,14 +188,14 @@ public class NPlayerLevelFollow : MonoBehaviour
     private void BoostStuff()
     {
         if(canBoost && _stats.isMoving)
-            _stats.BoostGauge -= _stats.boostDepletionRate * Time.deltaTime;
+            _stats.BoostGauge -= _stats.boostDepletionRate * _playerStates.UsableDeltaTime;
         _stats.BoostGauge = Mathf.Clamp(_stats.BoostGauge, 0, _stats.maxBoost);
     }
 
     void LevelLogic()
     {
-        LevelTimeLeft -= Time.deltaTime;
-        if(linkActive) LinkTimeLeft -= Time.deltaTime;
+        LevelTimeLeft -= _playerStates.UsableDeltaTime;
+        if(linkActive) LinkTimeLeft -= _playerStates.UsableDeltaTime;
     }
 
     //////////FUNCTIONS//////////
@@ -206,7 +210,7 @@ public class NPlayerLevelFollow : MonoBehaviour
             return false;
         }
     }
-    IEnumerator ExitLevel()
+    public IEnumerator ExitLevel()
     {
         // Prevent the level from ending while you are flipping
         // If that happens then a whole lot of ugly bugs pop up with the rotations
@@ -240,7 +244,7 @@ public class NPlayerLevelFollow : MonoBehaviour
         float t = 0;
         while(boostAttempt)
         {
-            t += Time.deltaTime;
+            t += _playerStates.UsableDeltaTime;
             _stats.BoostAttempt = true;
             _animations.BoostAnimationOverride(true);
             if(t >= _stats.boostAttemptTime)
@@ -255,7 +259,7 @@ public class NPlayerLevelFollow : MonoBehaviour
         _stats.BoostAttempt = false;
         while(boostAttemptCooldown)
         {
-            t += Time.deltaTime;
+            t += _playerStates.UsableDeltaTime;
             _animations.BoostAnimationOverride(false);
             if(t >= _stats.boostAttemptCooldown)
                 boostAttemptCooldown = false;

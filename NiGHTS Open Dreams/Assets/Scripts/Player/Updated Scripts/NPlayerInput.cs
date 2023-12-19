@@ -11,7 +11,8 @@ using UnityEngine.InputSystem;
 public class NPlayerInput : MonoBehaviour
 {
     private PlayerInputActions playerControls;
-    [SerializeField] private NPlayerScriptableObject _stats;
+    [SerializeField] private NPlayerStateController _playerStates;
+    public NPlayerScriptableObject _stats;
     [SerializeField] private NPlayerOpenControl _openPlayer;
     [SerializeField] private CinemachineFreeLook _mainCamera;
 
@@ -48,7 +49,7 @@ public class NPlayerInput : MonoBehaviour
     }
     public void OnPause(InputValue value)
     {
-        
+        PauseGame();
     }
     public void OnContinue(InputValue value)
     {
@@ -109,5 +110,10 @@ public class NPlayerInput : MonoBehaviour
     {
         Debug.Log(multiplier);
         _stats.TurningMultiplier = multiplier + 1;
+    }
+
+    void PauseGame()
+    {
+        _playerStates.GamePaused = !_playerStates.GamePaused;
     }
 }

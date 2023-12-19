@@ -7,6 +7,7 @@ public class EnterLevelScript : MonoBehaviour
 {
     [SerializeField] private NPlayerScriptableObject _stats;
     [SerializeField] private GameObject asscoiatedOpenLevel;
+    [SerializeField] private GameObject associatedLevelMusic;
     [SerializeField] private Transform[] ideyaDestinations = new Transform[4];
     [SerializeField] private IdeyaCapture[] ideyaCaptures = new IdeyaCapture[4];
     public PathCreator[] Paths = new PathCreator[4];
@@ -29,6 +30,7 @@ public class EnterLevelScript : MonoBehaviour
                 levelFollow.ActiveLevelPalace = this;
                 // Since the levelPlayer triggers the palace when it first spawns, turn off the level here
                 asscoiatedOpenLevel.SetActive(false);
+                associatedLevelMusic.SetActive(true);
 
                 // Continue Level
                 if(levelFollow.ContinueLevel)
@@ -69,6 +71,8 @@ public class EnterLevelScript : MonoBehaviour
             else
             {
                 asscoiatedOpenLevel.SetActive(true);
+                associatedLevelMusic.SetActive(false);
+                
                 if(modalInstance == null) // Spawn a new modal if one isnt already up. Prevents having multiple overlapping
                     modalInstance = Instantiate(UIModal);
 

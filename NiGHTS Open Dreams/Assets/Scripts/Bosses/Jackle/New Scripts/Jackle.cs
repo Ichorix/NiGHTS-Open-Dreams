@@ -354,7 +354,7 @@ public class Jackle : MonoBehaviour
         }
         sceneFade.BeginFade(1);
         yield return new WaitForSeconds(1f);
-        mmS.PlayClicked();
+        //mmS.PlayClicked();
         Debug.Log("Load Scene");
     }
     public void Damage()
