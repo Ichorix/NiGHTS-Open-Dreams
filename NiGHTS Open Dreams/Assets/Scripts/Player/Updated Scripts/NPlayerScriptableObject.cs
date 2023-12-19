@@ -58,7 +58,7 @@ public class NPlayerScriptableObject : ScriptableObject
     public float maxBoost = 100;
     [Tooltip("The rate at which the player will consume boost"), Range(0, 100)]
     public float boostDepletionRate = 20;
-    private float boostGauge;
+    [SerializeField] private float boostGauge;
     [Tooltip("The players Current boost")]
     public float BoostGauge
     {
