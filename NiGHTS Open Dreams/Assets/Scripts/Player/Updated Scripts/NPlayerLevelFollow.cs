@@ -43,7 +43,7 @@ public class NPlayerLevelFollow : MonoBehaviour
                 // Then sets the current path to the proper path
                 distanceTravelled = 0;
                 currentPath = ActiveLevelPaths[Mathf.Clamp(levelSegment, 0, ActiveLevelPaths.Length-1)];
-                LevelTimeLeft = ActiveLevelTimes[Mathf.Clamp(levelSegment, 0, ActiveLevelTimes.Length-1)];
+                LevelTimeLeft = ActiveLevelTimes[Mathf.Clamp(levelSegment, 0, ActiveLevelTimes.Length-1)] + bonusTime;
                 // And sets it active again
                 currentPath.gameObject.SetActive(true);
                 // Resets the necessary values
@@ -73,6 +73,7 @@ public class NPlayerLevelFollow : MonoBehaviour
         }
     }
     private bool lowOnTime;
+    public float bonusTime;
     public int currentChips;
     public int currentScore;
     [Space]
@@ -120,7 +121,7 @@ public class NPlayerLevelFollow : MonoBehaviour
 
         levelSegment = 0;
         currentPath = ActiveLevelPaths[levelSegment];
-        LevelTimeLeft = ActiveLevelTimes[levelSegment];
+        LevelTimeLeft = ActiveLevelTimes[levelSegment] + bonusTime;
         
         ContinueLevel = false;
         distanceTravelled = 0;

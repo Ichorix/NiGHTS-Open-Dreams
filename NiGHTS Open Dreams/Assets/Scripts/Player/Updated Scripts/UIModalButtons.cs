@@ -12,10 +12,12 @@ public class UIModalButtons : MonoBehaviour
     private NPlayerStateController _playerStates;
     private PathCreator[] pathsInstance = new PathCreator[4];
     private CustomStageScriptableObject stageInformation;
+    private float bonusTime;
 
     public void Enable(int bonus, NPlayerStateController playerStates, PathCreator[] bakedPaths, CustomStageScriptableObject stageInfo)
     {
-        bonusTimeText.text = "+"+ bonus.ToString() + " s";
+        bonusTime = Mathf.Clamp(bonus, 0, 60);
+        bonusTimeText.text = "+"+ bonusTime.ToString() + " s";
         _playerStates = playerStates;
         pathsInstance = bakedPaths;
         stageInformation = stageInfo;
@@ -23,7 +25,7 @@ public class UIModalButtons : MonoBehaviour
     }
     public void EnterStage()
     {
-        _playerStates.ActivateLevelPlayer(pathsInstance, stageInformation.Times, stageInformation.ChipsRequired);
+        _playerStates.ActivateLevelPlayer(pathsInstance, stageInformation.Times, stageInformation.ChipsRequired, bonusTime);
         Destroy(this.gameObject);
     }
     public void Cancel()
