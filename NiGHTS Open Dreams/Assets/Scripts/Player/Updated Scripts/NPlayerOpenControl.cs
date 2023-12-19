@@ -211,23 +211,21 @@ public class NPlayerOpenControl : MonoBehaviour
         }
     }
 
-    public void StoppedMoving()
-    {
-        StartCoroutine(ReAdjustPlayer());
-    }
-    IEnumerator ReAdjustPlayer()
+    public IEnumerator ReAdjustPlayer()
     {
         float t = 0;
-        Quaternion fromRotation = transform.rotation;
-        Quaternion toRotation = new Quaternion(0, transform.rotation.y, 0, transform.rotation.w);
 
-        while(!_stats.isMoving && t < 1)
+        while(t < 1)
         {
+            Quaternion fromRotation = transform.rotation;
+            Quaternion toRotation = new Quaternion(0, transform.rotation.y, 0, transform.rotation.w);
+
             t += Time.deltaTime * _stats.recenterSpeed;
             transform.rotation = Quaternion.Slerp(fromRotation, toRotation, t);
             yield return null;
         }
     }
+
 
     // Called when you touch the ground
     public void ReAdjustToNormals(Vector3 groundNormal)

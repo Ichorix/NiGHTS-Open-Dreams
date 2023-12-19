@@ -107,6 +107,15 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""ReOrientatePlayer"",
+                    ""type"": ""Button"",
+                    ""id"": ""e23a6a81-5d47-48f3-81ef-1ff7fe23d468"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -406,6 +415,17 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""action"": ""TightTurn"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2d86fa99-53a8-42b8-9158-7fe79a8e22cc"",
+                    ""path"": ""<Gamepad>/leftStickPress"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ReOrientatePlayer"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -423,6 +443,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         m_Player_Continue = m_Player.FindAction("Continue", throwIfNotFound: true);
         m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
         m_Player_TightTurn = m_Player.FindAction("TightTurn", throwIfNotFound: true);
+        m_Player_ReOrientatePlayer = m_Player.FindAction("ReOrientatePlayer", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -491,6 +512,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Continue;
     private readonly InputAction m_Player_Look;
     private readonly InputAction m_Player_TightTurn;
+    private readonly InputAction m_Player_ReOrientatePlayer;
     public struct PlayerActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -504,6 +526,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         public InputAction @Continue => m_Wrapper.m_Player_Continue;
         public InputAction @Look => m_Wrapper.m_Player_Look;
         public InputAction @TightTurn => m_Wrapper.m_Player_TightTurn;
+        public InputAction @ReOrientatePlayer => m_Wrapper.m_Player_ReOrientatePlayer;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -540,6 +563,9 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @TightTurn.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTightTurn;
                 @TightTurn.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTightTurn;
                 @TightTurn.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTightTurn;
+                @ReOrientatePlayer.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnReOrientatePlayer;
+                @ReOrientatePlayer.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnReOrientatePlayer;
+                @ReOrientatePlayer.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnReOrientatePlayer;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -571,6 +597,9 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @TightTurn.started += instance.OnTightTurn;
                 @TightTurn.performed += instance.OnTightTurn;
                 @TightTurn.canceled += instance.OnTightTurn;
+                @ReOrientatePlayer.started += instance.OnReOrientatePlayer;
+                @ReOrientatePlayer.performed += instance.OnReOrientatePlayer;
+                @ReOrientatePlayer.canceled += instance.OnReOrientatePlayer;
             }
         }
     }
@@ -586,5 +615,6 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         void OnContinue(InputAction.CallbackContext context);
         void OnLook(InputAction.CallbackContext context);
         void OnTightTurn(InputAction.CallbackContext context);
+        void OnReOrientatePlayer(InputAction.CallbackContext context);
     }
 }

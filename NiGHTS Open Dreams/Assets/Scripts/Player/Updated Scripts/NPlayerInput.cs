@@ -59,6 +59,10 @@ public class NPlayerInput : MonoBehaviour
     {
         TightTurnInput(value.Get<float>());
     }
+    public void OnReOrientatePlayer(InputValue value)
+    {
+        ReOrientateInput();
+    }
     #endif
 
     void MoveInput(float movementMultiplier)
@@ -69,7 +73,7 @@ public class NPlayerInput : MonoBehaviour
             else _stats.isMoving = false;
             bool newMoveState = _stats.isMoving;
             _stats.MovementMultiplier = movementMultiplier;
-            if(!newMoveState) _openPlayer.StoppedMoving();
+            if(!newMoveState) StartCoroutine(_openPlayer.ReAdjustPlayer());
         }
     }
     void BoostInput(bool newBoostState)
@@ -88,6 +92,10 @@ public class NPlayerInput : MonoBehaviour
     void RecenterCamera()
     {
         StartCoroutine(_openPlayer.RecenterCamera());
+    }
+    void ReOrientateInput()
+    {
+        StartCoroutine(_openPlayer.ReAdjustPlayer());
     }
     void ChangeCamera(bool isPerformed)
     {
