@@ -23,6 +23,7 @@ public class NPlayerLevelFollow : MonoBehaviour
     public EnterLevelScript ActiveLevelPalace;
     public PathCreator[] ActiveLevelPaths = new PathCreator[4]; //Creates the level with the appropriate amount of paths. Paths assigned in Inspector
     public float[] ActiveLevelTimes = new float[4]; //Time defined in Inspector.
+    public int[] ActiveLevelChipRequirement = new int[4];
     public PathCreator currentPath;
     public EndOfPathInstruction endOfPathInstruction;
     public float distanceTravelled;
@@ -72,7 +73,6 @@ public class NPlayerLevelFollow : MonoBehaviour
         }
     }
     private bool lowOnTime;
-    public int chipRequirement;
     public int currentChips;
     public int currentScore;
     [Space]

@@ -11,7 +11,6 @@ public class NPlayerUI : MonoBehaviour
     [SerializeField] private NPlayerLevelFollow levelPlayer;
     [SerializeField] private NPlayerScriptableObject _stats;
 
-    public float chipReq = 50;
     [Space]
     [SerializeField] private TextMeshProUGUI chipText;
     [SerializeField] private TextMeshProUGUI scoreText;
@@ -28,7 +27,8 @@ public class NPlayerUI : MonoBehaviour
         {
             scoreText.text = levelPlayer.currentScore.ToString("n0");
             timeText.text = ((int)levelPlayer.LevelTimeLeft).ToString();
-            chipText.text = levelPlayer.currentChips.ToString("n0") + " / " + chipReq.ToString();
+            chipText.text = levelPlayer.currentChips.ToString("n0")
+                + " / " + levelPlayer.ActiveLevelChipRequirement[levelPlayer.levelSegment].ToString();
         }
         else
         chipText.text = _stats.openChips.ToString("n0");

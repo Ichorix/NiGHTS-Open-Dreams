@@ -25,12 +25,13 @@ public class NPlayerStateController : MonoBehaviour
         ResetStats();
     }
 
-    public void ActivateLevelPlayer(PathCreator[] paths, float[] times)
+    public void ActivateLevelPlayer(PathCreator[] paths, float[] times, int[] chips)
     {
         NPlayerLevelFollow levelFollow = levelPlayer.transform.GetChild(0).GetComponent<NPlayerLevelFollow>();
 
         levelFollow.ActiveLevelPaths = paths;
         levelFollow.ActiveLevelTimes = times;
+        levelFollow.ActiveLevelChipRequirement = chips;
 
         // Activation has to be after the assignment so that the OnEnable() function assigns the rest of the values properly
         openPlayer.SetActive(false);

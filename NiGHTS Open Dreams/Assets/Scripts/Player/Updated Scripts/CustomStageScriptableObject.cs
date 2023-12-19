@@ -10,6 +10,8 @@ public class CustomStageScriptableObject : ScriptableObject
     public AnimationCurve[] Grades = new AnimationCurve[4];
     [Tooltip("The amount of time given per track")]
     public float[] Times = new float[4];
+    [Tooltip("The amount of chips needed to move on to the next track")]
+    public int[] ChipsRequired = new int[4];
 
     [Space]
     [Header("Save Data")]

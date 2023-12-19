@@ -23,7 +23,7 @@ public class UIModalButtons : MonoBehaviour
     }
     public void EnterStage()
     {
-        _playerStates.ActivateLevelPlayer(pathsInstance, stageInformation.Times);
+        _playerStates.ActivateLevelPlayer(pathsInstance, stageInformation.Times, stageInformation.ChipsRequired);
         Destroy(this.gameObject);
     }
     public void Cancel()

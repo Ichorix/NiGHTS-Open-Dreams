@@ -19,7 +19,7 @@ public class IdeyaCapture : MonoBehaviour
         if(other.CompareTag("Player") && _stats.isLevelPlayer && !ideyaReleased)
         {
             NPlayerLevelFollow levelFollow = other.gameObject.GetComponent<NPlayerLevelFollow>();
-            if(levelFollow.currentChips >= levelFollow.chipRequirement)
+            if(levelFollow.currentChips >= levelFollow.ActiveLevelChipRequirement[levelFollow.levelSegment])
             {
                 levelFollow.ContinueLevel = true;
                 levelFollow.recoveredIdeya = ideya;
