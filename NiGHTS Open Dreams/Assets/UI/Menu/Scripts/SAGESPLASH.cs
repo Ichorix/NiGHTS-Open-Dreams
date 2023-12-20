@@ -1,19 +1,36 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.Video;
 using UnityEngine.SceneManagement;
 
 public class SAGESPLASH : MonoBehaviour
 {
-    public AudioSource aSource;
+    [SerializeField] private Slider loadingBar;
+    [SerializeField] private VideoPlayer videoPlayer;
 
     void Start()
     {
-        Invoke("AudioFinish", aSource.clip.length);
+        loadingBar.gameObject.SetActive(false);
+        videoPlayer.loopPointReached += EndReached;
     }
-    void AudioFinish()
+
+    void EndReached(VideoPlayer vp)
     {
-        Debug.Log("Change Scenes");
-        SceneManager.LoadScene("MenusBasic");
+        loadingBar.gameObject.SetActive(true);
+        StartCoroutine(LoadingProgress());
     }
+
+    private IEnumerator LoadingProgress()
+    {
+        AsyncOperation operation = SceneManager.LoadSceneAsync("TerrainMaker");
+        while(!operation.isDone)
+        {
+            float progress = Mathf.Clamp01(operation.progress / .9f);
+            loadingBar.value = progress;
+            yield return null;
+        }
+    }
+    
 }
