@@ -14,16 +14,13 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Menus.unity
     guid: e76badde9ba30c648819bbc2070b51de
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/MenusBasic.unity
     guid: 818d375b5dbd19c42ac062c1cb5af82a
   - enabled: 1
     path: Assets/Scenes/TerrainMaker.unity
     guid: 85b80dc7a2776994f87153ea3f598f30
   - enabled: 0
-    path: Assets/Scenes/Dreamtopia.unity
-    guid: d26fef8a45392154b9d2efca69fedb0e
-  - enabled: 1
     path: Assets/Scenes/JackleFight.unity
     guid: 3ba32bed5e932dd409edc989293bea90
   m_configObjects:
