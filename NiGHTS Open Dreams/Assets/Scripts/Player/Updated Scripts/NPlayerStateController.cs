@@ -14,9 +14,9 @@ public class NPlayerStateController : MonoBehaviour
             gamePaused = value;
                 openControl._speed = 0;
                 openControl.enabled = !gamePaused;
-                OpenLevelMusic.SetActive(!gamePaused);
                 gameUI.SetActive(!gamePaused);
                 MainMenuUI.SetActive(gamePaused);
+                MainMenuCamera.SetActive(gamePaused);
                 _input._stats = gamePaused ? null : _stats;
                 ResetStats();
         }
@@ -29,14 +29,16 @@ public class NPlayerStateController : MonoBehaviour
     private NPlayerOpenControl openControl;
     public GameObject levelPlayer;
     private NPlayerLevelFollow levelFollow;
+    private Camera mainCamera;
     [SerializeField] private GameObject MainMenuUI;
+    [SerializeField] private GameObject MainMenuCamera;
     [SerializeField] private GameObject gameUI;
     [SerializeField] private NPlayerInput _input;
     [SerializeField] private NPlayerUI UIController;
-    public GameObject OpenLevelMusic;
     [SerializeField] private NPlayerScriptableObject _stats;
     void Awake()
     {
+        mainCamera = Camera.main;
         openControl = openPlayer.transform.GetChild(0).GetComponent<NPlayerOpenControl>();
         levelFollow = levelPlayer.transform.GetChild(0).GetComponent<NPlayerLevelFollow>();
         GamePaused = GamePaused; // Sets the GamePaused state to whatever was defined in the inspector.
