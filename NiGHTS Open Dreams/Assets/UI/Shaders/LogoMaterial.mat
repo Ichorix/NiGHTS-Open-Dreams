@@ -66,16 +66,18 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Multiply: 1
+    - _MaskStep: 0.5
+    - _Multiply: 2.25
     - _NoiseScale: 50
-    - _StarCorePower: 3
+    - _StarCorePower: 4
     - _StarFallSpeed: 0.1
     - _StarMoveSpeed: 1
-    - _StarPower: 2
+    - _StarPower: 4
     - _StarSize: 10
     - _StarStep: 0.01
+    - _TopGlow: 0.5
     - _UVOffset: 0.16
     - _UVPower: 30
     m_Colors:
-    - _Color: {r: 0.40668425, g: 0, b: 2.9960785, a: 0}
+    - _Color: {r: 0.6901961, g: 0, b: 8, a: 0}
   m_BuildTextureStacks: []

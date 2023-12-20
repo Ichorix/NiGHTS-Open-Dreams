@@ -120,13 +120,14 @@ public class NPlayerOpenControl : MonoBehaviour
             targetSpeed = _stats.speedABoosting;                    
         // If the speed change rate is too high or if performance is bad, it will sometimes jump past speedABoosting resulting in decelerating to normal speed
         // This can be fixed by increasing the speedOffset.
-        // Increasing speedOffset too much can cause bugs with acceleration on some devices, increase with moderation. The max I would do is 0.5f
+        // Increasing speedOffset too much can cause bugs with acceleration on some devices, increase with moderation. The max I would do is 1f
 
         if(!_stats.isMoving)
             targetSpeed = 0;
         
         float speedChangeRate = _stats.isBoosting? _stats.boostingAccelerationRate : _stats.normalAccelerationRate;
-        float speedOffset = 0.05f; //Default 0.05f
+        float speedOffset = 0.5f;
+        
 
         if(_speed < targetSpeed - speedOffset) //Accelerate
         {
