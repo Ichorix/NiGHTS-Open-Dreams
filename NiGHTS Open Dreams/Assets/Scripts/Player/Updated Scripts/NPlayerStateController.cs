@@ -18,6 +18,7 @@ public class NPlayerStateController : MonoBehaviour
                 MainMenuUI.SetActive(gamePaused);
                 MainMenuCamera.SetActive(gamePaused);
                 _input._stats = gamePaused ? null : _stats;
+                AudioListener.pause = gamePaused;
                 ResetStats();
         }
     }

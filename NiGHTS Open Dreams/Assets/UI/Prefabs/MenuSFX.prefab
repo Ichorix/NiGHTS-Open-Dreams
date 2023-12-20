@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8012851316785571529}
   - component: {fileID: 9052786927630001069}
   - component: {fileID: 9097385094415724818}
+  - component: {fileID: 2630877398934934190}
   m_Layer: 0
   m_Name: MenuSFX
   m_TagString: Untagged
@@ -322,3 +323,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &2630877398934934190
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5789084500609533816}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1faa1f48dc5196a4eb5629a19791008b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioSources:
+  - {fileID: 8012851316785571529}
+  - {fileID: 9052786927630001069}
+  - {fileID: 9097385094415724818}
