@@ -23,11 +23,14 @@ public class PointNChipCircles : MonoBehaviour
     [SerializeField] private float pulseSpeed;
     public AnimationCurve pointColorBellCurve;
     public Material matInstance;
+    public Sprite borderVariant;
+    [SerializeField] Image borderReference;
     public Image image;
 
     void Start()
     {
         variationMult = Random.Range(-10, 10) * 0.1f;
+        borderReference.sprite = borderVariant;
     }
     void Update()
     {
