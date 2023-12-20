@@ -221,7 +221,7 @@
                 {
                     "name": "",
                     "id": "daf7e380-f6ab-42d3-8699-82093275d059",
-                    "path": "<Keyboard>/v",
+                    "path": "<Keyboard>/rightCtrl",
                     "interactions": "Tap",
                     "processors": "",
                     "groups": "",
@@ -243,7 +243,7 @@
                 {
                     "name": "",
                     "id": "a1657598-35bc-4a10-ad43-d7c09dbe92dc",
-                    "path": "<Keyboard>/v",
+                    "path": "<Keyboard>/rightCtrl",
                     "interactions": "Hold",
                     "processors": "",
                     "groups": "",
@@ -276,7 +276,7 @@
                 {
                     "name": "",
                     "id": "61a72112-f046-4ffb-94b0-c738756e64bb",
-                    "path": "<Keyboard>/anyKey",
+                    "path": "<Keyboard>/enter",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -375,7 +375,7 @@
                 {
                     "name": "",
                     "id": "0dd5770d-93c2-4d24-aac1-66488c09efa9",
-                    "path": "<Keyboard>/ctrl",
+                    "path": "<Keyboard>/leftCtrl",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -398,6 +398,17 @@
                     "name": "",
                     "id": "2d86fa99-53a8-42b8-9158-7fe79a8e22cc",
                     "path": "<Gamepad>/leftStickPress",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ReOrientatePlayer",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f156b537-165e-49eb-8be0-e321ed3c5b74",
+                    "path": "<Keyboard>/c",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
