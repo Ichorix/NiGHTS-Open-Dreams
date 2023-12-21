@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class NPlayerAnimations : MonoBehaviour
 {
-    [SerializeField] private NPlayerOpenControl openPlayer;
-    [SerializeField] private NPlayerLevelRotations levelPlayer;
+    [SerializeField] private NPlayerOpenControl openControl;
+    [SerializeField] private NPlayerLevelRotations levelRotations;
     
     [SerializeField] private Animator _animator;
     [SerializeField] private NPlayerScriptableObject _stats;
@@ -84,7 +84,7 @@ public class NPlayerAnimations : MonoBehaviour
     }
     private void SpeedWindManagement()
     {
-        speedWindParticles.enableEmission = openPlayer._speed > speedWindSpeedThreshold;
+        speedWindParticles.enableEmission = openControl._speed > speedWindSpeedThreshold;
     }
 
     private void NPlayerOpenControl_TurningAnimations()
@@ -103,7 +103,7 @@ public class NPlayerAnimations : MonoBehaviour
 
     private void NPlayerLevelFollow_TurningAnimations()
     {
-        _animator.SetBool("isUpsideDown", levelPlayer.upsideDownTime > 0 && _stats.isMoving);
+        _animator.SetBool("isUpsideDown", levelRotations.upsideDownTime > 0 && _stats.isMoving);
         
         if(_stats.MoveDirection.y > turningAnimationThreshold)
             _animator.SetBool("isUp", true);
