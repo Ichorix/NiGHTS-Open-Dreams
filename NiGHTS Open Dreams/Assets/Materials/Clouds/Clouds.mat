@@ -44,7 +44,7 @@ Material:
     - _BaseScale: 0.005
     - _BaseScaleStrength: 0.96
     - _CloudHeight: 25
-    - _EdgeIncrease: 100
+    - _EdgeIncrease: 344.1
     - _NoiseScale: 0.01
     - _Power: 1
     - _QueueControl: 0
