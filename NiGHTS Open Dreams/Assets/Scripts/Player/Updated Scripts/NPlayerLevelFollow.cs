@@ -67,7 +67,7 @@ public class NPlayerLevelFollow : MonoBehaviour
             {
                 lowOnTime = true;
                 if(value <= 0)
-                    StartCoroutine(ExitLevel());
+                    DoExitLevel();
             }
             levelTimeLeft = value;
         }
@@ -210,7 +210,11 @@ public class NPlayerLevelFollow : MonoBehaviour
             return false;
         }
     }
-    public IEnumerator ExitLevel()
+    public void DoExitLevel()
+    {
+        StartCoroutine(ExitLevel());
+    }
+    IEnumerator ExitLevel()
     {
         // Prevent the level from ending while you are flipping
         // If that happens then a whole lot of ugly bugs pop up with the rotations
