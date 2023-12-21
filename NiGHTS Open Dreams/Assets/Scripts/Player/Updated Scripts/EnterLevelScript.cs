@@ -5,7 +5,44 @@ using PathCreation;
 
 public class EnterLevelScript : MonoBehaviour
 {
+    [Header("Save Data")]
+    [Tooltip("The highest Grade that has been saved for this level")]
+    [SerializeField] private int savedGrade = 0;
+    public int SavedGrade
+    {
+        get
+        {
+            if(PlayerPrefs.HasKey("Stage1-1 Grade"))
+                savedGrade = PlayerPrefs.GetInt("Stage1-1 Grade");
+            return savedGrade;
+        }
+        set
+        {
+            savedGrade = value;
+            PlayerPrefs.SetInt("Stage1-1 Grade", savedGrade);
+        }
+    }
+    [Tooltip("The highest Score that has been saved for this level")]
+    [SerializeField] private float savedScore = 0;
+    public float SavedScore
+    {
+        get
+        {
+            if(PlayerPrefs.HasKey("Stage1-1 Score"))
+                savedScore = PlayerPrefs.GetFloat("Stage1-1 Score");
+            return savedScore;
+        }
+        set
+        {
+            savedScore = value;
+            PlayerPrefs.SetFloat("Stage1-1 Score", savedScore);
+        }
+    }
+
+    [Space]
+    [Header("Level Information")]
     [SerializeField] private NPlayerScriptableObject _stats;
+    [SerializeField] private CustomStageScriptableObject thisStage;
     [SerializeField] private GameObject asscoiatedOpenLevel;
     [SerializeField] private GameObject associatedLevelMusic;
     [SerializeField] private Transform[] ideyaDestinations = new Transform[4];
@@ -13,7 +50,9 @@ public class EnterLevelScript : MonoBehaviour
     public PathCreator[] Paths = new PathCreator[4];
     public float[] ActiveAttemptScores = new float[4];
     public int [] ActiveAttemptGrades = new int[4];
-    [SerializeField] private CustomStageScriptableObject thisStage;
+    
+    [Space]
+    [Header("Instances")]
     [SerializeField] private GameObject UIModal;
     private GameObject modalInstance;
     [SerializeField] private Animator scoreSpinner;
@@ -61,8 +100,8 @@ public class EnterLevelScript : MonoBehaviour
                         foreach(float item in ActiveAttemptScores)
                             fullScore += item;
 
-                        thisStage.SavedGrade = fullGrade > thisStage.SavedGrade ? fullGrade : thisStage.SavedGrade;
-                        thisStage.SavedScore = fullScore > thisStage.SavedScore ? fullScore : thisStage.SavedScore;
+                        SavedGrade = fullGrade > SavedGrade ? fullGrade : SavedGrade;
+                        SavedScore = fullScore > SavedScore ? fullScore : SavedScore;
 
                         StartCoroutine(levelFollow.BeatLevel());
                     }
@@ -83,9 +122,9 @@ public class EnterLevelScript : MonoBehaviour
                 playerStates.ResetStats();
                 levelFollow.ActiveLevelPalace = this;
 
-                modalInstance.GetComponent<UIModalButtons>().Enable(openControl.openChips, playerStates, Paths, thisStage);
+                modalInstance.GetComponent<UIModalButtons>().Enable(openControl.OpenChips, playerStates, Paths, thisStage, SavedScore);
 
-                scoreSpinner.SetInteger("Grade", thisStage.SavedGrade);
+                scoreSpinner.SetInteger("Grade", SavedGrade);
                 scoreSpinner.SetTrigger("RunAnimation");
             }
         }

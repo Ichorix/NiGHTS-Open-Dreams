@@ -44,10 +44,6 @@ public class NPlayerInput : MonoBehaviour
     {
         RecenterCamera();
     }
-    public void OnChangeCamera(InputValue value)
-    {
-        ChangeCamera(value.isPressed);
-    }
     public void OnPause(InputValue value)
     {
         PauseGame();
@@ -97,20 +93,6 @@ public class NPlayerInput : MonoBehaviour
     void ReOrientateInput()
     {
         StartCoroutine(openControl.ReAdjustPlayer());
-    }
-    void ChangeCamera(bool isPerformed)
-    {
-        if(isPerformed)
-        {
-            if(_stats.cameraPlayerBound)
-            {
-                openControl.CamSetWorld();
-            }
-            else
-            {
-                openControl.CamSetPlayer();
-            }
-        }
     }
     void TightTurnInput(float multiplier)
     {

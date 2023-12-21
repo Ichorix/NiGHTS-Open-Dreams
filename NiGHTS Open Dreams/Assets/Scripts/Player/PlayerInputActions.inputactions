@@ -42,15 +42,6 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "ChangeCamera",
-                    "type": "Button",
-                    "id": "a4c4d6c5-5687-46d1-9c40-900d51baef97",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "Pause",
                     "type": "Button",
                     "id": "c866faec-c6db-48b9-b133-03bc9eb8478f",
@@ -197,6 +188,61 @@
                     "isPartOfComposite": true
                 },
                 {
+                    "name": "DPad",
+                    "id": "77d82759-a84b-48d9-b108-deddb70cab30",
+                    "path": "2DVector",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Rotating",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "up",
+                    "id": "69c61c9d-e462-437c-a129-bc2482e85b95",
+                    "path": "<Gamepad>/dpad/up",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Rotating",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "down",
+                    "id": "9f3639ab-09c3-4976-8770-6f60af15257a",
+                    "path": "<Gamepad>/dpad/down",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Rotating",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "left",
+                    "id": "1b20f960-fe82-48fe-b5cc-2ded6f0f071a",
+                    "path": "<Gamepad>/dpad/left",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Rotating",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
+                    "id": "367c98d0-70a3-4501-8678-23e193263136",
+                    "path": "<Gamepad>/dpad/right",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Rotating",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
                     "name": "",
                     "id": "dcb05c10-6812-4e39-a722-dd3862f8e743",
                     "path": "<Gamepad>/leftStick",
@@ -221,33 +267,11 @@
                 {
                     "name": "",
                     "id": "daf7e380-f6ab-42d3-8699-82093275d059",
-                    "path": "<Keyboard>/rightCtrl",
+                    "path": "<Keyboard>/v",
                     "interactions": "Tap",
                     "processors": "",
                     "groups": "",
                     "action": "RecenterCamera",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "7697696f-91f1-46fe-94d3-9182056bf966",
-                    "path": "<Gamepad>/rightStickPress",
-                    "interactions": "Hold",
-                    "processors": "",
-                    "groups": "",
-                    "action": "ChangeCamera",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "a1657598-35bc-4a10-ad43-d7c09dbe92dc",
-                    "path": "<Keyboard>/rightCtrl",
-                    "interactions": "Hold",
-                    "processors": "",
-                    "groups": "",
-                    "action": "ChangeCamera",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -300,7 +324,7 @@
                     "id": "d56cc90e-3f76-4b19-967c-bc85e3b2d85d",
                     "path": "<Gamepad>/rightStick",
                     "interactions": "",
-                    "processors": "InvertVector2(invertX=false),ScaleVector2",
+                    "processors": "InvertVector2(invertX=false),ScaleVector2(y=0)",
                     "groups": "",
                     "action": "Look",
                     "isComposite": false,
@@ -322,7 +346,7 @@
                     "id": "e05d5deb-b51d-43f7-a17b-f69fface339b",
                     "path": "2DVector",
                     "interactions": "",
-                    "processors": "",
+                    "processors": "InvertVector2(invertX=false),ScaleVector2(x=0.5,y=0)",
                     "groups": "",
                     "action": "Look",
                     "isComposite": true,

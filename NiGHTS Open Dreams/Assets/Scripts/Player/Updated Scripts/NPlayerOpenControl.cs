@@ -9,13 +9,26 @@ using UnityEngine.InputSystem;
 public class NPlayerOpenControl : MonoBehaviour
 {
     [Header("Save Data")]
-    public int openChips;
+    [SerializeField] private int openChips;
+    public int OpenChips
+    {
+        get
+        {
+            if(PlayerPrefs.HasKey("openChips"))
+                openChips = PlayerPrefs.GetInt("openChips");
+            return openChips;
+        }
+        set
+        {
+            openChips = value;
+            PlayerPrefs.SetInt("openChips", openChips);
+        }
+    }
     [Space]
     [Header("References")]
     [SerializeField] private NPlayerScriptableObject _stats;
     public NPlayerAnimations _animations;
     [SerializeField] private NotATrailScript trailInstantiator;
-    [SerializeField] private CinemachineFreeLook cameraSettings;
     private Rigidbody rigidbody;
     [Space]
     [Header("Links Data")]
@@ -56,12 +69,9 @@ public class NPlayerOpenControl : MonoBehaviour
     }
     void Start()
     {
+        OpenChips = OpenChips; // Load the saved value
         rigidbody = GetComponent<Rigidbody>();
         _stats.BoostGauge = _stats.maxBoost;
-        if(!_stats.cameraPlayerBound)
-            CamSetWorld();
-        else
-            CamSetPlayer();
     }
 
     void Update()
@@ -186,8 +196,12 @@ public class NPlayerOpenControl : MonoBehaviour
         float fov = fieldOfViewBySpeed.Evaluate(_speed);
         cameraLock.m_Lens = new LensSettings(fov, 10f, 0.1f, 5000f, 0);
         cameraFollow.m_Lens = new LensSettings(fov, 10f, 0.1f, 5000f, 0);
-        Debug.Log(transform.up);
-        // Camera
+        
+        // Camera Angle
+        cameraLock.m_YAxis.Value = 0.6f;
+        cameraFollow.m_YAxis.Value = 0.65f;
+
+        // Camera Locking
         if(transform.up.y < angleToSwitchCamera)
             cameraLock.gameObject.SetActive(true);
         else
@@ -203,25 +217,11 @@ public class NPlayerOpenControl : MonoBehaviour
 
     public IEnumerator RecenterCamera()
     {
-        cameraSettings.m_RecenterToTargetHeading = new AxisState.Recentering(true, 0, 0.25f);
+        cameraLock.m_RecenterToTargetHeading = new AxisState.Recentering(true, 0, 0.25f);
+        cameraFollow.m_RecenterToTargetHeading = new AxisState.Recentering(true, 0, 0.25f);
         yield return new WaitForSeconds(1);
-        cameraSettings.m_RecenterToTargetHeading = new AxisState.Recentering(false, 0, 0.25f);
-    }
-    public void CamSetWorld()
-    {
-        if(cameraSettings != null)
-        {
-            //cameraSettings.m_BindingMode = CinemachineTransposer.BindingMode.SimpleFollowWithWorldUp;
-            //_stats.cameraPlayerBound = false;
-        }
-    }
-    public void CamSetPlayer()
-    {
-        if(cameraSettings != null)
-        {
-            //cameraSettings.m_BindingMode = CinemachineTransposer.BindingMode.LockToTarget;
-            //_stats.cameraPlayerBound = true;
-        }
+        cameraLock.m_RecenterToTargetHeading = new AxisState.Recentering(false, 0, 0.25f);
+        cameraFollow.m_RecenterToTargetHeading = new AxisState.Recentering(false, 0, 0.25f);
     }
 
     public IEnumerator ReAdjustPlayer()

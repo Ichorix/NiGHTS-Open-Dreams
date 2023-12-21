@@ -46,6 +46,3 @@ MonoBehaviour:
   isLevelPlayer: 1
   PowerBuff: 0
   powerBuffTimeLeft: 0
-  MouseLookSensitivity: 1
-  JoystickLookSensitivity: 1
-  openChips: 611

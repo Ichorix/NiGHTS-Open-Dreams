@@ -64,15 +64,6 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""ChangeCamera"",
-                    ""type"": ""Button"",
-                    ""id"": ""a4c4d6c5-5687-46d1-9c40-900d51baef97"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
                     ""name"": ""Pause"",
                     ""type"": ""Button"",
                     ""id"": ""c866faec-c6db-48b9-b133-03bc9eb8478f"",
@@ -219,6 +210,61 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": true
                 },
                 {
+                    ""name"": ""DPad"",
+                    ""id"": ""77d82759-a84b-48d9-b108-deddb70cab30"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Rotating"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""69c61c9d-e462-437c-a129-bc2482e85b95"",
+                    ""path"": ""<Gamepad>/dpad/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Rotating"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""9f3639ab-09c3-4976-8770-6f60af15257a"",
+                    ""path"": ""<Gamepad>/dpad/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Rotating"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""1b20f960-fe82-48fe-b5cc-2ded6f0f071a"",
+                    ""path"": ""<Gamepad>/dpad/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Rotating"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""367c98d0-70a3-4501-8678-23e193263136"",
+                    ""path"": ""<Gamepad>/dpad/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Rotating"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
                     ""name"": """",
                     ""id"": ""dcb05c10-6812-4e39-a722-dd3862f8e743"",
                     ""path"": ""<Gamepad>/leftStick"",
@@ -243,33 +289,11 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""daf7e380-f6ab-42d3-8699-82093275d059"",
-                    ""path"": ""<Keyboard>/rightCtrl"",
+                    ""path"": ""<Keyboard>/v"",
                     ""interactions"": ""Tap"",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""RecenterCamera"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""7697696f-91f1-46fe-94d3-9182056bf966"",
-                    ""path"": ""<Gamepad>/rightStickPress"",
-                    ""interactions"": ""Hold"",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""ChangeCamera"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""a1657598-35bc-4a10-ad43-d7c09dbe92dc"",
-                    ""path"": ""<Keyboard>/rightCtrl"",
-                    ""interactions"": ""Hold"",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""ChangeCamera"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -322,7 +346,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""id"": ""d56cc90e-3f76-4b19-967c-bc85e3b2d85d"",
                     ""path"": ""<Gamepad>/rightStick"",
                     ""interactions"": """",
-                    ""processors"": ""InvertVector2(invertX=false),ScaleVector2"",
+                    ""processors"": ""InvertVector2(invertX=false),ScaleVector2(y=0)"",
                     ""groups"": """",
                     ""action"": ""Look"",
                     ""isComposite"": false,
@@ -344,7 +368,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""id"": ""e05d5deb-b51d-43f7-a17b-f69fface339b"",
                     ""path"": ""2DVector"",
                     ""interactions"": """",
-                    ""processors"": """",
+                    ""processors"": ""InvertVector2(invertX=false),ScaleVector2(x=0.5,y=0)"",
                     ""groups"": """",
                     ""action"": ""Look"",
                     ""isComposite"": true,
@@ -449,7 +473,6 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         m_Player_Boosting = m_Player.FindAction("Boosting", throwIfNotFound: true);
         m_Player_Rotating = m_Player.FindAction("Rotating", throwIfNotFound: true);
         m_Player_RecenterCamera = m_Player.FindAction("RecenterCamera", throwIfNotFound: true);
-        m_Player_ChangeCamera = m_Player.FindAction("ChangeCamera", throwIfNotFound: true);
         m_Player_Pause = m_Player.FindAction("Pause", throwIfNotFound: true);
         m_Player_Continue = m_Player.FindAction("Continue", throwIfNotFound: true);
         m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
@@ -518,7 +541,6 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Boosting;
     private readonly InputAction m_Player_Rotating;
     private readonly InputAction m_Player_RecenterCamera;
-    private readonly InputAction m_Player_ChangeCamera;
     private readonly InputAction m_Player_Pause;
     private readonly InputAction m_Player_Continue;
     private readonly InputAction m_Player_Look;
@@ -532,7 +554,6 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         public InputAction @Boosting => m_Wrapper.m_Player_Boosting;
         public InputAction @Rotating => m_Wrapper.m_Player_Rotating;
         public InputAction @RecenterCamera => m_Wrapper.m_Player_RecenterCamera;
-        public InputAction @ChangeCamera => m_Wrapper.m_Player_ChangeCamera;
         public InputAction @Pause => m_Wrapper.m_Player_Pause;
         public InputAction @Continue => m_Wrapper.m_Player_Continue;
         public InputAction @Look => m_Wrapper.m_Player_Look;
@@ -559,9 +580,6 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @RecenterCamera.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRecenterCamera;
                 @RecenterCamera.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRecenterCamera;
                 @RecenterCamera.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRecenterCamera;
-                @ChangeCamera.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnChangeCamera;
-                @ChangeCamera.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnChangeCamera;
-                @ChangeCamera.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnChangeCamera;
                 @Pause.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPause;
                 @Pause.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPause;
                 @Pause.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPause;
@@ -593,9 +611,6 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @RecenterCamera.started += instance.OnRecenterCamera;
                 @RecenterCamera.performed += instance.OnRecenterCamera;
                 @RecenterCamera.canceled += instance.OnRecenterCamera;
-                @ChangeCamera.started += instance.OnChangeCamera;
-                @ChangeCamera.performed += instance.OnChangeCamera;
-                @ChangeCamera.canceled += instance.OnChangeCamera;
                 @Pause.started += instance.OnPause;
                 @Pause.performed += instance.OnPause;
                 @Pause.canceled += instance.OnPause;
@@ -621,7 +636,6 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         void OnBoosting(InputAction.CallbackContext context);
         void OnRotating(InputAction.CallbackContext context);
         void OnRecenterCamera(InputAction.CallbackContext context);
-        void OnChangeCamera(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
         void OnContinue(InputAction.CallbackContext context);
         void OnLook(InputAction.CallbackContext context);

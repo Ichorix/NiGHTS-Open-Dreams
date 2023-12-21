@@ -31,7 +31,7 @@ public class NPlayerUI : MonoBehaviour
                 + " / " + levelFollow.ActiveLevelChipRequirement[levelFollow.levelSegment].ToString();
         }
         else
-        chipText.text = openControl.openChips.ToString("n0");
+        chipText.text = openControl.OpenChips.ToString("n0");
     }
     
     public void ActivateLevelUI(bool active)

@@ -79,7 +79,7 @@ public class NPlayerCollisionController : MonoBehaviour
         }
         else if(openControl != null)
         {
-            openControl.openChips += data.Chips;
+            openControl.OpenChips += data.Chips;
 
             if(data.increaseLink) openControl.LinkIncrease();
             else if(data.clearLink) openControl.LinkEmpty();

@@ -12,11 +12,4 @@ public class CustomStageScriptableObject : ScriptableObject
     public float[] Times = new float[4];
     [Tooltip("The amount of chips needed to move on to the next track")]
     public int[] ChipsRequired = new int[4];
-
-    [Space]
-    [Header("Save Data")]
-    [Tooltip("The highest Grade that has been saved for this level")]
-    public int SavedGrade = 0;
-    [Tooltip("The highest Score that has been saved for this level")]
-    public float SavedScore = 0;
 }

@@ -14,14 +14,15 @@ public class UIModalButtons : MonoBehaviour
     private CustomStageScriptableObject stageInformation;
     private float bonusTime;
 
-    public void Enable(int bonus, NPlayerStateController playerStates, PathCreator[] bakedPaths, CustomStageScriptableObject stageInfo)
+    public void Enable(int bonus, NPlayerStateController playerStates, PathCreator[] bakedPaths, CustomStageScriptableObject stageInfo, float savedScore)
     {
+        Cursor.visible = true;
         bonusTime = Mathf.Clamp(bonus, 0, 60);
         bonusTimeText.text = "+"+ bonusTime.ToString() + " s";
         _playerStates = playerStates;
         pathsInstance = bakedPaths;
         stageInformation = stageInfo;
-        HighScoreText.text = stageInformation.SavedScore.ToString("n0");
+        HighScoreText.text = savedScore.ToString("n0");
     }
     public void EnterStage()
     {
@@ -31,5 +32,9 @@ public class UIModalButtons : MonoBehaviour
     public void Cancel()
     {
         Destroy(this.gameObject);
+    }
+    void OnDisable()
+    {
+        Cursor.visible = false;
     }
 }
