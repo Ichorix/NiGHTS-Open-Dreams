@@ -102,22 +102,18 @@ public class NPlayerInput : MonoBehaviour
     {
         if(isPerformed)
         {
-            Debug.Log("Set Camera to");
             if(_stats.cameraPlayerBound)
             {
-                Debug.Log("World");
                 openControl.CamSetWorld();
             }
             else
             {
-                Debug.Log("Player");
                 openControl.CamSetPlayer();
             }
         }
     }
     void TightTurnInput(float multiplier)
     {
-        Debug.Log(multiplier);
         _stats.TurningMultiplier = multiplier + 1;
     }
 

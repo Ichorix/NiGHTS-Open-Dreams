@@ -38,8 +38,16 @@ public class NPlayerOpenControl : MonoBehaviour
     [SerializeField] private bool boostAttempt;
     [SerializeField] private bool boostAttemptCooldown;
     public float _speed;
-    public AnimationCurve fieldOfViewBySpeed;
     private Vector3 mostRecentGroundNormal;
+    [Space]
+    [Header("Camera Information")]
+    [Range(0, 1)]
+    public float angleToSwitchCamera;
+    [Range(1, 2)]
+    public float tightTurnValueToSwitchCamera;
+    public AnimationCurve fieldOfViewBySpeed;
+    public CinemachineFreeLook cameraLock;
+    public CinemachineFreeLook cameraFollow;
 
 
     void OnDisable()
@@ -165,7 +173,7 @@ public class NPlayerOpenControl : MonoBehaviour
         {
             _stats.BoostGauge = _stats.maxBoost;
             _stats.PowerBuffTimeLeft -= Time.deltaTime;
-            return; //We dont need to do any more calculations if you have Power active
+            return; // We dont need to do any more calculations if you have Power active
         }
 
         if(canBoost && _stats.isMoving)
@@ -174,22 +182,23 @@ public class NPlayerOpenControl : MonoBehaviour
     
     private void CameraFunctions()
     {
-        /* TODO Manual Camera code
-        if(_stats.LookDirection.sqrMagnitude >= _threshold)
-        {
-            
-            float deltaTimeMultiplier = IsCurrentDeviceMouse ? 1.0f : Time.deltaTime;
-
-            _cinemachineTargetYaw += _stats.LookDirection.x * deltaTimeMultiplier * Sensitivity;
-            _cinemachineTargetPitch += _stats.LookDirection.y * deltaTimeMultiplier * Sensitivity; 
-        }
-
-        //CinemachineCameraTarget.transform.rotation = Quaternion.Euler(_cinemachineTargetPitch + CameraAngleOverride,
-        //    _cinemachineTargetYaw, 0.0f);
-        */
+        // FOV
         float fov = fieldOfViewBySpeed.Evaluate(_speed);
-        cameraSettings.m_Lens = new LensSettings(fov, 10f, 0.1f, 5000f, 0);
+        cameraLock.m_Lens = new LensSettings(fov, 10f, 0.1f, 5000f, 0);
+        cameraFollow.m_Lens = new LensSettings(fov, 10f, 0.1f, 5000f, 0);
+        Debug.Log(transform.up);
+        // Camera
+        if(transform.up.y < angleToSwitchCamera)
+            cameraLock.gameObject.SetActive(true);
+        else
+            cameraLock.gameObject.SetActive(false);
 
+        if(_stats.TurningMultiplier > tightTurnValueToSwitchCamera)
+            cameraLock.gameObject.SetActive(false);
+        
+        if(canBoost)
+            cameraLock.gameObject.SetActive(true);
+        
     }
 
     public IEnumerator RecenterCamera()
@@ -202,16 +211,16 @@ public class NPlayerOpenControl : MonoBehaviour
     {
         if(cameraSettings != null)
         {
-            cameraSettings.m_BindingMode = CinemachineTransposer.BindingMode.SimpleFollowWithWorldUp;
-            _stats.cameraPlayerBound = false;
+            //cameraSettings.m_BindingMode = CinemachineTransposer.BindingMode.SimpleFollowWithWorldUp;
+            //_stats.cameraPlayerBound = false;
         }
     }
     public void CamSetPlayer()
     {
         if(cameraSettings != null)
         {
-            cameraSettings.m_BindingMode = CinemachineTransposer.BindingMode.LockToTarget;
-            _stats.cameraPlayerBound = true;
+            //cameraSettings.m_BindingMode = CinemachineTransposer.BindingMode.LockToTarget;
+            //_stats.cameraPlayerBound = true;
         }
     }
 
