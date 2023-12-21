@@ -111,11 +111,5 @@ public class NPlayerScriptableObject : ScriptableObject
         }
     }
 
-    [Space]
-    [Header("Save Data")]
-    [Tooltip("Multiplier for mouse input to Camera")]
-    public float MouseLookSensitivity = 1;
-    [Tooltip("Multiplier for joystic input to Camera")]
-    public float JoystickLookSensitivity = 1;
-    public int openChips;    
+     
 }

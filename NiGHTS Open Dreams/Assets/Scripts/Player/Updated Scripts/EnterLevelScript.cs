@@ -78,11 +78,12 @@ public class EnterLevelScript : MonoBehaviour
 
                 NPlayerStateController playerStates = other.transform.parent.parent.GetComponent<NPlayerStateController>();
                 NPlayerLevelFollow levelFollow = playerStates.levelPlayer.transform.GetChild(0).GetComponent<NPlayerLevelFollow>();
+                NPlayerOpenControl openControl = other.GetComponent<NPlayerOpenControl>();
                 
                 playerStates.ResetStats();
                 levelFollow.ActiveLevelPalace = this;
 
-                modalInstance.GetComponent<UIModalButtons>().Enable(_stats.openChips, playerStates, Paths, thisStage);
+                modalInstance.GetComponent<UIModalButtons>().Enable(openControl.openChips, playerStates, Paths, thisStage);
 
                 scoreSpinner.SetInteger("Grade", thisStage.SavedGrade);
                 scoreSpinner.SetTrigger("RunAnimation");

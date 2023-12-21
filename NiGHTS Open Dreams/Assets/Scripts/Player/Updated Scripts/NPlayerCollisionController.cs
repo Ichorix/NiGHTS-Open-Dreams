@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class NPlayerCollisionController : MonoBehaviour
 {
-    [SerializeField] private NPlayerLevelFollow levelPlayer;
-    [SerializeField] private NPlayerOpenControl openPlayer;
+    [SerializeField] private NPlayerLevelFollow levelFollow;
+    [SerializeField] private NPlayerOpenControl openControl;
     [SerializeField] private InstantiatePointItem pointItemScript;
     [SerializeField] private NPlayerScriptableObject _stats;
     [SerializeField] private SoundPlayerScriptableObject _sounds;
@@ -16,14 +16,14 @@ public class NPlayerCollisionController : MonoBehaviour
         // Bump in case you actually triggered with the ground
         if(other.CompareTag("lb_groundTarget"))
         {
-            if(openPlayer != null)
+            if(openControl != null)
             {
                 //Sets the player back by a frame along with bumping them up. Makes it more consistent
-                openPlayer.BumpUpFromGround(100, openPlayer._speed * Time.deltaTime);
+                openControl.BumpUpFromGround(100, openControl._speed * Time.deltaTime);
             }
-            else if(levelPlayer != null)
+            else if(levelFollow != null)
             {
-                levelPlayer.GetComponent<Rigidbody>().AddForce(Vector3.up * 50, ForceMode.Impulse);
+                levelFollow.GetComponent<Rigidbody>().AddForce(Vector3.up * 50, ForceMode.Impulse);
             }
             return;
         }
@@ -37,54 +37,54 @@ public class NPlayerCollisionController : MonoBehaviour
     {
         if(other.gameObject.CompareTag("lb_groundTarget"))
         {
-            if(openPlayer != null)
+            if(openControl != null)
             {
-                openPlayer.ReAdjustToNormals(other.contacts[0].normal);
-                openPlayer._animations.Grounded = true;
+                openControl.ReAdjustToNormals(other.contacts[0].normal);
+                openControl._animations.Grounded = true;
             }
-            else if(levelPlayer != null)
+            else if(levelFollow != null)
             {
-                levelPlayer.GetComponent<Rigidbody>().AddForce(Vector3.up * 300);
+                levelFollow.GetComponent<Rigidbody>().AddForce(Vector3.up * 300);
             }
         }
     }
     // Little Hop after leaving the ground
     void OnCollisionExit(Collision other)
     {
-        if(other.gameObject.CompareTag("lb_groundTarget") && openPlayer != null)
+        if(other.gameObject.CompareTag("lb_groundTarget") && openControl != null)
         {
-            openPlayer._animations.Grounded = false;
-            openPlayer.BumpUpFromGround(30);
+            openControl._animations.Grounded = false;
+            openControl.BumpUpFromGround(30);
         }
     }
 
     public void CollectItem(Collider other, CollectablesData data)
     {
         int points = 0;
-        if(levelPlayer != null)
+        if(levelFollow != null)
         {
-            if(data.increaseLink) levelPlayer.LinkIncrease();
-            else if(data.clearLink) levelPlayer.LinkEmpty();
+            if(data.increaseLink) levelFollow.LinkIncrease();
+            else if(data.clearLink) levelFollow.LinkEmpty();
 
-            points = data.Score * (data.timesLink ? levelPlayer.link : 1);
+            points = data.Score * (data.timesLink ? levelFollow.link : 1);
 
-            levelPlayer.currentScore += points;
+            levelFollow.currentScore += points;
             if(points > 0)
                 pointItemScript.InstantiateUItem(2, points);
 
-            levelPlayer.LevelTimeLeft += data.Time;
+            levelFollow.LevelTimeLeft += data.Time;
             if(data.Time < 0)
                 pointItemScript.InstantiateUItem(3, data.Time);
-            levelPlayer.currentChips += data.Chips;
+            levelFollow.currentChips += data.Chips;
         }
-        else if(openPlayer != null)
+        else if(openControl != null)
         {
-            _stats.openChips += data.Chips;
+            openControl.openChips += data.Chips;
 
-            if(data.increaseLink) openPlayer.LinkIncrease();
-            else if(data.clearLink) openPlayer.LinkEmpty();
+            if(data.increaseLink) openControl.LinkIncrease();
+            else if(data.clearLink) openControl.LinkEmpty();
 
-            points = data.Score * (data.timesLink ? openPlayer.link : 1);
+            points = data.Score * (data.timesLink ? openControl.link : 1);
             if(points > 0)
                 pointItemScript.InstantiateUItem(2, points);
         }

@@ -8,7 +8,10 @@ using UnityEngine.InputSystem;
 
 public class NPlayerOpenControl : MonoBehaviour
 {
-
+    [Header("Save Data")]
+    public int openChips;
+    [Space]
+    [Header("References")]
     [SerializeField] private NPlayerScriptableObject _stats;
     public NPlayerAnimations _animations;
     [SerializeField] private NotATrailScript trailInstantiator;

@@ -13,8 +13,9 @@ public class NPlayerInput : MonoBehaviour
     private PlayerInputActions playerControls;
     [SerializeField] private NPlayerStateController _playerStates;
     public NPlayerScriptableObject _stats;
-    [SerializeField] private NPlayerOpenControl _openPlayer;
+    [SerializeField] private NPlayerOpenControl openControl;
     [SerializeField] private CinemachineFreeLook _mainCamera;
+    public float LookSensitivity;
 
     void Awake()
     {
@@ -28,7 +29,7 @@ public class NPlayerInput : MonoBehaviour
     }
     public void OnLook(InputValue value)
     {
-        LookInput(value.Get<Vector2>() * _stats.JoystickLookSensitivity);
+        LookInput(value.Get<Vector2>() * LookSensitivity);
     }
     public void OnBoosting(InputValue value)
     {
@@ -73,7 +74,7 @@ public class NPlayerInput : MonoBehaviour
             else _stats.isMoving = false;
             bool newMoveState = _stats.isMoving;
             _stats.MovementMultiplier = movementMultiplier;
-            if(!newMoveState) StartCoroutine(_openPlayer.ReAdjustPlayer());
+            if(!newMoveState) StartCoroutine(openControl.ReAdjustPlayer());
         }
     }
     void BoostInput(bool newBoostState)
@@ -91,11 +92,11 @@ public class NPlayerInput : MonoBehaviour
 
     void RecenterCamera()
     {
-        StartCoroutine(_openPlayer.RecenterCamera());
+        StartCoroutine(openControl.RecenterCamera());
     }
     void ReOrientateInput()
     {
-        StartCoroutine(_openPlayer.ReAdjustPlayer());
+        StartCoroutine(openControl.ReAdjustPlayer());
     }
     void ChangeCamera(bool isPerformed)
     {
@@ -105,12 +106,12 @@ public class NPlayerInput : MonoBehaviour
             if(_stats.cameraPlayerBound)
             {
                 Debug.Log("World");
-                _openPlayer.CamSetWorld();
+                openControl.CamSetWorld();
             }
             else
             {
                 Debug.Log("Player");
-                _openPlayer.CamSetPlayer();
+                openControl.CamSetPlayer();
             }
         }
     }

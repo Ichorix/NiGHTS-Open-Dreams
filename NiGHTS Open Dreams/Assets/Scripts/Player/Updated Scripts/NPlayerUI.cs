@@ -7,8 +7,8 @@ using TMPro;
 public class NPlayerUI : MonoBehaviour
 {
     [SerializeField] private bool isLevelPlayer;
-    [SerializeField] private NPlayerOpenControl openPlayer;
-    [SerializeField] private NPlayerLevelFollow levelPlayer;
+    [SerializeField] private NPlayerOpenControl openControl;
+    [SerializeField] private NPlayerLevelFollow levelFollow;
     [SerializeField] private NPlayerScriptableObject _stats;
 
     [Space]
@@ -25,13 +25,13 @@ public class NPlayerUI : MonoBehaviour
 
         if(_stats.isLevelPlayer)
         {
-            scoreText.text = levelPlayer.currentScore.ToString("n0");
-            timeText.text = ((int)levelPlayer.LevelTimeLeft).ToString();
-            chipText.text = levelPlayer.currentChips.ToString("n0")
-                + " / " + levelPlayer.ActiveLevelChipRequirement[levelPlayer.levelSegment].ToString();
+            scoreText.text = levelFollow.currentScore.ToString("n0");
+            timeText.text = ((int)levelFollow.LevelTimeLeft).ToString();
+            chipText.text = levelFollow.currentChips.ToString("n0")
+                + " / " + levelFollow.ActiveLevelChipRequirement[levelFollow.levelSegment].ToString();
         }
         else
-        chipText.text = _stats.openChips.ToString("n0");
+        chipText.text = openControl.openChips.ToString("n0");
     }
     
     public void ActivateLevelUI(bool active)
