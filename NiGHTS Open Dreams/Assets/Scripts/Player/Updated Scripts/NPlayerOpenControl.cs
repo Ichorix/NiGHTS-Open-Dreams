@@ -141,13 +141,17 @@ public class NPlayerOpenControl : MonoBehaviour
             targetSpeed = _stats.speedABoosting;                    
         // If the speed change rate is too high or if performance is bad, it will sometimes jump past speedABoosting resulting in decelerating to normal speed
         // This can be fixed by increasing the speedOffset.
-        // Increasing speedOffset too much can cause bugs with acceleration on some devices, increase with moderation. The max I would do is 1f
+        // Increasing speedOffset too much can cause bugs with acceleration on higher framerates, increase with moderation.
+        // Essentially you want the highest value possible to catch speedABoosting, that is still less than the speedChangeRate for proper acceleration
+        // To Test issues, compare speedChangeRate * Time.deltaTime and speedOffset.
+        // If speedChangeRate goes below the speed offset, then acceleration will break
 
         if(!_stats.isMoving)
             targetSpeed = 0;
         
         float speedChangeRate = _stats.isBoosting? _stats.boostingAccelerationRate : _stats.normalAccelerationRate;
-        float speedOffset = 0.5f;
+        float speedOffset = 10f * Time.deltaTime; // Instead of having a static number, multiplying by Time.deltaTime should keep the values in balance
+
         
 
         if(_speed < targetSpeed - speedOffset) //Accelerate
@@ -168,9 +172,10 @@ public class NPlayerOpenControl : MonoBehaviour
         if(_speed <= speedOffset) _speed = 0;
 
         ///// If speed acts funky, activate these to determine it
-        //Debug.Log("Target Speed = " + targetSpeed + ", Current Speed = " + _speed);
-        //Debug.Log("Speed Change Rate = " + speedChangeRate * Time.deltaTime);
-        //Debug.Log("Movement Multiplier = " + _stats.MovementMultiplier + ", Momentum Bonus = " + momentumBonus);
+        Debug.Log("DeltaTime = " + Time.deltaTime);
+        Debug.Log("Target Speed = " + targetSpeed + ", Current Speed = " + _speed);
+        Debug.Log("Speed Change Rate = " + speedChangeRate * Time.deltaTime + "Speed Offset = " + speedOffset);
+        Debug.Log("Movement Multiplier = " + _stats.MovementMultiplier + ", Momentum Bonus = " + momentumBonus);
         transform.Translate(Vector3.forward * Mathf.Clamp(_speed, 0, 100f) * Time.deltaTime);
     }
     private void ActivateParaloop()
