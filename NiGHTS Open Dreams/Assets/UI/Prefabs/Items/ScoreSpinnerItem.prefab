@@ -60,7 +60,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 2100000, guid: 44814773fddb7004e9c4dcded1f04593, type: 2}
+  m_Material: {fileID: 2100000, guid: 7d586484aad9e324d9b8501256030ce7, type: 2}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -173,6 +173,8 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   matInstance: {fileID: 0}
+  borderVariant: {fileID: 0}
+  borderReference: {fileID: 0}
   image: {fileID: 0}
 --- !u!114 &1692138652200572859
 MonoBehaviour:
