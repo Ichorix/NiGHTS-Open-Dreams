@@ -51,8 +51,8 @@ Material:
     - _QueueOffset: 0
     m_Colors:
     - _BaseSpeed: {r: -30, g: -15, b: 0, a: 0}
-    - _DarkColor: {r: 0.73684204, g: 1.105263, b: 1.1892071, a: 0}
-    - _LightColor: {r: 1.7882353, g: 1.7882353, b: 1.7882353, a: 0}
+    - _DarkColor: {r: 0.6300718, g: 1.3165923, b: 1.4678596, a: 0}
+    - _LightColor: {r: 2.270603, g: 2.270603, b: 2.270603, a: 0}
     - _MaskOffset: {r: 0.5, g: 0.5, b: 0, a: 0}
     - _MaskTiling: {r: 0.025, g: 0.025, b: 0, a: 0}
     - _MoveSpeed: {r: 15, g: 7.5, b: 0, a: 0}

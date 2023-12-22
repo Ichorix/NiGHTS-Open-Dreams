@@ -13,6 +13,8 @@ TagManager:
   - ParaloopCollectable
   - IdeyaCapture
   - IdeyaPalace
+  - levelPlayer
+  - Water
   layers:
   - Default
   - TransparentFX
@@ -23,7 +25,7 @@ TagManager:
   - Particles
   - Ground
   - DistortionEffect
-  - ParaloopCollectable
+  - MenuNiGHTS
   - 
   - 
   - 

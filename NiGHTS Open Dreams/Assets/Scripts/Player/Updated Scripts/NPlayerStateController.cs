@@ -19,6 +19,7 @@ public class NPlayerStateController : MonoBehaviour
                 MainMenuCamera.SetActive(gamePaused);
                 _input._stats = gamePaused ? null : _stats;
                 AudioListener.pause = gamePaused;
+                MainMenuNiGHTS.SetBool("GameOn", !gamePaused);
                 ResetStats();
         }
     }
@@ -33,6 +34,7 @@ public class NPlayerStateController : MonoBehaviour
     private Camera mainCamera;
     [SerializeField] private GameObject MainMenuUI;
     [SerializeField] private GameObject MainMenuCamera;
+    [SerializeField] private Animator MainMenuNiGHTS;
     [SerializeField] private GameObject gameUI;
     [SerializeField] private NPlayerInput _input;
     [SerializeField] private NPlayerUI UIController;

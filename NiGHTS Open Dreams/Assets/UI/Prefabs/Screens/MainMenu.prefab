@@ -111,7 +111,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 30}
+  m_AnchoredPosition: {x: 0, y: 60}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!222 &2856791809765551358
@@ -153,13 +153,13 @@ MonoBehaviour:
     serializedVersion: 2
     rgba: 4294967295
   m_fontColor: {r: 1, g: 1, b: 1, a: 1}
-  m_enableVertexGradient: 0
+  m_enableVertexGradient: 1
   m_colorMode: 3
   m_fontColorGradient:
-    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topLeft: {r: 0, g: 0.99215686, b: 1, a: 1}
     topRight: {r: 1, g: 1, b: 1, a: 1}
     bottomLeft: {r: 1, g: 1, b: 1, a: 1}
-    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 0, b: 0.8352941, a: 1}
   m_fontColorGradientPreset: {fileID: 0}
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
@@ -908,7 +908,7 @@ MonoBehaviour:
   optionsMenu: {fileID: 2929418236794008493}
   menuMusic: {fileID: 845211241226458313}
   quitText: {fileID: 7442938777041639933}
-  levelFollow: {fileID: 0}
+  stateController: {fileID: 0}
   _stats: {fileID: 11400000, guid: 15afd228b40b218489c2a975b000e97f, type: 2}
 --- !u!1 &7006425598640915974
 GameObject:
@@ -1643,7 +1643,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6765533459609050620, guid: d209509ee0f2ab44dbaff61397fea906, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 1.1627045
+      value: 1.1627197
       objectReference: {fileID: 0}
     - target: {fileID: 8010104281449250633, guid: d209509ee0f2ab44dbaff61397fea906, type: 3}
       propertyPath: m_Pivot.x
@@ -1819,7 +1819,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6765533459609050620, guid: d209509ee0f2ab44dbaff61397fea906, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 1.1627045
+      value: 1.1627197
       objectReference: {fileID: 0}
     - target: {fileID: 8010104281449250633, guid: d209509ee0f2ab44dbaff61397fea906, type: 3}
       propertyPath: m_Pivot.x
@@ -2010,7 +2010,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6765533459609050620, guid: d209509ee0f2ab44dbaff61397fea906, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 1.1627045
+      value: 1.1627197
       objectReference: {fileID: 0}
     - target: {fileID: 8010104281449250633, guid: d209509ee0f2ab44dbaff61397fea906, type: 3}
       propertyPath: m_Pivot.x
