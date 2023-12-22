@@ -6,37 +6,33 @@ using PathCreation.Examples;
 public class DashBall : MonoBehaviour
 {
     public float launchTime;
-    private float time;
+    private float timeLeft;
     public float launchSpeed;
     public float upSpeed;
-    public float step;
-    
-    public LevelFollow player;
-    public LevelAnims anim;
-    private Rigidbody rb;
+    public ForceMode upForceMode;
+
+    private NPlayerLevelFollow levelFollow;
 
     void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag("levelPlayer"))
-        {
-            player = other.gameObject.GetComponent<LevelFollow>();
-            anim = other.gameObject.GetComponent<LevelAnims>();
+        Debug.Log("Trigger Enter");
+        levelFollow = other.gameObject.GetComponent<NPlayerLevelFollow>();
+
+        if(levelFollow != null)
             StartCoroutine(Launch());
-            rb = other.gameObject.GetComponent<Rigidbody>();
-            rb.velocity = Vector3.zero;
-            rb.AddForce(Vector3.up * upSpeed);
-        }
     }
 
+    // If youre getting a MoveNext() error in this Coroutine, I have absolutely no idea how to fix it
     IEnumerator Launch()
     {
-        anim.mAnimator.SetBool("isBoosting", true);
-        time = launchTime;
-        while (time > 0)
+        Debug.Log("Launch");
+        levelFollow.gameObject.GetComponent<Rigidbody>().AddForce(Vector3.up * upSpeed, upForceMode);
+        timeLeft = launchTime;
+        while (timeLeft > 0)
         {
-            player.distanceTravelled += launchSpeed;
-            time -= step;
-            yield return new WaitForSeconds(step);
-        }//mAnimator.SetBool("isBoosting", false);
+            levelFollow.distanceTravelled += launchSpeed * Time.deltaTime;
+            timeLeft -= Time.deltaTime;
+            yield return null;
+        }
     }
 }

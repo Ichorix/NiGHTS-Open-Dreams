@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53b35d5a90cf7aa41a2b87ea32fdd3d4, type: 3}
   m_Name: Star Chip
   m_EditorClassIdentifier: 
-  Score: 3
+  Score: 10
   timesLink: 1
   increaseLink: 1
   clearLink: 0
@@ -21,6 +21,5 @@ MonoBehaviour:
   givePower: 0
   powerTime: 0
   Chips: 0
-  chipItem: 0
   instantOff: 1
   interactionSound: {fileID: 8300000, guid: 7ce80e262e4cc48419f0e2fd141fb206, type: 3}
