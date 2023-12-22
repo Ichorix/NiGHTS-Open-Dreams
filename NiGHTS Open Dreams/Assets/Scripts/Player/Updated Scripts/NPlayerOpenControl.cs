@@ -225,8 +225,8 @@ public class NPlayerOpenControl : MonoBehaviour
         cameraLock.m_RecenterToTargetHeading = new AxisState.Recentering(true, 0, 0.25f);
         cameraFollow.m_RecenterToTargetHeading = new AxisState.Recentering(true, 0, 0.25f);
         yield return new WaitForSeconds(1);
-        cameraLock.m_RecenterToTargetHeading = new AxisState.Recentering(false, 0, 0.25f);
-        cameraFollow.m_RecenterToTargetHeading = new AxisState.Recentering(false, 0, 0.25f);
+        cameraLock.m_RecenterToTargetHeading = new AxisState.Recentering(true, 0, 1f);
+        cameraFollow.m_RecenterToTargetHeading = new AxisState.Recentering(true, 0, 1f);
     }
 
     public IEnumerator ReAdjustPlayer()
