@@ -8,6 +8,7 @@ public class NPlayerAnimations : MonoBehaviour
     [SerializeField] private NPlayerLevelRotations levelRotations;
     
     [SerializeField] private Animator _animator;
+    [SerializeField] private Animator _skinAnimator;
     [SerializeField] private NPlayerScriptableObject _stats;
     //Public so that they can be cleared by the paraloop
     public ParticleSystem rightHandSparkles;
@@ -27,12 +28,22 @@ public class NPlayerAnimations : MonoBehaviour
     {
         _animator.SetBool("isMoving", _stats.isMoving);
         _animator.SetBool("Grounded", Grounded);
+        _skinAnimator.SetBool("isMoving", _stats.isMoving);
+        _skinAnimator.SetBool("Grounded", Grounded);
         
         // Prevents the AnyState from transitioning to itself since the animation is split in half
         if(_animator.GetCurrentAnimatorStateInfo(0).IsName("Base Layer.LeftStep") ||
             _animator.GetCurrentAnimatorStateInfo(0).IsName("Base Layer.RightStep"))
+        {
             _animator.SetBool("DontTransitionToGrounded", true);
-        else _animator.SetBool("DontTransitionToGrounded", false);
+            _skinAnimator.SetBool("DontTransitionToGrounded", true);
+        }
+            
+        else
+        {
+            _animator.SetBool("DontTransitionToGrounded", false);
+            _skinAnimator.SetBool("DontTransitionToGrounded", false);
+        }
             
         BoostStateManagement();
 
@@ -76,6 +87,7 @@ public class NPlayerAnimations : MonoBehaviour
     private void BoostingAnimations()
     {
         _animator.SetBool("isBoosting", boostAnim);
+        _skinAnimator.SetBool("isBoosting", boostAnim);
         if(!boostOverride)
         {
             boostParticles.enableEmission = boostAnim;
@@ -93,26 +105,39 @@ public class NPlayerAnimations : MonoBehaviour
         {
             _animator.SetBool("isRight", _stats.MoveDirection.x > turningAnimationThreshold);
             _animator.SetBool("isLeft", _stats.MoveDirection.x < -turningAnimationThreshold);
+            _skinAnimator.SetBool("isRight", _stats.MoveDirection.x > turningAnimationThreshold);
+            _skinAnimator.SetBool("isLeft", _stats.MoveDirection.x < -turningAnimationThreshold);
         }
         else
         {
             _animator.SetBool("isRight", false);
             _animator.SetBool("isLeft", false);
+            _skinAnimator.SetBool("isRight", false);
+            _skinAnimator.SetBool("isLeft", false);
         }
     }
 
     private void NPlayerLevelFollow_TurningAnimations()
     {
         _animator.SetBool("isUpsideDown", levelRotations.upsideDownTime > 0 && _stats.isMoving);
+        _skinAnimator.SetBool("isUpsideDown", levelRotations.upsideDownTime > 0 && _stats.isMoving);
         
         if(_stats.MoveDirection.y > turningAnimationThreshold)
+        {
             _animator.SetBool("isUp", true);
+            _skinAnimator.SetBool("isUp", true);
+        }
         else if(_stats.MoveDirection.y < -turningAnimationThreshold)
+        {
             _animator.SetBool("isDown", true);
+            _skinAnimator.SetBool("isDown", true);
+        }
         else
         {
             _animator.SetBool("isUp", false);
             _animator.SetBool("isDown", false);
+            _skinAnimator.SetBool("isUp", false);
+            _skinAnimator.SetBool("isDown", false);
         }
     }
 }

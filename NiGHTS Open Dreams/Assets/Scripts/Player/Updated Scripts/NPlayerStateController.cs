@@ -5,6 +5,7 @@ using PathCreation;
 
 public class NPlayerStateController : MonoBehaviour
 {
+
     [SerializeField] private bool gamePaused;
     public bool GamePaused
     {
@@ -20,6 +21,7 @@ public class NPlayerStateController : MonoBehaviour
                 _input._stats = gamePaused ? null : _stats;
                 AudioListener.pause = gamePaused;
                 MainMenuNiGHTS.SetBool("GameOn", !gamePaused);
+                MainMenuSkins.SetBool("GameOn", !gamePaused);
                 ResetStats();
         }
     }
@@ -35,10 +37,32 @@ public class NPlayerStateController : MonoBehaviour
     [SerializeField] private GameObject MainMenuUI;
     [SerializeField] private GameObject MainMenuCamera;
     [SerializeField] private Animator MainMenuNiGHTS;
+    [SerializeField] private Animator MainMenuSkins;
     [SerializeField] private GameObject gameUI;
     [SerializeField] private NPlayerInput _input;
     [SerializeField] private NPlayerUI UIController;
     [SerializeField] private NPlayerScriptableObject _stats;
+    [Space]
+    [Header("Skin Management")]
+    [SerializeField] private NPlayerSkinManager[] skinManagers;
+    [SerializeField] private int selectedSkin;
+    public int SetSkin
+    {
+        get
+        {
+            if(PlayerPrefs.HasKey("selectedSkin"))
+                selectedSkin = PlayerPrefs.GetInt("selectedSkin");
+            return selectedSkin;
+        }
+        set
+        {
+            selectedSkin = value;
+            PlayerPrefs.SetInt("selectedSkin", selectedSkin);
+            foreach(NPlayerSkinManager skinManager in skinManagers)
+                skinManager.SwitchSkins(selectedSkin);
+        }
+    }
+
     void Awake()
     {
         mainCamera = Camera.main;

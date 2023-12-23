@@ -11,6 +11,7 @@ public class NPlayerLevelFollow : MonoBehaviour
     [SerializeField] private NPlayerScriptableObject _stats;
     [SerializeField] private NPlayerAnimations _animations;
     [SerializeField] private NPlayerLevelRotations _rotationAnimation;
+    [SerializeField] private NPlayerLevelRotations _skinRotationAnimation;
     [SerializeField] private NPlayerStateController _playerStates;
     [SerializeField] private NotATrailScript trailInstantiator;
     public Material blueChipMaterial;
@@ -219,7 +220,7 @@ public class NPlayerLevelFollow : MonoBehaviour
         // Prevent the level from ending while you are flipping
         // If that happens then a whole lot of ugly bugs pop up with the rotations
         // There's probably another workaround but this is the simplest.
-        while(_rotationAnimation.flipping)
+        while(_rotationAnimation.flipping || _skinRotationAnimation.flipping)
             yield return null;
             
         ActiveLevelPalace.ResetIdeyas();
@@ -230,7 +231,7 @@ public class NPlayerLevelFollow : MonoBehaviour
     }
     public IEnumerator BeatLevel()
     {
-        while(_rotationAnimation.flipping)
+        while(_rotationAnimation.flipping || _skinRotationAnimation.flipping)
             yield return null;
 
         currentPath.gameObject.SetActive(false);

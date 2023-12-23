@@ -9,7 +9,7 @@ using Cinemachine;
 public class OptionsManager : MonoBehaviour
 {
     [SerializeField] private GameObject keybindingsMenu;
-    [SerializeField] private GameObject accessibilitiesMenu;
+    [SerializeField] private GameObject othersMenu;
     [SerializeField] private GameObject displayMenu;
     [SerializeField] private GameObject audioMenu;
     [SerializeField] private Button keybindsB;
@@ -23,14 +23,17 @@ public class OptionsManager : MonoBehaviour
     [SerializeField] private Slider soundsSlider;
     [SerializeField] private Slider ambienceSlider;
     [SerializeField] private TMPro.TMP_Dropdown resolutionDropdown;
+    [SerializeField] private TMPro.TMP_Dropdown skinsDropdown;
     Resolution[] resolutions;
 
-    public CinemachineFreeLook cameraSettings;
+    public NPlayerStateController stateControl;
     void Start()
     {
+        Debug.Log("Options Start");
         GetResolutionOptions();
         LoadAudioValues();
-        
+        LoadSelectedSkin();
+        Debug.Log("Options Loaded");
     }
     private void GetResolutionOptions()
     {
@@ -60,7 +63,7 @@ public class OptionsManager : MonoBehaviour
     public void Keybindings()
     {
         keybindingsMenu.SetActive(true);
-        accessibilitiesMenu.SetActive(false);
+        othersMenu.SetActive(false);
         displayMenu.SetActive(false);
         audioMenu.SetActive(false);
 
@@ -69,22 +72,10 @@ public class OptionsManager : MonoBehaviour
         audioB.interactable = true;
         accessB.interactable = true;
     }
-    public void Accessibilities()
-    {
-        keybindingsMenu.SetActive(false);
-        accessibilitiesMenu.SetActive(true);
-        displayMenu.SetActive(false);
-        audioMenu.SetActive(false);
-
-        keybindsB.interactable = true;
-        displayB.interactable = true;
-        audioB.interactable = true;
-        accessB.interactable = false;
-    }
     public void Display()
     {
         keybindingsMenu.SetActive(false);
-        accessibilitiesMenu.SetActive(false);
+        othersMenu.SetActive(false);
         displayMenu.SetActive(true);
         audioMenu.SetActive(false);
 
@@ -96,7 +87,7 @@ public class OptionsManager : MonoBehaviour
     public void Audio()
     {
         keybindingsMenu.SetActive(false);
-        accessibilitiesMenu.SetActive(false);
+        othersMenu.SetActive(false);
         displayMenu.SetActive(false);
         audioMenu.SetActive(true);
 
@@ -104,6 +95,18 @@ public class OptionsManager : MonoBehaviour
         displayB.interactable = true;
         audioB.interactable = false;
         accessB.interactable = true;
+    }
+    public void Other()
+    {
+        keybindingsMenu.SetActive(false);
+        othersMenu.SetActive(true);
+        displayMenu.SetActive(false);
+        audioMenu.SetActive(false);
+
+        keybindsB.interactable = true;
+        displayB.interactable = true;
+        audioB.interactable = true;
+        accessB.interactable = false;
     }
 
     //////////Display//////////
@@ -163,16 +166,19 @@ public class OptionsManager : MonoBehaviour
         PlayerPrefs.SetFloat("ambienceVolume", volumeValue);
     }
 
-    //////////Accessibilities//////////
-    public void SetYInverted(bool YInvert)
+    //////////Other//////////
+    void LoadSelectedSkin()
     {
-        if(cameraSettings != null)
-            cameraSettings.m_YAxis = new AxisState(0, 1, false, true, 2f, 0.2f, 0.1f, "Mouse Y", YInvert);
+        int selectedSkin = 0;
+        if(PlayerPrefs.HasKey("selectedSkin"))
+                selectedSkin = PlayerPrefs.GetInt("selectedSkin");
+        skinsDropdown.value = selectedSkin;
+        Debug.Log("Set Skin Dropdown");
+        SetSkin(selectedSkin);
     }
-    public void SetXInverted(bool XInvert)
+    public void SetSkin(int index)
     {
-        if(cameraSettings != null)
-            cameraSettings.m_XAxis = new AxisState(-180, 180, true, false, 300f, 0.1f, 0.1f, "Mouse X", XInvert);
+        Debug.Log(index);
+        stateControl.SetSkin = index;
     }
-
 }
