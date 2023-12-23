@@ -5,6 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "CollectablesData", menuName = "ScriptableObjects/Collectable")]
 public class CollectablesData : ScriptableObject
 {
+    [Header("Collectable Stats")]
     [Tooltip("How much score is given when you collect this item")]
     public int Score;
     [Tooltip("Should the score be multiplied by the link?")]
@@ -28,5 +29,12 @@ public class CollectablesData : ScriptableObject
     [Space]
     [Tooltip("The sound that plays when you collect this item")]
     public AudioClip interactionSound;
+    [Space]
+    [Header("Behaviour")]
+    public bool dashBall;
+    [Tooltip("The duration that the launch lasts for")]
+    public float launchTime;
+    [Tooltip("The speed that the player will move at when launched")]
+    public float launchSpeed;
     
 }
