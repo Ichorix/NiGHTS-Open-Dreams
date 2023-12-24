@@ -20,8 +20,9 @@ public class RingYellow : MonoBehaviour
         }
     }
     public Animator YellowRingAnim;
-    public Collider selfCollider;
+    private Collider selfCollider;
     public bool LOD;
+    public bool dontDisableCollider;
 
     void Awake()
     {
@@ -39,12 +40,13 @@ public class RingYellow : MonoBehaviour
         if(isCollected)
         {
             TimeUntilGone -= Time.deltaTime;
-            selfCollider.enabled = false;
+            if(!dontDisableCollider)
+                selfCollider.enabled = false;
         }
     }
     void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag("Player")||other.CompareTag("levelPlayer"))
+        if(other.CompareTag("Player"))
         {
             Collect();
         }
