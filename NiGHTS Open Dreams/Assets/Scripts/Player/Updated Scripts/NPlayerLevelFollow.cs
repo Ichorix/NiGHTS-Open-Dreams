@@ -201,17 +201,6 @@ public class NPlayerLevelFollow : MonoBehaviour
     }
 
     //////////FUNCTIONS//////////
-
-    private bool IsMoving(Vector2 direction)
-    {
-        if(direction != Vector2.zero)
-             return true;
-        else
-        {
-            _stats.isBoosting = false;
-            return false;
-        }
-    }
     public void DoExitLevel()
     {
         StartCoroutine(ExitLevel());

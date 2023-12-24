@@ -219,7 +219,6 @@ public class NPlayerOpenControl : MonoBehaviour
             cameraLock.gameObject.SetActive(true);
         
     }
-
     public IEnumerator RecenterCamera()
     {
         cameraLock.m_RecenterToTargetHeading = new AxisState.Recentering(true, 0, 0.25f);
