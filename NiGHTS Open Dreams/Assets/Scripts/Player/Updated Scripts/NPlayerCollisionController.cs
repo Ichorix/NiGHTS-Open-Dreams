@@ -29,9 +29,16 @@ public class NPlayerCollisionController : MonoBehaviour
         }
         
         CollectablesData item = other.GetComponent<Collectable>()?.data;
-        if(item != null)
-            CollectItem(other, item);
+        if(item != null)// Amazing code
+            if(item.dashBall)
+            {
+                if(!levelFollow.specialBehaviourActive)
+                StartCoroutine(levelFollow.Behaviour_DashBall(item.launchTime, item.launchSpeed));
+            }
+            else
+                CollectItem(other, item);
     }
+
     // Constant Ground Orientation
     void OnCollisionStay(Collision other)
     {
@@ -48,6 +55,7 @@ public class NPlayerCollisionController : MonoBehaviour
             }
         }
     }
+
     // Little Hop after leaving the ground
     void OnCollisionExit(Collision other)
     {
@@ -83,7 +91,7 @@ public class NPlayerCollisionController : MonoBehaviour
 
             if(data.increaseLink) openControl.LinkIncrease();
             else if(data.clearLink) openControl.LinkEmpty();
-
+            
             points = data.Score * (data.timesLink ? openControl.link : 1);
             if(points > 0)
                 pointItemScript.InstantiateUItem(2, points);

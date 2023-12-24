@@ -23,5 +23,6 @@ MonoBehaviour:
   Chips: 0
   instantOff: 0
   interactionSound: {fileID: 0}
-  launchTime: 0
-  launchSpeed: 0
+  dashBall: 1
+  launchTime: 2
+  launchSpeed: 50

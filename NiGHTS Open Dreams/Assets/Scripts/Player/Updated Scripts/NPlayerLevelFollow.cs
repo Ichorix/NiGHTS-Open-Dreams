@@ -98,6 +98,7 @@ public class NPlayerLevelFollow : MonoBehaviour
     [SerializeField] private bool boostAttempt;
     [SerializeField] private bool boostAttemptCooldown;
     [SerializeField] private float _speed;
+    public bool specialBehaviourActive;
 
 
     void Start()    
@@ -293,5 +294,20 @@ public class NPlayerLevelFollow : MonoBehaviour
     {
         float OutputGrade = GradingCurve.Evaluate(ScoreToBeGraded);
         return (int)OutputGrade;
+    }
+
+    //////////BEHAVIOUR//////////
+
+    public IEnumerator Behaviour_DashBall(float launchTime, float launchSpeed)
+    {
+        specialBehaviourActive = true;
+        float behaviourTime = launchTime;
+        while(behaviourTime > 0)
+        {
+            distanceTravelled += launchSpeed * Time.deltaTime;
+            behaviourTime -= Time.deltaTime;
+            yield return null;
+        }
+        specialBehaviourActive = false;
     }
 }
