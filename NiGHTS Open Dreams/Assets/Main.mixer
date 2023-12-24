@@ -46,6 +46,8 @@ AudioMixerController:
   m_ExposedParameters:
   - guid: 34879c3f8cec13d4caac79d8056c8133
     name: ambienceVolume
+  - guid: 2aac1069028bdb846b22fc50ce1b1c9b
+    name: boostVolume
   - guid: f00c237e53868b948a266500e9760d4b
     name: masterVolume
   - guid: f1e6c2ae175c4be41a764400152538dd
@@ -58,6 +60,7 @@ AudioMixerController:
     - 8f85801679b0e234695c36e8acdcfcb8
     - 5a006852fcd15c141b732c96294f8c67
     - a415848fb250ecd44a72149d3bae8e1c
+    - 81361693ac6844d4d8dfceadd6832c9d
     name: View
   m_CurrentViewIndex: 0
   m_TargetSnapshot: {fileID: 24500006}
@@ -128,6 +131,25 @@ AudioMixerGroupController:
   m_Mute: 0
   m_Solo: 0
   m_BypassEffects: 0
+--- !u!243 &2869208901665333140
+AudioMixerGroupController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Boost
+  m_AudioMixer: {fileID: 24100000}
+  m_GroupID: 81361693ac6844d4d8dfceadd6832c9d
+  m_Children: []
+  m_Volume: 2aac1069028bdb846b22fc50ce1b1c9b
+  m_Pitch: f6de42154ad9cb448aafd55f35054e94
+  m_Send: 00000000000000000000000000000000
+  m_Effects:
+  - {fileID: 4736346735847123749}
+  m_UserColorIndex: 0
+  m_Mute: 0
+  m_Solo: 0
+  m_BypassEffects: 0
 --- !u!243 &4234148902848043164
 AudioMixerGroupController:
   m_ObjectHideFlags: 0
@@ -147,6 +169,20 @@ AudioMixerGroupController:
   m_Mute: 0
   m_Solo: 0
   m_BypassEffects: 0
+--- !u!244 &4736346735847123749
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_EffectID: 8a5000a1bd3b7424fad27cd09d29417d
+  m_EffectName: Attenuation
+  m_MixLevel: f14ac522e5a2b914cb451274e0bdf280
+  m_Parameters: []
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
 --- !u!244 &5948073626491120270
 AudioMixerEffectController:
   m_ObjectHideFlags: 3
@@ -170,7 +206,8 @@ AudioMixerGroupController:
   m_Name: SFX
   m_AudioMixer: {fileID: 24100000}
   m_GroupID: 5a006852fcd15c141b732c96294f8c67
-  m_Children: []
+  m_Children:
+  - {fileID: 2869208901665333140}
   m_Volume: 7dc688a913d5be447bbde9d6c43f90ce
   m_Pitch: 650ece42f5e69d541898db72ce5cc3db
   m_Send: 00000000000000000000000000000000

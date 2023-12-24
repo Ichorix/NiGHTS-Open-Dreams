@@ -21,6 +21,7 @@ public class OptionsManager : MonoBehaviour
     [SerializeField] private Slider masterSlider;
     [SerializeField] private Slider musicSlider;
     [SerializeField] private Slider soundsSlider;
+    [SerializeField] private Slider boostSlider;
     [SerializeField] private Slider ambienceSlider;
     [SerializeField] private TMPro.TMP_Dropdown resolutionDropdown;
     [SerializeField] private TMPro.TMP_Dropdown skinsDropdown;
@@ -141,6 +142,10 @@ public class OptionsManager : MonoBehaviour
             soundsSlider.value = PlayerPrefs.GetFloat("sfxVolume");
         SetFXVolume(soundsSlider.value);
 
+        if(PlayerPrefs.HasKey("boostVolume"))
+            boostSlider.value = PlayerPrefs.GetFloat("boostVolume");
+        SetBoostVolume(boostSlider.value);
+
         if(PlayerPrefs.HasKey("ambienceVolume"))
             ambienceSlider.value = PlayerPrefs.GetFloat("ambienceVolume");
         SetAmbienceVolume(ambienceSlider.value);
@@ -159,6 +164,11 @@ public class OptionsManager : MonoBehaviour
     {
         audioMixer.SetFloat("sfxVolume", Mathf.Log10(volumeValue) * 20);
         PlayerPrefs.SetFloat("sfxVolume", volumeValue);
+    }
+    public void SetBoostVolume(float volumeValue)
+    {
+        audioMixer.SetFloat("boostVolume", Mathf.Log10(volumeValue) * 20);
+        PlayerPrefs.SetFloat("boostVolume", volumeValue);
     }
     public void SetAmbienceVolume(float volumeValue)
     {

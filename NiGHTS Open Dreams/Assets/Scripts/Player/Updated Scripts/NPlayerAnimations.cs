@@ -18,10 +18,15 @@ public class NPlayerAnimations : MonoBehaviour
     [SerializeField] private ParticleSystem speedWindParticles;
     [SerializeField] private float speedWindSpeedThreshold = 30f;
     [SerializeField] private float turningAnimationThreshold = 0.6f;
-
     private bool boostAnim;
     private bool boostOverride;
     public bool Grounded;
+
+    [Header("Sounds")]
+    [SerializeField] private AudioSource boostingAudioSource;
+    [SerializeField] private AudioClip boostingStartSFX;
+    [SerializeField] private AudioClip boostingEndSFX;
+    private bool boostingSoundsActive;
     
 
     void Update()
@@ -92,8 +97,28 @@ public class NPlayerAnimations : MonoBehaviour
         {
             boostParticles.enableEmission = boostAnim;
             boostTrail.emitting = boostAnim;
+
+            // Sounds placed here to not play when boost attempting
+            if(boostAnim && !boostingSoundsActive)
+                StartCoroutine(BoostingSounds());
         }
     }
+    IEnumerator BoostingSounds()
+    {
+        boostingSoundsActive = true;
+        boostingAudioSource.volume = 1f;
+        boostingAudioSource.PlayOneShot(boostingStartSFX, 1f);
+        boostingAudioSource.PlayDelayed(boostingStartSFX.length);
+        while(boostAnim)
+        {
+            yield return null;
+        }
+        boostingSoundsActive = false;
+        boostingAudioSource.Stop();
+        boostingAudioSource.PlayOneShot(boostingEndSFX, 1f);
+        yield break;
+    }
+
     private void SpeedWindManagement()
     {
         speedWindParticles.enableEmission = openControl._speed > speedWindSpeedThreshold;
