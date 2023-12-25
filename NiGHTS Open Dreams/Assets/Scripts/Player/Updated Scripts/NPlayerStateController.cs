@@ -15,6 +15,7 @@ public class NPlayerStateController : MonoBehaviour
             gamePaused = value;
                 openControl._speed = 0;
                 openControl.enabled = !gamePaused;
+                ModalCanvas.SetActive(!gamePaused);
                 gameUI.SetActive(!gamePaused);
                 MainMenuUI.SetActive(gamePaused);
                 MainMenuCamera.SetActive(gamePaused);
@@ -29,15 +30,18 @@ public class NPlayerStateController : MonoBehaviour
     {
         get{ return gamePaused ? 0 : Time.deltaTime; }
     }
+
     public GameObject openPlayer;
     private NPlayerOpenControl openControl;
     public GameObject levelPlayer;
     private NPlayerLevelFollow levelFollow;
     private Camera mainCamera;
+
     [SerializeField] private GameObject MainMenuUI;
     [SerializeField] private GameObject MainMenuCamera;
     [SerializeField] private Animator MainMenuNiGHTS;
     [SerializeField] private Animator MainMenuSkins;
+    [SerializeField] private GameObject ModalCanvas;
     [SerializeField] private GameObject gameUI;
     [SerializeField] private NPlayerInput _input;
     [SerializeField] private NPlayerUI UIController;

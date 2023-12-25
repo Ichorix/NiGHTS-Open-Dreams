@@ -53,6 +53,7 @@ public class EnterLevelScript : MonoBehaviour
     
     [Space]
     [Header("Instances")]
+    [SerializeField] private GameObject ModalCanvas;
     [SerializeField] private GameObject UIModal;
     private GameObject modalInstance;
     [SerializeField] private Animator scoreSpinner;
@@ -113,7 +114,7 @@ public class EnterLevelScript : MonoBehaviour
                 associatedLevelMusic.SetActive(false);
                 
                 if(modalInstance == null) // Spawn a new modal if one isnt already up. Prevents having multiple overlapping
-                    modalInstance = Instantiate(UIModal);
+                    modalInstance = Instantiate(UIModal, ModalCanvas.transform);
 
                 NPlayerStateController playerStates = other.transform.parent.parent.GetComponent<NPlayerStateController>();
                 NPlayerLevelFollow levelFollow = playerStates.levelPlayer.transform.GetChild(0).GetComponent<NPlayerLevelFollow>();

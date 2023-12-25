@@ -43,6 +43,6 @@ MonoBehaviour:
   runBoostAttempt: 1
   BoostAttempt: 0
   cameraPlayerBound: 1
-  isLevelPlayer: 1
+  isLevelPlayer: 0
   PowerBuff: 0
   powerBuffTimeLeft: 0

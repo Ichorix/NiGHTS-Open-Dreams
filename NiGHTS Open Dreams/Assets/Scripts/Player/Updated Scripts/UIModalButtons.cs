@@ -16,7 +16,6 @@ public class UIModalButtons : MonoBehaviour
 
     public void Enable(int bonus, NPlayerStateController playerStates, PathCreator[] bakedPaths, CustomStageScriptableObject stageInfo, float savedScore)
     {
-        Cursor.visible = true;
         bonusTime = Mathf.Clamp(bonus, 0, 60);
         bonusTimeText.text = "+"+ bonusTime.ToString() + " s";
         _playerStates = playerStates;
@@ -32,6 +31,11 @@ public class UIModalButtons : MonoBehaviour
     public void Cancel()
     {
         Destroy(this.gameObject);
+    }
+    void Update()
+    {
+        // Screw you, your cursor is visible
+        Cursor.visible = true;
     }
     void OnDisable()
     {
