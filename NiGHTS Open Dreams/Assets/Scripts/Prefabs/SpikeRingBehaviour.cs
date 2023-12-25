@@ -13,6 +13,8 @@ public class SpikeRingBehaviour : MonoBehaviour
         enterTime = 0;
         hit = false;
     }
+
+    // I read that OnTriggerStay can be used as a Coroutine, using that may help optimize this system
     void OnTriggerStay(Collider other)
     {
         if(other.CompareTag("Player"))
