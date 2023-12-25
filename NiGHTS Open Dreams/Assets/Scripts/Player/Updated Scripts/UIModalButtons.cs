@@ -32,13 +32,4 @@ public class UIModalButtons : MonoBehaviour
     {
         Destroy(this.gameObject);
     }
-    void Update()
-    {
-        // Screw you, your cursor is visible
-        Cursor.visible = true;
-    }
-    void OnDisable()
-    {
-        Cursor.visible = false;
-    }
 }
