@@ -865,6 +865,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7006425598518402645}
   - component: {fileID: 7006425598518402646}
+  - component: {fileID: 7911648744006793576}
   m_Layer: 5
   m_Name: MenuManager
   m_TagString: Untagged
@@ -910,6 +911,18 @@ MonoBehaviour:
   quitText: {fileID: 7442938777041639933}
   stateController: {fileID: 0}
   _stats: {fileID: 11400000, guid: 15afd228b40b218489c2a975b000e97f, type: 2}
+--- !u!114 &7911648744006793576
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7006425598518402731}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 460e540a31ead66488efbfcecdaafb1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7006425598640915974
 GameObject:
   m_ObjectHideFlags: 0

@@ -17,16 +17,11 @@ public class MainMenuSimplified : MonoBehaviour
 
     void OnEnable()
     {
-        Cursor.visible = true;
         mainMenu.SetActive(true);
         optionsMenu.SetActive(false);
         menuMusic.Main.Play();
         levelFollow = stateController.levelPlayer.transform.GetChild(0).GetComponent<NPlayerLevelFollow>();
         quitText.text = _stats.isLevelPlayer ? " Exit Level" : " Quit Game";
-    }
-    void OnDisable()
-    {
-        Cursor.visible = false;
     }
     public void QuitGame()
     {
