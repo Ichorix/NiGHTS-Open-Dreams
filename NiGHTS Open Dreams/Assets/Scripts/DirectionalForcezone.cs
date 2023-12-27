@@ -22,30 +22,26 @@ public class DirectionalForcezone : MonoBehaviour
 
     void Start()
     {
-        
-        if(forceDirection == 0)
+        switch(forceDirection)
         {
-            direction = Vector3.up;
-        }
-        if(forceDirection == 1)
-        {
-            direction = Vector3.down;
-        }
-        if(forceDirection == 2)
-        {
-            direction = Vector3.left;
-        }
-        if(forceDirection == 3)
-        {
-            direction = Vector3.right;
-        }
-        if(forceDirection == 4)
-        {
-            direction = Vector3.forward;
-        }
-        if(forceDirection == 5)
-        {
-            direction = Vector3.back;
+            case 0:
+                direction = Vector3.up;
+                break;
+            case 1:
+                direction = Vector3.down;
+                break;
+            case 2:
+                direction = Vector3.left;
+                break;
+            case 3:
+                direction = Vector3.right;
+                break;
+            case 4:
+                direction = Vector3.forward;
+                break;
+            case 5:
+                direction = Vector3.back;
+                break;
         }
 
         if(forcePower == 0)
@@ -68,9 +64,10 @@ public class DirectionalForcezone : MonoBehaviour
     
     void OnTriggerStay(Collider other)
     {
-        if(other.tag != "Ground" && other.tag != "unForcable" && other.GetComponent<Rigidbody>() != null)
+        Rigidbody forcedBody = other.GetComponent<Rigidbody>();
+        if(other.tag != "Ground" && other.tag != "unForcable" && forcedBody != null)
         {
-            other.GetComponent<Rigidbody>().AddForce(direction * force);
+            forcedBody.AddForce(direction * force);
         }
     }
 
