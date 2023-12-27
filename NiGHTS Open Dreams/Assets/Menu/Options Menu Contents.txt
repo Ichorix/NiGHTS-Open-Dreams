@@ -1,9 +1,0 @@
-Controller Setup
-
-Keybinds
-
-Accessibility
-[Inverted Axis, Camera (World or Local)]
-
-Graphics Settings
-[Presets + maybe Manual Control]
