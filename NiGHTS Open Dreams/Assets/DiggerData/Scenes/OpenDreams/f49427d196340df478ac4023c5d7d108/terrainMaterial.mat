@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: terrainMaterial
+  m_Name: Digger/URP/Terrain/Lit
   m_Shader: {fileID: 4800000, guid: 6827fd961a7d47edad5b1b8c8e2f204a, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
