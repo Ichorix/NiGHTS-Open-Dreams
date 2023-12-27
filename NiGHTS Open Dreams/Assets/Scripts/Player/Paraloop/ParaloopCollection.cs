@@ -5,7 +5,7 @@ using UnityEngine;
 public class ParaloopCollection : MonoBehaviour
 {
     public GameObject _player;
-    public TriggerTestTwo _trigger;
+    public ParaloopTrigger _trigger;
     // Triggers once per item that it collides with, allowing us to simply detect for the tag rather than detect from the collectable
     void OnTriggerStay(Collider other)
     {
