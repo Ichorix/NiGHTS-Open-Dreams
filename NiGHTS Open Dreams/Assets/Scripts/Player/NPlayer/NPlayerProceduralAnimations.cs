@@ -11,6 +11,7 @@ public class NPlayerProceduralAnimations : MonoBehaviour
 
     void Update()
     {
+        // Always moves the targets towards the intended position by a speed, faster if the target has further to move
         distanceApart = Vector3.Distance(transform.position, intendedTarget.position);
         float step = animationSpeed * distanceApart * Time.deltaTime;
         transform.position = Vector3.MoveTowards(transform.position, intendedTarget.position + new Vector3(0, gravityDifference, 0), step);

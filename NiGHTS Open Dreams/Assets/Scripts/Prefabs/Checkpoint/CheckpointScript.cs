@@ -31,17 +31,14 @@ public class CheckpointScript : MonoBehaviour
         if(other.CompareTag("Player") && Outer)
         {
             // Checks the left and right triggers to see which direction the player went through
-            if(Enter.active)
+            if(Enter.active) // Called if the player went through the green side
             {
-                //Debug.Log("Entered Direction");
                 Outer = false;
                 RespawnStuff();
             }
-            if(Exit.active)
+            if(Exit.active) // Called if the player went through the red side
             {
-                //Debug.Log("Exited Direction");
                 Outer = false;
-
                 if(allowDespawning) DespawnStuff();
             }
         }

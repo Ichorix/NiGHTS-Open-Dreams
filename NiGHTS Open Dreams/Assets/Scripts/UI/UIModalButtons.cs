@@ -14,6 +14,7 @@ public class UIModalButtons : MonoBehaviour
     private CustomStageScriptableObject stageInformation;
     private float bonusTime;
 
+    // Called from the Ideya Palace in EnterLevelScript.OnTriggerEnter()
     public void Enable(int bonus, NPlayerStateController playerStates, PathCreator[] bakedPaths, CustomStageScriptableObject stageInfo, float savedScore)
     {
         bonusTime = Mathf.Clamp(bonus, 0, 60);
@@ -25,6 +26,7 @@ public class UIModalButtons : MonoBehaviour
     }
     public void EnterStage()
     {
+        // Sends the appropriate information to the player through NPlayerStateController.ActivateLevelPlayer()
         _playerStates.ActivateLevelPlayer(pathsInstance, stageInformation.Times, stageInformation.ChipsRequired, bonusTime);
         Destroy(this.gameObject);
     }

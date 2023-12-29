@@ -116,15 +116,20 @@ public class EnterLevelScript : MonoBehaviour
                 if(modalInstance == null) // Spawn a new modal if one isnt already up. Prevents having multiple overlapping
                     modalInstance = Instantiate(UIModal, ModalCanvas.transform);
 
+                // Get the appropriate references from the player
                 NPlayerStateController playerStates = other.transform.parent.parent.GetComponent<NPlayerStateController>();
                 NPlayerLevelFollow levelFollow = playerStates.levelPlayer.transform.GetChild(0).GetComponent<NPlayerLevelFollow>();
                 NPlayerOpenControl openControl = other.GetComponent<NPlayerOpenControl>();
-                
-                playerStates.ResetStats();
+
                 levelFollow.ActiveLevelPalace = this;
 
+                // Stop the players movement 
+                playerStates.ResetStats();
+
+                // Send the information to the modal instance through UIModalButtons.Enable()
                 modalInstance.GetComponent<UIModalButtons>().Enable(openControl.OpenChips, playerStates, Paths, thisStage, SavedScore);
 
+                // Activate the animation
                 scoreSpinner.SetInteger("Grade", SavedGrade);
                 scoreSpinner.SetTrigger("RunAnimation");
             }

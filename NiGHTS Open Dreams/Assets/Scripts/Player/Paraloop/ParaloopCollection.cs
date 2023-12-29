@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class ParaloopCollection : MonoBehaviour
 {
+    // refrences are assigned in ParaloopTrigger when the paraloop is instantiated
     public GameObject _player;
     public ParaloopTrigger _trigger;
+    
     // Triggers once per item that it collides with, allowing us to simply detect for the tag rather than detect from the collectable
     void OnTriggerStay(Collider other)
     {

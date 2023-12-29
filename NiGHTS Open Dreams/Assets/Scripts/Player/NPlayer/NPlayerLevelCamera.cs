@@ -8,16 +8,15 @@ public class NPlayerLevelCamera : MonoBehaviour
     [SerializeField] private NPlayerLevelFollow _player;
     private PathCreator currentPath;
     private EndOfPathInstruction endOfPathInstruction;
-    public float distanceTravelled;
+    private float distanceTravelled;
 
     [Header("Y Easing")]
     [SerializeField] private float playerYvalue;
     [SerializeField] private float levelYvalue;
     [Tooltip("The position between the Player's Y value and the Level's Y value that the camera will be at. 0 follows Level, 1 follows Player"), Range(0, 1)] 
-    public float yPercent = 0.6f;
+    [SerializeField] private float yPercent = 0.6f;
     private float positionBetweenYs;
-    //
-    public Vector3 pathPosition;
+    private Vector3 pathPosition;
 
     void UpdatePath()
     {
@@ -26,7 +25,9 @@ public class NPlayerLevelCamera : MonoBehaviour
     }
     void Update()
     {
+        // Probably not the most optimal place to put this
         UpdatePath();
+
         distanceTravelled = _player.distanceTravelled;
 
         pathPosition = currentPath.path.GetPointAtDistance(distanceTravelled, endOfPathInstruction);

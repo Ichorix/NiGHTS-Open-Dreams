@@ -99,7 +99,7 @@ public class NPlayerOpenControl : MonoBehaviour
     private float CalculateMomentumBonus()
     {
         // Results in a value between -1 and 1 with precision to 2 decimal places
-         // yForward is -1 when looking straight up, and 1 when looking straight down
+        // yForward is -1 when looking straight up, and 1 when looking straight down
         float yForward = Mathf.Round(-transform.forward.y * 100f) * 0.01f; 
         
         if(yForward >= 0)
@@ -172,10 +172,10 @@ public class NPlayerOpenControl : MonoBehaviour
         if(_speed <= speedOffset) _speed = 0;
 
         ///// If speed acts funky, activate these to determine it
-        Debug.Log("DeltaTime = " + Time.deltaTime);
-        Debug.Log("Target Speed = " + targetSpeed + ", Current Speed = " + _speed);
-        Debug.Log("Speed Change Rate = " + speedChangeRate * Time.deltaTime + "Speed Offset = " + speedOffset);
-        Debug.Log("Movement Multiplier = " + _stats.MovementMultiplier + ", Momentum Bonus = " + momentumBonus);
+        //Debug.Log("DeltaTime = " + Time.deltaTime);
+        //Debug.Log("Target Speed = " + targetSpeed + ", Current Speed = " + _speed);
+        //Debug.Log("Speed Change Rate = " + speedChangeRate * Time.deltaTime + "Speed Offset = " + speedOffset);
+        //Debug.Log("Movement Multiplier = " + _stats.MovementMultiplier + ", Momentum Bonus = " + momentumBonus);
         transform.Translate(Vector3.forward * Mathf.Clamp(_speed, 0, 100f) * Time.deltaTime);
     }
     private void ActivateParaloop()
@@ -255,20 +255,6 @@ public class NPlayerOpenControl : MonoBehaviour
         // Move towards the ground normal retaining the general forward direction by using the Cross Product of the current right vector
         transform.forward = Vector3.MoveTowards(transform.forward, normalForward, step);
     }
-    // Alternative that crosses forward and the normal to get the right vector, does some funky things
-    // Probably could be used to help make wallrunning work better but I'm good with the regular version
-    /*
-    public void ReAdjustToNormals(Vector3 groundNormal)
-    {
-        mostRecentGroundNormal = groundNormal;
-        Vector3 normalRight = Vector3.Cross(mostRecentGroundNormal, transform.forward);
-
-        // Calculates how far the player should rotate towards the intended forward by the speed inputted and how close the player is to that direction
-        float step = _stats.groundAdjustSpeed * Vector3.Distance(transform.right, normalRight) * Time.deltaTime;
-        // Move towards the ground normal retaining the general forward direction by using the Cross Product of the current right vector
-        transform.right = Vector3.MoveTowards(transform.right, normalRight, step);
-    }
-    */
 
     // See NPlayerCollisionController for the 2 usage examples
     public void BumpUpFromGround(float bumpForce, float translateDistance = 0)
@@ -325,7 +311,4 @@ public class NPlayerOpenControl : MonoBehaviour
         if(linkControl != null)
             linkControl.RunLinkIncrease(link);
     }
-
-
-    
 }

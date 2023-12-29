@@ -19,8 +19,14 @@ public class ParaloopEmitter : MonoBehaviour
     {
         collider.enabled = false;
     }
+
+    // This version of the ParaloopEmitter is an updated version of the one shown in the video.
+    // Instead of having a time between spawns like before that could change in density based on your movement speed,
+    // The new version now calculates the distance from the last object to see if it is far enough away based on the distanceThreshold
+    // Vector3.Distance is actually pretty fast so it probably isn't much of a performance difference compared to incrementing time
     void Update()
     {
+        // If there is no trail object currently in the list, then spawn the trail and don't do the rest of the logic
         if(trailObjects.Count <= 0)
         {
             SpawnTrail();

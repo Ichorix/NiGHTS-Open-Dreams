@@ -89,6 +89,7 @@ public class NPlayerStateController : MonoBehaviour
         ResetStats();
     }
 
+    // Called from the Enter Level Modal in UIModalButtons.EnterStage()
     public void ActivateLevelPlayer(PathCreator[] paths, float[] times, int[] chips, float extraTime)
     {
         NPlayerLevelFollow levelFollow = levelPlayer.transform.GetChild(0).GetComponent<NPlayerLevelFollow>();

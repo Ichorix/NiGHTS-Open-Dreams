@@ -25,6 +25,7 @@ public class NPlayerUI : MonoBehaviour
 
         if(_stats.isLevelPlayer)
         {
+            // Inputting "n0" to the ToString() prevents Scientific Notation and adds commas
             scoreText.text = levelFollow.currentScore.ToString("n0");
             timeText.text = ((int)levelFollow.LevelTimeLeft).ToString();
             chipText.text = levelFollow.currentChips.ToString("n0")

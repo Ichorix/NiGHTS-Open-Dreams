@@ -17,19 +17,24 @@ public class NPlayerCollisionController : MonoBehaviour
         {
             if(openControl != null)
             {
-                //Sets the player back by a frame along with bumping them up. Makes it more consistent
+                // The inputted _speed * Time.deltaTime sets the player back a frame while also bumping in the opposite direction of the ground by 100
                 openControl.BumpUpFromGround(100, openControl._speed * Time.deltaTime);
+                // Usually this will only happen if the player has a frame drop right when touching the ground, in which case sometimes they will still clip through the ground
+                // Thats not really something that I know how to fix since Terrain is so thin
             }
             else if(levelFollow != null)
             {
                 levelFollow.GetComponent<Rigidbody>().AddForce(Vector3.up * 50, ForceMode.Impulse);
             }
+            // Stops the logic because if you collided with the ground then it wont need to run the collect item information
             return;
         }
-        
+
+        // Gets the data of the collectable if it exists
         CollectablesData item = other.GetComponent<Collectable>()?.data;
+
         if(item != null)// Amazing code
-            if(item.dashBall)
+            if(item.dashBall) // If more behaviours are added this could be switched to a switch(heh get it) function for performance and use an Enumerator as the input for readability
             {
                 if(!levelFollow.specialBehaviourActive)
                 StartCoroutine(levelFollow.Behaviour_DashBall(item.launchTime, item.launchSpeed));

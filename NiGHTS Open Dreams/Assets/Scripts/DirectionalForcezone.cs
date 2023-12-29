@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class DirectionalForcezone : MonoBehaviour
 {
+    // Used to keep the player within the playzone
+    
     [Header("Inspector Variables")]
     [SerializeField, Tooltip("0: up, 1: down, 2: left, 3: right, 4: forward, 5: back")]
     private int forceDirection;

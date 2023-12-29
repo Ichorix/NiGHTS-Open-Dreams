@@ -28,7 +28,8 @@ public class NPlayerAnimations : MonoBehaviour
     [SerializeField] private AudioClip boostingEndSFX;
     private bool boostingSoundsActive;
     
-
+    // Sets the values for both animators at the same time
+    // Could be optimized by having the references, and an _animator variable that is set in OnEnable() to the correct animator
     void Update()
     {
         _animator.SetBool("isMoving", _stats.isMoving);

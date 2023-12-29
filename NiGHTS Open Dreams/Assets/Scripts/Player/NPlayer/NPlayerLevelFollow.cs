@@ -142,9 +142,9 @@ public class NPlayerLevelFollow : MonoBehaviour
     void Update()
     {
         SpeedLogic(); // Mostly copied from NPlayerOpenControl.MovePlayer()
-        MovePlayer();
-        BoostStuff();
-        LevelLogic(); //Counting time and logic for when Time is up
+        MovePlayer(); // The unique movement code for the level player
+        BoostStuff(); // Boost Stuff
+        LevelLogic(); // Counting time and logic for when Time is up
     }
     void MovePlayer()
     {
@@ -156,6 +156,9 @@ public class NPlayerLevelFollow : MonoBehaviour
         float yMovement = _stats.MoveDirection.y * _speed * _playerStates.UsableDeltaTime;
         rigidbody.MovePosition(new Vector3(pathPosition.x, transform.position.y + yMovement, pathPosition.z));
         //rigidbody.AddForce(Vector3.up * _stats.MoveDirection.y * _speed, ForceMode.VelocityChange);
+        // Something similar to the old vertical method using rigidbody forces to check for collisions
+        // Makes movement inconsistent though and since there is a new ground check in NPlayerCollisionController I think this just makes it a bit better with controller.
+        // Keyboard movement is snappy now as a consequence
 
         transform.eulerAngles = new Vector3(0, pathRotation.y, 0);
 
@@ -212,7 +215,9 @@ public class NPlayerLevelFollow : MonoBehaviour
         // There's probably another workaround but this is the simplest.
         while(_rotationAnimation.flipping || _skinRotationAnimation.flipping)
             yield return null;
-            
+        
+        // If you want to be generous you can put an if() here to check if the time is still < 0
+        // Which would allow the players a maximum of one second extra (based on current flip speed) to pick up stars if they time it perfectly
         ActiveLevelPalace.ResetIdeyas();
         currentPath.gameObject.SetActive(false);
         _playerStates.ActivateOpenPlayer();

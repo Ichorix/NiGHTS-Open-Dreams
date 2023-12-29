@@ -25,14 +25,14 @@ public class NPlayerLevelRotations : MonoBehaviour
         // MoveDirection.x when positive gives the correct values. When negative it gives some funky results, so I flip it later depending on if you are moving backwards or not.
         // MoveDirection.y works fine so it doesnt need any special treatment
         Vector3 lookDirection = new Vector3(Mathf.Abs(_stats.MoveDirection.x), _stats.MoveDirection.y, 0).normalized;
-        transform.forward += lookDirection * 5; // Whatever dark magic I used, this fixes it from being 45 to -45 to now be closer to 90 to -90
+        transform.forward += lookDirection * 5; // Whatever dark magic I used, this fixes it from being close to 45 and -45 to now be closer to 90 and -90
         
         
         if(_stats.MoveDirection.x > 0) // Checks if moving forwards
             isBackwards = false;
         else if(_stats.MoveDirection.x < 0) // Checks if moving backwards
             isBackwards = true;
-        //Keeps value when not moving so that the player will look either left or right accordingly, rather than snapping to forward-facing like it used to
+        // Keeps value when not moving so that the player will look either left or right accordingly, rather than snapping to forward-facing like it used to
 
 
         if(isBackwards)
@@ -52,7 +52,6 @@ public class NPlayerLevelRotations : MonoBehaviour
         }
         else upsideDownTime = 0;
 
-        //
         if(upsideDownTime >= flipTimeThreshold)
         {
             if(!flipped)
@@ -96,7 +95,7 @@ public class NPlayerLevelRotations : MonoBehaviour
             oppositeFlip = Mathf.SmoothStep(180, 360, t);
             yield return null;
         }
-        //Delayed to let the lerp happen. If not it would snap back
+        // Delayed to let the lerp happen. If not it would snap back
         flipped = false;
         flipping = false;
     }
