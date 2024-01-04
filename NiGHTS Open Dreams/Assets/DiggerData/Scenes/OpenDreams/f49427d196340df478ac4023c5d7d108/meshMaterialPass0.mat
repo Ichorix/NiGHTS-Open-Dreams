@@ -1,0 +1,114 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: meshMaterialPass0
+  m_Shader: {fileID: 4800000, guid: f4535d5bcc7c4e45b7fdcf3d539bced4, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords:
+  - _NORMALMAP
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Mask0:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Mask1:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Mask2:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Mask3:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Normal0:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Normal1:
+        m_Texture: {fileID: 2800000, guid: 9d4515cff1ba84d16b9396c09b31acb9, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Normal2:
+        m_Texture: {fileID: 2800000, guid: 6711a6f408dca5b41b938ec249d8d444, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Normal3:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Splat0:
+        m_Texture: {fileID: 2800000, guid: 317a0736add76414e80c36daf354e143, type: 3}
+        m_Scale: {x: 0.06666667, y: 0.06666667}
+        m_Offset: {x: 0, y: 0}
+    - _Splat1:
+        m_Texture: {fileID: 2800000, guid: 4eadcc55dbc734dd0a3dc14999a572cc, type: 3}
+        m_Scale: {x: 0.06666667, y: 0.06666667}
+        m_Offset: {x: 0, y: 0}
+    - _Splat2:
+        m_Texture: {fileID: 2800000, guid: 9875bf7345d4ac04ab35f3b9ed63a954, type: 3}
+        m_Scale: {x: 0.33333334, y: 0.33333334}
+        m_Offset: {x: 0, y: 0}
+    - _Splat3:
+        m_Texture: {fileID: 2800000, guid: 187a9cbbdb313414a96fed488123c31c, type: 3}
+        m_Scale: {x: 0.5, y: 0.5}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _EnableHeightBlend: 0
+    - _HeightTransition: 0
+    - _LayerHasMask0: 0
+    - _LayerHasMask1: 0
+    - _LayerHasMask2: 0
+    - _LayerHasMask3: 0
+    - _Metallic0: 0
+    - _Metallic1: 0
+    - _Metallic2: 0
+    - _Metallic3: 0
+    - _NormalScale0: 1
+    - _NormalScale1: 1.5
+    - _NormalScale2: 3
+    - _NormalScale3: 1
+    - _NumLayersCount: 1
+    - _Smoothness0: 0
+    - _Smoothness1: 0
+    - _Smoothness2: 0
+    - _Smoothness3: 0
+    m_Colors:
+    - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
+    - _DiffuseRemapScale0: {r: 0.3763599, g: 0.6792453, b: 0.31078678, a: 1}
+    - _DiffuseRemapScale1: {r: 1, g: 1, b: 1, a: 1}
+    - _DiffuseRemapScale2: {r: 1, g: 1, b: 1, a: 1}
+    - _DiffuseRemapScale3: {r: 0.6839622, g: 1, b: 0.71952003, a: 1}
+    - _MaskMapRemapOffset0: {r: 0, g: 0, b: 0, a: 0}
+    - _MaskMapRemapOffset1: {r: 0, g: 0, b: 0, a: 0}
+    - _MaskMapRemapOffset2: {r: 0, g: 0, b: 0, a: 0}
+    - _MaskMapRemapOffset3: {r: 0, g: 0, b: 0, a: 0}
+    - _MaskMapRemapScale0: {r: 1, g: 1, b: 1, a: 1}
+    - _MaskMapRemapScale1: {r: 1, g: 1, b: 1, a: 1}
+    - _MaskMapRemapScale2: {r: 1, g: 1, b: 1, a: 1}
+    - _MaskMapRemapScale3: {r: 1, g: 1, b: 1, a: 1}
+  m_BuildTextureStacks: []
