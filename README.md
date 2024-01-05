@@ -34,9 +34,4 @@ Textures used:
 
 ## Known Issues
 * Errors will display in the console whenever a custom UI Shader is shown. This is because the method that is used to get custom shaders onto Unity UI is entirely unintentional and really isn't supposed to work in the first place but I managed to figure out this workaround. To view these shaders, follow the path [NiGHTS Open Dreams/Assets/UI/Shaders](https://github.com/Ichorix/NiGHTS-Open-Dreams/tree/fdda19e59a698df3ddebd6e28a630cbff19ab6f5/NiGHTS%20Open%20Dreams/Assets/UI/Shaders)
-* 2
-
-### TODO:
-Swap .blend meshes with associated .fbx;
-  Rings
-  Blue Chips
+* 
