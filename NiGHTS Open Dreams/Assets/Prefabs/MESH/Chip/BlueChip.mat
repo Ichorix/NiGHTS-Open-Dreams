@@ -50,9 +50,12 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _EmissionOn: 1
+    - _AO: 1
+    - _EmissionOn: 0
+    - _Metallic: 1
     - _Power: 2
     - _QueueControl: 0
     - _QueueOffset: 0
+    - _Smoothness: 1
     m_Colors: []
   m_BuildTextureStacks: []
