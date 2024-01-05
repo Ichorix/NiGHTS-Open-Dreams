@@ -40,7 +40,7 @@ MonoBehaviour:
   TurningMultiplier: 1
   isMoving: 0
   isBoosting: 0
-  runBoostAttempt: 0
+  runBoostAttempt: 1
   BoostAttempt: 0
   cameraPlayerBound: 1
   isLevelPlayer: 0
