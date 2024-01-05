@@ -3891,7 +3891,17 @@ ModelImporter:
   - first:
       74: -8735833712626481887
     second: Sphere.035|SphereAction.002
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Blue
+    second: {fileID: 2100000, guid: 771d07f4f9f863040b4ec5606eaaf570, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Yellow
+    second: {fileID: 2100000, guid: 39070026179921745aa49e123490f5e1, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

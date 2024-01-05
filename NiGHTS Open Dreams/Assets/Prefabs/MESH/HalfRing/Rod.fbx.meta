@@ -30,7 +30,17 @@ ModelImporter:
   - first:
       74: 831165971251596384
     second: Sphere.003|Sphere.001Action.003
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BigCircle
+    second: {fileID: 2100000, guid: 20a6cfa30677ca44aa74de40379bfd53, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Rod
+    second: {fileID: 2100000, guid: d1863615376ec814b89e31fecc243ac3, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

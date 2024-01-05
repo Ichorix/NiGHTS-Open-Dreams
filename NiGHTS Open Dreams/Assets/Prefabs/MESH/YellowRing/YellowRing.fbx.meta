@@ -1731,7 +1731,12 @@ ModelImporter:
   - first:
       74: -2747110046601270179
     second: Sphere.023|SphereAction.002
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material
+    second: {fileID: 2100000, guid: 39070026179921745aa49e123490f5e1, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

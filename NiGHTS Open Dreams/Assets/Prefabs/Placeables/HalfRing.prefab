@@ -272,6 +272,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rod
       objectReference: {fileID: 0}
+    - target: {fileID: 7202271454713460447, guid: 8cffc194914abd24e9049f4469afb152, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: d1863615376ec814b89e31fecc243ac3, type: 2}
+    - target: {fileID: 8100320773420232829, guid: 8cffc194914abd24e9049f4469afb152, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 20a6cfa30677ca44aa74de40379bfd53, type: 2}
+    - target: {fileID: 8730303016566787287, guid: 8cffc194914abd24e9049f4469afb152, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 20a6cfa30677ca44aa74de40379bfd53, type: 2}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 8cffc194914abd24e9049f4469afb152, type: 3}
@@ -409,19 +421,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &4496968900609880647
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8088411369541674263}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a474a7cb6e914a14185c51a2e04edbd0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  data: {fileID: 11400000, guid: 6ce942f1fb5fd224ba7f911544f93bc6, type: 2}
 --- !u!114 &2972968201955975308
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -439,6 +438,19 @@ MonoBehaviour:
   YellowRingAnim: {fileID: 1096348142671146044}
   LOD: 0
   dontDisableCollider: 0
+--- !u!114 &4496968900609880647
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8088411369541674263}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a474a7cb6e914a14185c51a2e04edbd0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data: {fileID: 11400000, guid: 6ce942f1fb5fd224ba7f911544f93bc6, type: 2}
 --- !u!4 &8895770235935883181 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 16f12ff381dbca94f8d23f2a4bcf25f9, type: 3}
