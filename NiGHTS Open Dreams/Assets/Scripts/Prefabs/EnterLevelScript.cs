@@ -154,7 +154,6 @@ public class EnterLevelScript : MonoBehaviour
     {
         for(int i = 0; i < ideyaCaptures.Length; i++)
         {
-            Debug.Log(i);
             ideyaCaptures[i].ReturnMyIdeya();
         }
     }
