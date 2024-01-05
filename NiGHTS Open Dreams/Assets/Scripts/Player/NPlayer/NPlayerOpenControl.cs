@@ -239,7 +239,7 @@ public class NPlayerOpenControl : MonoBehaviour
 
             t += Time.deltaTime * _stats.recenterSpeed;
             transform.rotation = Quaternion.Slerp(fromRotation, toRotation, t);
-            yield return null;
+            yield return null; // For some reason its faster on higher framerates, uh boo hoo
         }
     }
 
