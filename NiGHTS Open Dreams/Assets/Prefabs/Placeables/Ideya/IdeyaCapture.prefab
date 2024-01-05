@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 2501911971593670228}
   - component: {fileID: 4535362083584943098}
   - component: {fileID: 3827620658461274236}
-  - component: {fileID: 3811344534862842089}
   - component: {fileID: 2608003999307839597}
   m_Layer: 0
   m_Name: IdeyaCapture
@@ -64,25 +63,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 6.6666
   m_Center: {x: 0, y: 3.57, z: 0}
---- !u!114 &3811344534862842089
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3022833451512567022}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cc8b8ebeb6360074f82cc1bbb2a52900, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  chipReq: 50
-  thisPlayer: {fileID: 0}
-  Lplayer: {fileID: 0}
-  ideya: {fileID: 0}
-  ideyaNum: 0
-  blueChipMat: {fileID: 2100000, guid: b3acc88ebb77dca45996f59a6234fd1f, type: 2}
-  palace: {fileID: 0}
 --- !u!114 &2608003999307839597
 MonoBehaviour:
   m_ObjectHideFlags: 0
