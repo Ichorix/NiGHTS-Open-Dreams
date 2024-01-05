@@ -32,7 +32,7 @@ Transform:
   - {fileID: 4454295892830020213}
   - {fileID: 3503141979139158329}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7756157988657451009
 MonoBehaviour:
@@ -61,7 +61,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3464252980602988072, guid: de9caa586be88c544ae3db63168cb2ae, type: 3}
       propertyPath: m_Name
-      value: Ring
+      value: YellowRing
       objectReference: {fileID: 0}
     - target: {fileID: 4276360363170970770, guid: de9caa586be88c544ae3db63168cb2ae, type: 3}
       propertyPath: m_RootOrder
@@ -136,7 +136,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3464252980602988072, guid: de9caa586be88c544ae3db63168cb2ae, type: 3}
       propertyPath: m_Name
-      value: Ring (1)
+      value: YellowRing (1)
       objectReference: {fileID: 0}
     - target: {fileID: 4276360363170970770, guid: de9caa586be88c544ae3db63168cb2ae, type: 3}
       propertyPath: m_RootOrder
