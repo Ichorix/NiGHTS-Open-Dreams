@@ -3,6 +3,7 @@ Open Source NiGHTS Unity Project, cleaned up for ease of navigation.
 Comes with Drag-And-Drop Player and Prefabs to build your own levels.
 Original Island left as an example to show how to use the scripts.
 
+## Project Information
 The Unity Project is made for Editor Version 2022.1.14f1 with the Universal Render Pipeline, and has Cinemachine, TextMeshPro, Shader Graph, Visual Effect Graph, and ProBuilder already installed.
 The project also comes with Sebastian Lague's [Bézier Path Creator](https://assetstore.unity.com/packages/tools/utilities/b-zier-path-creator-136082), Dinopunch's [Living Birds](https://assetstore.unity.com/packages/3d/characters/animals/birds/living-birds-15649), NullSave's [Controller Icon Pack](https://assetstore.unity.com/packages/2d/gui/icons/controller-icon-pack-128505), and BG Tools' [PlayerPrefs Editor](https://assetstore.unity.com/packages/tools/utilities/playerprefs-editor-167903) stored in the [Imported](https://github.com/Ichorix/NiGHTS-Open-Dreams/tree/0d3ee7d95afbddf83fd5990d3e7110ae56489313/NiGHTS%20Open%20Dreams/Assets/Imported) folder. Within the Imported folder, assets from various packages have been sorted into appropriate [Foliage](https://github.com/Ichorix/NiGHTS-Open-Dreams/tree/e57788342cd6cfb90495815e7add06aec4baa610/NiGHTS%20Open%20Dreams/Assets/Imported/Prefabs/!Foliage) and [Rocks](https://github.com/Ichorix/NiGHTS-Open-Dreams/tree/e57788342cd6cfb90495815e7add06aec4baa610/NiGHTS%20Open%20Dreams/Assets/Imported/Prefabs/!Rocks) folders.
 
@@ -25,10 +26,11 @@ Textures used:
 * [Seamless Texture 5](https://www.deviantart.com/agf81/art/Seamless-Texture-5-160257878) 
 
 
+## Known Issues
+* Errors will display in the console whenever a custom UI Shader is shown. This is because the method that is used to get custom shaders onto Unity UI is entirely unintentional and really isn't supposed to work in the first place but I managed to figure out this workaround. To view these shaders, follow the path [NiGHTS Open Dreams/Assets/UI/Shaders](https://github.com/Ichorix/NiGHTS-Open-Dreams/tree/fdda19e59a698df3ddebd6e28a630cbff19ab6f5/NiGHTS%20Open%20Dreams/Assets/UI/Shaders)
+* 2
 
-
-
-TODO:
+### TODO:
 Swap .blend meshes with associated .fbx;
   Rings
   Blue Chips
