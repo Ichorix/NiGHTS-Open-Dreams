@@ -9,6 +9,7 @@ public class NPlayerAnimations : MonoBehaviour
     
     [SerializeField] private Animator _animator;
     [SerializeField] private Animator _skinAnimator;
+    [SerializeField] private NPlayerProceduralAnimations legTarget;
     [SerializeField] private NPlayerScriptableObject _stats;
     //Public so that they can be cleared by the paraloop
     public ParticleSystem rightHandSparkles;
@@ -73,6 +74,7 @@ public class NPlayerAnimations : MonoBehaviour
                 boostAnim = _stats.isBoosting;
             else if(_stats.BoostAttempt)
                 boostAnim = !Grounded;
+
             rightHandSparkles.enableEmission = true;
             leftHandSparkles.enableEmission = true;
         }
@@ -94,6 +96,7 @@ public class NPlayerAnimations : MonoBehaviour
     {
         _animator.SetBool("isBoosting", boostAnim);
         _skinAnimator.SetBool("isBoosting", boostAnim);
+        legTarget.animationSpeed = boostAnim ? 100 : 5;
         if(!boostOverride)
         {
             boostParticles.enableEmission = boostAnim;

@@ -3403,17 +3403,17 @@ TrailRenderer:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0
+        time: 0.03217013
         value: 0
-        inSlope: 3.3572116
-        outSlope: 3.3572116
+        inSlope: 7.5431676
+        outSlope: 7.5431676
         tangentMode: 0
         weightedMode: 0
         inWeight: 0
-        outWeight: 1
+        outWeight: 0.38771808
       - serializedVersion: 3
-        time: 0.029787287
-        value: 0.48979777
+        time: 0.11289428
+        value: 0.39342326
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -3421,8 +3421,8 @@ TrailRenderer:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.12340455
-        value: 0.41836953
+        time: 0.1823874
+        value: 0.32800698
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -3561,6 +3561,7 @@ MonoBehaviour:
   levelRotations: {fileID: 0}
   _animator: {fileID: 387610649}
   _skinAnimator: {fileID: 1268621606}
+  legTarget: {fileID: 435539327}
   _stats: {fileID: 11400000, guid: 15afd228b40b218489c2a975b000e97f, type: 2}
   rightHandSparkles: {fileID: 5358885769098260474}
   leftHandSparkles: {fileID: 7875944462761427168}
@@ -13275,6 +13276,7 @@ MonoBehaviour:
   levelRotations: {fileID: 1432374146}
   _animator: {fileID: 1432374144}
   _skinAnimator: {fileID: 947090821}
+  legTarget: {fileID: 838079380}
   _stats: {fileID: 11400000, guid: 15afd228b40b218489c2a975b000e97f, type: 2}
   rightHandSparkles: {fileID: 1527543786}
   leftHandSparkles: {fileID: 1511021656}
@@ -13459,17 +13461,17 @@ TrailRenderer:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0
+        time: 0.03217013
         value: 0
-        inSlope: 3.3572116
-        outSlope: 3.3572116
+        inSlope: 7.5431676
+        outSlope: 7.5431676
         tangentMode: 0
         weightedMode: 0
         inWeight: 0
-        outWeight: 1
+        outWeight: 0.38771808
       - serializedVersion: 3
-        time: 0.029787287
-        value: 0.48979777
+        time: 0.11289428
+        value: 0.39342326
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -13477,8 +13479,8 @@ TrailRenderer:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.12340455
-        value: 0.41836953
+        time: 0.1823874
+        value: 0.32800698
         inSlope: 0
         outSlope: 0
         tangentMode: 0
