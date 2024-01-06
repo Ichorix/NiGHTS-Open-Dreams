@@ -154,16 +154,9 @@ public class NPlayerLevelFollow : MonoBehaviour
         pathPosition = currentPath.path.GetPointAtDistance(distanceTravelled, endOfPathInstruction);
         pathRotation = currentPath.path.GetRotationAtDistance(distanceTravelled, endOfPathInstruction).eulerAngles;
 
-        //float xMovement = _stats.MoveDirection.x * _speed * _playerStates.UsableDeltaTime;
         float yMovement = _stats.MoveDirection.y * _speed * _playerStates.UsableDeltaTime;
-        Debug.Log("Horizontal: " + _stats.MoveDirection.x * _speed * _playerStates.UsableDeltaTime + " Vertical: " + _stats.MoveDirection.y * _speed * _playerStates.UsableDeltaTime);
         transform.position = new Vector3(pathPosition.x, transform.position.y + yMovement, pathPosition.z);
-
-        //rigidbody.MovePosition(new Vector3(pathPosition.x, transform.position.y + yMovement, pathPosition.z));
-        //rigidbody.AddForce(Vector3.up * _stats.MoveDirection.y * _speed, ForceMode.VelocityChange);
-        // Something similar to the old vertical method using rigidbody forces to check for collisions
-        // Makes movement inconsistent though and since there is a new ground check in NPlayerCollisionController I think this just makes it a bit better with controller.
-        // Keyboard movement is snappy now as a consequence
+        
 
         transform.eulerAngles = new Vector3(0, pathRotation.y, 0);
 
