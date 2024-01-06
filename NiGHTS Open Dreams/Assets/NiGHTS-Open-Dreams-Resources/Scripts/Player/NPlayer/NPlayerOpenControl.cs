@@ -234,11 +234,20 @@ public class NPlayerOpenControl : MonoBehaviour
 
         while(t < 1)
         {
-            Quaternion fromRotation = transform.rotation;
-            Quaternion toRotation = new Quaternion(0, transform.rotation.y, 0, transform.rotation.w);
+            if (!_animations.Grounded)
+            {
+                Quaternion fromRotation = transform.rotation;
+                Quaternion toRotation = new Quaternion(0, transform.rotation.y, 0, transform.rotation.w);
+                transform.rotation = Quaternion.Slerp(fromRotation, toRotation, t);
+            }
+            else
+            {
+                // Copied Directly from ReAdjustToNormals()
+                Vector3 normalForward = Vector3.Cross(mostRecentGroundNormal, -transform.right);
+                transform.forward = Vector3.Slerp(transform.forward, normalForward, t);
+            }
 
             t += Time.deltaTime * _stats.recenterSpeed;
-            transform.rotation = Quaternion.Slerp(fromRotation, toRotation, t);
             yield return null; // For some reason its faster on higher framerates, uh boo hoo
         }
     }
