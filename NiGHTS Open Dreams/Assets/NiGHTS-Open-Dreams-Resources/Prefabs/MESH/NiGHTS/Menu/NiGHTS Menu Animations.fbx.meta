@@ -12,7 +12,37 @@ ModelImporter:
   - first:
       74: 4864456487366326693
     second: Armature|Action.002
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pl_nbody512_w_tga
+    second: {fileID: 2100000, guid: 6e4f0ad77b7e96949833cacbb91d7a00, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pl_neye128_w_tga
+    second: {fileID: 2100000, guid: ef0ecc022ab44e94e972ed033f9b78ff, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pl_neyelash128_w_tga
+    second: {fileID: 2100000, guid: 52bb30e9870b14944a6f77f4a7974625, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pl_ngem_blue16_w_tga
+    second: {fileID: 2100000, guid: f06a11c3b69779348918064f370c7dfe, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pl_ngem_red32_w_tga
+    second: {fileID: 2100000, guid: 43ba79b75a27a1d4ca7eafd694947194, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pl_nheadE256_w_tga
+    second: {fileID: 2100000, guid: 2f9602548ee067548a741ad42399d398, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
