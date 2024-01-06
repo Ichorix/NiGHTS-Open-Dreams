@@ -30,7 +30,7 @@ public class SAGESPLASH : MonoBehaviour
         while(!operation.isDone)
         {
             float progress = operation.progress; // 0 - 1
-            percentageText.text = progress * 100 + "%";
+            percentageText.text = progress.ToString("p0"); // Formats as percentage with no decimals
             loadingBar.value = Mathf.Clamp(progress * 16, 1, 16);
             yield return null;
         }
