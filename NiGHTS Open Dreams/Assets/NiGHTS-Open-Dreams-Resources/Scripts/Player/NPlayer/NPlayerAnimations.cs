@@ -116,12 +116,17 @@ public class NPlayerAnimations : MonoBehaviour
     {
         boostingSoundsActive = true;
         boostingAudioSource.volume = 1f;
+        // Plays the boosting start sound
         boostingAudioSource.PlayOneShot(boostingStartSFX, 1f);
+        // Then when the boosting start sound is over, play the audioSource
+        // This will play the BoostContinue sound and loop it since that is what is defined in the audioSource
         boostingAudioSource.PlayDelayed(boostingStartSFX.length);
+        
+        // So long as you are boosting, keep doing that
         while(boostAnim)
-        {
             yield return null;
-        }
+
+        // When you stop boosting then stop the sound effects and play the boostEnd sound
         boostingSoundsActive = false;
         boostingAudioSource.Stop();
         boostingAudioSource.PlayOneShot(boostingEndSFX, 1f);
