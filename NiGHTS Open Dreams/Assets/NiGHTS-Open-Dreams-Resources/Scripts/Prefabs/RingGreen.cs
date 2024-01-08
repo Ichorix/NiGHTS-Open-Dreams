@@ -9,6 +9,8 @@ public class RingGreen : MonoBehaviour
     public Animator RingAnim;
     public ParticleSystem Front;
     public ParticleSystem Back;
+
+    // I dont feel like fixing these .enableEmission, but if you feel so inclined check out NPlayerAnimations
     void Start()
     {
         isCollected = false;
