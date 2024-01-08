@@ -51,7 +51,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _AO: 1
-    - _EmissionOn: 0
+    - _EmissionOn: 1
     - _Metallic: 1
     - _Power: 2
     - _QueueControl: 0
