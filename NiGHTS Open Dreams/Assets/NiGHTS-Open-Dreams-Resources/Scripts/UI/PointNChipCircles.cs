@@ -6,22 +6,21 @@ using UnityEngine.UI;
 public class PointNChipCircles : MonoBehaviour
 {
     [SerializeField] private bool externalDeath = false;
+    [SerializeField] private float speed;
     private float t;
-    public float speed;
     private Vector3 center = Vector3.zero;
-    public Vector3 Destination = new Vector3(-1200, 500, 0);
+    [SerializeField] private Vector3 Destination = new Vector3(-1200, 500, 0); // Says where the item needs to go to. -1200, 500 is top left for the chip item. 
 
     private float xPos;
     private float yPos;
 
-    public AnimationCurve middleCurve;
-    public AnimationCurve posVariation; //y pos x neg
-    public AnimationCurve negVariation; //y neg x pos
-    private float variationMult; // input as t
+    // See the animation curves in the inspector
+    [SerializeField] private AnimationCurve posVariation;
+    [SerializeField] private AnimationCurve negVariation;
+    private float variationMult;
 
     [Header("Point item instance Information")]
     [SerializeField] private float pulseSpeed;
-    public AnimationCurve pointColorBellCurve;
     public Material matInstance;
     public Sprite borderVariant;
     [SerializeField] Image borderReference;
@@ -29,6 +28,7 @@ public class PointNChipCircles : MonoBehaviour
 
     void Start()
     {
+        // Gets a random -1 to 1 value with one decimal to determine if it should me closer to the positive variation, negative variation, or right in the middle
         variationMult = Random.Range(-10, 10) * 0.1f;
         borderReference.sprite = borderVariant;
     }
@@ -47,11 +47,12 @@ public class PointNChipCircles : MonoBehaviour
 
     void PositionCalculations()
     {
-        xPos = Mathf.Lerp(center.x, Destination.x, middleCurve.Evaluate(t));
-        yPos = Mathf.Lerp(center.y, Destination.y, middleCurve.Evaluate(t));
+        xPos = Mathf.Lerp(center.x, Destination.x, Mathf.Lerp(0, 1, t));
+        yPos = Mathf.Lerp(center.y, Destination.y, Mathf.Lerp(0, 1, t));
 
         if(variationMult > 0)
         {
+            // Var for variation rather than variable in this case
             float xVar = Mathf.Lerp(center.x, Destination.x, negVariation.Evaluate(t));
             float yVar = Mathf.Lerp(center.y, Destination.y, posVariation.Evaluate(t));
 
@@ -71,7 +72,7 @@ public class PointNChipCircles : MonoBehaviour
     }
     void ColorCalculations()
     {
-        matInstance.SetFloat("_TimeOffset", pointColorBellCurve.Evaluate(t * pulseSpeed));
+        matInstance.SetFloat("_TimeOffset", Mathf.Abs(Mathf.Sin(Time.time * pulseSpeed)));
         image.material = matInstance;
     }
 }
