@@ -20,6 +20,7 @@ public class PointNChipCircles : MonoBehaviour
     private float variationMult;
 
     [Header("Point item instance Information")]
+    [Tooltip("No idea the units these are in anymore. Actual speed is Time.time * t (controlled by speed) * pulseSpeed")]
     [SerializeField] private float pulseSpeed;
     public Material matInstance;
     public Sprite borderVariant;
@@ -72,7 +73,7 @@ public class PointNChipCircles : MonoBehaviour
     }
     void ColorCalculations()
     {
-        matInstance.SetFloat("_TimeOffset", Mathf.Abs(Mathf.Sin(Time.time * pulseSpeed)));
+        matInstance.SetFloat("_TimeOffset", Mathf.Abs(Mathf.Sin(Time.time * t * pulseSpeed)));
         image.material = matInstance;
     }
 }

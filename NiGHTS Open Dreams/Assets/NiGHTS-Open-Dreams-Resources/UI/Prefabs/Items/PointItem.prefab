@@ -94,30 +94,6 @@ MonoBehaviour:
   externalDeath: 0
   speed: 0.8
   Destination: {x: 1200, y: 500, z: 0}
-  middleCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 1
-      outSlope: 1
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 1
-      outSlope: 1
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
   posVariation:
     serializedVersion: 2
     m_Curve:
@@ -166,7 +142,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  pulseSpeed: 5
+  pulseSpeed: 0.1
   matInstance: {fileID: 0}
   borderVariant: {fileID: 0}
   borderReference: {fileID: 7136916354652579461}
