@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.XR;
 
 public class NPlayerAnimations : MonoBehaviour
 {
@@ -72,6 +73,9 @@ public class NPlayerAnimations : MonoBehaviour
 
     private void BoostStateManagement()
     {
+        var rHand = rightHandSparkles.emission;
+        var lHand = leftHandSparkles.emission;
+
         if(_stats.isMoving)
         {
             boostAnim = false;
@@ -80,14 +84,14 @@ public class NPlayerAnimations : MonoBehaviour
             else if(_stats.BoostAttempt)
                 boostAnim = !Grounded;
 
-            rightHandSparkles.enableEmission = true;
-            leftHandSparkles.enableEmission = true;
+            rHand.enabled = true;
+            lHand.enabled = true;
         }
         else
         {
             boostAnim = false;
-            rightHandSparkles.enableEmission = false;
-            leftHandSparkles.enableEmission = false;
+            rHand.enabled = false;
+            lHand.enabled = false;
         }
     }
 
@@ -99,12 +103,13 @@ public class NPlayerAnimations : MonoBehaviour
     }
     private void BoostingAnimations()
     {
+        var boostStars = boostParticles.emission;
         _animator.SetBool("isBoosting", boostAnim);
         _skinAnimator.SetBool("isBoosting", boostAnim);
         legTarget.animationSpeed = boostAnim ? 100 : 5;
         if(!boostOverride)
         {
-            boostParticles.enableEmission = boostAnim;
+            boostStars.enabled = boostAnim;
             boostTrail.emitting = boostAnim;
 
             // Sounds placed here to not play when boost attempting
@@ -135,7 +140,8 @@ public class NPlayerAnimations : MonoBehaviour
 
     private void SpeedWindManagement()
     {
-        speedWindParticles.enableEmission = openControl._speed > speedWindSpeedThreshold;
+        var windFX = speedWindParticles.emission;
+        windFX.enabled = openControl._speed > speedWindSpeedThreshold;
     }
 
     private void NPlayerOpenControl_TurningAnimations()
