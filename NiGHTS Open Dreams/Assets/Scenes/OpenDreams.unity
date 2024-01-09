@@ -190,63 +190,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &26531946
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 26531948}
-  - component: {fileID: 26531947}
-  m_Layer: 0
-  m_Name: Digger Master
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &26531947
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 26531946}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 521f8e3d06ab44cadaed6ad179732778, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  chunkSize: 33
-  sceneDataFolder: TerrainMaker
-  screenRelativeTransitionHeightLod0: 0.1
-  screenRelativeTransitionHeightLod1: 0.05
-  colliderLodIndex: 0
-  createLODs: 1
-  showUnderlyingObjects: 0
-  resolutionMult: 1
-  voxelHeight: 1
-  autoVoxelHeight: 0
-  layer: 0
-  chunksTag: Untagged
-  enableOcclusionCulling: 0
---- !u!4 &26531948
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 26531946}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1033667807}
-  m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &68431599
 GameObject:
   m_ObjectHideFlags: 0
@@ -4480,88 +4423,6 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 278436177}
   m_SourcePrefab: {fileID: 100100000, guid: 6c18aa9b053414f8c9d8f507cdc60faf, type: 3}
---- !u!1 &878502494
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 878502495}
-  - component: {fileID: 878502497}
-  - component: {fileID: 878502496}
-  m_Layer: 0
-  m_Name: Digger
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 2147483647
-  m_IsActive: 1
---- !u!4 &878502495
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 878502494}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 2102157372}
-  m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &878502496
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 878502494}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c12efbee81634dd78fa2cb2ab5a26c2e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  digger: {fileID: 878502497}
---- !u!114 &878502497
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 878502494}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 34d2e180125d4ac3a3e845f480befdfb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  master: {fileID: 26531947}
-  guid: 1332f88070570ff43b1203968fd8b08c
-  version: 2
-  basePathData: Assets\DiggerData\Scenes\TerrainMaker\1332f88070570ff43b1203968fd8b08c
-  cutter: {fileID: 878502496}
-  heightmapScale: {x: 1.953125, y: 1, z: 1.953125}
-  holeMapScale: {x: 1.953125, y: 1, z: 1.953125}
-  Terrain: {fileID: 2102157371}
-  Materials:
-  - {fileID: 2100000, guid: bc8fef9b9b353e5448d0d456193d525a, type: 2}
-  - {fileID: 2100000, guid: 460365b524ed3c545b8943edf9d36ed8, type: 2}
-  materialType: 2
-  terrainTextures:
-  - {fileID: 2800000, guid: 5e1acf362611957488060eee4178b3f3, type: 3}
-  - {fileID: 2800000, guid: 4eadcc55dbc734dd0a3dc14999a572cc, type: 3}
-  - {fileID: 2800000, guid: 9875bf7345d4ac04ab35f3b9ed63a954, type: 3}
-  - {fileID: 2800000, guid: 197149ea2860411408a82a7da3570ccc, type: 3}
-  - {fileID: 2800000, guid: 5e1acf362611957488060eee4178b3f3, type: 3}
-  chunksInStreamingAssets: []
-  persistenceSubPath: 
-  ShowDebug: 0
-  onChunkObjectCreated:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!1001 &904528081
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5662,7 +5523,6 @@ Transform:
   - {fileID: 554605807}
   - {fileID: 1002602119}
   - {fileID: 2102157372}
-  - {fileID: 26531948}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -12640,7 +12500,7 @@ Terrain:
   m_DrawTreesAndFoliage: 1
   m_StaticShadowCaster: 0
   m_ReflectionProbeUsage: 1
-  m_MaterialTemplate: {fileID: 2100000, guid: 41b9a075e9dd72d4e9b60f6201513704, type: 2}
+  m_MaterialTemplate: {fileID: 2100000, guid: 594ea882c5a793440b60ff72d896021e, type: 2}
   m_BakeLightProbesForTrees: 1
   m_PreserveTreePrototypeLayers: 0
   m_DeringLightProbesForTrees: 1
@@ -12661,7 +12521,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 878502495}
   - {fileID: 1329896756}
   - {fileID: 543450652379131115}
   - {fileID: 380269107}
