@@ -23,7 +23,7 @@ These packages are
 
 Some texture assets used from [Bumper Engine](https://gamejolt.com/games/BumperEngine19GT/506351) and [Digger - Terrain caves & overhangs](https://assetstore.unity.com/packages/tools/terrain/digger-terrain-caves-overhangs-135178)
 
-Since [Digger - Terrain caves & overhangs](https://assetstore.unity.com/packages/tools/terrain/digger-terrain-caves-overhangs-135178) is a paid package, it had to be removed from the project.
+Since [Digger - Terrain caves & overhangs](https://assetstore.unity.com/packages/tools/terrain/digger-terrain-caves-overhangs-135178) is a paid package (even though I was using the now unavailable LITE version), I have removed it from the project.
 The result is that the edges of the island will look stretched now without its Triplanar terrain shaders.
 Some terrain texture assets used came from the package too, but those textures orginated from DeviantArt User [AGF81](https://www.deviantart.com/agf81) and are provided with the Creative Commons Attribution 3.0 License.
 
