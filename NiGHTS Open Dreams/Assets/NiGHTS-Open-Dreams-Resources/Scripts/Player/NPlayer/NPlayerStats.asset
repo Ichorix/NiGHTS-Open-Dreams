@@ -26,7 +26,7 @@ MonoBehaviour:
   boostingSpeedLevel: 28
   boostAttemptSpeedLevel: 28
   levelTurningSpeed: 7
-  levelBoostingTurningSpeed: 5
+  levelBoostingTurningSpeed: 1
   flipSpeed: 2
   normalAccelerationRate: 20
   boostingAccelerationRate: 30
