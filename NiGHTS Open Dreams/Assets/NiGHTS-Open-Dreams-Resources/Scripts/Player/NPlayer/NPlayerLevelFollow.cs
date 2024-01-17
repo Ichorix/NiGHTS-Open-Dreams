@@ -99,6 +99,7 @@ public class NPlayerLevelFollow : MonoBehaviour
     [SerializeField] private bool boostAttemptCooldown;
     [SerializeField] private float _speed;
     public bool specialBehaviourActive;
+    public Vector2 rotationDirection;
 
 
     void Start()    
@@ -142,25 +143,34 @@ public class NPlayerLevelFollow : MonoBehaviour
 
     void Update()
     {
+        TurnPlayer(); // Deals with slowing the turning of the player
         SpeedLogic(); // Mostly copied from NPlayerOpenControl.MovePlayer()
         MovePlayer(); // The unique movement code for the level player
         BoostStuff(); // Boost Stuff
         LevelLogic(); // Counting time and logic for when Time is up
     }
+    void TurnPlayer()
+    {
+        float rotationSpeed = canBoost ? _stats.levelBoostingTurningSpeed : _stats.levelTurningSpeed;
+        float step = rotationSpeed * Time.deltaTime;
+        rotationDirection = Vector2.MoveTowards(rotationDirection, _stats.MoveDirection, step);
+        if (_stats.MoveDirection != Vector2.zero)
+            rotationDirection = rotationDirection.normalized;
+    }
     void MovePlayer()
     {
-        distanceTravelled += _stats.MoveDirection.x * _speed * _playerStates.UsableDeltaTime;
+        distanceTravelled += rotationDirection.x * _speed * _playerStates.UsableDeltaTime;
 
         pathPosition = currentPath.path.GetPointAtDistance(distanceTravelled, endOfPathInstruction);
         pathRotation = currentPath.path.GetRotationAtDistance(distanceTravelled, endOfPathInstruction).eulerAngles;
 
-        float yMovement = _stats.MoveDirection.y * _speed * _playerStates.UsableDeltaTime;
+        float yMovement = rotationDirection.y * _speed * _playerStates.UsableDeltaTime;
         transform.position = new Vector3(pathPosition.x, transform.position.y + yMovement, pathPosition.z);
         
 
         transform.eulerAngles = new Vector3(0, pathRotation.y, 0);
 
-        if(new Vector2(_stats.MoveDirection.x, _stats.MoveDirection.y) != Vector2.zero)
+        if(new Vector2(rotationDirection.x, rotationDirection.y) != Vector2.zero)
             _stats.isMoving = true;
         else _stats.isMoving = false;
 

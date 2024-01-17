@@ -39,6 +39,10 @@ public class NPlayerScriptableObject : ScriptableObject
     public float boostingSpeedLevel = 28;
     [Tooltip("The speed that the player will jump to when they boost while having no BoostGauge"), Range(0, 100)]
     public float boostAttemptSpeedLevel = 28;
+    [Tooltip("The speed that the player will rotate at"), Range(0, 100)]
+    public float levelTurningSpeed = 5;
+    [Tooltip("The speed that the player will rotate at when boosting"), Range(0, 100)]
+    public float levelBoostingTurningSpeed = 3;
     [Tooltip("The speed that the player will flip to upright position in the Level"), Range(0, 100)]
     public float flipSpeed = 2;
     

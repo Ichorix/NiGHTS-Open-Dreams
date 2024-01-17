@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.GridBrushBase;
 
 public class NPlayerLevelRotations : MonoBehaviour
 {
     public NPlayerScriptableObject _stats;
+    public NPlayerLevelFollow levelFollow;
 
     private Vector3 playerRotation;
     private bool isBackwards;
@@ -24,13 +26,13 @@ public class NPlayerLevelRotations : MonoBehaviour
     {
         // MoveDirection.x when positive gives the correct values. When negative it gives some funky results, so I flip it later depending on if you are moving backwards or not.
         // MoveDirection.y works fine so it doesnt need any special treatment
-        Vector3 lookDirection = new Vector3(Mathf.Abs(_stats.MoveDirection.x), _stats.MoveDirection.y, 0).normalized;
+        Vector3 lookDirection = new Vector3(Mathf.Abs(levelFollow.rotationDirection.x), levelFollow.rotationDirection.y, 0).normalized;
         transform.forward += lookDirection * 5; // Whatever dark magic I used, this fixes it from being close to 45 and -45 to now be closer to 90 and -90
         
         
-        if(_stats.MoveDirection.x > 0) // Checks if moving forwards
+        if(levelFollow.rotationDirection.x > 0) // Checks if moving forwards
             isBackwards = false;
-        else if(_stats.MoveDirection.x < 0) // Checks if moving backwards
+        else if(levelFollow.rotationDirection.x < 0) // Checks if moving backwards
             isBackwards = true;
         // Keeps value when not moving so that the player will look either left or right accordingly, rather than snapping to forward-facing like it used to
 

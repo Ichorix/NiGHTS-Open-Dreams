@@ -1167,6 +1167,8 @@ MonoBehaviour:
   boostAttemptCooldown: 0
   _speed: 0
   specialBehaviourActive: 0
+  rotationSpeed: 0
+  rotationDirection: {x: 0, y: 0}
 --- !u!114 &9167739940866995031
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3716,35 +3718,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &9167739939695649381
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8357329844212676030}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a925cf615debec48bd35e89901518d7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  openControl: {fileID: 0}
-  levelRotations: {fileID: 9167739939695649433}
-  _animator: {fileID: 9167739939695649435}
-  _skinAnimator: {fileID: 9167739941523512478}
-  legTarget: {fileID: 9167739941364185743}
-  _stats: {fileID: 11400000, guid: 15afd228b40b218489c2a975b000e97f, type: 2}
-  rightHandSparkles: {fileID: 3847425183582249304}
-  leftHandSparkles: {fileID: 1330430121930722882}
-  boostTrail: {fileID: 9167739939695649434}
-  boostParticles: {fileID: 2386680884837469524}
-  speedWindParticles: {fileID: 0}
-  speedWindSpeedThreshold: 30
-  turningAnimationThreshold: 0.6
-  Grounded: 0
-  boostingAudioSource: {fileID: 9167739939695649438}
-  boostingStartSFX: {fileID: 8300000, guid: b4eb1cbefecc4994f8ff645ceca11525, type: 3}
-  boostingEndSFX: {fileID: 8300000, guid: 9b13e7d8ed4078d44bfacc37afafe964, type: 3}
 --- !u!114 &9167739939695649380
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3847,7 +3820,7 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &9167739939695649433
+--- !u!114 &9167739939695649381
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3856,13 +3829,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 8357329844212676030}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fea85fd5d61f9544194a2b3d697f6f3d, type: 3}
+  m_Script: {fileID: 11500000, guid: 9a925cf615debec48bd35e89901518d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  openControl: {fileID: 0}
+  levelRotations: {fileID: 9167739939695649433}
+  _animator: {fileID: 9167739939695649435}
+  _skinAnimator: {fileID: 9167739941523512478}
+  legTarget: {fileID: 9167739941364185743}
   _stats: {fileID: 11400000, guid: 15afd228b40b218489c2a975b000e97f, type: 2}
-  upsideDownTime: 0
-  flipTimeThreshold: 1
-  flipping: 0
+  rightHandSparkles: {fileID: 3847425183582249304}
+  leftHandSparkles: {fileID: 1330430121930722882}
+  boostTrail: {fileID: 9167739939695649434}
+  boostParticles: {fileID: 2386680884837469524}
+  speedWindParticles: {fileID: 0}
+  speedWindSpeedThreshold: 30
+  turningAnimationThreshold: 0.6
+  Grounded: 0
+  boostingAudioSource: {fileID: 9167739939695649438}
+  boostingStartSFX: {fileID: 8300000, guid: b4eb1cbefecc4994f8ff645ceca11525, type: 3}
+  boostingEndSFX: {fileID: 8300000, guid: 9b13e7d8ed4078d44bfacc37afafe964, type: 3}
 --- !u!114 &9167739939695649432
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3879,6 +3865,23 @@ MonoBehaviour:
   - m_Rig: {fileID: 9167739939976337286}
     m_Active: 1
   m_Effectors: []
+--- !u!114 &9167739939695649433
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8357329844212676030}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fea85fd5d61f9544194a2b3d697f6f3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _stats: {fileID: 11400000, guid: 15afd228b40b218489c2a975b000e97f, type: 2}
+  levelFollow: {fileID: 9167739940866995030}
+  upsideDownTime: 0
+  flipTimeThreshold: 1
+  flipping: 0
 --- !u!114 &9167739939695649439
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4156,6 +4159,39 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &9167739941523512476
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8357329842880274740}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fff0960ef4ea6e04eac66b4a7fd2189d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RigLayers:
+  - m_Rig: {fileID: 9167739940901533439}
+    m_Active: 1
+  m_Effectors: []
+--- !u!114 &9167739941523512477
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8357329842880274740}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fea85fd5d61f9544194a2b3d697f6f3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _stats: {fileID: 11400000, guid: 15afd228b40b218489c2a975b000e97f, type: 2}
+  levelFollow: {fileID: 0}
+  upsideDownTime: 0
+  flipTimeThreshold: 1
+  flipping: 0
 --- !u!114 &9167739941523512479
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4182,38 +4218,6 @@ MonoBehaviour:
   - {fileID: 6602081760747285552}
   - {fileID: 6072589625779432238}
   - {fileID: 8138260881896150513}
---- !u!114 &9167739941523512477
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8357329842880274740}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fea85fd5d61f9544194a2b3d697f6f3d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _stats: {fileID: 11400000, guid: 15afd228b40b218489c2a975b000e97f, type: 2}
-  upsideDownTime: 0
-  flipTimeThreshold: 1
-  flipping: 0
---- !u!114 &9167739941523512476
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8357329842880274740}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fff0960ef4ea6e04eac66b4a7fd2189d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_RigLayers:
-  - m_Rig: {fileID: 9167739940901533439}
-    m_Active: 1
-  m_Effectors: []
 --- !u!4 &8696701131303566222 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 67357f3cb46c4764db0ee92f1e31e4df, type: 3}
