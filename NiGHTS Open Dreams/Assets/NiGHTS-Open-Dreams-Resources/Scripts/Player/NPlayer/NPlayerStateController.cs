@@ -5,74 +5,26 @@ using PathCreation;
 
 public class NPlayerStateController : MonoBehaviour
 {
-
-    [SerializeField] private bool gamePaused;
-    public bool GamePaused
-    {
-        get{ return gamePaused; }
-        set
-        {
-            gamePaused = value;
-                openControl._speed = 0;
-                openControl.enabled = !gamePaused;
-                ModalCanvas.SetActive(!gamePaused);
-                gameUI.SetActive(!gamePaused);
-                MainMenuUI.SetActive(gamePaused);
-                MainMenuCamera.SetActive(gamePaused);
-                _input._stats = gamePaused ? null : _stats;
-                AudioListener.pause = gamePaused;
-                MainMenuNiGHTS.SetBool("GameOn", !gamePaused);
-                MainMenuSkins.SetBool("GameOn", !gamePaused);
-                ResetStats();
-        }
-    }
+    public NPlayerMenuManager menuManager;
     public float UsableDeltaTime
     {
-        get{ return gamePaused ? 0 : Time.deltaTime; }
+        get{ return menuManager.GamePaused ? 0 : Time.deltaTime; }
     }
-
     public GameObject openPlayer;
-    private NPlayerOpenControl openControl;
+    [HideInInspector] public NPlayerOpenControl openControl;
     public GameObject levelPlayer;
-    private NPlayerLevelFollow levelFollow;
-    private Camera mainCamera;
-
-    [SerializeField] private GameObject MainMenuUI;
-    [SerializeField] private GameObject MainMenuCamera;
-    [SerializeField] private Animator MainMenuNiGHTS;
-    [SerializeField] private Animator MainMenuSkins;
-    [SerializeField] private GameObject ModalCanvas;
-    [SerializeField] private GameObject gameUI;
-    [SerializeField] private NPlayerInput _input;
-    [SerializeField] private NPlayerUI UIController;
-    [SerializeField] private NPlayerScriptableObject _stats;
-    [Space]
-    [Header("Skin Management")]
-    [SerializeField] private NPlayerSkinManager[] skinManagers;
-    [SerializeField] private int selectedSkin;
-    public int SetSkin
-    {
-        get
-        {
-            if(PlayerPrefs.HasKey("selectedSkin"))
-                selectedSkin = PlayerPrefs.GetInt("selectedSkin");
-            return selectedSkin;
-        }
-        set
-        {
-            selectedSkin = value;
-            PlayerPrefs.SetInt("selectedSkin", selectedSkin);
-            foreach(NPlayerSkinManager skinManager in skinManagers)
-                skinManager.SwitchSkins(selectedSkin);
-        }
-    }
+    [HideInInspector] public NPlayerLevelFollow levelFollow;
+    [HideInInspector] public Camera mainCamera;
+    
+    public NPlayerInput _input;
+    public NPlayerUI UIController;
+    public NPlayerScriptableObject _stats;
 
     void Awake()
     {
-        mainCamera = Camera.main;
         openControl = openPlayer.transform.GetChild(0).GetComponent<NPlayerOpenControl>();
         levelFollow = levelPlayer.transform.GetChild(0).GetComponent<NPlayerLevelFollow>();
-        GamePaused = GamePaused; // Sets the GamePaused state to whatever was defined in the inspector.
+        mainCamera = Camera.main;
     }
     void Start()
     {

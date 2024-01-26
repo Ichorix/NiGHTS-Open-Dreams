@@ -1167,7 +1167,6 @@ MonoBehaviour:
   boostAttemptCooldown: 0
   _speed: 0
   specialBehaviourActive: 0
-  rotationSpeed: 0
   rotationDirection: {x: 0, y: 0}
 --- !u!114 &9167739940866995031
 MonoBehaviour:
@@ -4109,6 +4108,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Skins Bundle
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 67357f3cb46c4764db0ee92f1e31e4df, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1743444141738233875, guid: 67357f3cb46c4764db0ee92f1e31e4df, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -4188,7 +4191,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _stats: {fileID: 11400000, guid: 15afd228b40b218489c2a975b000e97f, type: 2}
-  levelFollow: {fileID: 0}
+  levelFollow: {fileID: 9167739940866995030}
   upsideDownTime: 0
   flipTimeThreshold: 1
   flipping: 0

@@ -27,7 +27,7 @@ public class OptionsManager : MonoBehaviour
     [SerializeField] private TMPro.TMP_Dropdown skinsDropdown;
     Resolution[] resolutions;
 
-    public NPlayerStateController stateControl;
+    public NPlayerMasterSkinManager masterSkinManager;
     void Start()
     {
         Debug.Log("Options Start");
@@ -189,6 +189,6 @@ public class OptionsManager : MonoBehaviour
     public void SetSkin(int index)
     {
         Debug.Log(index);
-        stateControl.SetSkin = index;
+        masterSkinManager.SetSkin = index;
     }
 }

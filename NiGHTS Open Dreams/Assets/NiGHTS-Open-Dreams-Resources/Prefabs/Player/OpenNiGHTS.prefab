@@ -9914,7 +9914,7 @@ MonoBehaviour:
     m_RecenteringTime: 1
     m_LegacyHeadingDefinition: -1
     m_LegacyVelocityFilterStrength: -1
-  m_BindingMode: 0
+  m_BindingMode: 5
   m_SplineCurvature: 0.2
   m_Orbits:
   - m_Height: 4
@@ -17116,6 +17116,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Skins Bundle
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 67357f3cb46c4764db0ee92f1e31e4df, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1743444141738233875, guid: 67357f3cb46c4764db0ee92f1e31e4df, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -18466,6 +18470,102 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: cc249e5ac57b15e488a24d89974af394, type: 3}
   m_PrefabInstance: {fileID: 4123719931556476612}
   m_PrefabAsset: {fileID: 0}
+--- !u!82 &4123719930450196513
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3889716704985615253}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 2869208901665333140, guid: 8566f6d670d215e42a8c7d89ba59796a, type: 2}
+  m_audioClip: {fileID: 8300000, guid: 366616dd0d791f84b99cc79e78a2b3ef, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!96 &4123719930450196516
 TrailRenderer:
   serializedVersion: 3
@@ -18658,102 +18758,6 @@ TrailRenderer:
   m_Autodestruct: 0
   m_Emitting: 1
   m_ApplyActiveColorSpace: 1
---- !u!82 &4123719930450196513
-AudioSource:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3889716704985615253}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 2869208901665333140, guid: 8566f6d670d215e42a8c7d89ba59796a, type: 2}
-  m_audioClip: {fileID: 8300000, guid: 366616dd0d791f84b99cc79e78a2b3ef, type: 3}
-  m_PlayOnAwake: 0
-  m_Volume: 1
-  m_Pitch: 1
-  Loop: 1
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
 --- !u!95 &4123719930450196519
 Animator:
   serializedVersion: 4
@@ -18774,137 +18778,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &4123719930450196518
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3889716704985615253}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: ee851ece9924774418a2288157ca6bb5, type: 3}
-  m_NotificationBehavior: 2
-  m_UIInputModule: {fileID: 0}
-  m_DeviceLostEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_DeviceRegainedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ControlsChangedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ActionEvents:
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: AnimationControl, Assembly-CSharp
-        m_MethodName: Moving
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: ad1c4d1b-24eb-40f0-b59e-2223e22e0825
-    m_ActionName: Player/Moving[/Keyboard/space]
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: AnimationControl, Assembly-CSharp
-        m_MethodName: Boosting
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: a7db6111-ba83-459c-9aa7-8f53b2968efc
-    m_ActionName: Player/Boosting[/Keyboard/shift,/DualShock4GamepadHID/buttonWest]
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: AnimationControl, Assembly-CSharp
-        m_MethodName: Rotating
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 01e649cf-a710-4a0e-9acf-27b599848274
-    m_ActionName: Player/Up[/Keyboard/w]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: eb46999b-18a8-444b-9a4c-17961c070c78
-    m_ActionName: Player/Continue[/Keyboard/anyKey,/DualShock4GamepadHID/start]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 8cdafcbb-b0b0-4285-93ec-986307d583be
-    m_ActionName: Player/RecenterCamera[/DualShock4GamepadHID/rightStickPress,/Keyboard/v]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: c866faec-c6db-48b9-b133-03bc9eb8478f
-    m_ActionName: Player/Pause[/Keyboard/escape,/DualShock4GamepadHID/start]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: e2867afb-c2ea-49bf-a0db-36fbd5fb753a
-    m_ActionName: Player/Look[/DualShock4GamepadHID/rightStick]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 14c3a8e9-fdf2-41bd-9915-00b1362e9962
-    m_ActionName: Player/TightTurn[/Keyboard/leftCtrl,/DualShock4GamepadHID/leftTrigger]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: e23a6a81-5d47-48f3-81ef-1ff7fe23d468
-    m_ActionName: Player/ReOrientatePlayer[/DualShock4GamepadHID/leftStickPress,/Keyboard/c]
-  m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
-  m_DefaultActionMap: Player
-  m_SplitScreenIndex: -1
-  m_Camera: {fileID: 0}
---- !u!114 &4123719930450196517
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3889716704985615253}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a925cf615debec48bd35e89901518d7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  openControl: {fileID: 4123719930672608837}
-  levelRotations: {fileID: 0}
-  _animator: {fileID: 4123719930450196519}
-  _skinAnimator: {fileID: 4123719931850744088}
-  legTarget: {fileID: 4123719930476563777}
-  _stats: {fileID: 11400000, guid: 15afd228b40b218489c2a975b000e97f, type: 2}
-  rightHandSparkles: {fileID: 8315038385581043652}
-  leftHandSparkles: {fileID: 6086224222226301150}
-  boostTrail: {fileID: 4123719930450196516}
-  boostParticles: {fileID: 7430673389950829512}
-  speedWindParticles: {fileID: 5129796423582547404}
-  speedWindSpeedThreshold: 30
-  turningAnimationThreshold: 0.6
-  Grounded: 0
-  boostingAudioSource: {fileID: 4123719930450196513}
-  boostingStartSFX: {fileID: 8300000, guid: b4eb1cbefecc4994f8ff645ceca11525, type: 3}
-  boostingEndSFX: {fileID: 8300000, guid: 9b13e7d8ed4078d44bfacc37afafe964, type: 3}
 --- !u!114 &4123719930450196514
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19028,6 +18901,137 @@ MonoBehaviour:
   - {fileID: 7495606429319056855}
   - {fileID: 3356982100359694200}
   - {fileID: 588625536262733572}
+--- !u!114 &4123719930450196517
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3889716704985615253}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a925cf615debec48bd35e89901518d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  openControl: {fileID: 4123719930672608837}
+  levelRotations: {fileID: 0}
+  _animator: {fileID: 4123719930450196519}
+  _skinAnimator: {fileID: 4123719931850744088}
+  legTarget: {fileID: 4123719930476563777}
+  _stats: {fileID: 11400000, guid: 15afd228b40b218489c2a975b000e97f, type: 2}
+  rightHandSparkles: {fileID: 8315038385581043652}
+  leftHandSparkles: {fileID: 6086224222226301150}
+  boostTrail: {fileID: 4123719930450196516}
+  boostParticles: {fileID: 7430673389950829512}
+  speedWindParticles: {fileID: 5129796423582547404}
+  speedWindSpeedThreshold: 30
+  turningAnimationThreshold: 0.6
+  Grounded: 0
+  boostingAudioSource: {fileID: 4123719930450196513}
+  boostingStartSFX: {fileID: 8300000, guid: b4eb1cbefecc4994f8ff645ceca11525, type: 3}
+  boostingEndSFX: {fileID: 8300000, guid: 9b13e7d8ed4078d44bfacc37afafe964, type: 3}
+--- !u!114 &4123719930450196518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3889716704985615253}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: ee851ece9924774418a2288157ca6bb5, type: 3}
+  m_NotificationBehavior: 2
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: AnimationControl, Assembly-CSharp
+        m_MethodName: Moving
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: ad1c4d1b-24eb-40f0-b59e-2223e22e0825
+    m_ActionName: Player/Moving[/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: AnimationControl, Assembly-CSharp
+        m_MethodName: Boosting
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: a7db6111-ba83-459c-9aa7-8f53b2968efc
+    m_ActionName: Player/Boosting[/Keyboard/shift,/DualShock4GamepadHID/buttonWest]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: AnimationControl, Assembly-CSharp
+        m_MethodName: Rotating
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 01e649cf-a710-4a0e-9acf-27b599848274
+    m_ActionName: Player/Up[/Keyboard/w]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: eb46999b-18a8-444b-9a4c-17961c070c78
+    m_ActionName: Player/Continue[/Keyboard/anyKey,/DualShock4GamepadHID/start]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 8cdafcbb-b0b0-4285-93ec-986307d583be
+    m_ActionName: Player/RecenterCamera[/DualShock4GamepadHID/rightStickPress,/Keyboard/v]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: c866faec-c6db-48b9-b133-03bc9eb8478f
+    m_ActionName: Player/Pause[/Keyboard/escape,/DualShock4GamepadHID/start]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: e2867afb-c2ea-49bf-a0db-36fbd5fb753a
+    m_ActionName: Player/Look[/DualShock4GamepadHID/rightStick]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 14c3a8e9-fdf2-41bd-9915-00b1362e9962
+    m_ActionName: Player/TightTurn[/Keyboard/leftCtrl,/DualShock4GamepadHID/leftTrigger]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: e23a6a81-5d47-48f3-81ef-1ff7fe23d468
+    m_ActionName: Player/ReOrientatePlayer[/DualShock4GamepadHID/leftStickPress,/Keyboard/c]
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Player
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!4 &3953228708698674111 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8077533598363458181, guid: cc249e5ac57b15e488a24d89974af394, type: 3}

@@ -28,7 +28,7 @@ public class MainMenuSimplified : MonoBehaviour
         if(_stats.isLevelPlayer)
         {
             Debug.Log("Exit Level");
-            stateController.GamePaused = false;
+            stateController.menuManager.GamePaused = false;
             levelFollow.DoExitLevel();
         }
         else

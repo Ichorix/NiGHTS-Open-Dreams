@@ -11,10 +11,9 @@ using UnityEngine.InputSystem;
 public class NPlayerInput : MonoBehaviour
 {
     private PlayerInputActions playerControls;
-    [SerializeField] private NPlayerStateController _playerStates;
+    [SerializeField] private NPlayerMenuManager _menuManager;
     public NPlayerScriptableObject _stats;
     [SerializeField] private NPlayerOpenControl openControl;
-    [SerializeField] private CinemachineFreeLook _mainCamera;
     public float LookSensitivity;
 
     void Awake()
@@ -101,6 +100,6 @@ public class NPlayerInput : MonoBehaviour
 
     void PauseGame()
     {
-        _playerStates.GamePaused = !_playerStates.GamePaused;
+        _menuManager.GamePaused = !_menuManager.GamePaused;
     }
 }
